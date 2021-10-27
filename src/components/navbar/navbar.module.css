@@ -1,0 +1,29 @@
+.nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100px;
+	padding: 0 100px;
+}
+
+.nav-list {
+	display: flex;
+	justify-content: space-between;
+
+	width: 80%;
+	/*font-size: 1.2em;*/
+	text-transform: uppercase;
+}
+
+.nav-item {
+	list-style: none;
+}
+
+.nav-link {
+	text-decoration: none;
+}
+
+.nav-link:hover {
+	text-decoration: underline;
+}
