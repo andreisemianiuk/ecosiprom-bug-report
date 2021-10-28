@@ -1,12 +1,11 @@
-import * as React from "react"
-import {Navbar} from '../components/navbar/navbar'
+import * as React from 'react'
+import Layout from '../components/Layout/Layout'
 
 const ServicesPage = () => {
   return (
-    <main>
-      <Navbar/>
+    <Layout>
       Services Page
-    </main>
+    </Layout>
   )
 }
 
