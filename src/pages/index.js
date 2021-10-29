@@ -1,7 +1,7 @@
 import * as React from 'react'
-import Layout from '../components/Layout/Layout'
+import Layout from '../components/Layout'
 
-const IndexPage = () => {
+const HomePage = () => {
   return (
     <Layout>
       Content of main page
@@ -9,4 +9,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default HomePage

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'gatsby'
-import {nav, navItem, navList,navLink,navActiveLink} from './Navbar.module.css'
+import {nav, navItem, navList,navLink,navActiveLink} from '../styles/navbar.module.css'
 
 export const Navbar = () => {
   return <nav className={nav}>
@@ -9,13 +9,13 @@ export const Navbar = () => {
         <Link to={'/'} className={navLink} activeClassName={navActiveLink}>Главная</Link>
       </li>
       <li className={navItem}>
-        <Link to={'/services'} className={navLink} activeClassName={navActiveLink}>Специализация(Услуги)</Link>
+        <Link to={'/services'} className={navLink} activeClassName={navActiveLink}>Услуги</Link>
       </li>
        <li className={navItem}>
         <Link to={'/catalog'} className={navLink} activeClassName={navActiveLink}>Каталог</Link>
       </li>
       <li className={navItem}>
-        <Link to={'/projects'} className={navLink} activeClassName={navActiveLink}>Специализация/Проекты/Направление</Link>
+        <Link to={'/projects'} className={navLink} activeClassName={navActiveLink}>Проекты</Link>
       </li>
       <li className={navItem}>
         <Link to={'/about'} className={navLink} activeClassName={navActiveLink}>О нас</Link>

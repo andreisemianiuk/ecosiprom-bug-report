@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+}
+
+.description {
+	display: flex;
+	flex-direction: column;
+	padding-left: 50px;
+}
+
+.title {
+	font-size: 2.5rem;
+	color: brown;
+}
+
+.contactName {
+	color: darkslategrey;
+	font-size: 1.5rem;
+	font-weight: bolder;
+}
+
+.info {
+	color: darkslategrey;
+	font-size: 1.2rem;
+}
+
+.name {
+	color: darkslategrey;
+	font-size: 1rem;
+}
+
+.map {
+	padding-left: 20px;
+	padding-top: 50px;
+}
