@@ -4,9 +4,6 @@ module.exports = {
     title: "ecosiprom",
   },
   plugins: [
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -20,5 +17,6 @@ module.exports = {
         linkStyles: true // (default: true) Enable/disable loading stylesheets via CDN
       }
     },
+    `gatsby-plugin-gatsby-cloud`
   ],
 };
