@@ -1,22 +1,24 @@
 .nav {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	/*display: flex;*/
+	/*justify-content: center;*/
+	/*align-items: center;*/
 
 	height: 100px;
-	padding: 0 100px;
+	padding: 0 10px;
 }
 
 .nav-list {
 	display: flex;
 	justify-content: space-between;
 
-	width: 60%;
+	/*width: 60%;*/
 	/*font-size: 1.2em;*/
+	padding-right: 100px;
 	text-transform: uppercase;
 }
 
 .nav-item {
+	padding-left: 20px;
 	list-style: none;
 }
 

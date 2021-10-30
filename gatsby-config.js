@@ -17,6 +17,9 @@ module.exports = {
         linkStyles: true // (default: true) Enable/disable loading stylesheets via CDN
       }
     },
-    `gatsby-plugin-gatsby-cloud`
+    `gatsby-plugin-image`,
+    `gatsby-plugin-gatsby-cloud`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`
   ],
 };

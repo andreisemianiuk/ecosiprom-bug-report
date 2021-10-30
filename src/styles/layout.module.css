@@ -1,3 +1,8 @@
 .container {
-	padding: 0 50px;
+	padding: 20px 50px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
 }
