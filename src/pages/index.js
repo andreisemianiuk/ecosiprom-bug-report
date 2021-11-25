@@ -22,7 +22,6 @@ const HomePage = ({data}) => {
   
   return (
     <Layout>
-      {/*<img/>*/}
       {parse(content,options)}
     </Layout>
   )
