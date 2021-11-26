@@ -2,6 +2,7 @@ import * as React from 'react'
 import Layout from '../components/Layout'
 import {graphql} from 'gatsby'
 import parse, {domToReact} from 'html-react-parser'
+import {Slideshow} from '../components/Slideshow'
 
 const HomePage = ({data}) => {
   const {content} = data.allWpContentNode.edges[0].node
@@ -9,20 +10,21 @@ const HomePage = ({data}) => {
   const options = {
     replace: (domNode) => {
       if (domNode.name === 'li') {
-        return <li style={styles.li}>{domToReact(domNode.children,options)}</li>
+        return <li style={inlineStyles.li}>{domToReact(domNode.children, options)}</li>
       }
       if (domNode.name === 'ul') {
-        return <ul style={styles.ul}>{domToReact(domNode.children,options)}</ul>
+        return <ul style={inlineStyles.ul}>{domToReact(domNode.children, options)}</ul>
       }
-      if (domNode.name === 'figure') {
-        return null
-      }
-    }
+      if (domNode.name === 'figure') return <></>
+    },
   }
   
   return (
     <Layout>
-      {parse(content,options)}
+      <div style={inlineStyles.sliderContainer}>
+        <Slideshow autoplay={true}/>
+      </div>
+      {parse(content, options)}
     </Layout>
   )
 }
@@ -44,11 +46,20 @@ export const pageQuery = graphql`
 }
 `
 
-const styles = {
+const inlineStyles = {
   li: {
     // color: 'red'
   },
   ul: {
     // display: 'flex'
+  },
+  image: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  sliderContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }
