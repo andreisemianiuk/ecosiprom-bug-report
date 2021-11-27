@@ -1,4 +1,5 @@
 node_modules/
 .cache/
+.wordpress-cache/
 public
 /.idea
