@@ -9,14 +9,25 @@ const HomePage = ({data}) => {
   
   const options = {
     replace: (domNode) => {
-      if (domNode.name === 'li') {
-        return <li style={inlineStyles.li}>{domToReact(domNode.children, options)}</li>
+      if (domNode.name === 'figure') {
+        return <figure style={inlineStyles.figure}>{domToReact(domNode.children, options)}</figure>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'wp-block-group services') {
+        return <div style={inlineStyles.services}>{domToReact(domNode.children[0].children, options)}</div>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'wp-block-group service-item') {
+        return <div style={inlineStyles.serviceItem}>{domToReact(domNode.children[0].children, options)}</div>
       }
       if (domNode.name === 'ul') {
         return <ul style={inlineStyles.ul}>{domToReact(domNode.children, options)}</ul>
       }
-      if (domNode.name === 'figure') return <></>
-    },
+      if (domNode.name === 'li') {
+        return <li style={inlineStyles.li}>- {domToReact(domNode.children, options)}</li>
+      }
+      if (domNode.name === 'p') {
+        return <p style={inlineStyles.p}>{domToReact(domNode.children, options)}</p>
+      }
+    }
   }
   
   return (
@@ -43,15 +54,33 @@ export const pageQuery = graphql`
         }
       }
     }
-}
+  }
 `
 
 const inlineStyles = {
+  services: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap'
+  },
+  serviceItem: {
+    width: '350px'
+  },
   li: {
-    // color: 'red'
+    listStyle:'none'
   },
   ul: {
-    // display: 'flex'
+    paddingLeft:'50px'
+  },
+  p: {
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    fontWeight: 'bolder'
+  },
+  figure: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     display: 'flex',
@@ -61,5 +90,5 @@ const inlineStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
 }
