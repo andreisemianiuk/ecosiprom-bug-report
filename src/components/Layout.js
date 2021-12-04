@@ -1,15 +1,19 @@
 import * as React from 'react'
 import {Navbar} from './Navbar'
 import {StaticImage} from 'gatsby-plugin-image'
-import {container,header} from '../styles/layout.module.css'
+import {container,header,rightWrapper} from '../styles/layout.module.css'
 import {Link} from 'gatsby'
+import {ContactHeader} from './ContactHeader'
 
 export default function Layout({children}) {
   return (
     <main className={container}>
       <header className={header}>
         <Link to={'/'}><Logo/></Link>
-        <Navbar/>
+        <div className={rightWrapper}>
+          <ContactHeader/>
+          <Navbar/>
+        </div>
       </header>
       {/*Content*/}
       {children}

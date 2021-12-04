@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.item {
+	text-align: center;
+}
+
+.item-title {
+	font-size: 0.8em;
+	font-style: oblique;
+}
+
+.item-info {
+	color: #00637f;
+	font-weight: bold;
+}
