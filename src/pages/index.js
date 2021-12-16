@@ -3,6 +3,54 @@ import Layout from '../components/Layout'
 import {graphql} from 'gatsby'
 import parse, {domToReact} from 'html-react-parser'
 import {Slideshow} from '../components/Slideshow'
+import {useMediaQuery} from 'react-responsive'
+import styled from 'styled-components'
+import {devices} from '../common/MediaQuery/media-query'
+
+const SliderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media ${devices.mobileL} {
+    display: none;
+  }
+`
+const Services = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  
+  @media ${devices.mobileL} {
+    //display: flex;
+    //flex-direction: column;
+  }
+`
+const ServiceItem = styled.div`
+  width: 350px;
+`
+const Li = styled.li`
+  list-style: none;
+`
+const Ul = styled.ul`
+  padding-left: 50px;
+  @media ${devices.mobileL} {
+    padding-left: 0;
+  }
+`
+const P = styled.p`
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bolder;
+`
+const Figure = styled.figure`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+`
 
 const HomePage = ({data}) => {
   const {content} = data.allWpContentNode.edges[0].node
@@ -10,31 +58,36 @@ const HomePage = ({data}) => {
   const options = {
     replace: (domNode) => {
       if (domNode.name === 'figure') {
-        return <figure style={inlineStyles.figure}>{domToReact(domNode.children, options)}</figure>
+        return <Figure>{domToReact(domNode.children, options)}</Figure>
       }
       if (domNode.attribs && domNode.attribs.class === 'wp-block-group services') {
-        return <div style={inlineStyles.services}>{domToReact(domNode.children[0].children, options)}</div>
+        return <Services>{domToReact(domNode.children[0].children, options)}</Services>
       }
       if (domNode.attribs && domNode.attribs.class === 'wp-block-group service-item') {
-        return <div style={inlineStyles.serviceItem}>{domToReact(domNode.children[0].children, options)}</div>
+        return (<ServiceItem>
+          {domToReact(domNode.children[0].children, options)}
+        </ServiceItem>)
       }
       if (domNode.name === 'ul') {
-        return <ul style={inlineStyles.ul}>{domToReact(domNode.children, options)}</ul>
+        return <Ul>{domToReact(domNode.children, options)}</Ul>
       }
       if (domNode.name === 'li') {
-        return <li style={inlineStyles.li}>- {domToReact(domNode.children, options)}</li>
+        return <Li>- {domToReact(domNode.children, options)}</Li>
       }
       if (domNode.name === 'p') {
-        return <p style={inlineStyles.p}>{domToReact(domNode.children, options)}</p>
+        return <P>{domToReact(domNode.children, options)}</P>
       }
-    }
+      // if (domNode.attribs && domNode.attribs.class === 'gatsby-image-wrapper') {
+      //   return <Image>{domToReact(domNode.children, options)}</Image>
+      // }
+    },
   }
   
   return (
     <Layout>
-      <div style={inlineStyles.sliderContainer}>
+      <SliderContainer>
         <Slideshow autoplay={true}/>
-      </div>
+      </SliderContainer>
       {parse(content, options)}
     </Layout>
   )
@@ -57,38 +110,3 @@ export const pageQuery = graphql`
   }
 `
 
-const inlineStyles = {
-  services: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    flexWrap: 'wrap'
-  },
-  serviceItem: {
-    width: '350px'
-  },
-  li: {
-    listStyle:'none'
-  },
-  ul: {
-    paddingLeft:'50px'
-  },
-  p: {
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    fontWeight: 'bolder'
-  },
-  figure: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  sliderContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-}

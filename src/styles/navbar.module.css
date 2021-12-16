@@ -1,37 +1,23 @@
 .nav {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 
-	height: 50px;
-	padding: 0 20px;
 }
 
 .nav-list {
-	display: flex;
-	justify-content: space-between;
-	/*padding-right: 100px;*/
-	margin: 0;
-	text-transform: uppercase;
+
 }
 
 .nav-item {
-	font-size: 0.85em;
-	padding-left: 20px;
-	margin: 0;
-	list-style: none;
+
 }
 
 .nav-link {
-	color: #00637f;
-	/*font-weight: bolder;*/
-	text-decoration: none;
+
 }
 
 .nav-active-link {
-	color: brown;
+
 }
 
 .nav-link:hover {
-	text-decoration: underline;
+
 }
