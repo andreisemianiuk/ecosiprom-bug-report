@@ -8,16 +8,19 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding-left: 10px;
+  @media ${devices.mobileL} {
+    padding-left: 0;
+  }
 `
 const Item = styled.div`
   text-align: center;
 `
 const ItemInfo = styled.div`
   color: #00637f;
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-weight: bold;
   @media ${devices.mobileL} {
-    font-size: 0.7em;
+    //font-size: 0.8em;
   }
 `
 

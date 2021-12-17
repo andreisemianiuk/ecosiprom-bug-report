@@ -11,21 +11,20 @@ const Container = styled.div`
 
 `
 const MainContent = styled.div`
-  padding: 20px 50px;
-  @media ${devices.mobileL} {
-    padding-block: 20px;
-    padding-inline: 10px;
-  }
+  // @media ${devices.mobileL} {
+  // }
 `
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin: 20px;
   @media ${devices.tablet} {
     flex-direction: column;
+    margin: 0 0 10px 0;
   }
 `
 const StyledLink = styled(Link)`
+  padding-top: 20px;
   text-align: center;
 `
 const LogoItem = styled.div`

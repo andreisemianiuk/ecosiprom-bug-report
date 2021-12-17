@@ -8,8 +8,10 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   height: 50px;
+  padding-right: 20px;
   @media ${devices.mobileL} {
     flex-wrap: wrap;
+    padding-right: 0;
   }
 `
 const NavList = styled.ul`
@@ -74,16 +76,16 @@ export const Navbar = () => {
         <StyledNavLink to={'/services'} activeClassName={'active'}>Услуги</StyledNavLink>
       </NavItem>
       <NavItem>
-        <StyledNavLink to={'/catalog'}activeClassName={'active'}>Каталог</StyledNavLink>
+        <StyledNavLink to={'/catalog'} activeClassName={'active'}>Каталог</StyledNavLink>
       </NavItem>
       <NavItem>
-        <StyledNavLink to={'/projects'}activeClassName={'active'}>Проекты</StyledNavLink>
+        <StyledNavLink to={'/projects'} activeClassName={'active'}>Проекты</StyledNavLink>
       </NavItem>
       <NavItem>
-        <StyledNavLink to={'/about'}activeClassName={'active'}>О нас</StyledNavLink>
+        <StyledNavLink to={'/about'} activeClassName={'active'}>О нас</StyledNavLink>
       </NavItem>
       <NavItem>
-        <StyledNavLink to={'/contacts'}activeClassName={'active'}>Контакты</StyledNavLink>
+        <StyledNavLink to={'/contacts'} activeClassName={'active'}>Контакты</StyledNavLink>
       </NavItem>
     </NavList>
   </Nav>
