@@ -5,7 +5,6 @@ import parse, {domToReact} from 'html-react-parser'
 import {Slideshow} from '../components/Slideshow'
 import styled from 'styled-components'
 import {devices} from '../common/MediaQuery/media-query'
-import {GatsbyImage} from 'gatsby-plugin-image'
 
 const SliderContainer = styled.div`
   display: flex;
@@ -92,20 +91,40 @@ const ServicesList = styled.ul`
 const ServicesListItem = styled.li`
   font-size: 1.1em;
 `
-const PartnersList = styled.div`
+let PartnersList = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   //align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  @media ${devices.mobileL} {
+    flex-wrap: wrap;
+  }
 `
 let PartnerItem = styled.div`
-  max-height: 50px;
-  //width: 200px;
+  margin: 10px;
+`
+let PartnersTitle = styled.h3`
+  text-align: center;
+  color: #00637f;
+`
+let EquipmentList = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  //align-items: center;
+  flex-wrap: nowrap;
+  @media ${devices.mobileL} {
+    flex-wrap: wrap;
+  }
+`
+let EquipmentItem = styled.div`
+  margin: 10px;
+`
+let EquipmentTitle = styled.h3`
+  text-align: center;
+  color: #00637f;
 `
 const HomePage = ({data}) => {
   let {content} = data.allWpContentNode.edges[0].node
-  let logos = data.allImageSharp.nodes.map(node => node.fluid)
-  console.log('logos >> ', logos)
   
   const options = {
     replace: (domNode) => {
@@ -141,13 +160,24 @@ const HomePage = ({data}) => {
       if (domNode.attribs && domNode.attribs.class === 'services-list-item') {
         return <ServicesListItem>{domToReact(domNode.children, options)}</ServicesListItem>
       }
-      // if (domNode.attribs && domNode.attribs.class === 'partner-item') {
-      //   console.log('partner item domNode.children >> ', domNode.children)
-      //   return <PartnerItem>{domToReact(domNode.children, options)}</PartnerItem>
-      // }
-      // if (domNode.attribs && domNode.attribs.class === 'partners-container') {
-      //   return <PartnersList>{domToReact(domNode.children, options)}</PartnersList>
-      // }
+      if (domNode.attribs && domNode.attribs.class === 'partners-title') {
+        return <PartnersTitle>{domToReact(domNode.children, options)}</PartnersTitle>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'partner-item') {
+        return <PartnerItem>{domToReact(domNode.children, options)}</PartnerItem>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'partners-container') {
+        return <PartnersList>{domToReact(domNode.children, options)}</PartnersList>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'equipment-title') {
+        return <EquipmentTitle>{domToReact(domNode.children, options)}</EquipmentTitle>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'equipment-item') {
+        return <EquipmentItem>{domToReact(domNode.children, options)}</EquipmentItem>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'equipment-container') {
+        return <EquipmentList>{domToReact(domNode.children, options)}</EquipmentList>
+      }
       
     },
   }
@@ -157,15 +187,6 @@ const HomePage = ({data}) => {
         <Slideshow autoplay={true}/>
       </SliderContainer>
       {parse(content, options)}
-      <PartnersList>
-        {
-          logos.map(logo => (<PartnerItem><GatsbyImage
-            key={logo.src}
-            alt={logo.src}
-            image={{images: {fallback: {src: logo.src}}, layout: 'constrained', height: 50}}
-          /></PartnerItem>))
-        }
-      </PartnersList>
     </Layout>
   )
 }
@@ -181,13 +202,6 @@ export const pageQuery = graphql`
             id
             content
           }
-        }
-      }
-    }
-    allImageSharp(filter: {fluid: {src: {regex: "/logo/"}}}) {
-      nodes {
-        fluid(fit: FILL, cropFocus: CENTER) {
-          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
