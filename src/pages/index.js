@@ -6,7 +6,7 @@ import {Slideshow} from '../components/Slideshow'
 import styled from 'styled-components'
 import {devices} from '../common/MediaQuery/media-query'
 
-const SliderContainer = styled.div`
+let SliderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ const SliderContainer = styled.div`
     display: none;
   }
 `
-const MainServicesList = styled.ul`
+let MainServicesList = styled.ul`
   color: #ffffff;
   background-color: #00637f;
   padding: 5px 5px 10px;
@@ -23,7 +23,7 @@ const MainServicesList = styled.ul`
     padding: 0;
   }
 `
-const MainServicesItem = styled.li`
+let MainServicesItem = styled.li`
   font-size: 1.5em;
   font-weight: bold;
   max-width: 700px;
@@ -36,7 +36,7 @@ const MainServicesItem = styled.li`
     margin: 0;
   }
 `
-const MainServicesUnderLine = styled.div`
+let MainServicesUnderLine = styled.div`
   width: 90%;
   max-width: 650px;
   height: 10px;
@@ -46,7 +46,7 @@ const MainServicesUnderLine = styled.div`
     display: none;
   }
 `
-const Services = styled.div`
+let Services = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -55,7 +55,7 @@ const Services = styled.div`
     margin: 10px 5px
   }
 `
-const ServiceItem = styled.div`
+let ServiceItem = styled.div`
   max-width: 350px;
   margin: 5px;
 
@@ -72,12 +72,12 @@ const ServiceItem = styled.div`
     }
   }
 `
-const ServicesImage = styled.figure`
+let ServicesImage = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
 `
-const ServicesTitle = styled.p`
+let ServicesTitle = styled.p`
   text-transform: uppercase;
   text-align: center;
   color: #00637f;
@@ -85,45 +85,50 @@ const ServicesTitle = styled.p`
   font-weight: bolder;
   padding: 0 5px;
 `
-const ServicesList = styled.ul`
+let ServicesList = styled.ul`
   padding: 0 10px 0 30px;
 `
-const ServicesListItem = styled.li`
+let ServicesListItem = styled.li`
   font-size: 1.1em;
 `
-let PartnersList = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  //align-items: center;
-  flex-wrap: nowrap;
-  @media ${devices.mobileL} {
-    flex-wrap: wrap;
-  }
-`
-let PartnerItem = styled.div`
-  margin: 10px;
-`
-let PartnersTitle = styled.h3`
-  text-align: center;
-  color: #00637f;
-`
+// let PartnersList = styled.div`
+//   display: flex;
+//   justify-content: space-evenly;
+//   //align-items: center;
+//   flex-wrap: nowrap;
+//   @media ${devices.mobileL} {
+//     flex-wrap: wrap;
+//   }
+// `
+// let PartnerItem = styled.div`
+//   margin: 10px;
+// `
+// let PartnersTitle = styled.h3`
+//   text-align: center;
+//   color: #00637f;
+// `
 let EquipmentList = styled.div`
+  //width: 80%;
   display: flex;
   justify-content: space-evenly;
-  //align-items: center;
-  flex-wrap: nowrap;
+  align-items: center;
+  margin: 20px 10px 40px;
+  flex-wrap: wrap;
   @media ${devices.mobileL} {
-    flex-wrap: wrap;
+    margin: 0;
   }
 `
 let EquipmentItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 10px;
 `
 let EquipmentTitle = styled.h3`
   text-align: center;
   color: #00637f;
 `
-const HomePage = ({data}) => {
+function HomePage ({data})  {
   let {content} = data.allWpContentNode.edges[0].node
   
   const options = {
@@ -160,25 +165,21 @@ const HomePage = ({data}) => {
       if (domNode.attribs && domNode.attribs.class === 'services-list-item') {
         return <ServicesListItem>{domToReact(domNode.children, options)}</ServicesListItem>
       }
-      if (domNode.attribs && domNode.attribs.class === 'partners-title') {
-        return <PartnersTitle>{domToReact(domNode.children, options)}</PartnersTitle>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'partner-item') {
-        return <PartnerItem>{domToReact(domNode.children, options)}</PartnerItem>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'partners-container') {
-        return <PartnersList>{domToReact(domNode.children, options)}</PartnersList>
+      // if (domNode.attribs && domNode.attribs.class === 'partners-title') {
+      //   return <PartnersTitle>{domToReact(domNode.children, options)}</PartnersTitle>
+      // }
+      // if (domNode.attribs && domNode.attribs.class === 'partner-item') {
+      //   return <PartnerItem>{domToReact(domNode.children, options)}</PartnerItem>
+      // }
+      if (domNode.attribs && domNode.attribs.class === 'wp-block-group equipment-partners-container') {
+        return <EquipmentList>{domToReact(domNode.children[0].children, options)}</EquipmentList>
       }
       if (domNode.attribs && domNode.attribs.class === 'equipment-title') {
         return <EquipmentTitle>{domToReact(domNode.children, options)}</EquipmentTitle>
       }
-      if (domNode.attribs && domNode.attribs.class === 'equipment-item') {
+      if (domNode.attribs && domNode.attribs.class === 'wp-block-image size-full equipment-item') {
         return <EquipmentItem>{domToReact(domNode.children, options)}</EquipmentItem>
       }
-      if (domNode.attribs && domNode.attribs.class === 'equipment-container') {
-        return <EquipmentList>{domToReact(domNode.children, options)}</EquipmentList>
-      }
-      
     },
   }
   return (
