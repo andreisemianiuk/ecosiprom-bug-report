@@ -18,14 +18,16 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   margin: 20px;
-  @media ${devices.tablet} {
+  @media ${devices.laptop} {
     flex-direction: column;
     margin: 0 0 10px 0;
   }
 `
 const StyledLink = styled(Link)`
-  padding-top: 20px;
-  text-align: center;
+  @media ${devices.laptop} {
+    padding-top: 20px;
+    text-align: center;
+  }
 `
 const LogoItem = styled.div`
   margin: 0 auto 20px;
