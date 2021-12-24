@@ -5,7 +5,7 @@ import {Link} from 'gatsby'
 import {ContactHeader} from './ContactHeader'
 import styled from 'styled-components'
 import {devices} from '../common/MediaQuery/media-query'
-import {Footer} from './Footer'
+import Footer from './Footer'
 
 const Container = styled.div`
 
