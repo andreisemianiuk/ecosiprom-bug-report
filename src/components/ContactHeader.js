@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import {devices} from '../common/MediaQuery/media-query'
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,9 +18,6 @@ const ItemInfo = styled.div`
   color: #00637f;
   font-size: 0.9em;
   font-weight: bold;
-  @media ${devices.mobileL} {
-    //font-size: 0.8em;
-  }
 `
 
 export const ContactHeader = () => {
