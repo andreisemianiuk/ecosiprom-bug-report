@@ -91,24 +91,8 @@ let ServicesList = styled.ul`
 let ServicesListItem = styled.li`
   font-size: 1.1em;
 `
-// let PartnersList = styled.div`
-//   display: flex;
-//   justify-content: space-evenly;
-//   //align-items: center;
-//   flex-wrap: nowrap;
-//   @media ${devices.mobileL} {
-//     flex-wrap: wrap;
-//   }
-// `
-// let PartnerItem = styled.div`
-//   margin: 10px;
-// `
-// let PartnersTitle = styled.h3`
-//   text-align: center;
-//   color: #00637f;
-// `
+
 let EquipmentList = styled.div`
-  //width: 80%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

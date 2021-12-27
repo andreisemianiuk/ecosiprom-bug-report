@@ -1,15 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import {graphql, Link, useStaticQuery} from 'gatsby'
+import {devices} from '../common/MediaQuery/media-query'
 
 let FooterContainer = styled.footer`
-  height: 100px;
+  min-height: 100px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   color: #c5fcff;
   background-color: #00637f;
+  padding: 20px 100px;
+  @media ${devices.mobileL} {
+    flex-direction: column;
+    padding: 10px;
+  }
 `
 let LinkList = styled.div`
   display: flex;
@@ -21,8 +26,12 @@ let FooterLink = styled(Link)`
   font-size: .9em;
 `
 let CompanyInfo = styled.div`
-  //color: white;
   font-size: 0.8em;
+`
+let ContactInfo = styled.div`
+  @media ${devices.mobileL} {
+    margin: 10px 0;
+  }
 `
 
 function Footer() {
@@ -44,9 +53,10 @@ function Footer() {
   `)
   return (
     <FooterContainer>
-      <LinkList>{nodes.map(({path, label}) => !(/Шеф-монтаж|Газовый/.test(label)) &&
+        <LinkList>{nodes.map(({path, label}) => !(/Шеф-монтаж|Газовый/.test(label)) &&
         <FooterLink to={path}>{label}</FooterLink>)}
       </LinkList>
+        <ContactInfo>info@ecosiprom.com<br/> +375 (29) 662-30-04</ContactInfo>
       <CompanyInfo>&copy;2021 Экосипром. Все права защищены</CompanyInfo>
     </FooterContainer>
   )
