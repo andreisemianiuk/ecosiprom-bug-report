@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Layout from '../components/Layout'
 
-const ServicesPage = () => {
+function ServicesPage() {
   return (
     <Layout>
       Services Page
