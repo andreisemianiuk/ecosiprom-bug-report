@@ -8,13 +8,11 @@ import {devices} from '../common/MediaQuery/media-query'
 let AboutContainer = styled.div`
   padding: 50px 30px;
   @media ${devices.mobileL} {
-    padding: 0 10px 20px;
+    padding-bottom: 20px;
   }
 `
 let AboutInfo = styled.p`
-  @media ${devices.mobileL} {
-    text-align: center;
-  }
+  padding-left: 20px;
 `
 let AboutListItem = styled.li`
   margin-left: 30px;
@@ -33,6 +31,9 @@ let LicenseItem = styled.div`
   margin: 10px;
   @media ${devices.mobileL} {
     width: 150px;
+  }
+  @media ${devices.mobileS} {
+    margin: 0;
   }
 `
 
@@ -78,6 +79,5 @@ export const pageQuery = graphql`
         }
       }
     }
-}
-
+  }
 `
