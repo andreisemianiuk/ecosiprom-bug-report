@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import {devices} from '../common/MediaQuery/media-query'
 
 let AboutContainer = styled.div`
-  padding: 50px 30px;
+  padding: 50px 0;
   @media ${devices.mobileL} {
     padding-bottom: 20px;
   }
