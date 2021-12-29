@@ -23,9 +23,14 @@ let LicenseContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding-bottom: 30px;
+  flex-wrap: nowrap;
+  @media ${devices.mobileL} {
+    flex-wrap: wrap;
+  }
 `
 let LicenseItem = styled.div`
   width: 250px;
+  margin: 10px;
   @media ${devices.mobileL} {
     width: 150px;
   }
