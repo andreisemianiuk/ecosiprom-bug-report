@@ -5,6 +5,7 @@ import parse, {domToReact} from 'html-react-parser'
 import {Slideshow} from '../components/Slideshow'
 import styled from 'styled-components'
 import {devices} from '../common/MediaQuery/media-query'
+import {GatsbyImage,getImage} from 'gatsby-plugin-image'
 
 let SliderContainer = styled.div`
   display: flex;
@@ -92,6 +93,9 @@ let ServicesListItem = styled.li`
   font-size: 1.1em;
 `
 
+let EquipmentListContainer = styled.div`
+
+`
 let EquipmentList = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -149,29 +153,39 @@ function HomePage ({data})  {
       if (domNode.attribs && domNode.attribs.class === 'services-list-item') {
         return <ServicesListItem>{domToReact(domNode.children, options)}</ServicesListItem>
       }
-      // if (domNode.attribs && domNode.attribs.class === 'partners-title') {
-      //   return <PartnersTitle>{domToReact(domNode.children, options)}</PartnersTitle>
+      // if (domNode.attribs && domNode.attribs.class === 'wp-block-group equipment-partners-container') {
+      //   return <EquipmentList>{domToReact(domNode.children[0].children, options)}</EquipmentList>
       // }
-      // if (domNode.attribs && domNode.attribs.class === 'partner-item') {
-      //   return <PartnerItem>{domToReact(domNode.children, options)}</PartnerItem>
+      // if (domNode.attribs && domNode.attribs.class === 'equipment-title') {
+      //   return <EquipmentTitle>{domToReact(domNode.children, options)}</EquipmentTitle>
       // }
-      if (domNode.attribs && domNode.attribs.class === 'wp-block-group equipment-partners-container') {
-        return <EquipmentList>{domToReact(domNode.children[0].children, options)}</EquipmentList>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'equipment-title') {
-        return <EquipmentTitle>{domToReact(domNode.children, options)}</EquipmentTitle>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'wp-block-image size-full equipment-item') {
-        return <EquipmentItem>{domToReact(domNode.children, options)}</EquipmentItem>
-      }
+      // if (domNode.attribs && domNode.attribs.class === 'wp-block-image size-full equipment-item') {
+      //   return <EquipmentItem>{domToReact(domNode.children, options)}</EquipmentItem>
+      // }
     },
   }
+  // const logoImage = getImage(data.allImageSharp.ed)
+  let logoImagesContainer = data.allImageSharp.edges
   return (
     <Layout>
       <SliderContainer>
         <Slideshow autoplay={true}/>
       </SliderContainer>
       {parse(content, options)}
+      <EquipmentListContainer>
+        <EquipmentTitle>Мы работаем с компаниями</EquipmentTitle>
+        <EquipmentList>
+        {logoImagesContainer.map(img => /logo-/.test(img.node.fluid.src) &&
+          <EquipmentItem><GatsbyImage image={img.node.gatsbyImageData} alt={img.node.id}/></EquipmentItem>)}
+      </EquipmentList>
+      </EquipmentListContainer>
+      <EquipmentListContainer>
+        <EquipmentTitle>Мы работаем с оборудованием</EquipmentTitle>
+        <EquipmentList>
+        {logoImagesContainer.map(img => /-logo/.test(img.node.fluid.src) &&
+          <EquipmentItem><GatsbyImage image={img.node.gatsbyImageData} alt={img.node.id}/></EquipmentItem>)}
+      </EquipmentList>
+      </EquipmentListContainer>
     </Layout>
   )
 }
@@ -186,6 +200,17 @@ export const pageQuery = graphql`
           ... on WpPage {
             id
             content
+          }
+        }
+      }
+    }
+    allImageSharp(filter: {fluid: {src: {regex: "/logo/"}}}) {
+      edges {
+        node {
+          id
+          gatsbyImageData
+          fluid {
+            src
           }
         }
       }
