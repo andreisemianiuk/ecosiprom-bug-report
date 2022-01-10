@@ -5,7 +5,7 @@ import parse, {domToReact} from 'html-react-parser'
 import {Slideshow} from '../components/Slideshow'
 import styled from 'styled-components'
 import {devices} from '../common/MediaQuery/media-query'
-import {GatsbyImage,getImage} from 'gatsby-plugin-image'
+import {GatsbyImage} from 'gatsby-plugin-image'
 
 let SliderContainer = styled.div`
   display: flex;
@@ -92,11 +92,10 @@ let ServicesList = styled.ul`
 let ServicesListItem = styled.li`
   font-size: 1.1em;
 `
-
-let EquipmentListContainer = styled.div`
+let LogosListContainer = styled.div`
 
 `
-let EquipmentList = styled.div`
+let LogosList = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -106,18 +105,23 @@ let EquipmentList = styled.div`
     margin: 0;
   }
 `
-let EquipmentItem = styled.div`
+let LogosItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px;
+  //width: 150px;
 `
-let EquipmentTitle = styled.h3`
+let LogosTitle = styled.h3`
   text-align: center;
   color: #00637f;
 `
-function HomePage ({data})  {
+
+function HomePage({data}) {
+  // console.log('data >> ', data)
   let {content} = data.allWpContentNode.edges[0].node
+  let logos = data.allWpMediaItem.nodes
+  console.log('logos >> ', logos)
   
   const options = {
     replace: (domNode) => {
@@ -153,39 +157,40 @@ function HomePage ({data})  {
       if (domNode.attribs && domNode.attribs.class === 'services-list-item') {
         return <ServicesListItem>{domToReact(domNode.children, options)}</ServicesListItem>
       }
-      // if (domNode.attribs && domNode.attribs.class === 'wp-block-group equipment-partners-container') {
-      //   return <EquipmentList>{domToReact(domNode.children[0].children, options)}</EquipmentList>
-      // }
-      // if (domNode.attribs && domNode.attribs.class === 'equipment-title') {
-      //   return <EquipmentTitle>{domToReact(domNode.children, options)}</EquipmentTitle>
-      // }
-      // if (domNode.attribs && domNode.attribs.class === 'wp-block-image size-full equipment-item') {
-      //   return <EquipmentItem>{domToReact(domNode.children, options)}</EquipmentItem>
-      // }
     },
   }
-  // const logoImage = getImage(data.allImageSharp.ed)
-  let logoImagesContainer = data.allImageSharp.edges
   return (
     <Layout>
       <SliderContainer>
         <Slideshow autoplay={true}/>
       </SliderContainer>
       {parse(content, options)}
-      <EquipmentListContainer>
-        <EquipmentTitle>Мы работаем с компаниями</EquipmentTitle>
-        <EquipmentList>
-        {logoImagesContainer.map(img => /logo-/.test(img.node.fluid.src) &&
-          <EquipmentItem><GatsbyImage image={img.node.gatsbyImageData} alt={img.node.id}/></EquipmentItem>)}
-      </EquipmentList>
-      </EquipmentListContainer>
-      <EquipmentListContainer>
-        <EquipmentTitle>Мы работаем с оборудованием</EquipmentTitle>
-        <EquipmentList>
-        {logoImagesContainer.map(img => /-logo/.test(img.node.fluid.src) &&
-          <EquipmentItem><GatsbyImage image={img.node.gatsbyImageData} alt={img.node.id}/></EquipmentItem>)}
-      </EquipmentList>
-      </EquipmentListContainer>
+      <LogosListContainer>
+        <LogosTitle>Мы работаем с компаниями</LogosTitle>
+        <LogosList>
+          {logos.map(item => /logo-/.test(item.title) &&
+            <LogosItem key={item.id}>
+              <GatsbyImage
+                image={item.localFile.childImageSharp.gatsbyImageData}
+                alt={item.altText}
+              />
+            </LogosItem>)
+          }
+        </LogosList>
+      </LogosListContainer>
+      <LogosListContainer>
+        <LogosTitle>Мы работаем с оборудованием</LogosTitle>
+        <LogosList>
+          {logos.map(item => /-logo/.test(item.title) &&
+            <LogosItem key={item.id}>
+              <GatsbyImage
+                image={item.localFile.childImageSharp.gatsbyImageData}
+                alt={item.altText}
+              />
+            </LogosItem>)
+          }
+        </LogosList>
+      </LogosListContainer>
     </Layout>
   )
 }
@@ -204,15 +209,16 @@ export const pageQuery = graphql`
         }
       }
     }
-    allImageSharp(filter: {fluid: {src: {regex: "/logo/"}}}) {
-      edges {
-        node {
-          id
-          gatsbyImageData
-          fluid {
-            src
+    allWpMediaItem(filter: {title: {regex: "/logo/"}}) {
+      nodes {
+        id
+        title
+        localFile {
+          childImageSharp {
+            gatsbyImageData(height: 50, formats: PNG)
           }
         }
+        altText
       }
     }
   }
