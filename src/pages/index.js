@@ -6,6 +6,7 @@ import {Slideshow} from '../components/Slideshow'
 import styled from 'styled-components'
 import {devices} from '../common/MediaQuery/media-query'
 import {GatsbyImage} from 'gatsby-plugin-image'
+import {Logos} from '../components/Logos'
 
 let SliderContainer = styled.div`
   display: flex;
@@ -61,7 +62,6 @@ let ServiceItem = styled.div`
   margin: 5px;
 
   &:hover {
-    transform: scale(1.1);
     cursor: pointer;
     box-shadow: 0 14px 28px rgba(77, 99, 135, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
@@ -73,18 +73,18 @@ let ServiceItem = styled.div`
     }
   }
 `
-let ServicesImage = styled.figure`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
 let ServicesTitle = styled.p`
   text-transform: uppercase;
   text-align: center;
   color: #00637f;
   font-size: 1.2em;
   font-weight: bolder;
-  padding: 0 5px;
+  padding: 10px 5px;
+`
+let ServicesImage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 let ServicesList = styled.ul`
   padding: 0 10px 0 30px;
@@ -92,36 +92,10 @@ let ServicesList = styled.ul`
 let ServicesListItem = styled.li`
   font-size: 1.1em;
 `
-let LogosListContainer = styled.div`
-
-`
-let LogosList = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 20px 10px 40px;
-  flex-wrap: wrap;
-  @media ${devices.mobileL} {
-    margin: 0;
-  }
-`
-let LogosItem = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  //width: 150px;
-`
-let LogosTitle = styled.h3`
-  text-align: center;
-  color: #00637f;
-`
 
 function HomePage({data}) {
-  // console.log('data >> ', data)
   let {content} = data.allWpContentNode.edges[0].node
-  let logos = data.allWpMediaItem.nodes
-  console.log('logos >> ', logos)
+  let services = data.allWpMediaItem.nodes.filter(logo => /services/.test(logo.title))
   
   const options = {
     replace: (domNode) => {
@@ -137,19 +111,22 @@ function HomePage({data}) {
             <MainServicesUnderLine/>
           </>)
       }
-      if (domNode.attribs && domNode.attribs.class === 'wp-block-group services') {
-        return <Services>{domToReact(domNode.children[0].children, options)}</Services>
+      if (domNode.attribs && domNode.attribs.class === 'services-container') {
+        return <Services>{domToReact(domNode.children, options)}</Services>
       }
-      if (domNode.attribs && domNode.attribs.class === 'wp-block-group service-item') {
-        return (<ServiceItem>
-          {domToReact(domNode.children[0].children, options)}
-        </ServiceItem>)
-      }
-      if (domNode.attribs && domNode.attribs.class === 'wp-block-image size-full services-image') {
-        return <ServicesImage>{domToReact(domNode.children, options)}</ServicesImage>
+      if (domNode.attribs && domNode.attribs.class === 'services-item') {
+        return (<ServiceItem>{domToReact(domNode.children, options)}</ServiceItem>)
       }
       if (domNode.attribs && domNode.attribs.class === 'services-title') {
         return <ServicesTitle>{domToReact(domNode.children, options)}</ServicesTitle>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'services-image-wrapper') {
+        let dataAttribute = domNode.next.attribs.data
+        let image = services.find(item => item.altText === dataAttribute)
+        return <ServicesImage>
+          <GatsbyImage image={image.localFile.childImageSharp.gatsbyImageData}
+                       alt={image.altText}/>
+        </ServicesImage>
       }
       if (domNode.attribs && domNode.attribs.class === 'services-list') {
         return <ServicesList>{domToReact(domNode.children, options)}</ServicesList>
@@ -165,32 +142,8 @@ function HomePage({data}) {
         <Slideshow autoplay={true}/>
       </SliderContainer>
       {parse(content, options)}
-      <LogosListContainer>
-        <LogosTitle>Мы работаем с компаниями</LogosTitle>
-        <LogosList>
-          {logos.map(item => /logo-/.test(item.title) &&
-            <LogosItem key={item.id}>
-              <GatsbyImage
-                image={item.localFile.childImageSharp.gatsbyImageData}
-                alt={item.altText}
-              />
-            </LogosItem>)
-          }
-        </LogosList>
-      </LogosListContainer>
-      <LogosListContainer>
-        <LogosTitle>Мы работаем с оборудованием</LogosTitle>
-        <LogosList>
-          {logos.map(item => /-logo/.test(item.title) &&
-            <LogosItem key={item.id}>
-              <GatsbyImage
-                image={item.localFile.childImageSharp.gatsbyImageData}
-                alt={item.altText}
-              />
-            </LogosItem>)
-          }
-        </LogosList>
-      </LogosListContainer>
+      <Logos type={'компаниями'}/>
+      <Logos type={'оборудованием'}/>
     </Layout>
   )
 }
@@ -209,13 +162,13 @@ export const pageQuery = graphql`
         }
       }
     }
-    allWpMediaItem(filter: {title: {regex: "/logo/"}}) {
+    allWpMediaItem(filter: {title: {regex: "/services/"}}) {
       nodes {
         id
         title
         localFile {
           childImageSharp {
-            gatsbyImageData(height: 50, formats: PNG)
+            gatsbyImageData
           }
         }
         altText
