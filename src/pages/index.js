@@ -60,7 +60,7 @@ let Services = styled.div`
 let ServiceItem = styled.div`
   max-width: 350px;
   margin: 5px;
-
+  padding: 20px 10px;
   &:hover {
     cursor: pointer;
     box-shadow: 0 14px 28px rgba(77, 99, 135, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -68,6 +68,8 @@ let ServiceItem = styled.div`
 
   @media ${devices.mobileL} {
     max-width: 100%;
+    padding: 20px 0 0;
+    margin: 0;
     &:hover {
       transform: scale(1);
     }
@@ -97,7 +99,7 @@ function HomePage({data}) {
   let {content} = data.allWpContentNode.edges[0].node
   let services = data.allWpMediaItem.nodes.filter(logo => /services/.test(logo.title))
   
-  const options = {
+  let options = {
     replace: (domNode) => {
       if (domNode.attribs && domNode.attribs.class === 'main-services') {
         return (<MainServicesList>{domToReact(domNode.children, options)}</MainServicesList>)
@@ -123,6 +125,7 @@ function HomePage({data}) {
       if (domNode.attribs && domNode.attribs.class === 'services-image-wrapper') {
         let dataAttribute = domNode.next.attribs.data
         let image = services.find(item => item.altText === dataAttribute)
+        
         return <ServicesImage>
           <GatsbyImage image={image.localFile.childImageSharp.gatsbyImageData}
                        alt={image.altText}/>
