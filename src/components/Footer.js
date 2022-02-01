@@ -53,10 +53,10 @@ function Footer() {
   `)
   return (
     <FooterContainer>
-        <LinkList>{nodes.map(({path, label}) => !(/Шеф-монтаж|Газовый/.test(label)) &&
-        <FooterLink to={path}>{label}</FooterLink>)}
+      <LinkList>{nodes.map(({path, label}) => !(/Шеф-монтаж|Газовый/.test(label)) &&
+        <FooterLink key={'footer_' + path} to={path}>{label}</FooterLink>)}
       </LinkList>
-        <ContactInfo>info@ecosiprom.com<br/> +375 (29) 662-30-04</ContactInfo>
+      <ContactInfo>info@ecosiprom.com<br/> +375 (29) 662-30-04</ContactInfo>
       <CompanyInfo>&copy;2021 Экосипром. Все права защищены</CompanyInfo>
     </FooterContainer>
   )

@@ -1,12 +1,12 @@
 import * as React from 'react'
 import Layout from '../components/Layout'
-import {graphql} from 'gatsby'
-import parse, {domToReact} from 'html-react-parser'
-import {Slideshow} from '../components/Slideshow'
+import { graphql } from 'gatsby'
+import parse, { domToReact } from 'html-react-parser'
+import { Slideshow } from '../components/Slideshow'
 import styled from 'styled-components'
-import {devices} from '../common/MediaQuery/media-query'
-import {GatsbyImage} from 'gatsby-plugin-image'
-import {Logos} from '../components/Logos'
+import { devices } from '../common/MediaQuery/media-query'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { Logos } from '../components/Logos'
 
 let SliderContainer = styled.div`
   display: flex;
@@ -42,7 +42,13 @@ let MainServicesUnderLine = styled.div`
   width: 90%;
   max-width: 650px;
   height: 10px;
-  background: linear-gradient(116deg, #d3f5f5 0%, #f9fbfd 98%, transparent 98%, transparent 100%);
+  background: linear-gradient(
+    116deg,
+    #d3f5f5 0%,
+    #f9fbfd 98%,
+    transparent 98%,
+    transparent 100%
+  );
 
   &:last-child {
     display: none;
@@ -54,16 +60,18 @@ let Services = styled.div`
   flex-wrap: wrap;
   margin: 30px 0;
   @media ${devices.mobileL} {
-    margin: 10px 5px
+    margin: 10px 5px;
   }
 `
 let ServiceItem = styled.div`
   max-width: 350px;
   margin: 5px;
   padding: 20px 10px;
+
   &:hover {
     cursor: pointer;
-    box-shadow: 0 14px 28px rgba(77, 99, 135, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(77, 99, 135, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.22);
   }
 
   @media ${devices.mobileL} {
@@ -95,14 +103,20 @@ let ServicesListItem = styled.li`
   font-size: 1.1em;
 `
 
-function HomePage({data}) {
-  let {content} = data.allWpContentNode.edges[0].node
-  let services = data.allWpMediaItem.nodes.filter(logo => /services/.test(logo.title))
-  
+function HomePage({ data }) {
+  let { content } = data.allWpContentNode.edges[0].node
+  let services = data.allWpMediaItem.nodes.filter(logo =>
+    /services/.test(logo.title)
+  )
+  console.log('services >> ', services)
   let options = {
-    replace: (domNode) => {
+    replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'main-services') {
-        return (<MainServicesList>{domToReact(domNode.children, options)}</MainServicesList>)
+        return (
+          <MainServicesList>
+            {domToReact(domNode.children, options)}
+          </MainServicesList>
+        )
       }
       if (domNode.attribs && domNode.attribs.class === 'main-services-item') {
         return (
@@ -110,43 +124,70 @@ function HomePage({data}) {
             <MainServicesItem>
               {domToReact(domNode.children, options)}
             </MainServicesItem>
-            <MainServicesUnderLine/>
-          </>)
+            <MainServicesUnderLine />
+          </>
+        )
       }
       if (domNode.attribs && domNode.attribs.class === 'services-container') {
         return <Services>{domToReact(domNode.children, options)}</Services>
       }
       if (domNode.attribs && domNode.attribs.class === 'services-item') {
-        return (<ServiceItem>{domToReact(domNode.children, options)}</ServiceItem>)
+        return (
+          <ServiceItem>{domToReact(domNode.children, options)}</ServiceItem>
+        )
       }
       if (domNode.attribs && domNode.attribs.class === 'services-title') {
-        return <ServicesTitle>{domToReact(domNode.children, options)}</ServicesTitle>
+        return (
+          <ServicesTitle>{domToReact(domNode.children, options)}</ServicesTitle>
+        )
       }
-      if (domNode.attribs && domNode.attribs.class === 'services-image-wrapper') {
-        let dataAttribute = domNode.next.attribs.data
-        let image = services.find(item => item.altText === dataAttribute)
-        
-        return <ServicesImage>
-          <GatsbyImage image={image.localFile.childImageSharp.gatsbyImageData}
-                       alt={image.altText}/>
-        </ServicesImage>
+      if (
+        domNode.attribs &&
+        domNode.attribs.class === 'services-image-wrapper'
+      ) {
+        let dataAttribute = new RegExp(`${domNode.next.attribs.data}`)
+        let dataAttribute2 = 'test'
+        console.log('dataAttribute >> ', dataAttribute)
+        let image = services.find(item => {
+          console.log('item >> ', item)
+          return domNode.next.attribs.data && dataAttribute.test(item.title)
+        })
+        console.log('image >> ', image)
+        if (image) {
+          return (
+            <ServicesImage>
+              <GatsbyImage
+                image={image.localFile.childImageSharp.gatsbyImageData}
+                alt={image.altText}
+              />
+            </ServicesImage>
+          )
+        } else {
+          return <div>{dataAttribute2}</div>
+        }
       }
       if (domNode.attribs && domNode.attribs.class === 'services-list') {
-        return <ServicesList>{domToReact(domNode.children, options)}</ServicesList>
+        return (
+          <ServicesList>{domToReact(domNode.children, options)}</ServicesList>
+        )
       }
       if (domNode.attribs && domNode.attribs.class === 'services-list-item') {
-        return <ServicesListItem>{domToReact(domNode.children, options)}</ServicesListItem>
+        return (
+          <ServicesListItem>
+            {domToReact(domNode.children, options)}
+          </ServicesListItem>
+        )
       }
     },
   }
   return (
     <Layout>
       <SliderContainer>
-        <Slideshow autoplay={true}/>
+        <Slideshow autoplay={true} />
       </SliderContainer>
       {parse(content, options)}
-      <Logos type={'компаниями'}/>
-      <Logos type={'оборудованием'}/>
+      <Logos type={'компаниями'} />
+      <Logos type={'оборудованием'} />
     </Layout>
   )
 }
@@ -155,7 +196,7 @@ export default HomePage
 
 export const pageQuery = graphql`
   query {
-    allWpContentNode(filter: {slug: {eq: "main"}}) {
+    allWpContentNode(filter: { slug: { eq: "main" } }) {
       edges {
         node {
           ... on WpPage {
@@ -165,7 +206,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allWpMediaItem(filter: {title: {regex: "/services/"}}) {
+    allWpMediaItem(filter: { title: { regex: "/services/" } }) {
       nodes {
         id
         title
