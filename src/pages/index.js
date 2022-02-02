@@ -108,7 +108,6 @@ function HomePage({ data }) {
   let services = data.allWpMediaItem.nodes.filter(logo =>
     /services/.test(logo.title)
   )
-  console.log('services >> ', services)
   let options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'main-services') {
@@ -146,13 +145,11 @@ function HomePage({ data }) {
         domNode.attribs.class === 'services-image-wrapper'
       ) {
         let dataAttribute = new RegExp(`${domNode.next.attribs.data}`)
-        let dataAttribute2 = 'test'
-        console.log('dataAttribute >> ', dataAttribute)
-        let image = services.find(item => {
-          console.log('item >> ', item)
-          return domNode.next.attribs.data && dataAttribute.test(item.title)
-        })
-        console.log('image >> ', image)
+
+        let image = services.find(
+          item => domNode.next.attribs.data && dataAttribute.test(item.title)
+        )
+
         if (image) {
           return (
             <ServicesImage>
@@ -163,7 +160,7 @@ function HomePage({ data }) {
             </ServicesImage>
           )
         } else {
-          return <div>{dataAttribute2}</div>
+          return <div>image</div>
         }
       }
       if (domNode.attribs && domNode.attribs.class === 'services-list') {
