@@ -151,20 +151,20 @@ function HomePage({ data }) {
           item =>
             domNode.next.attribs.data && dataAttribute.test(item.node.title)
         )
-        console.log('image >> ', image)
-        return (
-          <ServicesImage>
-            <GatsbyImage
-              image={image.node.localFile.childImageSharp.gatsbyImageData}
-              alt={image.node.title}
-            />
-          </ServicesImage>
-        )
-        // if (image) {
+        // console.log('image >> ', image)
 
-        // } else {
-        // return <div>image</div>
-        // }
+        if (image) {
+          return (
+            <ServicesImage>
+              <GatsbyImage
+                image={image.node.localFile.childImageSharp.gatsbyImageData}
+                alt={image.node.title}
+              />
+            </ServicesImage>
+          )
+        } else {
+          return <div>image</div>
+        }
       }
       if (domNode.attribs && domNode.attribs.class === 'services-list') {
         return (
