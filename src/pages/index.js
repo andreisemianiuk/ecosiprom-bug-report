@@ -105,9 +105,10 @@ let ServicesListItem = styled.li`
 
 function HomePage({ data }) {
   let { content } = data.allWpContentNode.edges[0].node
-  let services = data.allWpMediaItem.nodes.filter(logo =>
-    /services/.test(logo.title)
+  let services = data.allWpMediaItem.edges.filter(node =>
+    /services/.test(node.node.title)
   )
+
   let options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'main-services') {
@@ -147,20 +148,22 @@ function HomePage({ data }) {
         let dataAttribute = new RegExp(`${domNode.next.attribs.data}`)
 
         let image = services.find(
-          item => domNode.next.attribs.data && dataAttribute.test(item.title)
+          item =>
+            domNode.next.attribs.data && dataAttribute.test(item.node.title)
         )
+        console.log('image >> ', image)
         return (
           <ServicesImage>
             <GatsbyImage
-              image={image.localFile.childImageSharp.gatsbyImageData}
-              alt={image.altText}
+              image={image.node.localFile.childImageSharp.gatsbyImageData}
+              alt={image.node.title}
             />
           </ServicesImage>
         )
         // if (image) {
 
         // } else {
-        //   return <div>image</div>
+        // return <div>image</div>
         // }
       }
       if (domNode.attribs && domNode.attribs.class === 'services-list') {
@@ -204,15 +207,15 @@ export const pageQuery = graphql`
       }
     }
     allWpMediaItem(filter: { title: { regex: "/services/" } }) {
-      nodes {
-        id
-        title
-        localFile {
-          childImageSharp {
-            gatsbyImageData
+      edges {
+        node {
+          title
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
           }
         }
-        altText
       }
     }
   }
