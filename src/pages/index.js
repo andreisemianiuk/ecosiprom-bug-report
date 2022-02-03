@@ -149,19 +149,19 @@ function HomePage({ data }) {
         let image = services.find(
           item => domNode.next.attribs.data && dataAttribute.test(item.title)
         )
+        return (
+          <ServicesImage>
+            <GatsbyImage
+              image={image.localFile.childImageSharp.gatsbyImageData}
+              alt={image.altText}
+            />
+          </ServicesImage>
+        )
+        // if (image) {
 
-        if (image) {
-          return (
-            <ServicesImage>
-              <GatsbyImage
-                image={image.localFile.childImageSharp.gatsbyImageData}
-                alt={image.altText}
-              />
-            </ServicesImage>
-          )
-        } else {
-          return <div>image</div>
-        }
+        // } else {
+        //   return <div>image</div>
+        // }
       }
       if (domNode.attribs && domNode.attribs.class === 'services-list') {
         return (
