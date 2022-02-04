@@ -111,6 +111,12 @@ function HomePage({ data }) {
 
   let options = {
     replace: domNode => {
+      if (
+        domNode.attribs &&
+        domNode.attribs.class === 'partners-icons-wrapper'
+      ) {
+        return <></>
+      }
       if (domNode.attribs && domNode.attribs.class === 'main-services') {
         return (
           <MainServicesList>
@@ -151,20 +157,18 @@ function HomePage({ data }) {
           item =>
             domNode.next.attribs.data && dataAttribute.test(item.node.title)
         )
-        // console.log('image >> ', image)
-        return (
-          <ServicesImage>
-            <GatsbyImage
-              image={image.node.localFile.childImageSharp.gatsbyImageData}
-              alt={image.node.title}
-            />
-          </ServicesImage>
-        )
-        // if (image) {
-
-        // } else {
-        //   return <div>image</div>
-        // }
+        if (image) {
+          return (
+            <ServicesImage>
+              <GatsbyImage
+                image={image.node.localFile.childImageSharp.gatsbyImageData}
+                alt={image.node.title}
+              />
+            </ServicesImage>
+          )
+        } else {
+          return <div>image</div>
+        }
       }
       if (domNode.attribs && domNode.attribs.class === 'services-list') {
         return (
