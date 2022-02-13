@@ -46,6 +46,7 @@ function BackImage({ className, description, children }) {
 const ServicesBackgroundImage = styled(BackImage)`
   background-position: center;
   background-size: cover;
+  height: max-content;
 `
 
 export default ServicesBackgroundImage
