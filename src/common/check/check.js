@@ -1,6 +1,5 @@
 export function check(nodeEl) {
   let arr = []
-
   for (let i = 0; i < nodeEl.length; i++) {
     let cur = nodeEl[i]
     if (cur.type === 'text') {
@@ -29,5 +28,9 @@ export function check(nodeEl) {
       arr.push(el.outerHTML)
     }
   }
-  return arr.join('')
+  if (typeof document !== `undefined`) {
+    return arr.join('')
+  } else {
+    return null
+  }
 }
