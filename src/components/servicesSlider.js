@@ -32,7 +32,7 @@ const Item = styled.div`
   /* color: #ffffff; */
 `
 
-function ServicesSlider({ items = [], desc, switchItem }) {
+export const ServicesSlider = ({ items = [], desc, switchItem }) => {
   let currentIndex = items.findIndex(v => v === desc)
   let item = items[currentIndex]
   let switchLeft = () => {
@@ -61,5 +61,3 @@ function ServicesSlider({ items = [], desc, switchItem }) {
     </Container>
   )
 }
-
-export default ServicesSlider
