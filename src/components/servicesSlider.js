@@ -1,24 +1,38 @@
 import React from 'react'
 import styled from 'styled-components'
+import rightArrow from '../images/right-arrow.png'
+import leftArrow from '../images/left-arrow.png'
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  width: 100%;
+  height: 10vh;
+  text-align: center;
+  color: #ffffff;
+  background-color: #00637f;
 `
-const Arrow = styled.span`
-  display: inline-block;
-  margin: 0 5px;
-  padding: 4px 8px;
-  background-color: #ffffff;
-  border: 1px solid #00637f;
+const ArrowContainer = styled.span`
+  display: inline-flex;
+  /* margin: 0 5px; */
+  padding: 8px;
+  /* border: 1px solid #00637f; */
+`
+const Arrow = styled.img`
+  width: 32px;
+  height: 32px;
 `
 const Item = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.8em;
-  text-align: center;
+  /* text-align: center; */
   /* color: #ffffff; */
 `
 
-export default function ServicesSlider({ items = [], desc, switchItem }) {
+function ServicesSlider({ items = [], desc, switchItem }) {
   let currentIndex = items.findIndex(v => v === desc)
   let item = items[currentIndex]
   let switchLeft = () => {
@@ -37,9 +51,15 @@ export default function ServicesSlider({ items = [], desc, switchItem }) {
   }
   return (
     <Container>
-      <Arrow onClick={switchLeft}>&#8592;</Arrow>
+      <ArrowContainer onClick={switchLeft}>
+        <Arrow src={leftArrow} alt='' />
+      </ArrowContainer>
       <Item>{item}</Item>
-      <Arrow onClick={switchRight}>&#8594;</Arrow>
+      <ArrowContainer onClick={switchRight}>
+        <Arrow src={rightArrow} alt='' />
+      </ArrowContainer>
     </Container>
   )
 }
+
+export default ServicesSlider

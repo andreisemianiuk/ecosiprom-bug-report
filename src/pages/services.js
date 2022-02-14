@@ -22,8 +22,6 @@ let ServicesMobileContainer = styled.main`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: 70vh;
-  padding-top: 0;
 `
 let ServicesList = styled.div`
   height: fit-content;
@@ -33,9 +31,17 @@ let ServicesList = styled.div`
   border-radius: 5px;
 `
 let ServicesMobileList = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 15vh; */
   background-color: rgba(255, 255, 255, 0.8);
   padding: 10px;
   border-radius: 5px;
+  @media ${devices.mobileL} {
+    border-radius: 0;
+    padding: 0;
+  }
 `
 let ServicesListItem = styled.div`
   max-width: 420px;
@@ -65,8 +71,11 @@ let ServiceDescriptionWrapper = styled.div`
   height: 70vh;
   border-radius: 10px;
   overflow: hidden;
-  @media ${devices.laptopL} {
+  @media ${devices.mobileL} {
     width: 100%;
+    height: auto;
+    border-radius: 0;
+    margin: 20px 0;
   }
 `
 let ServiceDescription = styled.div`
@@ -85,6 +94,8 @@ let ServiceDescription = styled.div`
   @media ${devices.mobileL} {
     font-size: 0.8em;
     width: 100%;
+    height: auto;
+    border-radius: 0;
   }
 `
 function ServicesPage({ data }) {
