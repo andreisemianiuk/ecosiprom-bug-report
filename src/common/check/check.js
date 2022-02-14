@@ -31,5 +31,5 @@ export function check(nodeEl) {
     }
     return arr.join('')
   }
-  return 'null'
+  return null
 }
