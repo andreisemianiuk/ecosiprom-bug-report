@@ -9,10 +9,6 @@ import Layout from '../components/Layout'
 import ServicesBackgroundImage from '../components/ServicesBackgroundImage'
 import { ServicesSlider } from '../components/ServicesSlider'
 
-// if (typeof document !== `undefined`) {
-//   const check = require('../common/check/check.js')
-// }
-
 let ServicesContainer = styled.main`
   display: flex;
   justify-content: space-evenly;
@@ -103,9 +99,6 @@ let ServiceDescription = styled.div`
   }
 `
 function ServicesPage({ data }) {
-  // React.useEffect(() => {
-  //   check = typeof window !== `undefined` ? check : null
-  // }, [check])
   let { content } = data.allWpContentNode.edges[0].node
   let [description, setDescription] = React.useState('ПРОЕКТИРОВАНИЕ')
   const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
@@ -132,7 +125,7 @@ function ServicesPage({ data }) {
       if (domNode.attribs && domNode.attribs.data) {
         let key = domNode.attribs.data
         let node = domNode.children
-        let value = typeof window !== `undefined` ? check(node) : null
+        let value = check(node)
         arrOfServices.push(key)
         desc[key] = value
         return <></>
