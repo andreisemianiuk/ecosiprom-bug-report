@@ -11,7 +11,7 @@ export function check(nodeEl) {
         innerText = check(cur.children)
       }
       let el = document.createElement(cur.name)
-      if (innerText && typeof window !== 'undefined') {
+      if (innerText) {
         el.innerHTML = innerText
       }
       if (cur.attribs.style) {
