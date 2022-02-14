@@ -7,7 +7,7 @@ import { check } from '../common/check/check'
 import { devices } from '../common/MediaQuery/media-query'
 import Layout from '../components/Layout'
 import ServicesBackgroundImage from '../components/ServicesBackgroundImage'
-import ServicesSlider from '../components/servicesSlider'
+import ServicesSlider from '../components/ServicesSlider'
 
 let ServicesContainer = styled.main`
   display: flex;
