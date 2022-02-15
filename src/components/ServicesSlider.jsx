@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import rightArrow from '../images/right-arrow.png'
 import leftArrow from '../images/left-arrow.png'
+import { devices } from '../common/MediaQuery/media-query'
 
 const Container = styled.div`
   display: flex;
@@ -15,9 +16,7 @@ const Container = styled.div`
 `
 const ArrowContainer = styled.span`
   display: inline-flex;
-  /* margin: 0 5px; */
   padding: 8px;
-  /* border: 1px solid #00637f; */
 `
 const Arrow = styled.img`
   width: 32px;
@@ -27,9 +26,10 @@ const Item = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8em;
-  /* text-align: center; */
-  /* color: #ffffff; */
+  font-size: 0.8rem;
+  @media ${devices.mobileS} {
+    font-size: 0.7rem;
+  }
 `
 
 export const ServicesSlider = ({ items = [], desc, switchItem }) => {

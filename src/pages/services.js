@@ -12,8 +12,12 @@ import { ServicesSlider } from '../components/ServicesSlider'
 let ServicesContainer = styled.main`
   display: flex;
   justify-content: space-evenly;
-  height: 90vh;
-  padding-top: 50px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  height: 80vh;
+  padding-top: 100px;
+  @media ${devices.laptopL} {
+    padding-top: 50px;
+  }
   @media ${devices.mobileL} {
     width: 100%;
   }
@@ -29,41 +33,52 @@ let ServicesList = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
   padding: 10px;
   border-radius: 5px;
+  @media ${devices.tablet} {
+    padding: 5px;
+  }
 `
 let ServicesMobileList = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* height: 15vh; */
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  border-radius: 5px;
+  padding: 0;
+  border-radius: 0;
   @media ${devices.mobileL} {
-    border-radius: 0;
-    padding: 0;
+    /* border-radius: 0; */
+    /* padding: 0; */
   }
 `
 let ServicesListItem = styled.div`
-  max-width: 420px;
+  max-width: 600px;
   text-align: center;
   border: 1px solid gray;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 15px;
-  padding: 5px 0;
+  padding: 10px 5px;
   color: ${({ active }) => (active ? 'rgba(255, 255, 255)' : '#00637f')};
   background-color: ${({ active }) =>
     active ? '#00637f' : 'rgba(255, 255, 255)'};
-  font-weight: bold;
-  font-size: 0.8em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.5rem;
   cursor: pointer;
   &:hover {
     background-color: #00637f;
     color: white;
   }
   @media ${devices.laptopL} {
-    font-size: 0.7em;
+    font-size: 0.8rem;
     margin: 10px;
+    max-width: 420px;
+  }
+  @media ${devices.laptop} {
     max-width: 320px;
+  }
+  @media ${devices.tablet} {
+    max-width: 270px;
+    font-size: 0.7rem;
+    padding: 4px 2px;
+    margin: 10px 5px;
   }
 `
 let ServiceDescriptionWrapper = styled.div`
@@ -82,26 +97,39 @@ let ServiceDescription = styled.div`
   width: 100%;
   height: fit-content;
   max-height: 70vh;
-  font-size: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   color: #222038;
   padding: 20px 30px;
   overflow-y: auto;
   @media ${devices.laptopL} {
-    font-size: 0.8em;
+    font-size: 1rem;
+  }
+  @media ${devices.laptop} {
+    font-size: 0.9rem;
+  }
+  @media ${devices.tablet} {
+    font-size: 0.7rem;
+    padding: 15px 10px;
   }
   @media ${devices.mobileL} {
-    font-size: 0.8em;
+    font-size: 1rem;
     width: 100%;
-    height: auto;
     border-radius: 0;
+  }
+  @media ${devices.mobileM} {
+    font-size: 0.9rem;
+  }
+  @media ${devices.mobileS} {
+    font-size: 0.8rem;
   }
 `
 function ServicesPage({ data }) {
   let { content } = data.allWpContentNode.edges[0].node
   let [description, setDescription] = React.useState('ПРОЕКТИРОВАНИЕ')
-  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
+  const isMobile = useMediaQuery({ query: devices.mobileL })
   let handleClick = e => {
     let name = e.target.innerText
     setDescription(name)
