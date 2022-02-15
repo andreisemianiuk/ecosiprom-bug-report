@@ -6,27 +6,44 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  width: 30%;
   text-align: center;
-  padding-left: 10px;
-  font-size: 1em;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 2rem;
   color: #00637f;
   font-weight: bold;
+  @media ${devices.laptopL} {
+    font-size: 1.2rem;
+    width: 31%;
+  }
+  @media ${devices.laptop} {
+    font-size: 0.85rem;
+  }
+  @media ${devices.tablet} {
+    font-size: 0.8rem;
+  }
   @media ${devices.mobileL} {
-    padding-left: 0;
+    width: 100%;
+    font-size: 1.3rem;
+    margin-top: 20px;
+  }
+  @media ${devices.mobileM} {
+    font-size: 1.2rem;
+  }
+  @media ${devices.mobileS} {
+    font-size: 1rem;
   }
 `
 const Info = styled.div``
 const PhonesWrapper = styled.div`
   display: flex;
-  @media ${devices.mobileL} {
+  justify-content: space-between;
+  @media ${devices.tablet} {
     flex-direction: column;
-    font-size: 1.2em;
   }
 `
 const Phone = styled.div`
-  & :first-child {
-    margin-right: 10px;
-  }
   @media ${devices.mobileL} {
     & :first-child {
       margin-right: 0;
