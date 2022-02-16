@@ -99,7 +99,7 @@ let ServiceDescription = styled.div`
   height: fit-content;
   max-height: 70vh;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.8);
   color: #222038;
