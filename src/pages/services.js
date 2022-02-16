@@ -13,7 +13,7 @@ let ServicesContainer = styled.main`
   display: flex;
   justify-content: space-evenly;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  height: 80vh;
+  height: 90vh;
   padding-top: 100px;
   @media ${devices.laptopL} {
     padding-top: 50px;
@@ -69,6 +69,7 @@ let ServicesListItem = styled.div`
   @media ${devices.laptopL} {
     font-size: 0.8rem;
     margin: 10px;
+    padding: 4px 2px;
     max-width: 420px;
   }
   @media ${devices.laptop} {

@@ -14,8 +14,8 @@ const Container = styled.div`
   color: #00637f;
   font-weight: bold;
   @media ${devices.laptopL} {
-    font-size: 1.2rem;
-    width: 31%;
+    font-size: 1rem;
+    width: 29%;
   }
   @media ${devices.laptop} {
     font-size: 0.85rem;

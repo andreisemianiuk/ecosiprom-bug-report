@@ -37,7 +37,7 @@ const NavItem = styled.li`
   }
   @media ${devices.laptopL} {
     padding-left: 20px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   @media ${devices.laptop} {
     padding-left: 10px;

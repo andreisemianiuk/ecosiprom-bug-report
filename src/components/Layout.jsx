@@ -51,7 +51,7 @@ function Logo() {
     (device === 'mobileL' && 350) ||
     (device === 'tablet' && 150) ||
     (device === 'laptop' && 250) ||
-    (device === 'laptopL' && 350) ||
+    (device === 'laptopL' && 300) ||
     (device === 'desktop' && 500)
   return (
     <LogoItem width={deviceWidth}>
