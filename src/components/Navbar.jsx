@@ -28,7 +28,7 @@ const NavList = styled.ul`
   text-transform: uppercase;
 `
 const NavItem = styled.li`
-  font-size: 2rem;
+  font-size: 1.6rem;
   padding-left: 50px;
   margin: 0;
   list-style: none;

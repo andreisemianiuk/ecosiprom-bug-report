@@ -6,11 +6,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 30%;
+  width: 32%;
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: #00637f;
   font-weight: bold;
   @media ${devices.laptopL} {

@@ -14,7 +14,7 @@ let ServicesContainer = styled.main`
   justify-content: space-evenly;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   height: 90vh;
-  padding-top: 100px;
+  padding-top: 70px;
   @media ${devices.laptopL} {
     padding-top: 50px;
   }
@@ -60,7 +60,7 @@ let ServicesListItem = styled.div`
   background-color: ${({ active }) =>
     active ? '#00637f' : 'rgba(255, 255, 255)'};
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   &:hover {
     background-color: #00637f;
@@ -99,7 +99,7 @@ let ServiceDescription = styled.div`
   height: fit-content;
   max-height: 70vh;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.8);
   color: #222038;
