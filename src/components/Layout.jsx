@@ -18,7 +18,7 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   margin: 20px;
-  @media ${devices.mobileL} {
+  @media ${devices.tablet} {
     flex-direction: column;
   }
 `
@@ -49,9 +49,9 @@ function Logo() {
     (device === 'mobileS' && 250) ||
     (device === 'mobileM' && 300) ||
     (device === 'mobileL' && 350) ||
-    (device === 'tablet' && 150) ||
-    (device === 'laptop' && 250) ||
-    (device === 'laptopL' && 300) ||
+    (device === 'tablet' && 300) ||
+    (device === 'laptop' && 200) ||
+    (device === 'laptopL' && 250) ||
     (device === 'desktop' && 350)
   return (
     <LogoItem width={deviceWidth}>

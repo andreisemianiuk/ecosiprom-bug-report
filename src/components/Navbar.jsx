@@ -12,12 +12,17 @@ const Nav = styled.nav`
   @media ${devices.laptopL} {
     padding: 0 20px;
   }
+  @media (max-width: 1100px) {
+    padding: 0 10px;
+  }
   @media ${devices.laptop} {
     padding: 0 5px;
   }
+  @media ${devices.tablet} {
+    margin-top: 20px;
+  }
   @media ${devices.mobileL} {
     padding: 0;
-    margin-top: 20px;
   }
 `
 const NavList = styled.ul`
@@ -35,24 +40,33 @@ const NavItem = styled.li`
   & :first-child {
     padding-left: 0;
   }
+  @media (max-width: 1800px) {
+    padding-left: 20px;
+    font-size: 1.3rem;
+  }
   @media ${devices.laptopL} {
     padding-left: 20px;
     font-size: 1.2rem;
   }
-  @media ${devices.laptop} {
-    padding-left: 10px;
+  @media (max-width: 1300px) {
+    padding-left: 5px;
     font-size: 1rem;
   }
+  @media ${devices.laptop} {
+    /* padding-left: 10px; */
+    font-size: 0.8rem;
+  }
   @media ${devices.tablet} {
-    padding-left: 10px;
-    font-size: 0.9rem;
+    /* padding-left: 10px; */
+    font-size: 1rem;
+    padding: 4px 8px;
   }
   @media ${devices.mobileL} {
     padding: 2px 4px;
-    font-size: 1.15rem;
+    /* font-size: 1rem; */
   }
   @media ${devices.mobileM} {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   @media ${devices.mobileS} {
     font-size: 0.8rem;
