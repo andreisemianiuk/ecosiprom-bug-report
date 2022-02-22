@@ -10,6 +10,7 @@ let Container = styled.section`
 `
 let Sidebar = styled.div`
   display: flex;
+  width: max(30%, 300px);
   /* justify-content: center; */
   /* align-items: center; */
   flex-direction: column;

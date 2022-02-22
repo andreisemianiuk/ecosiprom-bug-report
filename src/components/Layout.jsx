@@ -1,18 +1,14 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
+import styled from 'styled-components'
 import { devices } from '../common/MediaQuery/media-query'
-import { useMediaQueryHook } from '../common/MediaQuery/useMediaQueryHook'
 import { ContactHeader } from './ContactHeader'
-import Footer from './Footer'
+import { Logo } from './Logo'
 import { Navbar } from './Navbar'
+import Footer from './Footer'
 
 const Container = styled.div``
-const MainContent = styled.div`
-  // @media ${devices.mobileL} {
-  // }
-`
+const MainContent = styled.div``
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
@@ -23,9 +19,6 @@ const Header = styled.header`
   }
 `
 const StyledLink = styled(Link)``
-const LogoItem = styled.div`
-  width: ${({ width }) => `${width}px`};
-`
 
 export default function Layout({ children }) {
   return (
@@ -40,27 +33,5 @@ export default function Layout({ children }) {
       <MainContent>{children}</MainContent>
       <Footer />
     </Container>
-  )
-}
-
-function Logo() {
-  const device = useMediaQueryHook()
-  const deviceWidth =
-    (device === 'mobileS' && 250) ||
-    (device === 'mobileM' && 300) ||
-    (device === 'mobileL' && 350) ||
-    (device === 'tablet' && 300) ||
-    (device === 'laptop' && 200) ||
-    (device === 'laptopL' && 250) ||
-    (device === 'desktop' && 350)
-  return (
-    <LogoItem width={deviceWidth}>
-      <StaticImage
-        src='../images/logo-ecosiprom.png'
-        alt='Logo for site'
-        placeholder='blurred'
-        layout='constrained'
-      />
-    </LogoItem>
   )
 }
