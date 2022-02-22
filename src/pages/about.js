@@ -22,11 +22,11 @@ let AboutContainer = styled.div`
   }
   @media ${devices.tablet} {
     flex-direction: column;
-    font-size: 0.8rem;
+    /* font-size: 0.9rem; */
     padding: 20px 10px;
   }
   @media ${devices.mobileL} {
-    font-size: 0.7rem;
+    /* font-size: 0.9rem; */
   }
 `
 let AboutStart = styled.div`

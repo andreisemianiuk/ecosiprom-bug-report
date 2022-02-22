@@ -70,6 +70,7 @@ const PhonesWrapper = styled.div`
   }
 `
 const Phone = styled.a`
+  color: #00637f;
   text-decoration: none;
 `
 
