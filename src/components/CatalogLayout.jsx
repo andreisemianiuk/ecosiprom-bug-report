@@ -3,29 +3,49 @@ import parse, { domToReact } from 'html-react-parser'
 import * as React from 'react'
 import styled from 'styled-components'
 
-let Container = styled.section`
+let Container = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 50px 20px;
 `
 let Sidebar = styled.div`
+  width: 300px;
+  /* width: max(50%, 300px); */
   display: flex;
-  width: max(30%, 300px);
-  /* justify-content: center; */
-  /* align-items: center; */
   flex-direction: column;
-  /* width: 300px; */
-  padding-left: 50px;
-`
-let Content = styled.div`
-  display: flex;
-  width: 80%;
+  padding-left: clamp(5px, 10vw, 50px);
 `
 let MenuItem = styled.li`
+  width: max(100%, 300px);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* font-size: clamp(0.7rem, 1rem, 1.3rem); */
+  color: #00637f;
+  /* padding: 2px 4px; */
   list-style: none;
-  cursor: pointer;
+  text-transform: uppercase;
 `
-let CommonText = styled.div``
+let MenuItemRef = styled.a`
+  position: relative;
+  text-decoration: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    border-radius: 4px;
+    background-color: #00637f;
+    bottom: -2px;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+`
 
 export const CatalogLayout = ({ children }) => {
   // console.log(children)
@@ -45,9 +65,11 @@ export const CatalogLayout = ({ children }) => {
       }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
         return (
-          <MenuItem>{domToReact(domNode.children, options)}</MenuItem>
-          // <Link>
-          // </Link>
+          <MenuItem>
+            <MenuItemRef href='#'>
+              {domToReact(domNode.children, options)}
+            </MenuItemRef>
+          </MenuItem>
         )
       }
       if (domNode.attribs && domNode.attribs.class === 'common-text') {
@@ -57,9 +79,9 @@ export const CatalogLayout = ({ children }) => {
   }
 
   return (
-    <>
+    <Container>
       {parse(content, options)}
       {children}
-    </>
+    </Container>
   )
 }

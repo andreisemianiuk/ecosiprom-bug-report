@@ -182,6 +182,12 @@ function HomePage({ data }) {
           </ServicesListItem>
         )
       }
+      if (
+        domNode.attribs &&
+        domNode.attribs.class === 'main-slideshow-images'
+      ) {
+        return <></>
+      }
     },
   }
   return (

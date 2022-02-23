@@ -8,7 +8,9 @@ import { Navbar } from './Navbar'
 import Footer from './Footer'
 
 const Container = styled.div``
-const MainContent = styled.div``
+const MainContent = styled.div`
+  min-height: 80vh;
+`
 const Header = styled.header`
   display: flex;
   justify-content: space-between;

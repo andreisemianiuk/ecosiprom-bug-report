@@ -6,28 +6,10 @@ import Layout from '../../components/Layout'
 import { CatalogLayout } from '../../components/CatalogLayout'
 
 let Container = styled.section`
-  display: flex;
-  justify-content: space-between;
-  padding: 50px 20px;
-`
-let Sidebar = styled.div`
-  display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
-  flex-direction: column;
-  /* width: 300px; */
-  padding-left: 50px;
-`
-let Content = styled.div`
-  display: flex;
-  width: 80%;
-`
-let MenuItem = styled.li`
-  list-style: none;
-  cursor: pointer;
+  padding: min(10vw, 50px);
 `
 let CommonText = styled.div`
-  color: chocolate;
+  /* color: chocolate; */
 `
 
 function CatalogPage({ data }) {
@@ -49,7 +31,9 @@ function CatalogPage({ data }) {
   return (
     <Layout>
       <CatalogLayout>
-        <CommonText>{contentHTML}</CommonText>
+        <Container>
+          <CommonText>{contentHTML}</CommonText>
+        </Container>
       </CatalogLayout>
     </Layout>
   )
