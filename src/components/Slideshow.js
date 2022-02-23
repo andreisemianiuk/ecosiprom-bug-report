@@ -1,35 +1,69 @@
+import { graphql, useStaticQuery } from 'gatsby'
+import BackgroundImage from 'gatsby-background-image'
+import { getImage } from 'gatsby-plugin-image'
+import { convertToBgImage } from 'gbimage-bridge'
 import React from 'react'
-import {Slide} from 'react-slideshow-image'
+import { Slide } from 'react-slideshow-image'
 import 'react-slideshow-image/dist/styles.css'
-import mainOne from '../images/main-1.jpg'
-import mainTwo from '../images/main-2.jpg'
-import mainThree from '../images/main-3.jpg'
 
+// const slideImages = [
+//   {
+//     url: `${mainOne}`,
+//     caption: 'Slide 1',
+//   },
+//   {
+//     url: `${mainTwo}`,
+//     caption: 'Slide 2',
+//   },
+//   {
+//     url: `${mainThree}`,
+//     caption: 'Slide 3',
+//   },
+//   {
+//     url: `${mainFour}`,
+//     caption: 'Slide 4',
+//   },
+// ]
 
-const slideImages = [
-  {
-    url: `${mainOne}`,
-    caption: 'Slide 1',
-  },
-  {
-    url: `${mainTwo}`,
-    caption: 'Slide 2',
-  },
-  {
-    url: `${mainThree}`,
-    caption: 'Slide 3',
-  },
-]
-
-export const Slideshow = () => {
+export const Slideshow = ({ children }) => {
+  const {
+    allWpMediaItem: { nodes },
+  } = useStaticQuery(graphql`
+    query SlideshowQuery {
+      allWpMediaItem(filter: { title: { regex: "/main/" } }) {
+        nodes {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+      }
+    }
+  `)
   return (
-    <div className="slide-container" style={{width: '1000px'}}>
+    <div className='slide-container' style={{ width: '100%' }}>
       <Slide>
-        {slideImages.map((slideImage, index) => (
-          <div className="each-slide" key={index}>
-            <div style={{'backgroundImage': `url(${slideImage.url})`, height: '500px',width: '1000px'}}/>
-          </div>
-        ))}
+        {nodes.map(node => {
+          let image = getImage(node.localFile.childImageSharp.gatsbyImageData)
+          let bgImage = convertToBgImage(image)
+          return (
+            <div
+              style={{
+                backgroundPosition: 'center',
+                backgroundSize: '100%',
+              }}>
+              <BackgroundImage
+                Tag='div'
+                style={{ width: '100%', height: '500px' }}
+                // Spread bgImage into BackgroundImage:
+                {...bgImage}
+                preserveStackingContext>
+                {children}
+              </BackgroundImage>
+            </div>
+          )
+        })}
       </Slide>
     </div>
   )
