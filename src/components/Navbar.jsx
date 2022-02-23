@@ -73,13 +73,16 @@ const NavItem = styled.li`
   }
 `
 const StyledNavLink = styled(Link)`
-  color: #00637f;
   text-decoration: none;
-  &.active {
-    color: brown;
-  }
+  box-shadow: inset 0 0 0 0 #00637f;
+  color: #00637f;
+  margin: 0 -0.25rem;
+  padding: 0 0.25rem;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
   &:hover {
-    text-decoration: underline;
+    box-shadow: inset 100px 0 0 0 #00637f;
+    color: white;
   }
 `
 
