@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import parse, { domToReact } from 'html-react-parser'
 import * as React from 'react'
 import styled from 'styled-components'
@@ -7,15 +7,25 @@ let Container = styled.div`
   display: flex;
   justify-content: space-between;
 `
+let SidebarContainer = styled.div`
+  /* width: max(25%, 300px); */
+`
+let ContentContainer = styled.div`
+  /* width: 90%; */
+`
 let Sidebar = styled.div`
-  width: 300px;
+  /* width: 80%; */
   /* width: max(50%, 300px); */
   display: flex;
   flex-direction: column;
   padding-left: clamp(5px, 10vw, 50px);
 `
+let Title = styled.h2`
+  color: #f53725;
+  /* margin-right: 80px; */
+`
 let MenuItem = styled.li`
-  width: max(100%, 300px);
+  /* width: max(100%, 300px); */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /* font-size: clamp(0.7rem, 1rem, 1.3rem); */
   color: #00637f;
@@ -23,7 +33,7 @@ let MenuItem = styled.li`
   list-style: none;
   text-transform: uppercase;
 `
-let MenuItemRef = styled.a`
+let MenuItemLink = styled(Link)`
   position: relative;
   text-decoration: none;
 
@@ -33,7 +43,7 @@ let MenuItemRef = styled.a`
     width: 100%;
     height: 4px;
     border-radius: 4px;
-    background-color: #00637f;
+    background-color: #f53725;
     bottom: -2px;
     left: 0;
     transform-origin: right;
@@ -63,12 +73,16 @@ export const CatalogLayout = ({ children }) => {
       if (domNode.attribs && domNode.attribs.class === 'sidebar') {
         return <Sidebar>{domToReact(domNode.children, options)}</Sidebar>
       }
+      if (domNode.attribs && domNode.attribs.class === 'sidebar-title') {
+        return <Title>{domToReact(domNode.children, options)}</Title>
+      }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
+        let { link } = domNode.attribs
         return (
           <MenuItem>
-            <MenuItemRef href='#'>
+            <MenuItemLink to={`/catalog/${link}`}>
               {domToReact(domNode.children, options)}
-            </MenuItemRef>
+            </MenuItemLink>
           </MenuItem>
         )
       }
@@ -81,6 +95,8 @@ export const CatalogLayout = ({ children }) => {
   return (
     <Container>
       {parse(content, options)}
+      {/* <SidebarContainer></SidebarContainer> */}
+      {/* <ContentContainer></ContentContainer> */}
       {children}
     </Container>
   )
