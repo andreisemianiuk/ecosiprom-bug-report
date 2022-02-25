@@ -6,6 +6,7 @@ import Layout from '../../components/Layout'
 import { CatalogLayout } from '../../components/CatalogLayout'
 
 let Container = styled.section`
+  width: 80%;
   padding: min(10vw, 50px);
 `
 let CommonText = styled.div`
