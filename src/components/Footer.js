@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import {graphql, Link, useStaticQuery} from 'gatsby'
-import {devices} from '../common/MediaQuery/media-query'
+import { graphql, Link, useStaticQuery } from 'gatsby'
+import { devices } from '../common/MediaQuery/media-query'
 
 let FooterContainer = styled.footer`
   min-height: 100px;
@@ -23,7 +23,7 @@ let FooterLink = styled(Link)`
   text-decoration: none;
   color: #c5fcff;
   margin: 10px;
-  font-size: .9em;
+  font-size: 0.9em;
 `
 let CompanyInfo = styled.div`
   font-size: 0.8em;
@@ -37,7 +37,7 @@ let ContactInfo = styled.div`
 function Footer() {
   const {
     wpMenu: {
-      menuItems: {nodes},
+      menuItems: { nodes },
     },
   } = useStaticQuery(graphql`
     query FooterQuery {
@@ -53,11 +53,21 @@ function Footer() {
   `)
   return (
     <FooterContainer>
-      <LinkList>{nodes.map(({path, label}) => !(/Шеф-монтаж|Газовый/.test(label)) &&
-        <FooterLink key={'footer_' + path} to={path}>{label}</FooterLink>)}
+      <LinkList>
+        {nodes.map(
+          ({ path, label }) =>
+            !/Шеф-монтаж|Газовый/.test(label) && (
+              <FooterLink key={'footer_' + path} to={path}>
+                {label}
+              </FooterLink>
+            )
+        )}
       </LinkList>
-      <ContactInfo>info@ecosiprom.com<br/> +375 (29) 662-30-04</ContactInfo>
-      <CompanyInfo>&copy;2021 Экосипром. Все права защищены</CompanyInfo>
+      <ContactInfo>
+        info@ecosiprom.com
+        <br /> +375 (29) 662-30-04
+      </ContactInfo>
+      <CompanyInfo>&copy;2022 Экосипром. Все права защищены</CompanyInfo>
     </FooterContainer>
   )
 }
