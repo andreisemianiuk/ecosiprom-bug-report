@@ -17,10 +17,10 @@ let ProductWrapper = styled.section`
 let Product = styled.div`
   width: 500px;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   /* align-items: center; */
   flex-direction: column;
-  /* height: 500px; */
+  height: fit-content;
   border: 1px solid #333;
   margin: 5px;
   padding: 5px;
