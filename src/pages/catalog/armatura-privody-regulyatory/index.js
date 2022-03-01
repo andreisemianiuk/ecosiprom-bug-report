@@ -1,47 +1,59 @@
 import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { Link } from 'gatsby-plugin-modal-routing'
 import parse, { domToReact } from 'html-react-parser'
 import * as React from 'react'
 import styled from 'styled-components'
-import { CatalogLayout } from '../../components/CatalogLayout'
-import Layout from '../../components/Layout'
+import { CatalogLayout } from '../../../components/CatalogLayout'
+import Layout from '../../../components/Layout'
 
 let ProductWrapper = styled.section`
   display: flex;
-  justify-content: space-between;
-  /* flex-direction: column; */
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  width: 80%;
+  width: 75%;
 `
-
+const ProductLink = styled(Link)`
+  text-decoration: none;
+`
 let Product = styled.div`
-  width: 500px;
+  width: 400px;
   display: flex;
-  /* justify-content: center; */
-  /* align-items: center; */
   flex-direction: column;
   height: fit-content;
   border: 1px solid #333;
-  margin: 5px;
-  padding: 5px;
+  margin: 10px 0;
+  padding: 10px 5px 0;
+`
+let ProductTitle = styled.h3`
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  font-size: 1.4rem;
 `
 let ImagesWrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `
-function ArmatyraPrivodyRegulyatoryPage({ data }) {
-  console.log('data >> ', data)
+function ArmatyraPrivodyRegulyatoryPage({ location, data }) {
+  // console.log('location >>', location)
   const { content } = data?.wpPage || ''
   const { nodes } = data?.allWpMediaItem
+
   const options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'item') {
-        return <Product>{domToReact(domNode.children, options)}</Product>
+        return (
+          <ProductLink
+            to='/catalog/armatura-privody-regulyatory/regulyatory-davleniya-gaza/'
+            asModal>
+            <Product>{domToReact(domNode.children, options)}</Product>
+          </ProductLink>
+        )
       }
       if (domNode.attribs && domNode.attribs.class === 'image-wrapper') {
         const regex = new RegExp(`${domNode.attribs['data-image']}`, 'i')
         const images = nodes.filter(node => regex.test(node.title))
-        console.log('images >> ', images)
+
         return (
           <ImagesWrapper>
             {images.map(image => (
@@ -53,8 +65,14 @@ function ArmatyraPrivodyRegulyatoryPage({ data }) {
           </ImagesWrapper>
         )
       }
+      if (domNode.attribs && domNode.attribs.class === 'title') {
+        return (
+          <ProductTitle>{domToReact(domNode.children, options)}</ProductTitle>
+        )
+      }
     },
   }
+
   return (
     <Layout>
       <CatalogLayout>
