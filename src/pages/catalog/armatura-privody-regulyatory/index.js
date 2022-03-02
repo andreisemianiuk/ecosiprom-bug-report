@@ -1,8 +1,8 @@
+import * as React from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby-plugin-modal-routing'
 import parse, { domToReact } from 'html-react-parser'
-import * as React from 'react'
 import styled from 'styled-components'
 import { CatalogLayout } from '../../../components/CatalogLayout'
 import Layout from '../../../components/Layout'
@@ -34,8 +34,7 @@ let ImagesWrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `
-function ArmatyraPrivodyRegulyatoryPage({ location, data }) {
-  // console.log('location >>', location)
+function ArmatyraPrivodyRegulyatoryPage({ data }) {
   const { content } = data?.wpPage || ''
   const { nodes } = data?.allWpMediaItem
 
@@ -86,7 +85,7 @@ export default ArmatyraPrivodyRegulyatoryPage
 
 export const pageQuery = graphql`
   query ArmatyraPrivodyRegulyatoryPageQuery {
-    wpPage(title: { eq: "арматура, приводы и регуляторы" }) {
+    wpPage(title: { eq: "armatura,privody i regulyatory" }) {
       content
     }
     allWpMediaItem(filter: { title: { regex: "/apr-/" } }) {
