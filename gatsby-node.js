@@ -10,13 +10,6 @@ exports.createPages = async ({ actions, graphql }) => {
           node {
             id
             uri
-            title
-            content
-            wpParent {
-              node {
-                uri
-              }
-            }
           }
         }
       }
@@ -32,9 +25,8 @@ exports.createPages = async ({ actions, graphql }) => {
       ),
       context: {
         id: node.id,
-        content: node.content,
-        parentUri: node.wpParent.node.uri,
       },
+      defer: true,
     })
   })
 }
