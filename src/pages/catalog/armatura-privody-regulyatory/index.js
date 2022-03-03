@@ -37,13 +37,12 @@ let ImagesWrapper = styled.div`
 function ArmatyraPrivodyRegulyatoryPage({ data }) {
   const { content } = data?.wpPage || ''
   const { nodes } = data?.allWpMediaItem
-
   const options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'item') {
         return (
           <ProductLink
-            to='/catalog/armatura-privody-regulyatory/regulyatory-davleniya-gaza/'
+            to={`/catalog/armatura-privody-regulyatory/${domNode.attribs['data-link']}/`}
             asModal>
             <Product>{domToReact(domNode.children, options)}</Product>
           </ProductLink>
@@ -52,13 +51,13 @@ function ArmatyraPrivodyRegulyatoryPage({ data }) {
       if (domNode.attribs && domNode.attribs.class === 'image-wrapper') {
         const regex = new RegExp(`${domNode.attribs['data-image']}`, 'i')
         const images = nodes.filter(node => regex.test(node.title))
-
         return (
           <ImagesWrapper>
-            {images.map(image => (
+            {images.map((image, index) => (
               <GatsbyImage
                 image={image.localFile.childImageSharp.gatsbyImageData}
                 alt={image.altText}
+                key={image.altText + index}
               />
             ))}
           </ImagesWrapper>
@@ -85,7 +84,7 @@ export default ArmatyraPrivodyRegulyatoryPage
 
 export const pageQuery = graphql`
   query ArmatyraPrivodyRegulyatoryPageQuery {
-    wpPage(title: { eq: "armatura,privody i regulyatory" }) {
+    wpPage(title: { eq: "арматура, приводы и регуляторы" }) {
       content
     }
     allWpMediaItem(filter: { title: { regex: "/apr-/" } }) {

@@ -19,7 +19,7 @@ let ProductDescription = styled.div`
 `
 let ImagesWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ count }) => (count > 1 ? 'space-between' : 'center')};
   width: 50%;
 `
 let ProductTitle = styled.h3`
@@ -31,73 +31,79 @@ let ProductTitle = styled.h3`
 const Instruction = styled.a`
   color: blue;
 `
-const ArmaturaPrivodyRegulyatoryTemplate = props => {
-  console.log(props)
-  // const { content } = data?.wpPage || ''
-  // const { nodes } = data?.allWpMediaItem
-  // const options = {
-  //   replace: domNode => {
-  //     if (domNode.attribs && domNode.attribs.class === 'image-wrapper') {
-  //       const regex = new RegExp(`${domNode.attribs['data-image']}`, 'i')
-  //       const images = nodes.filter(node => regex.test(node.title))
-
-  //       return (
-  //         <ImagesWrapper>
-  //           {images.map(image => (
-  //             <GatsbyImage
-  //               image={image.localFile.childImageSharp.gatsbyImageData}
-  //               alt={image.altText}
-  //             />
-  //           ))}
-  //         </ImagesWrapper>
-  //       )
-  //     }
-  //     if (domNode.attribs && domNode.attribs.class === 'title') {
-  //       return (
-  //         <ProductTitle>{domToReact(domNode.children, options)}</ProductTitle>
-  //       )
-  //     }
-  //     if (domNode.attribs && domNode.attribs.class === 'download') {
-  //       return (
-  //         <Instruction href={`${domNode.attribs['data-link']}`} download>
-  //           {domToReact(domNode.children, options)}
-  //         </Instruction>
-  //       )
-  //     }
-  //     if (domNode.attribs && domNode.attribs.class === 'description') {
-  //       return (
-  //         <ProductDescription>
-  //           {domToReact(domNode.children, options)}
-  //         </ProductDescription>
-  //       )
-  //     }
-  //   },
-  // }
+const ArmaturaPrivodyRegulyatoryTemplate = ({
+  data: {
+    wpPage: {
+      content,
+      title,
+      wpParent: {
+        node: { uri },
+      },
+    },
+    allWpMediaItem: { nodes },
+  },
+}) => {
+  const options = {
+    replace: domNode => {
+      if (domNode.attribs && domNode.attribs.class === 'download') {
+        return (
+          <Instruction href={`${domNode.attribs['data-link']}`} download>
+            {domToReact(domNode.children, options)}
+          </Instruction>
+        )
+      }
+      if (domNode.attribs && domNode.attribs.class === 'description') {
+        return (
+          <ProductDescription>
+            {domToReact(domNode.children, options)}
+          </ProductDescription>
+        )
+      }
+    },
+  }
   return (
-    <Modal location={'/catalog/armatura-privody-regulyatory/'}>
-      modal{/* <Container>{parse(content, options)}</Container> */}
+    <Modal location={uri}>
+      <Container>
+        <ProductTitle>{title}</ProductTitle>
+        <ImagesWrapper count={nodes.length}>
+          {nodes.map((image, index) => (
+            <GatsbyImage
+              image={image.localFile.childImageSharp.gatsbyImageData}
+              alt={image.altText}
+              key={image.altText + index}
+            />
+          ))}
+        </ImagesWrapper>
+        {parse(content, options)}
+      </Container>
     </Modal>
   )
 }
 
 export default ArmaturaPrivodyRegulyatoryTemplate
 
-// export const pageQuery = graphql`
-//   query RegulyatoryDavleniyaGazaPageQuery {
-//     wpPage(title: { eq: "regulyatory davleniya gaza" }) {
-//       content
-//     }
-//     allWpMediaItem(filter: { title: { regex: "/Регуляторы газа/" } }) {
-//       nodes {
-//         id
-//         title
-//         localFile {
-//           childImageSharp {
-//             gatsbyImageData(height: 250)
-//           }
-//         }
-//         altText
-//       }
-//     }
-//   }
-// `
+export const pageQuery = graphql`
+  query RegulyatoryDavleniyaGazaPageQuery($id: String!) {
+    wpPage(id: { eq: $id }) {
+      content
+      title
+      wpParent {
+        node {
+          uri
+        }
+      }
+    }
+    allWpMediaItem(filter: { wpParent: { node: { id: { eq: $id } } } }) {
+      nodes {
+        id
+        title
+        localFile {
+          childImageSharp {
+            gatsbyImageData(height: 250)
+          }
+        }
+        altText
+      }
+    }
+  }
+`
