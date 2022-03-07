@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby-plugin-modal-routing'
 import parse, { domToReact } from 'html-react-parser'
 import styled from 'styled-components'
-import { CatalogLayout } from '../../../components/CatalogLayout'
-import Layout from '../../../components/Layout'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { CatalogLayout } from '../components/CatalogLayout'
+import Layout from '../components/Layout'
+import { Link } from 'gatsby-plugin-modal-routing'
 
-let ProductWrapper = styled.section`
+const ProductWrapper = styled.section`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -16,7 +16,7 @@ let ProductWrapper = styled.section`
 const ProductLink = styled(Link)`
   text-decoration: none;
 `
-let Product = styled.div`
+const Product = styled.div`
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -25,18 +25,20 @@ let Product = styled.div`
   margin: 10px 0;
   padding: 10px 5px 0;
 `
-let ProductTitle = styled.h3`
+const ProductTitle = styled.h3`
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   font-size: 1.4rem;
 `
-let ImagesWrapper = styled.div`
+const ImagesWrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `
-function ArmatyraPrivodyRegulyatoryPage({ data }) {
-  const { content } = data?.wpPage || ''
-  const { nodes } = data?.allWpMediaItem
+
+const ProductListTemplate = ({ data }) => {
+  console.log('data >> ', data)
+  const nodes = data?.allWpMediaItem?.nodes || []
+  const content = data?.wpPage?.content || ''
   const options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'item') {
@@ -51,6 +53,7 @@ function ArmatyraPrivodyRegulyatoryPage({ data }) {
       if (domNode.attribs && domNode.attribs.class === 'image-wrapper') {
         const regex = new RegExp(`${domNode.attribs['data-image']}`, 'i')
         const images = nodes.filter(node => regex.test(node.title))
+        console.log(images)
         return (
           <ImagesWrapper>
             {images.map((image, index) => (
@@ -70,7 +73,6 @@ function ArmatyraPrivodyRegulyatoryPage({ data }) {
       }
     },
   }
-
   return (
     <Layout>
       <CatalogLayout>
@@ -80,20 +82,20 @@ function ArmatyraPrivodyRegulyatoryPage({ data }) {
   )
 }
 
-export default ArmatyraPrivodyRegulyatoryPage
+export default ProductListTemplate
 
 export const pageQuery = graphql`
-  query ArmatyraPrivodyRegulyatoryPageQuery {
-    wpPage(title: { eq: "арматура, приводы и регуляторы" }) {
+  query ProductListTemplateQuery($id: String!) {
+    wpPage(id: { eq: $id }) {
       content
     }
-    allWpMediaItem(filter: { title: { regex: "/apr-/" } }) {
+    allWpMediaItem(filter: { wpParent: { node: { id: { eq: $id } } } }) {
       nodes {
         id
         title
         localFile {
           childImageSharp {
-            gatsbyImageData(height: 100)
+            gatsbyImageData(height: 250)
           }
         }
         altText

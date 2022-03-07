@@ -1,9 +1,9 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import Modal from '../components/Modal'
-import parse, { domToReact } from 'html-react-parser'
 import { graphql } from 'gatsby'
+import parse, { domToReact } from 'html-react-parser'
+import styled from 'styled-components'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import Modal from '../components/Modal'
 
 const Container = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ let ProductTitle = styled.h3`
 const Instruction = styled.a`
   color: blue;
 `
-const ArmaturaPrivodyRegulyatoryTemplate = ({
+const ModalProductItemTemplate = ({
   data: {
     wpPage: {
       content,
@@ -80,7 +80,7 @@ const ArmaturaPrivodyRegulyatoryTemplate = ({
   )
 }
 
-export default ArmaturaPrivodyRegulyatoryTemplate
+export default ModalProductItemTemplate
 
 export const pageQuery = graphql`
   query RegulyatoryDavleniyaGazaPageQuery($id: String!) {
@@ -99,7 +99,7 @@ export const pageQuery = graphql`
         title
         localFile {
           childImageSharp {
-            gatsbyImageData(height: 250)
+            gatsbyImageData(height: 250, placeholder: BLURRED)
           }
         }
         altText

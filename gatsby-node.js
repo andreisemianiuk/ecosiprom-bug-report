@@ -1,14 +1,95 @@
 const path = require(`path`)
 
-exports.createPages = async ({ actions, graphql }) => {
-  const result = await graphql(`
+exports.createPages = async gatsbyUtilities => {
+  const productItems = await getProductItems(gatsbyUtilities)
+  const productList = await getProductList(gatsbyUtilities)
+
+  if (!productItems.length || !productList.length) {
+    return
+  }
+  await createProductItemPages({ productItems, gatsbyUtilities })
+  await createProductListPages({ productList, gatsbyUtilities })
+}
+const createProductItemPages = async ({ productItems, gatsbyUtilities }) => {
+  Promise.all(
+    productItems.map(({ node }) => {
+      if (node.slug !== 'electromagnitnye-klapany') {
+        gatsbyUtilities.actions.createPage({
+          path: node.uri,
+          component: require.resolve(
+            './src/templates/modal-product-item-template.js'
+          ),
+          context: {
+            id: node.id,
+          },
+          defer: true,
+        })
+      }
+    })
+  )
+}
+const createProductListPages = async ({ productList, gatsbyUtilities }) => {
+  Promise.all(
+    productList.map(({ node }) => {
+      gatsbyUtilities.actions.createPage({
+        path: node.uri,
+        component: require.resolve('./src/templates/product-list-template.js'),
+        context: {
+          id: node.id,
+        },
+        defer: true,
+      })
+    })
+  )
+}
+async function getProductItems({ graphql, reporter }) {
+  const graphqlResult = await graphql(`
     {
       allWpPage(
-        filter: { wpParent: { node: { id: { eq: "cG9zdDoyMDc4" } } } }
+        filter: {
+          wpParent: {
+            node: {
+              slug: {
+                in: ["armatura-privody-regulyatory", "electromagnitnye-klapany"]
+              }
+            }
+          }
+        }
       ) {
         edges {
           node {
             id
+            uri
+            slug
+          }
+        }
+      }
+    }
+  `)
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your product items`,
+      graphqlResult.errors
+    )
+    return
+  }
+  return graphqlResult.data.allWpPage.edges
+}
+async function getProductList({ graphql, reporter }) {
+  const graphqlResult = await graphql(`
+    {
+      allWpPage(
+        filter: {
+          slug: {
+            regex: "/armatura-privody-regulyatory|electromagnitnye-klapany/"
+          }
+        }
+      ) {
+        edges {
+          node {
+            id
+            slug
             uri
           }
         }
@@ -16,20 +97,41 @@ exports.createPages = async ({ actions, graphql }) => {
     }
   `)
 
-  const pages = result.data.allWpPage.edges
-  pages.forEach(({ node }) => {
-    actions.createPage({
-      path: node.uri,
-      component: require.resolve(
-        './src/templates/armatura-privody-regulyatory.js'
-      ),
-      context: {
-        id: node.id,
-      },
-      defer: true,
-    })
-  })
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your product items`,
+      graphqlResult.errors
+    )
+    return
+  }
+  return graphqlResult.data.allWpPage.edges
 }
+// exports.createPages = async ({ actions, graphql }) => {
+//   const result = await graphql(`
+// {
+//   allWpPage(filter: {content: {regex: "/class=\"item\"/"}}) {
+// 		edges {
+// 			node {
+// 				slug
+// 				uri
+// 			}
+// 		}
+// 	}
+// }
+//   `)
+
+//   const pages = result.data.allWpPage.edges
+//   pages.forEach(({ node }) => {
+// actions.createPage({
+//   path: node.uri,
+//   component: require.resolve('./src/templates/product-list-template.js'),
+//   context: {
+//     id: node.id,
+//   },
+//   defer: true,
+// })
+//   })
+// }
 // exports.createPages = async gatsbyUtilities => {
 //   // Query our posts from the GraphQL server
 //   const posts = await getPosts(gatsbyUtilities)
