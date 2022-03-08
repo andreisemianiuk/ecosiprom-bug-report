@@ -1,29 +1,37 @@
 import * as React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, useScrollRestoration } from 'gatsby'
 import parse, { domToReact } from 'html-react-parser'
 import styled from 'styled-components'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { CatalogLayout } from '../components/CatalogLayout'
 import Layout from '../components/Layout'
 import { Link } from 'gatsby-plugin-modal-routing'
+import { devices } from '../common/MediaQuery/media-query'
 
 const ProductWrapper = styled.section`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   width: 75%;
+  @media ${devices.mobileL} {
+    width: 100%;
+    flex-direction: column;
+  }
 `
 const ProductLink = styled(Link)`
   text-decoration: none;
 `
 const Product = styled.div`
-  width: 400px;
+  width: clamp(320px, 100%, 425px);
   display: flex;
   flex-direction: column;
   height: fit-content;
   border: 1px solid #333;
   margin: 10px 0;
   padding: 10px 5px 0;
+  @media ${devices.mobileL} {
+    /* padding: 0; */
+  }
 `
 const ProductTitle = styled.h3`
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -35,17 +43,19 @@ const ImagesWrapper = styled.div`
   justify-content: space-around;
 `
 
-const ProductListTemplate = ({ data }) => {
-  console.log('data >> ', data)
-  const nodes = data?.allWpMediaItem?.nodes || []
-  const content = data?.wpPage?.content || ''
+const ProductListTemplate = ({
+  data: {
+    wpPage: { content },
+    allWpMediaItem: { nodes },
+  },
+  path,
+}) => {
+  // console.log('listScrollRestoration >> ', listScrollRestoration)
   const options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'item') {
         return (
-          <ProductLink
-            to={`/catalog/armatura-privody-regulyatory/${domNode.attribs['data-link']}/`}
-            asModal>
+          <ProductLink to={`${path}${domNode.attribs['data-link']}/`} asModal>
             <Product>{domToReact(domNode.children, options)}</Product>
           </ProductLink>
         )
@@ -53,7 +63,6 @@ const ProductListTemplate = ({ data }) => {
       if (domNode.attribs && domNode.attribs.class === 'image-wrapper') {
         const regex = new RegExp(`${domNode.attribs['data-image']}`, 'i')
         const images = nodes.filter(node => regex.test(node.title))
-        console.log(images)
         return (
           <ImagesWrapper>
             {images.map((image, index) => (
@@ -95,7 +104,7 @@ export const pageQuery = graphql`
         title
         localFile {
           childImageSharp {
-            gatsbyImageData(height: 250)
+            gatsbyImageData(height: 100)
           }
         }
         altText

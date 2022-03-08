@@ -4,10 +4,15 @@ import parse, { domToReact } from 'html-react-parser'
 import styled from 'styled-components'
 import Layout from '../../components/Layout'
 import { CatalogLayout } from '../../components/CatalogLayout'
+import { devices } from '../../common/MediaQuery/media-query'
 
 let Container = styled.section`
   width: 80%;
   padding: min(10vw, 50px);
+  @media ${devices.mobileL} {
+    width: 100%;
+    padding: 0 20px 30px;
+  }
 `
 let CommonText = styled.div`
   /* color: chocolate; */

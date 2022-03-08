@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Layout from '../components/Layout'
-import { graphql } from 'gatsby'
+import { graphql, useScrollRestoration } from 'gatsby'
 import parse, { domToReact } from 'html-react-parser'
 import { Slideshow } from '../components/Slideshow'
 import styled from 'styled-components'
@@ -190,6 +190,7 @@ function HomePage({ data }) {
       }
     },
   }
+
   return (
     <Layout>
       <SliderContainer>

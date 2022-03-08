@@ -3,13 +3,14 @@ import { ModalRoutingContext } from 'gatsby-plugin-modal-routing'
 import React from 'react'
 import styled from 'styled-components'
 import CloseCross from '../assets/cross-svgrepo-com.svg'
+import { devices } from '../common/MediaQuery/media-query'
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: rgba(0, 0, 0, 0.3);
 `
 const Box = styled.div`
@@ -18,14 +19,21 @@ const Box = styled.div`
   justify-content: space-around;
   align-items: center;
   position: relative;
-  width: 80%;
-  height: 90%;
+  width: min(80%, 1000px);
+  padding-bottom: 30px;
+  margin: 20px 0;
   background-color: #fff;
   border-radius: 15px;
+  @media ${devices.mobileL} {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
 `
 const BottomButtonsWrapper = styled.div`
   display: flex;
-  width: 30%;
+  width: max(30%, 280px);
+  align-items: center;
   justify-content: space-between;
 `
 const OrderButton = styled.button`
@@ -35,7 +43,7 @@ const OrderButton = styled.button`
   border-radius: 10px;
   color: #fff;
   background-color: #00637f;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 `
 const CloseButton = styled.button`
   position: absolute;
@@ -49,7 +57,7 @@ const CloseButton = styled.button`
 `
 const CloseLink = styled(Link)`
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: max(1.2rem, 50%);
   &:hover {
     opacity: 0.7;
   }

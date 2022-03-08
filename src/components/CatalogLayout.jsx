@@ -2,10 +2,14 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import parse, { domToReact } from 'html-react-parser'
 import * as React from 'react'
 import styled from 'styled-components'
+import { devices } from '../common/MediaQuery/media-query'
 
 let Container = styled.div`
   display: flex;
   justify-content: space-between;
+  @media ${devices.mobileL} {
+    flex-direction: column;
+  }
 `
 let SidebarContainer = styled.div`
   /* width: max(25%, 300px); */
@@ -22,6 +26,7 @@ let Sidebar = styled.div`
 `
 let Title = styled.h2`
   color: #f53725;
+  /* text-align: center; */
   /* margin-right: 80px; */
 `
 let MenuItem = styled.li`
