@@ -21,6 +21,7 @@ const createProductItemPages = async ({ productItems, gatsbyUtilities }) => {
           ),
           context: {
             id: node.id,
+            parentId: node.parentId,
           },
           defer: true,
         })
@@ -36,6 +37,7 @@ const createProductListPages = async ({ productList, gatsbyUtilities }) => {
         component: require.resolve('./src/templates/product-list-template.js'),
         context: {
           id: node.id,
+          parentId: node.parentId,
         },
         defer: true,
       })
@@ -59,6 +61,7 @@ async function getProductItems({ graphql, reporter }) {
         edges {
           node {
             id
+            parentId
             uri
             slug
           }
@@ -89,6 +92,7 @@ async function getProductList({ graphql, reporter }) {
         edges {
           node {
             id
+            parentId
             slug
             uri
           }
