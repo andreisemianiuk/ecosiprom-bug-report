@@ -23,7 +23,7 @@ const createProductItemPages = async ({ productItems, gatsbyUtilities }) => {
             id: node.id,
             parentId: node.parentId,
           },
-          defer: true,
+          // defer: true,
         })
       }
     })
