@@ -28,7 +28,7 @@ let ProductDescription = styled.div`
 let ImagesWrapper = styled.div`
   display: flex;
   justify-content: ${({ count }) => (count > 1 ? 'space-between' : 'center')};
-  width: clamp(300px, 70%, 700px);
+  width: clamp(300px, 50%, 500px);
   @media ${devices.mobileL} {
     /* width: 90%; */
   }
@@ -38,8 +38,9 @@ let ProductTitle = styled.h3`
   color: red;
   text-align: center;
   text-transform: uppercase;
+
   @media ${devices.mobileL} {
-    font-size: 1.2rem;
+    font-size: 1.2em;
   }
 `
 const Instruction = styled.a`

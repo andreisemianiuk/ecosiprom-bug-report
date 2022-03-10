@@ -1,5 +1,6 @@
 import { Link } from 'gatsby'
 import { ModalRoutingContext } from 'gatsby-plugin-modal-routing'
+
 import React from 'react'
 import styled from 'styled-components'
 import CloseCross from '../assets/cross-svgrepo-com.svg'
@@ -65,7 +66,8 @@ const CloseLink = styled(Link)`
 
 const Modal = ({ location, children }) => (
   <ModalRoutingContext.Consumer>
-    {() => {
+    {props => {
+      console.log('props >> ', props)
       return (
         <Container>
           <Box>
