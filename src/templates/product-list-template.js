@@ -1,13 +1,11 @@
 import * as React from 'react'
-import { graphql, useScrollRestoration } from 'gatsby'
+import { graphql, Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import parse, { domToReact } from 'html-react-parser'
 import styled from 'styled-components'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { devices } from '../common/MediaQuery/media-query'
 import { CatalogLayout } from '../components/CatalogLayout'
 import Layout from '../components/Layout'
-import { Link } from 'gatsby-plugin-modal-routing'
-import { devices } from '../common/MediaQuery/media-query'
-import { shouldUpdateScroll } from '../../gatsby-browser'
 
 const ProductWrapper = styled.section`
   display: flex;
@@ -68,8 +66,9 @@ const ProductListTemplate = props => {
         return (
           <ProductLink
             to={`${props.path}${domNode.attribs['data-link']}/`}
-            asModal
-            state={{ noScroll: true }}>
+            // asModal
+            // state={{ noScroll: true }}
+          >
             <Product>{domToReact(domNode.children, options)}</Product>
           </ProductLink>
         )

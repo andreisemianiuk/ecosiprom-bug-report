@@ -1,7 +1,5 @@
-import { Link } from 'gatsby'
-import { ModalRoutingContext } from 'gatsby-plugin-modal-routing'
-
 import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 import CloseCross from '../assets/cross-svgrepo-com.svg'
 import { devices } from '../common/MediaQuery/media-query'
@@ -12,23 +10,28 @@ const Container = styled.div`
   align-items: center;
   width: 100vw;
   min-height: 100vh;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 99, 127, 0.5);
 `
 const Box = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+
   position: relative;
+
   width: min(80%, 1000px);
-  padding-bottom: 30px;
-  margin: 20px 0;
+  min-height: auto;
+  padding-bottom: 50px;
   background-color: #fff;
   border-radius: 15px;
+
   @media ${devices.mobileL} {
     width: 100%;
+    height: 100%;
     margin: 0;
     border-radius: 0;
+    padding-top: 20px;
   }
 `
 const BottomButtonsWrapper = styled.div`
@@ -65,27 +68,20 @@ const CloseLink = styled(Link)`
 `
 
 const Modal = ({ location, children }) => (
-  <ModalRoutingContext.Consumer>
-    {props => {
-      console.log('props >> ', props)
-      return (
-        <Container>
-          <Box>
-            <CloseButton>
-              <CloseLink to={location}>
-                <CloseCross />
-              </CloseLink>
-            </CloseButton>
-            {children}
-            <BottomButtonsWrapper>
-              <OrderButton>Заказать</OrderButton>
-              <CloseLink to={location}>Назад</CloseLink>
-            </BottomButtonsWrapper>
-          </Box>
-        </Container>
-      )
-    }}
-  </ModalRoutingContext.Consumer>
+  <Container>
+    <Box>
+      <CloseButton>
+        <CloseLink to={location}>
+          <CloseCross />
+        </CloseLink>
+      </CloseButton>
+      {children}
+      <BottomButtonsWrapper>
+        <CloseLink to={location}>Назад</CloseLink>
+        <OrderButton>Заказать</OrderButton>
+      </BottomButtonsWrapper>
+    </Box>
+  </Container>
 )
 
 export default Modal

@@ -6,36 +6,36 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import Modal from '../components/Modal'
 import { devices } from '../common/MediaQuery/media-query'
 
-const Container = styled.div`
+let Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  /* height: 100%; */
   text-decoration: none;
 `
 let ProductDescription = styled.div`
-  padding: 50px 100px 0;
+  padding: 50px 100px 10px;
   font-size: 1.4rem;
   @media ${devices.desktop} {
     font-size: 1.2rem;
   }
+  @media ${devices.tablet} {
+    padding: 30px 20px 10px;
+  }
   @media ${devices.mobileL} {
     font-size: 1rem;
-    padding: 10px;
+    padding: 10px 20px;
   }
 `
 let ImagesWrapper = styled.div`
   display: flex;
   justify-content: ${({ count }) => (count > 1 ? 'space-between' : 'center')};
-  width: clamp(300px, 50%, 500px);
-  @media ${devices.mobileL} {
-    /* width: 90%; */
-  }
+  width: clamp(300px, 70%, 500px);
+  padding: 20px 0;
 `
 let ProductTitle = styled.h3`
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  color: red;
+  color: #d43d3d;
   text-align: center;
   text-transform: uppercase;
 
@@ -43,8 +43,8 @@ let ProductTitle = styled.h3`
     font-size: 1.2em;
   }
 `
-const Instruction = styled.a`
-  color: blue;
+let Instruction = styled.a`
+  color: #00637f;
   margin: 10px 0 30px;
 `
 const ModalProductItemTemplate = ({
@@ -59,7 +59,7 @@ const ModalProductItemTemplate = ({
     allWpMediaItem: { nodes },
   },
 }) => {
-  const options = {
+  let options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'image-wrapper') {
         const regex = new RegExp(`${domNode.attribs['data-image']}`, 'i')
@@ -68,7 +68,6 @@ const ModalProductItemTemplate = ({
           <ImagesWrapper count={images.length}>
             {images.map((image, index) => (
               <GatsbyImage
-                // imgStyle={{ height: '100px' }}
                 image={image.localFile.childImageSharp.gatsbyImageData}
                 alt={image.altText}
                 key={image.altText + index}
