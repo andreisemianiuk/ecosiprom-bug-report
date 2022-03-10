@@ -37,9 +37,12 @@ const ProductTitle = styled.h3`
   text-align: center;
   font-size: 1.2em;
 `
-const ImagesWrapper = styled.div`
+const ImagesContainer = styled.div`
   display: flex;
   justify-content: space-around;
+`
+const GatsbyImageWrapper = styled.div`
+  padding: 0 10px;
 `
 
 const ProductListTemplate = props => {
@@ -79,15 +82,17 @@ const ProductListTemplate = props => {
           regex.test(node.title)
         )
         return (
-          <ImagesWrapper>
+          <ImagesContainer>
             {images.map((image, index) => (
-              <GatsbyImage
-                image={image.localFile.childImageSharp.gatsbyImageData}
-                alt={image.altText}
-                key={image.altText + index}
-              />
+              <GatsbyImageWrapper>
+                <GatsbyImage
+                  image={image.localFile.childImageSharp.gatsbyImageData}
+                  alt={image.altText}
+                  key={image.altText + index}
+                />
+              </GatsbyImageWrapper>
             ))}
-          </ImagesWrapper>
+          </ImagesContainer>
         )
       }
       if (domNode.attribs && domNode.attribs.class === 'title') {

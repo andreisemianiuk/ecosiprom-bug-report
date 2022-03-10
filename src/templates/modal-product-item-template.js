@@ -27,11 +27,14 @@ let ProductDescription = styled.div`
     padding: 10px 20px;
   }
 `
-let ImagesWrapper = styled.div`
+let ImagesContaier = styled.div`
   display: flex;
   justify-content: ${({ count }) => (count > 1 ? 'space-between' : 'center')};
   width: clamp(300px, 70%, 500px);
   padding: 20px 0;
+`
+let GatsbyImageWrapper = styled.div`
+  padding: 0 10px;
 `
 let ProductTitle = styled.h3`
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -65,15 +68,17 @@ const ModalProductItemTemplate = ({
         const regex = new RegExp(`${domNode.attribs['data-image']}`, 'i')
         const images = nodes.filter(node => regex.test(node.title))
         return (
-          <ImagesWrapper count={images.length}>
+          <ImagesContaier count={images.length}>
             {images.map((image, index) => (
-              <GatsbyImage
-                image={image.localFile.childImageSharp.gatsbyImageData}
-                alt={image.altText}
-                key={image.altText + index}
-              />
+              <GatsbyImageWrapper>
+                <GatsbyImage
+                  image={image.localFile.childImageSharp.gatsbyImageData}
+                  alt={image.altText}
+                  key={image.altText + index}
+                />
+              </GatsbyImageWrapper>
             ))}
-          </ImagesWrapper>
+          </ImagesContaier>
         )
       }
       if (domNode.attribs && domNode.attribs.class === 'download') {

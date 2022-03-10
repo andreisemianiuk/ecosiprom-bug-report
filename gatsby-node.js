@@ -52,7 +52,12 @@ async function getProductItems({ graphql, reporter }) {
           wpParent: {
             node: {
               slug: {
-                in: ["armatura-privody-regulyatory", "electromagnitnye-klapany"]
+                in: [
+                  "armatura-privody-regulyatory"
+                  "electromagnitnye-klapany"
+                  "toplivnye-nasosy"
+                  "datchiki-rele-avtomaty-goreniya"
+                ]
               }
             }
           }
@@ -85,7 +90,7 @@ async function getProductList({ graphql, reporter }) {
       allWpPage(
         filter: {
           slug: {
-            regex: "/armatura-privody-regulyatory|electromagnitnye-klapany/"
+            regex: "/armatura-privody-regulyatory|electromagnitnye-klapany|toplivnye-nasosy|datchiki-rele-avtomaty-goreniya|prom-gorelki|gorelki-rekumat/"
           }
         }
       ) {
