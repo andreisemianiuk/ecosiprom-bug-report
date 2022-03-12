@@ -15,15 +15,15 @@ let Container = styled.div`
 `
 let ProductDescription = styled.div`
   padding: 50px 100px 10px;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   @media ${devices.desktop} {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   @media ${devices.tablet} {
     padding: 30px 20px 10px;
   }
   @media ${devices.mobileL} {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 10px 20px;
   }
 `

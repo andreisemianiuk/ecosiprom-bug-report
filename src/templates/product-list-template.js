@@ -25,7 +25,8 @@ const Product = styled.div`
   display: flex;
   flex-direction: column;
   /* height: fit-content; */
-  border: 1px solid #333;
+  border: 2px dotted #00637f;
+  border-radius: 5px;
   margin: 10px 0;
   padding: 10px 5px 0;
   @media ${devices.mobileL} {
@@ -127,7 +128,7 @@ export const pageQuery = graphql`
         title
         localFile {
           childImageSharp {
-            gatsbyImageData(height: 100)
+            gatsbyImageData(height: 100, placeholder: TRACED_SVG)
           }
         }
         altText

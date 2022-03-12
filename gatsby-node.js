@@ -13,7 +13,11 @@ exports.createPages = async gatsbyUtilities => {
 const createProductItemPages = async ({ productItems, gatsbyUtilities }) => {
   Promise.all(
     productItems.map(({ node }) => {
-      if (node.slug !== 'electromagnitnye-klapany') {
+      if (
+        node.slug !== 'electromagnitnye-klapany' ||
+        node.slug !== 'gorelki-rekumat' ||
+        node.slug !== 'izluchayushchie-truby'
+      ) {
         gatsbyUtilities.actions.createPage({
           path: node.uri,
           component: require.resolve(
@@ -57,6 +61,9 @@ async function getProductItems({ graphql, reporter }) {
                   "electromagnitnye-klapany"
                   "toplivnye-nasosy"
                   "datchiki-rele-avtomaty-goreniya"
+                  "prom-gorelki"
+                  "gorelki-rekumat"
+                  "izluchayushchie-truby"
                 ]
               }
             }
@@ -90,7 +97,7 @@ async function getProductList({ graphql, reporter }) {
       allWpPage(
         filter: {
           slug: {
-            regex: "/armatura-privody-regulyatory|electromagnitnye-klapany|toplivnye-nasosy|datchiki-rele-avtomaty-goreniya|prom-gorelki|gorelki-rekumat/"
+            regex: "/armatura-privody-regulyatory|electromagnitnye-klapany|toplivnye-nasosy|datchiki-rele-avtomaty-goreniya|prom-gorelki|gorelki-rekumat|izluchayushchie-truby/"
           }
         }
       ) {

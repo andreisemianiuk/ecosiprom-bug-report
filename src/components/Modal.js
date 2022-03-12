@@ -9,8 +9,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  min-height: 100vh;
+  min-height: min(100vh, 570px);
   background: rgba(0, 99, 127, 0.5);
+  /* @media ${devices.mobileL} {
+    height: 100%;
+  } */
 `
 const Box = styled.div`
   display: flex;
@@ -21,7 +24,9 @@ const Box = styled.div`
   position: relative;
 
   width: min(80%, 1000px);
-  min-height: auto;
+  height: 100%;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
   padding-bottom: 50px;
   background-color: #fff;
   border-radius: 15px;
