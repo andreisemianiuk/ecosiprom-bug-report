@@ -1,7 +1,7 @@
-import * as React from 'react'
 import { graphql, Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import parse, { domToReact } from 'html-react-parser'
+import * as React from 'react'
 import styled from 'styled-components'
 import { devices } from '../common/MediaQuery/media-query'
 import { CatalogLayout } from '../components/CatalogLayout'
@@ -15,6 +15,7 @@ const ProductWrapper = styled.section`
   @media ${devices.mobileL} {
     width: 100%;
     flex-direction: column;
+    padding: 0 2px;
   }
 `
 const ProductLink = styled(Link)`
@@ -24,14 +25,10 @@ const ProductLink = styled(Link)`
 const Product = styled.div`
   display: flex;
   flex-direction: column;
-  /* height: fit-content; */
   border: 2px dotted #00637f;
   border-radius: 5px;
   margin: 10px 0;
   padding: 10px 5px 0;
-  @media ${devices.mobileL} {
-    /* padding: 0; */
-  }
 `
 const ProductTitle = styled.h3`
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -46,42 +43,27 @@ const GatsbyImageWrapper = styled.div`
   padding: 0 10px;
 `
 
-const ProductListTemplate = props => {
-  // data: {
-  //   wpPage: { content },
-  //   allWpMediaItem: { nodes },
-  // },
-  // path,
-  // location,
-  // const listScrollRestoration = useScrollRestoration(
-  //   `${props.location.pathname}`
-  // )
-  // console.log('listScrollRestoration >> ', listScrollRestoration)
-  // const ss = Object.values(window.sessionStorage)
-  // console.log('ss >> ', ss)
-  // const y = ss[window.sessionStorage.length - 3]
-  // console.log('y >> ', y)
-  // React.useEffect(() => {
-  //   window.scrollTo(0, y)
-  // }, [])
+const ProductListTemplate = ({
+  data: {
+    wpPage: { content },
+    allWpMediaItem: { nodes },
+  },
+  path,
+}) => {
   const options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'item') {
         return (
           <ProductLink
-            to={`${props.path}${domNode.attribs['data-link']}/`}
-            // asModal
-            // state={{ noScroll: true }}
-          >
+            to={`${path}${domNode.attribs['data-link']}/`}
+            state={{ modal: true }}>
             <Product>{domToReact(domNode.children, options)}</Product>
           </ProductLink>
         )
       }
       if (domNode.attribs && domNode.attribs.class === 'image-wrapper') {
         const regex = new RegExp(`${domNode.attribs['data-image']}`, 'i')
-        const images = props.data.allWpMediaItem.nodes.filter(node =>
-          regex.test(node.title)
-        )
+        const images = nodes.filter(node => regex.test(node.title))
         return (
           <ImagesContainer>
             {images.map((image, index) => (
@@ -104,12 +86,9 @@ const ProductListTemplate = props => {
     },
   }
   return (
-    // {...useScrollRestoration}
     <Layout>
       <CatalogLayout>
-        <ProductWrapper>
-          {parse(props.data.wpPage.content, options)}
-        </ProductWrapper>
+        <ProductWrapper>{parse(content, options)}</ProductWrapper>
       </CatalogLayout>
     </Layout>
   )

@@ -3,17 +3,15 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 import CloseCross from '../assets/cross-svgrepo-com.svg'
 import { devices } from '../common/MediaQuery/media-query'
+import { ModalRoutingContext } from 'gatsby-plugin-modal-routing-3'
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  min-height: min(100vh, 570px);
+  min-height: max(100vh, 570px);
   background: rgba(0, 99, 127, 0.5);
-  /* @media ${devices.mobileL} {
-    height: 100%;
-  } */
 `
 const Box = styled.div`
   display: flex;
@@ -24,7 +22,7 @@ const Box = styled.div`
   position: relative;
 
   width: min(80%, 1000px);
-  height: 100%;
+
   margin-top: 5vh;
   margin-bottom: 5vh;
   padding-bottom: 50px;
@@ -33,7 +31,7 @@ const Box = styled.div`
 
   @media ${devices.mobileL} {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     margin: 0;
     border-radius: 0;
     padding-top: 20px;
@@ -66,6 +64,7 @@ const CloseButton = styled.button`
 `
 const CloseLink = styled(Link)`
   text-decoration: none;
+
   font-size: max(1.2rem, 50%);
   &:hover {
     opacity: 0.7;
@@ -73,20 +72,26 @@ const CloseLink = styled(Link)`
 `
 
 const Modal = ({ location, children }) => (
-  <Container>
-    <Box>
-      <CloseButton>
-        <CloseLink to={location}>
-          <CloseCross />
-        </CloseLink>
-      </CloseButton>
-      {children}
-      <BottomButtonsWrapper>
-        <CloseLink to={location}>Назад</CloseLink>
-        <OrderButton>Заказать</OrderButton>
-      </BottomButtonsWrapper>
-    </Box>
-  </Container>
+  <ModalRoutingContext.Consumer>
+    {() => {
+      return (
+        <Container>
+          <Box>
+            <CloseButton>
+              <CloseLink to={location}>
+                <CloseCross />
+              </CloseLink>
+            </CloseButton>
+            {children}
+            <BottomButtonsWrapper>
+              <CloseLink to={location}>Назад</CloseLink>
+              <OrderButton>Заказать</OrderButton>
+            </BottomButtonsWrapper>
+          </Box>
+        </Container>
+      )
+    }}
+  </ModalRoutingContext.Consumer>
 )
 
 export default Modal

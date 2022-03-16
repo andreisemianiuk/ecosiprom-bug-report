@@ -44,6 +44,7 @@ let ProductTitle = styled.h3`
 
   @media ${devices.mobileL} {
     font-size: 1.2em;
+    padding: 0 5px;
   }
 `
 let Instruction = styled.a`
