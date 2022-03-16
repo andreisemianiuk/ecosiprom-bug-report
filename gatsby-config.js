@@ -12,6 +12,23 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-modal-routing-3`,
+      options: {
+        // A selector to set react-modal's app root to, default is `#___gatsby`
+        // See http://reactcommunity.org/react-modal/accessibility/#app-element
+        appElement: '#___gatsby',
+
+        // Object of props that will be passed to the react-modal container
+        // See http://reactcommunity.org/react-modal/#usage
+        modalProps: {
+          style: {
+            overlay: {},
+            content: { inset: 'inherit', padding: 0 },
+          },
+        },
+      },
+    },
+    {
       resolve: 'gatsby-plugin-react-leaflet',
       options: {
         linkStyles: true, // (default: true) Enable/disable loading stylesheets via CDN
