@@ -83,6 +83,10 @@ body {
   color: var(--color-text);
 }
 
+body.ReactModal__Body--open {
+  overflow: hidden;
+}
+
 footer {
   padding: var(--spacing-6) var(--spacing-0);
 }
