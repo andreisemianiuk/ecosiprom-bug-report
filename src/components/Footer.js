@@ -41,7 +41,7 @@ function Footer() {
     },
   } = useStaticQuery(graphql`
     query FooterQuery {
-      wpMenu {
+      wpMenu(slug: { eq: "footer_menu" }) {
         menuItems {
           nodes {
             path
