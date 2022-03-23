@@ -63,6 +63,7 @@ async function getProductItems({ graphql, reporter }) {
                   "datchiki-rele-avtomaty-goreniya"
                   "prom-gorelki"
                   "gorelki-rekumat"
+                  "gorelki-regemat"
                   "izluchayushchie-truby"
                 ]
               }
@@ -97,7 +98,7 @@ async function getProductList({ graphql, reporter }) {
       allWpPage(
         filter: {
           slug: {
-            regex: "/armatura-privody-regulyatory|electromagnitnye-klapany|toplivnye-nasosy|datchiki-rele-avtomaty-goreniya|prom-gorelki|gorelki-rekumat|izluchayushchie-truby/"
+            regex: "/armatura-privody-regulyatory|electromagnitnye-klapany|toplivnye-nasosy|datchiki-rele-avtomaty-goreniya|prom-gorelki|gorelki-rekumat|gorelki-regemat|izluchayushchie-truby/"
           }
         }
       ) {

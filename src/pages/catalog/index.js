@@ -1,13 +1,13 @@
 import * as React from 'react'
-import { graphql, Link } from 'gatsby'
-import parse, { domToReact } from 'html-react-parser'
+import { graphql } from 'gatsby'
+import parse from 'html-react-parser'
 import styled from 'styled-components'
-import Layout from '../../components/Layout'
-import { CatalogLayout } from '../../components/CatalogLayout'
 import { devices } from '../../common/MediaQuery/media-query'
+import { CatalogLayout } from '../../components/CatalogLayout'
+import Layout from '../../components/Layout'
 
 let Container = styled.section`
-  width: 80%;
+  width: 73%;
   padding: min(10vw, 50px);
   @media ${devices.mobileL} {
     width: 100%;

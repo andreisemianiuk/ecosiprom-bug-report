@@ -31,11 +31,15 @@ const Box = styled.div`
 
   @media ${devices.mobileL} {
     width: 100%;
+    justify-content: space-around;
     min-height: 100vh;
     margin: 0;
     border-radius: 0;
     padding-top: 20px;
   }
+`
+const ChildrenWrapper = styled.div`
+  height: 100%;
 `
 const BottomButtonsWrapper = styled.div`
   display: flex;
@@ -73,18 +77,19 @@ const CloseLink = styled(Link)`
 
 const Modal = ({ location, children }) => (
   <ModalRoutingContext.Consumer>
-    {() => {
+    {({ closeTo }) => {
+      // console.log('props >> ', props)
       return (
         <Container>
           <Box>
             <CloseButton>
-              <CloseLink to={location}>
+              <CloseLink to={closeTo}>
                 <CloseCross />
               </CloseLink>
             </CloseButton>
-            {children}
+            <ChildrenWrapper>{children}</ChildrenWrapper>
             <BottomButtonsWrapper>
-              <CloseLink to={location}>Назад</CloseLink>
+              <CloseLink to={closeTo}>Назад</CloseLink>
               <OrderButton>Заказать</OrderButton>
             </BottomButtonsWrapper>
           </Box>

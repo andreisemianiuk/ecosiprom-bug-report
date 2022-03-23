@@ -6,65 +6,35 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 30%;
+  width: clamp(400px, 30%, 600px);
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 2rem;
+  font-size: 1.4em;
   color: #00637f;
   font-weight: bold;
-  @media ${devices.desktop} {
-    font-size: 1.8rem;
-    /* width: 28%; */
-  }
-  @media (max-width: 2300px) {
-    font-size: 1.5rem;
-    /* width: 28%; */
-  }
-  @media (max-width: 1800px) {
-    font-size: 1.2rem;
-    width: 28%;
-  }
-  @media (max-width: 1600px) {
-    font-size: 1.1rem;
-  }
   @media ${devices.laptopL} {
-    font-size: 1rem;
-    /* width: 29%; */
-  }
-  @media (max-width: 1300px) {
-    font-size: 0.8rem;
-    width: 29%;
+    font-size: 1.1em;
   }
   @media ${devices.laptop} {
-    font-size: 0.7rem;
-    /* width: 32%; */
-  }
-  @media (max-width: 900px) {
-    font-size: 0.6rem;
-    /* width: 32%; */
+    font-size: 1em;
   }
   @media ${devices.tablet} {
     width: 100%;
-    font-size: 1.1rem;
     margin-top: 20px;
-  }
-  @media ${devices.mobileL} {
-    /* width: 100%; */
-    /* font-size: 1.2rem; */
-    /* margin-top: 20px; */
+    /* font-size: 1em; */
   }
   @media ${devices.mobileM} {
-    font-size: 1rem;
+    font-size: 1em;
   }
   @media ${devices.mobileS} {
-    font-size: 0.9rem;
+    font-size: 0.9em;
   }
 `
 const Info = styled.div``
 const PhonesWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   @media ${devices.tablet} {
     flex-direction: column;
   }
@@ -72,6 +42,9 @@ const PhonesWrapper = styled.div`
 const Phone = styled.a`
   color: #00637f;
   text-decoration: none;
+  @media ${devices.desktop} {
+    /* font-size: 1em; */
+  }
 `
 
 export const ContactHeader = () => {

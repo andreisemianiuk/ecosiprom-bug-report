@@ -7,14 +7,11 @@ const Nav = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
   padding: 0 50px;
   @media ${devices.laptopL} {
     padding: 0 20px;
   }
-  @media (max-width: 1100px) {
-    padding: 0 10px;
-  }
+
   @media ${devices.laptop} {
     padding: 0 5px;
   }
@@ -33,50 +30,34 @@ const NavList = styled.ul`
   text-transform: uppercase;
 `
 const NavItem = styled.li`
-  font-size: 1.6rem;
+  font-size: 1.8em;
   padding-left: 50px;
   margin: 0;
   list-style: none;
   & :first-child {
     padding-left: 0;
   }
-  @media (max-width: 1800px) {
-    padding-left: 20px;
-    font-size: 1.3rem;
-  }
+
   @media ${devices.laptopL} {
-    padding-left: 20px;
-    font-size: 1.2rem;
+    padding-left: 10px;
+    font-size: 1.4em;
   }
-  @media (max-width: 1300px) {
-    padding-left: 5px;
-    font-size: 1rem;
-  }
+
   @media ${devices.laptop} {
-    /* padding-left: 10px; */
-    font-size: 0.8rem;
+    padding-left: 5px;
+    font-size: 1em;
   }
   @media ${devices.tablet} {
-    /* padding-left: 10px; */
-    font-size: 1rem;
     padding: 4px 8px;
   }
   @media ${devices.mobileL} {
-    padding: 2px 4px;
-    /* font-size: 1rem; */
-  }
-  @media ${devices.mobileM} {
-    font-size: 0.8rem;
-  }
-  @media ${devices.mobileS} {
-    font-size: 0.8rem;
+    padding: 0;
   }
 `
 const StyledNavLink = styled(Link)`
   text-decoration: none;
   box-shadow: inset 0 0 0 0 #00637f;
   color: #00637f;
-  margin: 0 -0.25rem;
   padding: 0 0.25rem;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 

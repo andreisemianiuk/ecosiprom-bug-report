@@ -51,6 +51,7 @@ function Footer() {
       }
     }
   `)
+  console.log('nodes >> ', nodes)
   return (
     <FooterContainer>
       <LinkList>
