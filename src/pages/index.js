@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Layout from '../components/Layout'
-import { graphql, useScrollRestoration } from 'gatsby'
+import { graphql, Link, useScrollRestoration } from 'gatsby'
 import parse, { domToReact } from 'html-react-parser'
 import { Slideshow } from '../components/Slideshow'
 import styled from 'styled-components'
@@ -63,7 +63,8 @@ let Services = styled.div`
     margin: 10px 5px;
   }
 `
-let ServiceItem = styled.div`
+let ServiceItem = styled(Link)`
+  text-decoration: none;
   max-width: 350px;
   margin: 5px;
   padding: 20px 10px;
@@ -139,7 +140,9 @@ function HomePage({ data }) {
       }
       if (domNode.attribs && domNode.attribs.class === 'services-item') {
         return (
-          <ServiceItem>{domToReact(domNode.children, options)}</ServiceItem>
+          <ServiceItem to='/services'>
+            {domToReact(domNode.children, options)}
+          </ServiceItem>
         )
       }
       if (domNode.attribs && domNode.attribs.class === 'services-title') {
