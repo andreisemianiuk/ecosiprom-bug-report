@@ -43,6 +43,10 @@ const NavItem = styled.li`
     padding-left: 20px;
     font-size: 1.5em;
   }
+  @media (max-width: 1500px) {
+    padding-left: 15px;
+    font-size: 1.4em;
+  }
   @media ${devices.laptopL} {
     padding-left: 10px;
     font-size: 1.3em;
@@ -61,6 +65,9 @@ const NavItem = styled.li`
   @media ${devices.tablet} {
     font-size: 1em;
     padding: 2px 4px;
+  }
+  @media (max-width: 450px) {
+    font-size: 0.95em;
   }
   @media ${devices.mobileL} {
     font-size: 0.9em;

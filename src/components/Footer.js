@@ -8,9 +8,16 @@ let FooterContainer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 1.5em;
   color: #c5fcff;
   background-color: #00637f;
   padding: 20px 100px;
+  @media ${devices.laptopL} {
+    font-size: 1.2em;
+  }
+  @media (max-width: 1200px) {
+    font-size: 1em;
+  }
   @media (max-width: 1000px) {
     flex-direction: column;
     padding: 10px;
@@ -24,6 +31,10 @@ let FooterLink = styled(Link)`
   color: #c5fcff;
   margin: 10px;
   font-size: 0.9em;
+  @media ${devices.mobileL} {
+    font-size: 0.8em;
+    margin: 5px;
+  }
 `
 let CompanyInfo = styled.div`
   font-size: 0.8em;
