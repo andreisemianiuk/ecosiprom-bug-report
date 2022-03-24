@@ -11,7 +11,7 @@ let FooterContainer = styled.footer`
   color: #c5fcff;
   background-color: #00637f;
   padding: 20px 100px;
-  @media ${devices.mobileL} {
+  @media (max-width: 1000px) {
     flex-direction: column;
     padding: 10px;
   }
@@ -29,7 +29,7 @@ let CompanyInfo = styled.div`
   font-size: 0.8em;
 `
 let ContactInfo = styled.div`
-  @media ${devices.mobileL} {
+  @media (max-width: 1000px) {
     margin: 10px 0;
   }
 `
@@ -51,18 +51,14 @@ function Footer() {
       }
     }
   `)
-  console.log('nodes >> ', nodes)
   return (
     <FooterContainer>
       <LinkList>
-        {nodes.map(
-          ({ path, label }) =>
-            !/Шеф-монтаж|Газовый/.test(label) && (
-              <FooterLink key={'footer_' + path} to={path}>
-                {label}
-              </FooterLink>
-            )
-        )}
+        {nodes.map(({ path, label }) => (
+          <FooterLink key={'footer_' + path} to={path}>
+            {label}
+          </FooterLink>
+        ))}
       </LinkList>
       <ContactInfo>
         info@ecosiprom.com
