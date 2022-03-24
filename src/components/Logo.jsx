@@ -16,8 +16,8 @@ export const Logo = () => {
     (device === 'tablet' && 300) ||
     (device === 'laptop' && 200) ||
     (device === 'laptopL' && 250) ||
-    (device === 'desktop' && 350) ||
-    250
+    (device === 'desktop' && 300) ||
+    350
   return (
     <LogoItem width={deviceWidth}>
       <StaticImage

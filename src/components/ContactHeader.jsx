@@ -6,23 +6,29 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: clamp(400px, 30%, 600px);
+  width: clamp(300px, 30%, 600px);
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 1.4em;
   color: #00637f;
   font-weight: bold;
-  @media ${devices.laptopL} {
-    font-size: 1.1em;
+  @media (max-width: 1800px) {
+    font-size: 1.2em;
   }
-  @media ${devices.laptop} {
+  @media ${devices.laptopL} {
     font-size: 1em;
   }
-  @media ${devices.tablet} {
-    width: 100%;
+  @media (max-width: 1300px) {
+    font-size: 0.9em;
+  }
+  @media (max-width: 1200px) {
+    font-size: 0.8em;
+  }
+  @media (max-width: 950px) {
+    width: clamp(300px, 100%, 400px);
     margin-top: 20px;
-    /* font-size: 1em; */
+    font-size: 1em;
   }
   @media ${devices.mobileM} {
     font-size: 1em;

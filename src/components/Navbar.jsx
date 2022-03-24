@@ -8,14 +8,16 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   padding: 0 50px;
-  @media ${devices.laptopL} {
+  @media (max-width: 1800px) {
     padding: 0 20px;
   }
-
-  @media ${devices.laptop} {
-    padding: 0 5px;
+  @media (max-width: 1200px) {
+    padding: 0 8px;
   }
-  @media ${devices.tablet} {
+  @media ${devices.laptop} {
+    padding: 0;
+  }
+  @media (max-width: 950px) {
     margin-top: 20px;
   }
   @media ${devices.mobileL} {
@@ -30,28 +32,45 @@ const NavList = styled.ul`
   text-transform: uppercase;
 `
 const NavItem = styled.li`
-  font-size: 1.8em;
+  font-size: 1.6em;
   padding-left: 50px;
   margin: 0;
   list-style: none;
   & :first-child {
     padding-left: 0;
   }
-
+  @media (max-width: 1800px) {
+    padding-left: 20px;
+    font-size: 1.5em;
+  }
   @media ${devices.laptopL} {
     padding-left: 10px;
-    font-size: 1.4em;
+    font-size: 1.3em;
   }
-
-  @media ${devices.laptop} {
+  @media (max-width: 1250px) {
     padding-left: 5px;
+    font-size: 1.1em;
+  }
+  @media ${devices.laptop} {
     font-size: 1em;
   }
-  @media ${devices.tablet} {
+  @media (max-width: 950px) {
+    font-size: 1.2em;
     padding: 4px 8px;
   }
+  @media ${devices.tablet} {
+    font-size: 1em;
+    padding: 2px 4px;
+  }
   @media ${devices.mobileL} {
+    font-size: 0.9em;
     padding: 0;
+  }
+  @media ${devices.mobileM} {
+    font-size: 0.8em;
+  }
+  @media ${devices.mobileS} {
+    font-size: 0.7em;
   }
 `
 const StyledNavLink = styled(Link)`

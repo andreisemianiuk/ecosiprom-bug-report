@@ -16,7 +16,7 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   margin: 20px;
-  @media ${devices.tablet} {
+  @media (max-width: 950px) {
     flex-direction: column;
   }
 `

@@ -49,7 +49,7 @@ let SubMenu = styled.ul`
 let MenuItem = styled.li`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #00637f;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   list-style: none;
   text-transform: uppercase;
 `
