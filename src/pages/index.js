@@ -17,7 +17,7 @@ let SliderContainer = styled.div`
   }
 `
 let MainServicesList = styled.ul`
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, sans-serif;
   color: #dedbe6;
   background-color: #00637f;
   padding: 5px 0 10px;
@@ -59,7 +59,7 @@ let Services = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Verdana, sans-serif;
   margin: 30px 0;
   @media ${devices.mobileL} {
     margin: 10px 5px;
@@ -101,7 +101,7 @@ let ServicesTitle = styled.p`
   padding: 10px 5px;
 `
 let ServicesList = styled.ul`
-  font-size: 0.9em;
+  font-size: 1em;
   padding: 0 10px 0 30px;
 `
 let ServicesListItem = styled.li`

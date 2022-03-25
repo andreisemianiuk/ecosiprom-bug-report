@@ -63,21 +63,21 @@ const NavItem = styled.li`
     padding: 4px 8px;
   }
   @media ${devices.tablet} {
-    font-size: 1em;
+    font-size: 1.2em;
     padding: 2px 4px;
   }
   @media (max-width: 450px) {
-    font-size: 0.95em;
+    /* font-size: 1.1em; */
   }
   @media ${devices.mobileL} {
-    font-size: 0.9em;
+    font-size: 1.1em;
     padding: 0;
   }
   @media ${devices.mobileM} {
-    font-size: 0.8em;
+    font-size: 1em;
   }
   @media ${devices.mobileS} {
-    font-size: 0.7em;
+    font-size: 0.9em;
   }
 `
 const StyledNavLink = styled(Link)`

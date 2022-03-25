@@ -8,40 +8,43 @@ const Container = styled.address`
   justify-content: space-evenly;
   width: clamp(300px, 30%, 600px);
   text-align: center;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.4em;
   color: #00637f;
   font-weight: bold;
   @media (max-width: 1800px) {
-    font-size: 1.2em;
-  }
-  @media ${devices.laptopL} {
     font-size: 1em;
   }
-  @media (max-width: 1300px) {
+  @media ${devices.laptopL} {
     font-size: 0.9em;
   }
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     font-size: 0.8em;
+  }
+  @media (max-width: 1200px) {
+    font-size: 0.7em;
   }
   @media (max-width: 950px) {
     width: clamp(300px, 100%, 400px);
     margin-top: 20px;
     font-size: 1em;
   }
+  @media ${devices.mobileL} {
+    font-size: 0.9em;
+  }
   @media ${devices.mobileM} {
-    font-size: 1em;
+    font-size: 0.8em;
   }
   @media ${devices.mobileS} {
-    font-size: 0.9em;
+    font-size: 0.75em;
   }
 `
 const Info = styled.div``
 const PhonesWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  @media ${devices.tablet} {
+  @media (max-width: 950px) {
     flex-direction: column;
   }
 `

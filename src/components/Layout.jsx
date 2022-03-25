@@ -18,6 +18,9 @@ const Header = styled.header`
   @media (max-width: 950px) {
     flex-direction: column;
   }
+  @media (max-width: 500px) {
+    margin: 15px 0;
+  }
 `
 const StyledLink = styled(Link)``
 
