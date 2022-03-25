@@ -1,8 +1,8 @@
-import {GatsbyImage} from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import * as React from 'react'
 import styled from 'styled-components'
-import {devices} from '../common/MediaQuery/media-query'
-import {graphql, useStaticQuery} from 'gatsby'
+import { devices } from '../common/MediaQuery/media-query'
+import { graphql, useStaticQuery } from 'gatsby'
 
 let LogosList = styled.div`
   display: flex;
@@ -21,18 +21,18 @@ let LogosItem = styled.div`
   margin: 10px;
 `
 let LogosTitle = styled.h3`
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.2em;
+  color: #c42034;
   text-align: center;
-  color: #00637f;
 `
 
-export function Logos({type}) {
+export function Logos({ type }) {
   let {
-    allWpMediaItem: {
-      nodes
-    },
+    allWpMediaItem: { nodes },
   } = useStaticQuery(graphql`
     query LogosQuery {
-      allWpMediaItem(filter: {title: {regex: "/logo/"}}) {
+      allWpMediaItem(filter: { title: { regex: "/logo/" } }) {
         nodes {
           id
           title
@@ -47,20 +47,23 @@ export function Logos({type}) {
     }
   `)
   let regexForLogos = type === 'компаниями' ? /logo-/ : /-logo/
-  
+
   return (
     <div>
       <LogosTitle>Мы работаем с {type}</LogosTitle>
       <LogosList>
-        {nodes.map(item => regexForLogos.test(item.title) &&
-          <LogosItem key={item.id}>
-            <GatsbyImage
-              image={item.localFile.childImageSharp.gatsbyImageData}
-              alt={item.altText}
-              height={50}
-            />
-          </LogosItem>)
-        }
+        {nodes.map(
+          item =>
+            regexForLogos.test(item.title) && (
+              <LogosItem key={item.id}>
+                <GatsbyImage
+                  image={item.localFile.childImageSharp.gatsbyImageData}
+                  alt={item.altText}
+                  height={50}
+                />
+              </LogosItem>
+            )
+        )}
       </LogosList>
     </div>
   )

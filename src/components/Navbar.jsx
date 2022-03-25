@@ -82,14 +82,15 @@ const NavItem = styled.li`
 `
 const StyledNavLink = styled(Link)`
   text-decoration: none;
-  box-shadow: inset 0 0 0 0 #00637f;
+  text-transform: capitalize;
+  box-shadow: inset 0 0 0 0 #dedbe6;
   color: #00637f;
   padding: 0 0.25rem;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
   &:hover {
-    box-shadow: inset 100px 0 0 0 #00637f;
-    color: white;
+    box-shadow: inset 100px 0 0 0 #dedbe6;
+    color: #c42034;
   }
 `
 
@@ -100,7 +101,7 @@ export const Navbar = () => {
     },
   } = useStaticQuery(graphql`
     query NavbarQuery {
-      wpMenu {
+      wpMenu(slug: { eq: "footer_menu" }) {
         menuItems {
           nodes {
             path
@@ -114,40 +115,13 @@ export const Navbar = () => {
   return (
     <Nav>
       <NavList>
-        {/*{*/}
-        {/*  nodes.map(({id, label, path}, i) =>*/}
-        {/*    i > 0 &&*/}
-        {/*    (<li key={id} className={navItem}>*/}
-        {/*      <Link to={`${path}`} className={navLink} activeClassName={navActiveLink}>*/}
-        {/*        {label}*/}
-        {/*      </Link>*/}
-        {/*    </li>))*/}
-        {/*}*/}
-        <NavItem>
-          <StyledNavLink to={'/services'} activeClassName={'active'}>
-            Услуги
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to={'/catalog'} activeClassName={'active'}>
-            Каталог
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to={'/projects'} activeClassName={'active'}>
-            Проекты
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to={'/about'} activeClassName={'active'}>
-            О нас
-          </StyledNavLink>
-        </NavItem>
-        <NavItem>
-          <StyledNavLink to={'/contacts'} activeClassName={'active'}>
-            Контакты
-          </StyledNavLink>
-        </NavItem>
+        {nodes.map(({ id, label, path }) => (
+          <NavItem key={id}>
+            <StyledNavLink to={`${path}`} activeClassName={'active'}>
+              {label}
+            </StyledNavLink>
+          </NavItem>
+        ))}
       </NavList>
     </Nav>
   )

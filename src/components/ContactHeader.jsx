@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { devices } from '../common/MediaQuery/media-query'
 
-const Container = styled.div`
+const Container = styled.address`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

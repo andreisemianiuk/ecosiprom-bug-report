@@ -1,11 +1,10 @@
-import * as React from 'react'
 import { Link } from 'gatsby'
+import * as React from 'react'
 import styled from 'styled-components'
-import { devices } from '../common/MediaQuery/media-query'
 import { ContactHeader } from './ContactHeader'
+import Footer from './Footer'
 import { Logo } from './Logo'
 import { Navbar } from './Navbar'
-import Footer from './Footer'
 
 const Container = styled.div``
 const MainContent = styled.div`

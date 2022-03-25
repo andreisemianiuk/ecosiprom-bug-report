@@ -1,9 +1,9 @@
-import { Link, graphql, useStaticQuery } from 'gatsby'
-import parse, { domToReact } from 'html-react-parser'
 import * as React from 'react'
+import parse, { domToReact } from 'html-react-parser'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
-import { devices } from '../common/MediaQuery/media-query'
 import DropdownArrow from '../assets/dropdown.svg'
+import { devices } from '../common/MediaQuery/media-query'
 
 let Container = styled.div`
   display: flex;
@@ -140,11 +140,6 @@ export const CatalogLayout = ({ children }) => {
           ...state,
           regemat: payload.regemat,
         }
-      case 'IZLUCHAYUSHCHIE-TRUBY':
-        return {
-          ...state,
-          izluchayushchieTruby: payload.izluchayushchieTruby,
-        }
       case 'TOPLIVNYE-NASOSY':
         return {
           ...state,
@@ -165,6 +160,8 @@ export const CatalogLayout = ({ children }) => {
           ...state,
           electromagnitnyeKlapany: payload.electromagnitnyeKlapany,
         }
+      default:
+        return { ...state }
     }
   }
 

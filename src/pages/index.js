@@ -1,12 +1,12 @@
-import * as React from 'react'
-import Layout from '../components/Layout'
-import { graphql, Link, useScrollRestoration } from 'gatsby'
+import { graphql, Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import parse, { domToReact } from 'html-react-parser'
-import { Slideshow } from '../components/Slideshow'
+import * as React from 'react'
 import styled from 'styled-components'
 import { devices } from '../common/MediaQuery/media-query'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import Layout from '../components/Layout'
 import { Logos } from '../components/Logos'
+import { Slideshow } from '../components/Slideshow'
 
 let SliderContainer = styled.div`
   display: flex;
@@ -17,19 +17,20 @@ let SliderContainer = styled.div`
   }
 `
 let MainServicesList = styled.ul`
-  color: #ffffff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #dedbe6;
   background-color: #00637f;
-  padding: 5px 5px 10px;
+  padding: 5px 0 10px;
   margin: 20px 0;
   @media ${devices.mobileL} {
     padding: 0;
   }
 `
 let MainServicesItem = styled.li`
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
   max-width: 700px;
-  padding-left: 50px;
+  padding-left: 30px;
   margin: 20px 0;
   list-style: none;
   @media ${devices.mobileL} {
@@ -39,13 +40,13 @@ let MainServicesItem = styled.li`
   }
 `
 let MainServicesUnderLine = styled.div`
-  width: 90%;
+  width: 100%;
   max-width: 650px;
   height: 10px;
   background: linear-gradient(
     116deg,
-    #d3f5f5 0%,
-    #f9fbfd 98%,
+    #fff 0%,
+    #dedbe6 98%,
     transparent 98%,
     transparent 100%
   );
@@ -58,15 +59,17 @@ let Services = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 30px 0;
   @media ${devices.mobileL} {
     margin: 10px 5px;
   }
 `
 let ServiceItem = styled(Link)`
-  text-decoration: none;
   max-width: 350px;
+  color: #292734;
   margin: 5px;
+  text-decoration: none;
   padding: 20px 10px;
 
   &:hover {
@@ -84,24 +87,25 @@ let ServiceItem = styled(Link)`
     }
   }
 `
-let ServicesTitle = styled.p`
-  text-transform: uppercase;
-  text-align: center;
-  color: #00637f;
-  font-size: 1.2em;
-  font-weight: bolder;
-  padding: 10px 5px;
-`
 let ServicesImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `
+let ServicesTitle = styled.p`
+  text-transform: uppercase;
+  text-align: center;
+  color: #c42034;
+  /* font-size: 1.2em; */
+  font-weight: bolder;
+  padding: 10px 5px;
+`
 let ServicesList = styled.ul`
+  font-size: 0.9em;
   padding: 0 10px 0 30px;
 `
 let ServicesListItem = styled.li`
-  font-size: 1.1em;
+  /* font-size: 1.1em; */
 `
 
 function HomePage({ data }) {
