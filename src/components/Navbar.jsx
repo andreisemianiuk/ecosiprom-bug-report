@@ -32,8 +32,8 @@ const NavList = styled.ul`
   text-transform: uppercase;
 `
 const NavItem = styled.li`
-  font-size: 1.6em;
-  padding-left: 50px;
+  font-size: 1.2em;
+  padding-left: 20px;
   margin: 0;
   list-style: none;
   & :first-child {
@@ -41,43 +41,38 @@ const NavItem = styled.li`
   }
   @media (max-width: 1800px) {
     padding-left: 20px;
-    font-size: 1.5em;
+    font-size: 1.1em;
   }
   @media (max-width: 1500px) {
     padding-left: 15px;
-    font-size: 1.4em;
+    font-size: 1em;
   }
   @media ${devices.laptopL} {
     padding-left: 10px;
-    font-size: 1.3em;
+    font-size: 0.9em;
   }
   @media (max-width: 1250px) {
     padding-left: 5px;
-    font-size: 1.1em;
+    font-size: 0.85em;
   }
   @media ${devices.laptop} {
-    font-size: 1em;
+    font-size: 0.8em;
   }
   @media (max-width: 950px) {
     font-size: 1.2em;
-    padding: 4px 8px;
   }
-  @media ${devices.tablet} {
-    font-size: 1.2em;
-    padding: 2px 4px;
-  }
-  @media (max-width: 450px) {
-    /* font-size: 1.1em; */
-  }
-  @media ${devices.mobileL} {
-    font-size: 1.1em;
+  @media (max-width: 600px) {
+    font-size: 1em;
     padding: 0;
   }
-  @media ${devices.mobileM} {
+  @media ${devices.mobileL} {
     font-size: 1em;
   }
+  @media ${devices.mobileM} {
+    font-size: 0.85em;
+  }
   @media ${devices.mobileS} {
-    font-size: 0.9em;
+    font-size: 0.7em;
   }
 `
 const StyledNavLink = styled(Link)`
@@ -90,7 +85,7 @@ const StyledNavLink = styled(Link)`
 
   &:hover {
     box-shadow: inset 100px 0 0 0 #dedbe6;
-    color: #c42034;
+    /* color: #c42034; */
   }
 `
 

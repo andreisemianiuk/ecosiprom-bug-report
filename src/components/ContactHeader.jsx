@@ -1,34 +1,43 @@
 import React from 'react'
 import styled from 'styled-components'
 import { devices } from '../common/MediaQuery/media-query'
+import PhoneCall from '../assets/phone-call3.svg'
+import EmailIcon from '../assets/email.svg'
 
 const Container = styled.address`
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: clamp(300px, 30%, 600px);
-  text-align: center;
+
+  /* justify-content: space-between; */
+  /* width: clamp(400px, 40%, 600px); */
+  /* text-align: center; */
   font-style: normal;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1.4em;
+  font-size: 1em;
   color: #00637f;
   font-weight: bold;
-  @media (max-width: 1800px) {
-    font-size: 1em;
-  }
+  /* @media (max-width: 1800px) {
+    font-size: 0.8em;
+  } */
   @media ${devices.laptopL} {
-    font-size: 0.9em;
-  }
-  @media (max-width: 1300px) {
     font-size: 0.8em;
   }
+  @media (max-width: 1300px) {
+    font-size: 0.75em;
+  }
   @media (max-width: 1200px) {
-    font-size: 0.7em;
+    font-size: 0.6em;
+  }
+  @media ${devices.laptop} {
+    /* font-size: 0.5em; */
   }
   @media (max-width: 950px) {
-    width: clamp(300px, 100%, 400px);
     margin-top: 20px;
-    font-size: 1em;
+    font-size: 0.9em;
+  }
+  @media (max-width: 600px) {
+    font-size: 0.9em;
+    flex-direction: column;
+    align-items: center;
   }
   @media ${devices.mobileL} {
     font-size: 0.9em;
@@ -40,13 +49,45 @@ const Container = styled.address`
     font-size: 0.75em;
   }
 `
-const Info = styled.div``
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  @media (max-width: 600px) {
+    margin-right: 0;
+  }
+`
+const EmailWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 600px) {
+    margin-bottom: 10px;
+  }
+`
+const EmailIconContainer = styled.div`
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+`
+const Email = styled.a``
+const Adress = styled.div``
 const PhonesWrapper = styled.div`
   display: flex;
+  align-items: center;
+`
+const Phones = styled.div`
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  margin-left: 10px;
   @media (max-width: 950px) {
-    flex-direction: column;
+    /* flex-direction: column; */
   }
+`
+const PhoneIcon = styled.div`
+  width: 20px;
+  height: 20px;
 `
 const Phone = styled.a`
   color: #00637f;
@@ -59,10 +100,23 @@ const Phone = styled.a`
 export const ContactHeader = () => {
   return (
     <Container>
-      <Info>220073 г. Минск ул. Гусовского 2а</Info>
+      <Info>
+        <Adress>220073 г. Минск ул. Гусовского 2а</Adress>
+        <EmailWrapper>
+          <EmailIconContainer>
+            <EmailIcon />
+          </EmailIconContainer>
+          <Email href='mailto:info@ecosiprom.com'>info@ecosiprom.com</Email>
+        </EmailWrapper>
+      </Info>
       <PhonesWrapper>
-        <Phone href='tel:+37529-662-30-04'>+375 (29) 662-30-04</Phone>
-        <Phone href='tel:+37517-275-23-06'>+375 (17) 275-23-06</Phone>
+        <PhoneIcon>
+          <PhoneCall />
+        </PhoneIcon>
+        <Phones>
+          <Phone href='tel:+37529-662-30-04'>+375 (29) 662-30-04</Phone>
+          <Phone href='tel:+37517-275-23-06'>+375 (17) 275-23-06</Phone>
+        </Phones>
       </PhonesWrapper>
     </Container>
   )

@@ -26,7 +26,8 @@ let Container = styled.div`
   }
 `
 let Title = styled.h1`
-  color: #b01c1c;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #c42034;
   @media ${devices.desktop} {
     font-size: 2em;
     text-align: center;
@@ -50,7 +51,7 @@ let Description = styled.div`
     padding-left: 0;
   }
 `
-let FieldsWrapper = styled.div`
+let FieldsWrapper = styled.address`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -73,17 +74,18 @@ let Info = styled.div`
   color: #00637f;
   font-weight: bold;
   margin: 10px;
-  @media ${devices.mobileL} {
-    text-align: center;
-  }
 `
 let Name = styled.div`
-  color: #00637f;
+  color: #283043;
   font-weight: bold;
   margin-top: 30px;
   text-align: center;
-  font-size: 1.4em;
+  font-size: 1.2em;
 `
+let Phone = styled.a`
+  color: #00637f;
+`
+let Email = styled.a``
 let MapContainer = styled.div`
   padding-top: 50px;
   @media ${devices.mobileL} {
@@ -97,43 +99,55 @@ function ContactsPage({ data }) {
 
   let options = {
     replace: domNode => {
-      if (domNode.attribs && domNode.attribs.class === 'contacts-title') {
+      if (domNode.attribs && domNode.attribs.class === 'title') {
         return <Title>{domToReact(domNode.children, options)}</Title>
       }
-      if (domNode.attribs && domNode.attribs.class === 'contacts-description') {
+      if (domNode.attribs && domNode.attribs.class === 'description') {
         return (
           <Description>{domToReact(domNode.children, options)}</Description>
         )
       }
-      if (
-        domNode.attribs &&
-        domNode.attribs.class === 'contact-fields-wrapper'
-      ) {
+      if (domNode.attribs && domNode.attribs.class === 'fields-wrapper') {
         return (
           <FieldsWrapper>{domToReact(domNode.children, options)}</FieldsWrapper>
         )
       }
-      if (domNode.attribs && domNode.attribs.class === 'contact-field') {
+      if (domNode.attribs && domNode.attribs.class === 'field') {
         return <Field>{domToReact(domNode.children, options)}</Field>
       }
-      if (domNode.attribs && domNode.attribs.class === 'contact-field-name') {
+      if (domNode.attribs && domNode.attribs.class === 'field-name') {
         return <FieldName>{domToReact(domNode.children, options)}</FieldName>
       }
-      if (domNode.attribs && domNode.attribs.class === 'contact-field-info') {
+      if (domNode.attribs && domNode.attribs.class === 'field-info') {
         return <Info>{domToReact(domNode.children, options)}</Info>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'contacts-container') {
-        return <Container>{domToReact(domNode.children, options)}</Container>
       }
       if (domNode.attribs && domNode.attribs.class === 'contact-name') {
         return <Name>{domToReact(domNode.children, options)}</Name>
+      }
+      if (domNode.attribs && domNode.attribs.class === 'phone') {
+        const tel =
+          domNode.children[0].data &&
+          typeof domNode.children[0].data === 'string' &&
+          domNode.children[0].data.replace(/[\)\(\s]/g, '')
+        return (
+          <Phone href={`tel:${tel}`}>
+            {domToReact(domNode.children[0], options)}
+          </Phone>
+        )
+      }
+      if (domNode.attribs && domNode.attribs.class === 'email') {
+        return (
+          <Email href={`mailto:${domNode.children[0].data}`}>
+            {domToReact(domNode.children, options)}
+          </Email>
+        )
       }
     },
   }
   return (
     <Layout>
       <Section>
-        {parse(content, options)}
+        <div>{parse(content, options)}</div>
         <MapContainer>
           <MyMap />
         </MapContainer>
