@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { devices } from '../common/MediaQuery/media-query'
-import PhoneCall from '../assets/phone-call3.svg'
+import PhoneCall from '../assets/phone-call2.svg'
 import EmailIcon from '../assets/email.svg'
 
 const Container = styled.address`
