@@ -188,7 +188,7 @@ export const CatalogLayout = ({ children }) => {
         return <SubMenu>{domToReact(domNode.children, options)}</SubMenu>
       }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
-        // let { link } = domNode.attribs
+        let { link } = domNode.attribs
 
         // const slug = domNode.attribs.link.split('/').at(-1)
 
