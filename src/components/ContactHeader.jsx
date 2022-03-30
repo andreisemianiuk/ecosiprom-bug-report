@@ -51,6 +51,7 @@ const EmailWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 8px;
   @media (max-width: 600px) {
     margin-bottom: 10px;
   }
@@ -79,6 +80,7 @@ const PhoneIcon = styled.div`
 const Phone = styled.a`
   color: #00637f;
   text-decoration: none;
+  margin: 2px 0;
 `
 
 export const ContactHeader = () => {

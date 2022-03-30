@@ -9,7 +9,6 @@ let FooterContainer = styled.footer`
   align-items: center;
   justify-content: space-between;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1.2em;
   color: #dedbe6;
   background-color: #00637f;
   padding: 20px 100px;
@@ -18,40 +17,54 @@ let FooterContainer = styled.footer`
   }
   @media (max-width: 1200px) {
     padding: 20px 40px;
-    font-size: 0.9em;
   }
   @media (max-width: 1000px) {
-    font-size: 1em;
     flex-direction: column;
   }
   @media (max-width: 600px) {
-    font-size: 0.9em;
     padding: 10px 5px;
-  }
-  @media (max-width: 450px) {
-    font-size: 0.8em;
-  }
-  @media (max-width: 350px) {
-    font-size: 0.8em;
-  }
-  @media ${devices.mobileS} {
-    font-size: 0.7em;
   }
 `
 let LinkList = styled.div`
   display: flex;
+  @media (max-width: 1200px) {
+    font-size: 0.9em;
+  }
+  @media (max-width: 1000px) {
+    font-size: 1em;
+  }
+  @media (max-width: 600px) {
+    font-size: 0.9em;
+  }
+  @media (max-width: 500px) {
+    font-size: 0.8em;
+  }
+  @media (max-width: 450px) {
+    font-size: 0.7em;
+  }
+  @media (max-width: 350px) {
+    font-size: 0.6em;
+  }
+  @media (max-width: 330px) {
+    font-size: 0.5em;
+  }
 `
 let FooterLink = styled(Link)`
   text-decoration: none;
   color: #dedbe6;
   margin: 10px;
   @media ${devices.mobileL} {
-    font-size: 0.8em;
     margin: 5px;
   }
 `
 let CompanyInfo = styled.div`
-  font-size: 0.8em;
+  font-size: 0.9em;
+  @media ${devices.mobileL} {
+    font-size: 0.8em;
+  }
+  @media ${devices.mobileM} {
+    font-size: 0.7em;
+  }
 `
 let ContactInfo = styled.address`
   @media (max-width: 1000px) {
@@ -66,7 +79,7 @@ const PhonesWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
 `
 const Phone = styled.a`
   color: #dedbe6;
