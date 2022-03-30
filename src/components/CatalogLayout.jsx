@@ -221,8 +221,8 @@ export const CatalogLayout = ({ children }) => {
         return (
           <MenuItem>
             <MenuItemLink
-              // onMouseOver={handleMenu}
-              // onMouseLeave={handleLeaveMenu}
+              onMouseOver={() => {}}
+              onMouseLeave={() => {}}
               to={`/catalog/`}
               // state={{ modal: !domNode.attribs['data-submenu'] }}
             >
