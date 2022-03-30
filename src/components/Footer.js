@@ -17,11 +17,25 @@ let FooterContainer = styled.footer`
     font-size: 1em;
   }
   @media (max-width: 1200px) {
-    font-size: 1em;
+    padding: 20px 40px;
+    font-size: 0.9em;
   }
   @media (max-width: 1000px) {
+    font-size: 1em;
     flex-direction: column;
-    padding: 10px;
+  }
+  @media (max-width: 600px) {
+    font-size: 0.9em;
+    padding: 10px 5px;
+  }
+  @media (max-width: 450px) {
+    font-size: 0.8em;
+  }
+  @media (max-width: 350px) {
+    font-size: 0.8em;
+  }
+  @media ${devices.mobileS} {
+    font-size: 0.7em;
   }
 `
 let LinkList = styled.div`
