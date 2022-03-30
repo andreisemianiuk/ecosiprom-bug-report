@@ -178,58 +178,58 @@ export const CatalogLayout = ({ children }) => {
         return <Title>{domToReact(domNode.children, options)}</Title>
       }
       if (domNode.attribs && domNode.attribs.class === 'sub-menu') {
-        // const slug = domNode.prev.attribs.link.split('/').at(-1)
+        const slug = domNode.prev.attribs.link.split('/').at(-1)
 
-        // const stateName = slug
-        //   .split('-')
-        //   .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
-        //   .join('')
+        const stateName = slug
+          .split('-')
+          .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
+          .join('')
 
         return <SubMenu>{domToReact(domNode.children, options)}</SubMenu>
       }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
-        // let { link } = domNode.attribs
+        let { link } = domNode.attribs
 
-        // const slug = domNode.attribs.link.split('/').at(-1)
+        const slug = domNode.attribs.link.split('/').at(-1)
 
-        // const stateName = slug
-        //   .split('-')
-        //   .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
-        //   .join('')
+        const stateName = slug
+          .split('-')
+          .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
+          .join('')
 
-        // const actionType = slug
-        //   .split('-')
-        //   .map(el => el.toUpperCase())
-        //   .join('-')
+        const actionType = slug
+          .split('-')
+          .map(el => el.toUpperCase())
+          .join('-')
 
-        // const handleMenu = () => {
-        //   console.log('handle menu')
-        //   //   dispatch({
-        //   //     type: actionType,
-        //   //     payload: { [stateName]: !state[stateName] },
-        //   //   })
-        // }
-        // const handleLeaveMenu = () => {
-        //   // if (!state[stateName]) {
-        //   //   dispatch({
-        //   //     type: actionType,
-        //   //     payload: { [stateName]: !state[stateName] },
-        //   //   })
-        //   // }
-        // }
+        const handleMenu = () => {
+          console.log('handle menu')
+          //   dispatch({
+          //     type: actionType,
+          //     payload: { [stateName]: !state[stateName] },
+          //   })
+        }
+        const handleLeaveMenu = () => {
+          // if (!state[stateName]) {
+          //   dispatch({
+          //     type: actionType,
+          //     payload: { [stateName]: !state[stateName] },
+          //   })
+          // }
+        }
 
         return (
           <MenuItem>
             <MenuItemLink
-              onMouseOver={() => {}}
-              onMouseLeave={() => {}}
-              to={`/catalog/`}
+              // onMouseOver={handleMenu}
+              onMouseLeave={handleLeaveMenu}
+              to={`/catalog/${link}`}
               // state={{ modal: !domNode.attribs['data-submenu'] }}
             >
               {domToReact(domNode.children, options)}
             </MenuItemLink>
             {domNode.attribs['data-submenu'] && (
-              <DropdownContainer>
+              <DropdownContainer onClick={handleMenu}>
                 <Dropdown />
               </DropdownContainer>
             )}
