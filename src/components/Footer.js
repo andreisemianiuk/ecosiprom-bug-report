@@ -45,7 +45,6 @@ let FooterLink = styled(Link)`
   text-decoration: none;
   color: #dedbe6;
   margin: 10px;
-  font-size: 0.9em;
   @media ${devices.mobileL} {
     font-size: 0.8em;
     margin: 5px;
