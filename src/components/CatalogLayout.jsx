@@ -76,7 +76,6 @@ let MenuItemLink = styled(Link)`
     transform: scaleX(1);
   }
 `
-
 const DropdownContainer = styled.span`
   position: relative;
   cursor: pointer;
@@ -87,7 +86,7 @@ const Dropdown = styled(DropdownArrow)`
   left: 0;
   width: 20px;
 `
-
+const mockData = []
 export const CatalogLayout = ({ children }) => {
   // console.log(children)
   const {
@@ -179,41 +178,36 @@ export const CatalogLayout = ({ children }) => {
         return <Title>{domToReact(domNode.children, options)}</Title>
       }
       if (domNode.attribs && domNode.attribs.class === 'sub-menu') {
-        alert('sum-menu-start')
         const slug = domNode.prev.attribs.link.split('/').at(-1)
-        alert('sum-menu-slug')
+
         const stateName = slug
           .split('-')
           .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
           .join('')
-        alert('sum-menu-stateName')
-        return (
-          <SubMenu isOpen={state[stateName]}>
-            {domToReact(domNode.children, options)}
-          </SubMenu>
-        )
+
+        return <SubMenu>{domToReact(domNode.children, options)}</SubMenu>
       }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
         let { link } = domNode.attribs
-        alert('menu-item-start')
+
         const slug = domNode.attribs.link.split('/').at(-1)
-        alert('menu-item-slug')
+
         const stateName = slug
           .split('-')
           .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
           .join('')
-        alert('menu-item-stateName')
+
         const actionType = slug
           .split('-')
           .map(el => el.toUpperCase())
           .join('-')
-        alert('menu-item-actionType')
-        const handleMenu = () => {
-          dispatch({
-            type: actionType,
-            payload: { [stateName]: !state[stateName] },
-          })
-        }
+
+        // const handleMenu = () => {
+        //   dispatch({
+        //     type: actionType,
+        //     payload: { [stateName]: !state[stateName] },
+        //   })
+        // }
         const handleLeaveMenu = () => {
           // if (!state[stateName]) {
           //   dispatch({
@@ -222,14 +216,15 @@ export const CatalogLayout = ({ children }) => {
           //   })
           // }
         }
-        alert('sum-menu-before-return')
+
         return (
           <MenuItem>
             <MenuItemLink
               // onMouseOver={handleMenu}
               onMouseLeave={handleLeaveMenu}
               to={`/catalog/${link}`}
-              state={{ modal: !domNode.attribs['data-submenu'] }}>
+              // state={{ modal: !domNode.attribs['data-submenu'] }}
+            >
               {domToReact(domNode.children, options)}
             </MenuItemLink>
             {domNode.attribs['data-submenu'] && (
