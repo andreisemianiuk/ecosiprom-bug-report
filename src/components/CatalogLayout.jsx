@@ -192,7 +192,7 @@ export const CatalogLayout = ({ children }) => {
 
         const slug = domNode.attribs.link
           .split('/')
-          .filter((_, i, a) => i !== a.lengh - 1)
+          .filter((_, i, a) => i !== a.length - 1)
 
         const stateName = slug
           .split('-')
