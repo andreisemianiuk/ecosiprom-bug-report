@@ -179,11 +179,14 @@ export const CatalogLayout = ({ children }) => {
         return <Title>{domToReact(domNode.children, options)}</Title>
       }
       if (domNode.attribs && domNode.attribs.class === 'sub-menu') {
+        alert('sum-menu-start')
         const slug = domNode.prev.attribs.link.split('/').at(-1)
+        alert('sum-menu-slug')
         const stateName = slug
           .split('-')
           .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
           .join('')
+        alert('sum-menu-stateName')
         return (
           <SubMenu isOpen={state[stateName]}>
             {domToReact(domNode.children, options)}
@@ -192,16 +195,19 @@ export const CatalogLayout = ({ children }) => {
       }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
         let { link } = domNode.attribs
+        alert('sum-menu-start')
         const slug = domNode.attribs.link.split('/').at(-1)
+        alert('sum-menu-slug')
         const stateName = slug
           .split('-')
           .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
           .join('')
-
+        alert('sum-menu-stateName')
         const actionType = slug
           .split('-')
           .map(el => el.toUpperCase())
           .join('-')
+        alert('sum-menu-actionType')
         const handleMenu = () => {
           dispatch({
             type: actionType,
@@ -216,6 +222,7 @@ export const CatalogLayout = ({ children }) => {
           //   })
           // }
         }
+        alert('sum-menu-before-return')
         return (
           <MenuItem>
             <MenuItemLink
