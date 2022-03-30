@@ -36,11 +36,11 @@ function CatalogPage({ data }) {
   parse(content, options)
   return (
     <Layout>
-      <CatalogLayout>
-        <Container>
-          <CommonText>{contentHTML}</CommonText>
-        </Container>
-      </CatalogLayout>
+      {/* <CatalogLayout> */}
+      <Container>
+        <CommonText>{contentHTML}</CommonText>
+      </Container>
+      {/* </CatalogLayout> */}
     </Layout>
   )
 }
