@@ -178,28 +178,26 @@ export const CatalogLayout = ({ children }) => {
         return <Title>{domToReact(domNode.children, options)}</Title>
       }
       if (domNode.attribs && domNode.attribs.class === 'sub-menu') {
-        // const slug = domNode.prev.attribs.link.split('/').at(-1)
+        const slug = domNode.prev.attribs.link.split('/')
 
-        // const stateName = slug
-        //   .split('-')
-        //   .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
-        //   .join('')
+        const stateName = slugslug[slug.length - 1]
+          .split('-')
+          .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
+          .join('')
 
         return <SubMenu>{domToReact(domNode.children, options)}</SubMenu>
       }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
         let { link } = domNode.attribs
 
-        const slug = domNode.attribs.link
-          .split('/')
-          .filter((_, i, a) => i !== a.length - 1)
+        const slug = domNode.attribs.link.split('/')
 
-        const stateName = slug
+        const stateName = slug[slug.length - 1]
           .split('-')
           .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
           .join('')
 
-        const actionType = slug
+        const actionType = slug[slug.length - 1]
           .split('-')
           .map(el => el.toUpperCase())
           .join('-')
