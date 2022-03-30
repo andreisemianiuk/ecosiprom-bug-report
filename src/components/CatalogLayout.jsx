@@ -220,14 +220,14 @@ export const CatalogLayout = ({ children }) => {
 
         return (
           <MenuItem>
-            <MenuItemLink
+            {domToReact(domNode.children, options)}
+            {/* <MenuItemLink
               // onMouseOver={handleMenu}
               onMouseLeave={handleLeaveMenu}
               to={`/catalog/`}
               // state={{ modal: !domNode.attribs['data-submenu'] }}
             >
-              {domToReact(domNode.children, options)}
-            </MenuItemLink>
+            </MenuItemLink> */}
             {domNode.attribs['data-submenu'] && (
               <DropdownContainer onClick={handleMenu}>
                 <Dropdown />
