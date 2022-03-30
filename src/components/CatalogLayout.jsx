@@ -202,34 +202,34 @@ export const CatalogLayout = ({ children }) => {
         //   .map(el => el.toUpperCase())
         //   .join('-')
 
-        const handleMenu = () => {
-          console.log('handle menu')
-          //   dispatch({
-          //     type: actionType,
-          //     payload: { [stateName]: !state[stateName] },
-          //   })
-        }
-        const handleLeaveMenu = () => {
-          // if (!state[stateName]) {
-          //   dispatch({
-          //     type: actionType,
-          //     payload: { [stateName]: !state[stateName] },
-          //   })
-          // }
-        }
+        // const handleMenu = () => {
+        //   console.log('handle menu')
+        //   //   dispatch({
+        //   //     type: actionType,
+        //   //     payload: { [stateName]: !state[stateName] },
+        //   //   })
+        // }
+        // const handleLeaveMenu = () => {
+        //   // if (!state[stateName]) {
+        //   //   dispatch({
+        //   //     type: actionType,
+        //   //     payload: { [stateName]: !state[stateName] },
+        //   //   })
+        //   // }
+        // }
 
         return (
           <MenuItem>
-            {domToReact(domNode.children, options)}
-            {/* <MenuItemLink
+            <MenuItemLink
               // onMouseOver={handleMenu}
-              onMouseLeave={handleLeaveMenu}
+              // onMouseLeave={handleLeaveMenu}
               to={`/catalog/`}
               // state={{ modal: !domNode.attribs['data-submenu'] }}
             >
-            </MenuItemLink> */}
+              {domToReact(domNode.children, options)}
+            </MenuItemLink>
             {domNode.attribs['data-submenu'] && (
-              <DropdownContainer onClick={handleMenu}>
+              <DropdownContainer>
                 <Dropdown />
               </DropdownContainer>
             )}
