@@ -195,19 +195,19 @@ export const CatalogLayout = ({ children }) => {
       }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
         let { link } = domNode.attribs
-        alert('sum-menu-start')
+        alert('menu-item-start')
         const slug = domNode.attribs.link.split('/').at(-1)
-        alert('sum-menu-slug')
+        alert('menu-item-slug')
         const stateName = slug
           .split('-')
           .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
           .join('')
-        alert('sum-menu-stateName')
+        alert('menu-item-stateName')
         const actionType = slug
           .split('-')
           .map(el => el.toUpperCase())
           .join('-')
-        alert('sum-menu-actionType')
+        alert('menu-item-actionType')
         const handleMenu = () => {
           dispatch({
             type: actionType,
