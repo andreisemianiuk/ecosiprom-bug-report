@@ -202,12 +202,13 @@ export const CatalogLayout = ({ children }) => {
           .map(el => el.toUpperCase())
           .join('-')
 
-        // const handleMenu = () => {
-        //   dispatch({
-        //     type: actionType,
-        //     payload: { [stateName]: !state[stateName] },
-        //   })
-        // }
+        const handleMenu = () => {
+          console.log('handle menu')
+          //   dispatch({
+          //     type: actionType,
+          //     payload: { [stateName]: !state[stateName] },
+          //   })
+        }
         const handleLeaveMenu = () => {
           // if (!state[stateName]) {
           //   dispatch({
