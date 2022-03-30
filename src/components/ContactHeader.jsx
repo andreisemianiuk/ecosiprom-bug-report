@@ -6,18 +6,11 @@ import EmailIcon from '../assets/email.svg'
 
 const Container = styled.address`
   display: flex;
-
-  /* justify-content: space-between; */
-  /* width: clamp(400px, 40%, 600px); */
-  /* text-align: center; */
   font-style: normal;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1em;
   color: #00637f;
   font-weight: bold;
-  /* @media (max-width: 1800px) {
-    font-size: 0.8em;
-  } */
   @media ${devices.laptopL} {
     font-size: 0.8em;
   }
@@ -26,9 +19,6 @@ const Container = styled.address`
   }
   @media (max-width: 1200px) {
     font-size: 0.6em;
-  }
-  @media ${devices.laptop} {
-    /* font-size: 0.5em; */
   }
   @media (max-width: 950px) {
     margin-top: 20px;
@@ -45,8 +35,8 @@ const Container = styled.address`
   @media ${devices.mobileM} {
     font-size: 0.8em;
   }
-  @media ${devices.mobileS} {
-    font-size: 0.75em;
+  @media ${devices.mobileM} {
+    font-size: 0.7em;
   }
 `
 const Info = styled.div`
@@ -81,9 +71,6 @@ const Phones = styled.div`
   flex-direction: column;
   justify-content: space-around;
   margin-left: 10px;
-  @media (max-width: 950px) {
-    /* flex-direction: column; */
-  }
 `
 const PhoneIcon = styled.div`
   width: 20px;
@@ -92,9 +79,6 @@ const PhoneIcon = styled.div`
 const Phone = styled.a`
   color: #00637f;
   text-decoration: none;
-  @media ${devices.desktop} {
-    /* font-size: 1em; */
-  }
 `
 
 export const ContactHeader = () => {

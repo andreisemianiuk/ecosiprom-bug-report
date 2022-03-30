@@ -55,6 +55,7 @@ let FieldsWrapper = styled.address`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  font-style: normal;
   @media ${devices.laptop} {
     flex-direction: row;
   }
@@ -66,14 +67,14 @@ let Field = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 10px;
   @media ${devices.mobileL} {
   }
 `
 let FieldName = styled.div``
 let Info = styled.div`
   color: #00637f;
-  font-weight: bold;
-  margin: 10px;
+  /* margin: 10px; */
 `
 let Name = styled.div`
   color: #283043;
@@ -83,7 +84,9 @@ let Name = styled.div`
   font-size: 1.2em;
 `
 let Phone = styled.a`
+  display: block;
   color: #00637f;
+  text-decoration: none;
 `
 let Email = styled.a``
 let MapContainer = styled.div`
@@ -131,7 +134,7 @@ function ContactsPage({ data }) {
           domNode.children[0].data.replace(/[\)\(\s]/g, '')
         return (
           <Phone href={`tel:${tel}`}>
-            {domToReact(domNode.children[0], options)}
+            {domToReact(domNode.children, options)}
           </Phone>
         )
       }
