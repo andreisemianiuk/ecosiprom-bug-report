@@ -54,16 +54,3 @@ export const pageQuery = graphql`
     }
   }
 `
-
-// allWpMediaItem(filter: { title: { regex: "//" } }) {
-//       nodes {
-//         id
-//         title
-//         localFile {
-//           childImageSharp {
-//             gatsbyImageData
-//           }
-//         }
-//         altText
-//       }
-//     }
