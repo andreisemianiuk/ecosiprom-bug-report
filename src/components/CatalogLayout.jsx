@@ -190,7 +190,9 @@ export const CatalogLayout = ({ children }) => {
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
         let { link } = domNode.attribs
 
-        const slug = domNode.attribs.link.split('/').at(-1)
+        const slug = domNode.attribs.link
+          .split('/')
+          .filter((_, i, a) => i !== a.lengh - 1)
 
         const stateName = slug
           .split('-')
