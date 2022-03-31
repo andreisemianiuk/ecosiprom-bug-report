@@ -43,6 +43,9 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 30px;
+  @media (max-width: 1100px) {
+    margin-right: 10px;
+  }
   @media (max-width: 600px) {
     margin-right: 0;
   }
@@ -51,8 +54,8 @@ const EmailWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8px;
   @media (max-width: 600px) {
+    margin-top: 8px;
     margin-bottom: 10px;
   }
 `

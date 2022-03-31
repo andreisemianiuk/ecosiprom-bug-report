@@ -71,6 +71,9 @@ const NavItem = styled.li`
   @media ${devices.mobileM} {
     font-size: 0.85em;
   }
+  @media (max-width: 340px) {
+    font-size: 0.75em;
+  }
   @media ${devices.mobileS} {
     font-size: 0.7em;
   }

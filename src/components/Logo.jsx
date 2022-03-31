@@ -11,12 +11,12 @@ export const Logo = () => {
   const device = useMediaQueryHook()
   const deviceWidth =
     (device === 'mobileS' && 250) ||
-    (device === 'mobileM' && 300) ||
-    (device === 'mobileL' && 350) ||
+    (device === 'mobileM' && 275) ||
+    (device === 'mobileL' && 300) ||
     (device === 'tablet' && 300) ||
     (device === 'laptop' && 200) ||
-    (device === 'laptopL' && 250) ||
-    (device === 'desktop' && 300) ||
+    (device === 'laptopL' && 230) ||
+    (device === 'desktop' && 250) ||
     350
   return (
     <LogoItem width={deviceWidth}>
