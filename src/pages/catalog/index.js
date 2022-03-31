@@ -18,7 +18,7 @@ let CommonText = styled.div`
   /* color: chocolate; */
 `
 
-function CatalogPage({ data, location: { pathname } }) {
+function CatalogPage({ data }) {
   let { content } = data.wpPage
 
   let contentHTML
