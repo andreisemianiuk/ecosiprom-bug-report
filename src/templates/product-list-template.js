@@ -25,7 +25,7 @@ const ProductLink = styled(Link)`
 const Product = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px dotted #00637f;
+  border: 1px solid #00637f;
   border-radius: 5px;
   margin: 10px 0;
   padding: 10px 5px 0;
@@ -85,6 +85,7 @@ const ProductListTemplate = ({
       }
     },
   }
+  console.log('product triggerd')
   return (
     <Layout>
       <CatalogLayout>

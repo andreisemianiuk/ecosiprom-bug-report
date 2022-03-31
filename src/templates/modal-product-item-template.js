@@ -63,6 +63,7 @@ const ModalProductItemTemplate = ({
     allWpMediaItem: { nodes },
   },
 }) => {
+  console.log('product triggerd')
   let options = {
     replace: domNode => {
       if (domNode.attribs && domNode.attribs.class === 'image-wrapper') {

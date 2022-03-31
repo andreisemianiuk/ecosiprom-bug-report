@@ -4,6 +4,7 @@ import { graphql, Link, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 import DropdownArrow from '../assets/dropdown.svg'
 import { devices } from '../common/MediaQuery/media-query'
+import { useCatalogMenu } from '../common/catalogMenu/useCatalogMenu'
 
 let Container = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ let Container = styled.div`
   }
 `
 let Sidebar = styled.div`
-  width: 27%;
+  width: min(25%, 400px);
   flex-direction: column;
   padding-left: clamp(5px, 10vw, 50px);
   @media ${devices.mobileL} {
@@ -22,7 +23,7 @@ let Sidebar = styled.div`
   }
 `
 let Title = styled.h2`
-  font-size: 1.8em;
+  font-size: 1.3em;
   margin-top: 15px;
   text-transform: uppercase;
   color: #bf2b1d;
@@ -64,7 +65,7 @@ let MenuItemLink = styled(Link)`
     height: 4px;
     border-radius: 4px;
     background-color: #f53725;
-    bottom: -2px;
+    bottom: -4px;
     left: 0;
     transform-origin: right;
     transform: scaleX(0);
@@ -82,13 +83,13 @@ const DropdownContainer = styled.span`
 `
 const Dropdown = styled(DropdownArrow)`
   position: absolute;
-  top: 2px;
-  left: 0;
-  width: 20px;
+  top: 5px;
+  left: 2px;
+  width: 10px;
 `
 
-export const CatalogLayout = ({ children }) => {
-  // console.log(children)
+export const CatalogLayout = props => {
+  const { state, dispatch } = useCatalogMenu()
   const {
     wpPage: { content },
   } = useStaticQuery(graphql`
@@ -98,73 +99,6 @@ export const CatalogLayout = ({ children }) => {
       }
     }
   `)
-
-  const menuInitialState = {
-    armaturaPrivodyRegulyatory: false,
-    regulyatoryDavleniyaGaza: false,
-    electromagnitnyeKlapany: false,
-    promGorelki: false,
-    gorelkiRekumat: false,
-    regemat: false,
-    izluchayushchieTruby: false,
-    toplivnyeNasosy: false,
-    datchikiReleAvtomatyGoreniya: false,
-  }
-
-  const reducer = (state, action) => {
-    const { type, payload } = action
-    switch (type) {
-      case 'ARMATURA-PRIVODY-REGULYATORY':
-        return {
-          ...state,
-          armaturaPrivodyRegulyatory: payload.armaturaPrivodyRegulyatory,
-        }
-      case 'REGULYATORY-DAVLENIYA-GAZA':
-        return {
-          ...state,
-          regulyatoryDavleniyaGaza: payload.regulyatoryDavleniyaGaza,
-        }
-      case 'PROM-GORELKI':
-        return {
-          ...state,
-          promGorelki: payload.promGorelki,
-        }
-      case 'GORELKI-REKUMAT':
-        return {
-          ...state,
-          gorelkiRekumat: payload.gorelkiRekumat,
-        }
-      case 'GORELKI-REGEMAT':
-        return {
-          ...state,
-          regemat: payload.regemat,
-        }
-      case 'TOPLIVNYE-NASOSY':
-        return {
-          ...state,
-          toplivnyeNasosy: payload.toplivnyeNasosy,
-        }
-      case 'IZLUCHAYUSHCHIE-TRUBY':
-        return {
-          ...state,
-          izluchayushchieTruby: payload.izluchayushchieTruby,
-        }
-      case 'DATCHIKI-RELE-AVTOMATY-GORENIYA':
-        return {
-          ...state,
-          datchikiReleAvtomatyGoreniya: payload.datchikiReleAvtomatyGoreniya,
-        }
-      case 'ELECTROMAGNITNYE-KLAPANY':
-        return {
-          ...state,
-          electromagnitnyeKlapany: payload.electromagnitnyeKlapany,
-        }
-      default:
-        return { ...state }
-    }
-  }
-
-  const [state, dispatch] = React.useReducer(reducer, menuInitialState)
 
   const modifyLink = domNode => {
     let slug
@@ -217,6 +151,7 @@ export const CatalogLayout = ({ children }) => {
         return (
           <MenuItem>
             <MenuItemLink
+              activeStyle={{ borderBottom: '4px solid #f53725' }}
               to={`/catalog/${link}`}
               state={{ modal: !domNode.attribs['data-submenu'] }}>
               {domToReact(domNode.children, options)}
@@ -238,7 +173,7 @@ export const CatalogLayout = ({ children }) => {
   return (
     <Container>
       {parse(content, options)}
-      {children}
+      {props.children}
     </Container>
   )
 }
