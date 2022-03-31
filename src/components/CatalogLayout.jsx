@@ -180,7 +180,7 @@ export const CatalogLayout = ({ children }) => {
       if (domNode.attribs && domNode.attribs.class === 'sub-menu') {
         const slug = domNode.prev.attribs.link.split('/')
 
-        const stateName = slugslug[slug.length - 1]
+        const stateName = slug[slug.length - 1]
           .split('-')
           .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
           .join('')
@@ -191,6 +191,10 @@ export const CatalogLayout = ({ children }) => {
         let { link } = domNode.attribs
 
         const slug = domNode.attribs.link.split('/')
+        console.log(
+          '🚀 ~ file: CatalogLayout.jsx ~ line 194 ~ === ~ CatalogLayout ~ slug',
+          slug
+        )
 
         const stateName = slug[slug.length - 1]
           .split('-')
