@@ -86,7 +86,7 @@ const Dropdown = styled(DropdownArrow)`
   left: 0;
   width: 20px;
 `
-const mockData = []
+
 export const CatalogLayout = ({ children }) => {
   // console.log(children)
   const {
@@ -99,72 +99,90 @@ export const CatalogLayout = ({ children }) => {
     }
   `)
 
-  // const menuInitialState = {
-  //   armaturaPrivodyRegulyatory: false,
-  //   regulyatoryDavleniyaGaza: false,
-  //   electromagnitnyeKlapany: false,
-  //   promGorelki: false,
-  //   gorelkiRekumat: false,
-  //   regemat: false,
-  //   izluchayushchieTruby: false,
-  //   toplivnyeNasosy: false,
-  //   datchikiReleAvtomatyGoreniya: false,
-  // }
+  const menuInitialState = {
+    armaturaPrivodyRegulyatory: false,
+    regulyatoryDavleniyaGaza: false,
+    electromagnitnyeKlapany: false,
+    promGorelki: false,
+    gorelkiRekumat: false,
+    regemat: false,
+    izluchayushchieTruby: false,
+    toplivnyeNasosy: false,
+    datchikiReleAvtomatyGoreniya: false,
+  }
 
-  // const reducer = (state, action) => {
-  //   const { type, payload } = action
-  //   switch (type) {
-  //     case 'ARMATURA-PRIVODY-REGULYATORY':
-  //       return {
-  //         ...state,
-  //         armaturaPrivodyRegulyatory: payload.armaturaPrivodyRegulyatory,
-  //       }
-  //     case 'REGULYATORY-DAVLENIYA-GAZA':
-  //       return {
-  //         ...state,
-  //         regulyatoryDavleniyaGaza: payload.regulyatoryDavleniyaGaza,
-  //       }
-  //     case 'PROM-GORELKI':
-  //       return {
-  //         ...state,
-  //         promGorelki: payload.promGorelki,
-  //       }
-  //     case 'GORELKI-REKUMAT':
-  //       return {
-  //         ...state,
-  //         gorelkiRekumat: payload.gorelkiRekumat,
-  //       }
-  //     case 'GORELKI-REGEMAT':
-  //       return {
-  //         ...state,
-  //         regemat: payload.regemat,
-  //       }
-  //     case 'TOPLIVNYE-NASOSY':
-  //       return {
-  //         ...state,
-  //         toplivnyeNasosy: payload.toplivnyeNasosy,
-  //       }
-  //     case 'IZLUCHAYUSHCHIE-TRUBY':
-  //       return {
-  //         ...state,
-  //         izluchayushchieTruby: payload.izluchayushchieTruby,
-  //       }
-  //     case 'DATCHIKI-RELE-AVTOMATY-GORENIYA':
-  //       return {
-  //         ...state,
-  //         datchikiReleAvtomatyGoreniya: payload.datchikiReleAvtomatyGoreniya,
-  //       }
-  //     case 'ELECTROMAGNITNYE-KLAPANY':
-  //       return {
-  //         ...state,
-  //         electromagnitnyeKlapany: payload.electromagnitnyeKlapany,
-  //       }
-  //     default:
-  //       return { ...state }
-  //   }
-  // }
+  const reducer = (state, action) => {
+    const { type, payload } = action
+    switch (type) {
+      case 'ARMATURA-PRIVODY-REGULYATORY':
+        return {
+          ...state,
+          armaturaPrivodyRegulyatory: payload.armaturaPrivodyRegulyatory,
+        }
+      case 'REGULYATORY-DAVLENIYA-GAZA':
+        return {
+          ...state,
+          regulyatoryDavleniyaGaza: payload.regulyatoryDavleniyaGaza,
+        }
+      case 'PROM-GORELKI':
+        return {
+          ...state,
+          promGorelki: payload.promGorelki,
+        }
+      case 'GORELKI-REKUMAT':
+        return {
+          ...state,
+          gorelkiRekumat: payload.gorelkiRekumat,
+        }
+      case 'GORELKI-REGEMAT':
+        return {
+          ...state,
+          regemat: payload.regemat,
+        }
+      case 'TOPLIVNYE-NASOSY':
+        return {
+          ...state,
+          toplivnyeNasosy: payload.toplivnyeNasosy,
+        }
+      case 'IZLUCHAYUSHCHIE-TRUBY':
+        return {
+          ...state,
+          izluchayushchieTruby: payload.izluchayushchieTruby,
+        }
+      case 'DATCHIKI-RELE-AVTOMATY-GORENIYA':
+        return {
+          ...state,
+          datchikiReleAvtomatyGoreniya: payload.datchikiReleAvtomatyGoreniya,
+        }
+      case 'ELECTROMAGNITNYE-KLAPANY':
+        return {
+          ...state,
+          electromagnitnyeKlapany: payload.electromagnitnyeKlapany,
+        }
+      default:
+        return { ...state }
+    }
+  }
 
-  // const [state, dispatch] = React.useReducer(reducer, menuInitialState)
+  const [state, dispatch] = React.useReducer(reducer, menuInitialState)
+
+  const modifyLink = domNode => {
+    let slug
+    if (domNode.attribs.class === 'sub-menu') {
+      slug = domNode.prev.attribs.link.split('/')
+    } else {
+      slug = domNode.attribs.link.split('/')
+    }
+    const stateName = slug[slug.length - 1]
+      .split('-')
+      .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
+      .join('')
+    const actionType = slug[slug.length - 1]
+      .split('-')
+      .map(el => el.toUpperCase())
+      .join('-')
+    return [stateName, actionType]
+  }
 
   const options = {
     replace: domNode => {
@@ -178,58 +196,29 @@ export const CatalogLayout = ({ children }) => {
         return <Title>{domToReact(domNode.children, options)}</Title>
       }
       if (domNode.attribs && domNode.attribs.class === 'sub-menu') {
-        const slug = domNode.prev.attribs.link.split('/')
-
-        const stateName = slug[slug.length - 1]
-          .split('-')
-          .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
-          .join('')
-
-        return <SubMenu>{domToReact(domNode.children, options)}</SubMenu>
+        const [stateName] = modifyLink(domNode)
+        return (
+          <SubMenu isOpen={state[stateName]}>
+            {domToReact(domNode.children, options)}
+          </SubMenu>
+        )
       }
       if (domNode.attribs && domNode.attribs.class === 'menu-item') {
         let { link } = domNode.attribs
-
-        const slug = domNode.attribs.link.split('/')
-        console.log(
-          '🚀 ~ file: CatalogLayout.jsx ~ line 194 ~ === ~ CatalogLayout ~ slug',
-          slug
-        )
-
-        const stateName = slug[slug.length - 1]
-          .split('-')
-          .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
-          .join('')
-
-        const actionType = slug[slug.length - 1]
-          .split('-')
-          .map(el => el.toUpperCase())
-          .join('-')
+        const [stateName, actionType] = modifyLink(domNode)
 
         const handleMenu = () => {
-          console.log('handle menu')
-          //   dispatch({
-          //     type: actionType,
-          //     payload: { [stateName]: !state[stateName] },
-          //   })
-        }
-        const handleLeaveMenu = () => {
-          // if (!state[stateName]) {
-          //   dispatch({
-          //     type: actionType,
-          //     payload: { [stateName]: !state[stateName] },
-          //   })
-          // }
+          dispatch({
+            type: actionType,
+            payload: { [stateName]: !state[stateName] },
+          })
         }
 
         return (
           <MenuItem>
             <MenuItemLink
-              // onMouseOver={handleMenu}
-              onMouseLeave={handleLeaveMenu}
               to={`/catalog/${link}`}
-              // state={{ modal: !domNode.attribs['data-submenu'] }}
-            >
+              state={{ modal: !domNode.attribs['data-submenu'] }}>
               {domToReact(domNode.children, options)}
             </MenuItemLink>
             {domNode.attribs['data-submenu'] && (
