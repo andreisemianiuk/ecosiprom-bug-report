@@ -74,6 +74,15 @@ function useProviderCatalogMenu() {
           ...state,
           electromagnitnyeKlapany: payload.electromagnitnyeKlapany,
         }
+      case 'HIDE-ALL':
+        const obj = {}
+        for (let key in menuInitialState) {
+          obj[key] = false
+        }
+        return {
+          ...state,
+          ...obj,
+        }
       default:
         return { ...state }
     }

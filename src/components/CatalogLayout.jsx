@@ -2,9 +2,11 @@ import * as React from 'react'
 import parse, { domToReact } from 'html-react-parser'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
-import DropdownArrow from '../assets/dropdown.svg'
+import DropDownArrow from '../assets/dropdown.svg'
+import DropUpArrow from '../assets/drop-up.svg'
 import { devices } from '../common/MediaQuery/media-query'
 import { useCatalogMenu } from '../common/catalogMenu/useCatalogMenu'
+import { modifyLink } from '../common/modifyLink/modifyLink'
 
 let Container = styled.div`
   display: flex;
@@ -77,15 +79,21 @@ let MenuItemLink = styled(Link)`
     transform: scaleX(1);
   }
 `
-const DropdownContainer = styled.span`
+const DropArrowContainer = styled.span`
   position: relative;
   cursor: pointer;
 `
-const Dropdown = styled(DropdownArrow)`
+const DropDown = styled(DropDownArrow)`
   position: absolute;
-  top: 5px;
+  top: 0.35em;
   left: 2px;
   width: 10px;
+`
+const DropUp = styled(DropUpArrow)`
+  position: absolute;
+  top: 0.1em;
+  left: 2px;
+  width: 14px;
 `
 
 export const CatalogLayout = props => {
@@ -100,23 +108,23 @@ export const CatalogLayout = props => {
     }
   `)
 
-  const modifyLink = domNode => {
-    let slug
-    if (domNode.attribs.class === 'sub-menu') {
-      slug = domNode.prev.attribs.link.split('/')
-    } else {
-      slug = domNode.attribs.link.split('/')
-    }
-    const stateName = slug[slug.length - 1]
-      .split('-')
-      .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
-      .join('')
-    const actionType = slug[slug.length - 1]
-      .split('-')
-      .map(el => el.toUpperCase())
-      .join('-')
-    return [stateName, actionType]
-  }
+  // const modifyLink = domNode => {
+  //   let slug
+  //   if (domNode.attribs.class === 'sub-menu') {
+  //     slug = domNode.prev.attribs.link.split('/')
+  //   } else {
+  //     slug = domNode.attribs.link.split('/')
+  //   }
+  //   const stateName = slug[slug.length - 1]
+  //     .split('-')
+  //     .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
+  //     .join('')
+  //   const actionType = slug[slug.length - 1]
+  //     .split('-')
+  //     .map(el => el.toUpperCase())
+  //     .join('-')
+  //   return [stateName, actionType]
+  // }
 
   const options = {
     replace: domNode => {
@@ -141,10 +149,16 @@ export const CatalogLayout = props => {
         let { link } = domNode.attribs
         const [stateName, actionType] = modifyLink(domNode)
 
-        const handleMenu = () => {
+        const handleDropdownMenu = () => {
           dispatch({
             type: actionType,
             payload: { [stateName]: !state[stateName] },
+          })
+        }
+        const handleMenu = () => {
+          dispatch({
+            type: actionType,
+            payload: { [stateName]: true },
           })
         }
 
@@ -153,13 +167,14 @@ export const CatalogLayout = props => {
             <MenuItemLink
               activeStyle={{ borderBottom: '4px solid #f53725' }}
               to={`/catalog/${link}`}
+              onClick={handleMenu}
               state={{ modal: !domNode.attribs['data-submenu'] }}>
               {domToReact(domNode.children, options)}
             </MenuItemLink>
             {domNode.attribs['data-submenu'] && (
-              <DropdownContainer onClick={handleMenu}>
-                <Dropdown />
-              </DropdownContainer>
+              <DropArrowContainer onClick={handleDropdownMenu}>
+                {state[stateName] ? <DropUp /> : <DropDown />}
+              </DropArrowContainer>
             )}
           </MenuItem>
         )
