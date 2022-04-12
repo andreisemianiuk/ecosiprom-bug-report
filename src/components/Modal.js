@@ -78,18 +78,19 @@ const CloseLink = styled(Link)`
 const Modal = ({ location, children }) => (
   <ModalRoutingContext.Consumer>
     {({ closeTo }) => {
-      // console.log('props >> ', props)
+      console.log('closeTo >> ', closeTo)
+      console.log('location >> ', location)
       return (
         <Container>
           <Box>
             <CloseButton>
-              <CloseLink to={closeTo}>
+              <CloseLink to={location}>
                 <CloseCross />
               </CloseLink>
             </CloseButton>
             <ChildrenWrapper>{children}</ChildrenWrapper>
             <BottomButtonsWrapper>
-              <CloseLink to={closeTo}>Назад</CloseLink>
+              <CloseLink to={location}>Назад</CloseLink>
               <OrderButton>Заказать</OrderButton>
             </BottomButtonsWrapper>
           </Box>

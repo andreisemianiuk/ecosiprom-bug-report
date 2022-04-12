@@ -15,9 +15,10 @@ const ProductWrapper = styled.section`
   justify-content: space-evenly;
   flex-wrap: wrap;
   width: 75%;
-  @media ${devices.mobileL} {
+  @media (max-width: 800px) {
     width: 100%;
     flex-direction: column;
+    align-items: center;
     padding: 0 2px;
   }
 `
@@ -54,10 +55,6 @@ const ProductListTemplate = ({
   path,
 }) => {
   const lastMenuState = defineMenuPath(path)
-  console.log(
-    '🚀 ~ file: product-list-template.js ~ line 55 ~ lastMenuState',
-    lastMenuState
-  )
   const { dispatch } = useCatalogMenu()
   React.useEffect(() => {
     if (lastMenuState.length) {

@@ -34,11 +34,6 @@ function useProviderCatalogMenu() {
           ...state,
           armaturaPrivodyRegulyatory: payload.armaturaPrivodyRegulyatory,
         }
-      case 'REGULYATORY-DAVLENIYA-GAZA':
-        return {
-          ...state,
-          regulyatoryDavleniyaGaza: payload.regulyatoryDavleniyaGaza,
-        }
       case 'PROM-GORELKI':
         return {
           ...state,
@@ -80,7 +75,6 @@ function useProviderCatalogMenu() {
           obj[key] = false
         }
         return {
-          ...state,
           ...obj,
         }
       default:

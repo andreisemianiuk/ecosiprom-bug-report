@@ -11,16 +11,25 @@ import { modifyLink } from '../common/modifyLink/modifyLink'
 let Container = styled.div`
   display: flex;
   justify-content: space-between;
-  @media ${devices.mobileL} {
+  @media (max-width: 800px) {
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `
 let Sidebar = styled.div`
   width: min(25%, 400px);
   flex-direction: column;
   padding-left: clamp(5px, 10vw, 50px);
-  @media ${devices.mobileL} {
+  @media (max-width: 1200px) {
+    width: 40%;
+  }
+  @media (max-width: 1000px) {
+    width: 50%;
+  }
+  @media (max-width: 800px) {
     width: 100%;
+    text-align: center;
     padding-left: 0;
   }
 `
@@ -39,11 +48,7 @@ let Title = styled.h2`
     text-align: center;
   }
 `
-let MainMenu = styled.ul`
-  @media ${devices.mobileL} {
-    padding-left: min(10%, 30px);
-  }
-`
+let MainMenu = styled.ul``
 let SubMenu = styled.ul`
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   font-size: 0.9em;
@@ -86,12 +91,12 @@ const DropArrowContainer = styled.span`
 const DropDown = styled(DropDownArrow)`
   position: absolute;
   top: 0.35em;
-  left: 2px;
+  left: 3px;
   width: 10px;
 `
 const DropUp = styled(DropUpArrow)`
   position: absolute;
-  top: 0.1em;
+  top: 0.25em;
   left: 2px;
   width: 14px;
 `
@@ -107,24 +112,6 @@ export const CatalogLayout = props => {
       }
     }
   `)
-
-  // const modifyLink = domNode => {
-  //   let slug
-  //   if (domNode.attribs.class === 'sub-menu') {
-  //     slug = domNode.prev.attribs.link.split('/')
-  //   } else {
-  //     slug = domNode.attribs.link.split('/')
-  //   }
-  //   const stateName = slug[slug.length - 1]
-  //     .split('-')
-  //     .map((el, idx) => (idx > 0 ? el[0].toUpperCase() + el.slice(1) : el))
-  //     .join('')
-  //   const actionType = slug[slug.length - 1]
-  //     .split('-')
-  //     .map(el => el.toUpperCase())
-  //     .join('-')
-  //   return [stateName, actionType]
-  // }
 
   const options = {
     replace: domNode => {
