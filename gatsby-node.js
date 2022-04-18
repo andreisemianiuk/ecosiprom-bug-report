@@ -248,6 +248,7 @@ async function getServicesList({ graphql, reporter }) {
       allWpPage(filter: { wpParent: { node: { slug: { eq: "services" } } } }) {
         edges {
           node {
+            id
             slug
             uri
             parentId
