@@ -128,97 +128,88 @@ let ServiceDescription = styled.div`
   }
 `
 function ServicesPage({ data }) {
-  let { content } = data.allWpContentNode.edges[0].node
-  let [description, setDescription] = React.useState('ПРОЕКТИРОВАНИЕ')
-  const isMobile = useMediaQuery({ query: devices.mobileL })
-  let handleClick = e => {
-    let name = e.target.innerText
-    setDescription(name)
-  }
-  let arrOfServices = []
-  let desc = {}
+  let { content } = data.wpPage
+  // let [description, setDescription] = React.useState('ПРОЕКТИРОВАНИЕ')
+  // const isMobile = useMediaQuery({ query: devices.mobileL })
+  // let handleClick = e => {
+  //   let name = e.target.innerText
+  //   setDescription(name)
+  // }
+  // let arrOfServices = []
+  // let desc = {}
   let options = {
     replace: domNode => {
-      if (domNode.attribs && domNode.attribs.class === 'wp-block-group') {
-        return <>{domToReact(domNode.children[0].children, options)}</>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'services-container') {
-        return <>{domToReact(domNode.children[0].children, options)}</>
-      }
-      if (
-        domNode.attribs &&
-        domNode.attribs.class === 'services-item-description'
-      ) {
-        return <></>
-      }
-      if (domNode.attribs && domNode.attribs.data) {
-        let key = domNode.attribs.data
-        let node = domNode.children
-        let value = check(node)
-        arrOfServices.push(key)
-        desc[key] = value
-        return <></>
-      }
+      //   if (domNode.attribs && domNode.attribs.class === 'wp-block-group') {
+      //     return <>{domToReact(domNode.children[0].children, options)}</>
+      //   }
+      //   if (domNode.attribs && domNode.attribs.class === 'services-container') {
+      //     return <>{domToReact(domNode.children[0].children, options)}</>
+      //   }
+      //   if (
+      //     domNode.attribs &&
+      //     domNode.attribs.class === 'services-item-description'
+      //   ) {
+      //     return <></>
+      //   }
+      //   if (domNode.attribs && domNode.attribs.data) {
+      //     let key = domNode.attribs.data
+      //     let node = domNode.children
+      //     let value = check(node)
+      //     arrOfServices.push(key)
+      //     desc[key] = value
+      //     return <></>
+      //   }
     },
   }
-  return (
-    <Layout>
-      <>{parse(content, options)}</>
-      <ServicesBackgroundImage description={description}>
-        {isMobile ? (
-          <ServicesMobileContainer>
-            <ServicesMobileList>
-              <ServicesSlider
-                items={arrOfServices}
-                desc={description}
-                switchItem={setDescription}
-              />
-            </ServicesMobileList>
-            <ServiceDescriptionWrapper>
-              <ServiceDescription>
-                {parse(desc[description])}
-              </ServiceDescription>
-            </ServiceDescriptionWrapper>
-          </ServicesMobileContainer>
-        ) : (
-          <ServicesContainer>
-            <ServicesList>
-              {arrOfServices.map(item => {
-                return (
-                  <ServicesListItem
-                    active={item === description}
-                    onClick={handleClick}
-                    key={item}>
-                    {item}
-                  </ServicesListItem>
-                )
-              })}
-            </ServicesList>
-            <ServiceDescriptionWrapper>
-              <ServiceDescription>
-                {parse(desc[description])}
-              </ServiceDescription>
-            </ServiceDescriptionWrapper>
-          </ServicesContainer>
-        )}
-      </ServicesBackgroundImage>
-    </Layout>
-  )
+  return <Layout>{parse(content, options)}</Layout>
+}
+{
+  /* <ServicesBackgroundImage description={description}>
+	{isMobile ? (
+		<ServicesMobileContainer>
+			<ServicesMobileList>
+				<ServicesSlider
+					items={arrOfServices}
+					desc={description}
+					switchItem={setDescription}
+				/>
+			</ServicesMobileList>
+			<ServiceDescriptionWrapper>
+				<ServiceDescription>
+					{parse(desc[description])}
+				</ServiceDescription>
+			</ServiceDescriptionWrapper>
+		</ServicesMobileContainer>
+	) : (
+		<ServicesContainer>
+			<ServicesList>
+				{arrOfServices.map(item => {
+					return (
+						<ServicesListItem
+							active={item === description}
+							onClick={handleClick}
+							key={item}>
+							{item}
+						</ServicesListItem>
+					)
+				})}
+			</ServicesList>
+			<ServiceDescriptionWrapper>
+				<ServiceDescription>
+					{parse(desc[description])}
+				</ServiceDescription>
+			</ServiceDescriptionWrapper>
+		</ServicesContainer>
+	)}
+</ServicesBackgroundImage> */
 }
 
 export default ServicesPage
 
 export const pageQuery = graphql`
   query ServicesQuery {
-    allWpContentNode(filter: { slug: { eq: "services" } }) {
-      edges {
-        node {
-          ... on WpPage {
-            id
-            content
-          }
-        }
-      }
+    wpPage(slug: { eq: "services" }) {
+      content
     }
   }
 `
