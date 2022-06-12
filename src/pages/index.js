@@ -1,12 +1,12 @@
-import { graphql, Link } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import parse, { domToReact } from 'html-react-parser'
-import * as React from 'react'
-import styled from 'styled-components'
-import { devices } from '../common/MediaQuery/media-query'
-import Layout from '../components/Layout'
-import { Logos } from '../components/Logos'
-import { Slideshow } from '../components/Slideshow'
+import { graphql, Link } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image"
+import parse, { domToReact } from "html-react-parser"
+import * as React from "react"
+import styled from "styled-components"
+import { devices } from "../common/MediaQuery/media-query"
+import Layout from "../components/Layout"
+import { Logos } from "../components/Logos"
+import { Slideshow } from "../components/Slideshow"
 
 let SliderContainer = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ let SliderContainer = styled.div`
   }
 `
 let MainServicesList = styled.ul`
-  font-family: Verdana, sans-serif;
+  /* font-family: Verdana, sans-serif; */
   color: #dedbe6;
   background-color: #00637f;
   padding: 5px 0 10px;
@@ -59,7 +59,7 @@ let Services = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  font-family: Verdana, sans-serif;
+  /* font-family: Verdana, sans-serif; */
   margin: 30px 0;
   @media ${devices.mobileL} {
     margin: 10px 5px;
@@ -118,18 +118,18 @@ function HomePage({ data }) {
     replace: domNode => {
       if (
         domNode.attribs &&
-        domNode.attribs.class === 'partners-icons-wrapper'
+        domNode.attribs.class === "partners-icons-wrapper"
       ) {
         return <></>
       }
-      if (domNode.attribs && domNode.attribs.class === 'main-services') {
+      if (domNode.attribs && domNode.attribs.class === "main-services") {
         return (
           <MainServicesList>
             {domToReact(domNode.children, options)}
           </MainServicesList>
         )
       }
-      if (domNode.attribs && domNode.attribs.class === 'main-services-item') {
+      if (domNode.attribs && domNode.attribs.class === "main-services-item") {
         return (
           <>
             <MainServicesItem>
@@ -139,24 +139,24 @@ function HomePage({ data }) {
           </>
         )
       }
-      if (domNode.attribs && domNode.attribs.class === 'services-container') {
+      if (domNode.attribs && domNode.attribs.class === "services-container") {
         return <Services>{domToReact(domNode.children, options)}</Services>
       }
-      if (domNode.attribs && domNode.attribs.class === 'services-item') {
+      if (domNode.attribs && domNode.attribs.class === "services-item") {
         return (
-          <ServiceItem to='/services'>
+          <ServiceItem to="/services">
             {domToReact(domNode.children, options)}
           </ServiceItem>
         )
       }
-      if (domNode.attribs && domNode.attribs.class === 'services-title') {
+      if (domNode.attribs && domNode.attribs.class === "services-title") {
         return (
           <ServicesTitle>{domToReact(domNode.children, options)}</ServicesTitle>
         )
       }
       if (
         domNode.attribs &&
-        domNode.attribs.class === 'services-image-wrapper'
+        domNode.attribs.class === "services-image-wrapper"
       ) {
         let dataAttribute = new RegExp(`${domNode.next.attribs.data}`)
 
@@ -177,12 +177,12 @@ function HomePage({ data }) {
           return <div>image</div>
         }
       }
-      if (domNode.attribs && domNode.attribs.class === 'services-list') {
+      if (domNode.attribs && domNode.attribs.class === "services-list") {
         return (
           <ServicesList>{domToReact(domNode.children, options)}</ServicesList>
         )
       }
-      if (domNode.attribs && domNode.attribs.class === 'services-list-item') {
+      if (domNode.attribs && domNode.attribs.class === "services-list-item") {
         return (
           <ServicesListItem>
             {domToReact(domNode.children, options)}
@@ -191,7 +191,7 @@ function HomePage({ data }) {
       }
       if (
         domNode.attribs &&
-        domNode.attribs.class === 'main-slideshow-images'
+        domNode.attribs.class === "main-slideshow-images"
       ) {
         return <></>
       }
@@ -204,8 +204,8 @@ function HomePage({ data }) {
         <Slideshow autoplay={true} />
       </SliderContainer>
       {parse(content, options)}
-      <Logos type={'компаниями'} />
-      <Logos type={'оборудованием'} />
+      <Logos type={"компаниями"} />
+      <Logos type={"оборудованием"} />
     </Layout>
   )
 }
