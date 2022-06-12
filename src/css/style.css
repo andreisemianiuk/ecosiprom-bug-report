@@ -141,37 +141,3 @@ a:focus {
   text-decoration: none;
 }
 
-/* Button */
-
-.button-primary, .button-secondary {
-  font-size: var(--fontSize-button-primary);
-  line-height: var(--lineHeight-button-primary);
-}
-
-.button-primary {
-  font-weight: var(--fontWeight-semibold);
-}
-
-.button-secondary {
-  font-weight: var(--fontWeight-medium);
-}
-
-/* Text */
-
-.text-large {
-  line-height: var(--lineHeight-normal);
-}
-
-.text-middle {
-  line-height: var(--lineHeight-text-middle);
-  font-size: 15px;
-}
-
-/* Header menu */
-
-.header-menu {
-  font-size: 15px;
-  line-height: 22px;
-  font-weight: var(--fontWeight-bold);
-}
-
