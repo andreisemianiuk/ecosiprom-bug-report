@@ -15,19 +15,25 @@ const LogoNavbarContainer = styled.div`
   background-color: #ffffff;
   padding: 0 135px;
 `
-
+const HeaderContainer = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  /* overflow: hidden; */
+  z-index: 1000;
+`
 const Header = () => {
   return (
-    <>
+    <HeaderContainer>
       <ContactHeader />
       <LogoNavbarContainer>
         <Link to={"/"}>
           <Logo />
         </Link>
         <Navbar />
-        <PrimaryButton />
+        <PrimaryButton text={"Оставить заявку"} />
       </LogoNavbarContainer>
-    </>
+    </HeaderContainer>
   )
 }
 

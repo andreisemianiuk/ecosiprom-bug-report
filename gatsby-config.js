@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://ecosiprom.gatsbyjs.io',
-    title: 'ecosiprom',
+    siteUrl: "https://ecosiprom.gatsbyjs.io",
+    title: "ecosiprom",
   },
   plugins: [
     {
@@ -16,20 +16,20 @@ module.exports = {
       options: {
         // A selector to set react-modal's app root to, default is `#___gatsby`
         // See http://reactcommunity.org/react-modal/accessibility/#app-element
-        appElement: '#___gatsby',
+        appElement: "#___gatsby",
 
         // Object of props that will be passed to the react-modal container
         // See http://reactcommunity.org/react-modal/#usage
         modalProps: {
           style: {
             overlay: {},
-            content: { inset: 'inherit', padding: 0 },
+            content: { inset: "inherit", padding: 0 },
           },
         },
       },
     },
     {
-      resolve: 'gatsby-plugin-react-leaflet',
+      resolve: "gatsby-plugin-react-leaflet",
       options: {
         linkStyles: true, // (default: true) Enable/disable loading stylesheets via CDN
       },
@@ -63,7 +63,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-react-svg',
+      resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
           include: /assets/,

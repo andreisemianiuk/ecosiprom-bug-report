@@ -21,7 +21,7 @@ export const Logo = () => {
   return (
     <LogoItem width={170}>
       <StaticImage
-        src="../images/logo-ecosiprom.png"
+        src="../../images/logo-ecosiprom.png"
         alt="Logo for site"
         placeholder="blurred"
         layout="constrained"
