@@ -1,9 +1,9 @@
-import React from "react"
-import styled from "styled-components"
-import MobileIcon from "../../assets/mobile.svg"
-import PhoneIcon from "../../assets/phone.svg"
-import EmailIcon from "../../assets/email.svg"
-import PhoneCircleIcon from "../../assets/phone-circle.svg"
+import React from "react";
+import styled from "styled-components";
+import MobileIcon from "../../assets/mobile.svg";
+import PhoneIcon from "../../assets/phone.svg";
+import EmailIcon from "../../assets/email.svg";
+import PhoneCircleIcon from "../../assets/phone-circle.svg";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,17 +17,17 @@ const Wrapper = styled.div`
   line-height: 20px;
   font-feature-settings: "pnum" on, "lnum" on;
   text-decoration: none;
-`
+`;
 const PhoneWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-`
-const PhoneCircleYIconContainer = styled.div`
+`;
+const PhoneCircleIconContainer = styled.div`
   position: absolute;
-  left: 41.67%;
-  bottom: -14.83%;
-`
+  left: 6.3px;
+  bottom: -4.5px;
+`;
 const ItemWrapper = styled.a`
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@ const ItemWrapper = styled.a`
   &:first-child {
     margin-left: 0;
   }
-`
+`;
 const Item = styled.a`
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@ const Item = styled.a`
   font-weight: 500;
   padding-left: 10px;
   text-decoration: none;
-`
+`;
 
 export const ContactHeader = () => {
   return (
@@ -56,9 +56,9 @@ export const ContactHeader = () => {
       <ItemWrapper>
         <PhoneWrapper>
           <PhoneIcon />
-          <PhoneCircleYIconContainer>
+          <PhoneCircleIconContainer>
             <PhoneCircleIcon />
-          </PhoneCircleYIconContainer>
+          </PhoneCircleIconContainer>
         </PhoneWrapper>
         <Item href="tel:+37517-275-23-06">+375 (17) 275-23-06</Item>
       </ItemWrapper>
@@ -67,5 +67,5 @@ export const ContactHeader = () => {
         <Item href="mailto:info@ecosiprom.com">info@ecosiprom.com</Item>
       </ItemWrapper>
     </Wrapper>
-  )
-}
+  );
+};
