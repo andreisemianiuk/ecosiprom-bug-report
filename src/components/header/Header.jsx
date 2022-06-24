@@ -6,32 +6,39 @@ import { Logo } from "./Logo";
 import { Navbar } from "./Navbar";
 import { ContactHeader } from "./ContactHeader";
 
-const LogoNavbarContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  height: 80px;
-  background-color: #ffffff;
-  padding: 0 135px;
-`;
 const HeaderContainer = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  /* overflow: hidden; */
   z-index: 1000;
+`;
+const LogoNavbarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  height: 80px;
+  background-color: #ffffff;
+`;
+const ContentWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  max-width: 1170px;
 `;
 const Header = () => {
   return (
     <HeaderContainer>
       <ContactHeader />
       <LogoNavbarContainer>
-        <Link to={"/"}>
-          <Logo />
-        </Link>
-        <Navbar />
-        <PrimaryButton text={"Оставить заявку"} />
+        <ContentWrapper>
+          <Link to={"/"}>
+            <Logo />
+          </Link>
+          <Navbar />
+          <PrimaryButton text={"Оставить заявку"} />
+        </ContentWrapper>
       </LogoNavbarContainer>
     </HeaderContainer>
   );

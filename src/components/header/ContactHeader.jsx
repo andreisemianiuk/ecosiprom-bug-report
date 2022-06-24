@@ -7,16 +7,19 @@ import PhoneCircleIcon from "../../assets/phone-circle.svg";
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
+  justify-content: center;
   height: 30px;
   background-color: #cfe0e6;
-  padding: 0 135px;
   font-size: 14px;
-  line-height: 20px;
   font-feature-settings: "pnum" on, "lnum" on;
   text-decoration: none;
+`;
+const ContentWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1170px;
+  margin: 0 auto;
 `;
 const PhoneWrapper = styled.div`
   position: relative;
@@ -49,23 +52,25 @@ const Item = styled.a`
 export const ContactHeader = () => {
   return (
     <Wrapper>
-      <ItemWrapper>
-        <MobileIcon />
-        <Item href="tel:+37529-662-30-04">+375 (29) 662-30-04</Item>
-      </ItemWrapper>
-      <ItemWrapper>
-        <PhoneWrapper>
-          <PhoneIcon />
-          <PhoneCircleIconContainer>
-            <PhoneCircleIcon />
-          </PhoneCircleIconContainer>
-        </PhoneWrapper>
-        <Item href="tel:+37517-275-23-06">+375 (17) 275-23-06</Item>
-      </ItemWrapper>
-      <ItemWrapper>
-        <EmailIcon />
-        <Item href="mailto:info@ecosiprom.com">info@ecosiprom.com</Item>
-      </ItemWrapper>
+      <ContentWrapper>
+        <ItemWrapper>
+          <MobileIcon />
+          <Item href="tel:+37529-662-30-04">+375 (29) 662-30-04</Item>
+        </ItemWrapper>
+        <ItemWrapper>
+          <PhoneWrapper>
+            <PhoneIcon />
+            <PhoneCircleIconContainer>
+              <PhoneCircleIcon />
+            </PhoneCircleIconContainer>
+          </PhoneWrapper>
+          <Item href="tel:+37517-275-23-06">+375 (17) 275-23-06</Item>
+        </ItemWrapper>
+        <ItemWrapper>
+          <EmailIcon />
+          <Item href="mailto:info@ecosiprom.com">info@ecosiprom.com</Item>
+        </ItemWrapper>
+      </ContentWrapper>
     </Wrapper>
   );
 };

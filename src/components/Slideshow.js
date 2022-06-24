@@ -9,6 +9,8 @@ import styled from "styled-components";
 import parse, { domToReact } from "html-react-parser";
 import LeftArrow from "../images/left-arrow.png";
 import RightArrow from "../images/right-arrow.png";
+// import { useMediaQueryHook } from "../common/MediaQuery/useMediaQueryHook";
+// import { sizes } from "../common/MediaQuery/media-query";
 
 const ImageWrapper = styled.div`
   background: linear-gradient(
@@ -24,28 +26,31 @@ const BackgroundImageContainer = styled(BackgroundImage)`
   width: 100%;
   height: 500px;
 `;
-const BackgroundImageLabel = styled.h1`
-  position: absolute;
-  top: 116px;
-  left: 135px;
-  width: 668px;
-
+const InnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const ContentWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1170px;
   color: #fff;
 `;
+const BackgroundImageLabel = styled.h1`
+  max-width: 668px;
+  padding-top: 116px;
+`;
 const BackgroundImageInfo = styled.p`
-  position: absolute;
-  top: 137px;
-  left: 0;
   width: 584px;
-  height: 51px;
-  color: #fff;
   font-size: 16px;
   line-height: 24px;
   font-weight: 500;
+  margin-top: 21px;
 `;
 const ArrowContainer = styled.div`
   position: absolute;
-  top: 400px;
+  top: 350px;
   left: ${v => v.left}px;
   right: ${v => v.right}px;
   cursor: pointer;
@@ -57,7 +62,7 @@ const ArrowImage = styled.img`
   alt: ${v => v.alt};
 `;
 
-export const Slideshow = ({ children }) => {
+export const Slideshow = () => {
   const {
     allWpMediaItem: { nodes },
   } = useStaticQuery(graphql`
@@ -88,14 +93,25 @@ export const Slideshow = ({ children }) => {
     },
   };
 
+  // const device = useMediaQueryHook();
+  // const arrowsPadding = device => {
+  //   let deviceSize = parseInt(sizes[device]);
+  //   let widthWithoutContent = deviceSize - 1170;
+  //   let widthOfSingleSide = widthWithoutContent / 2;
+  //   let widthForPadding = widthOfSingleSide * 0.75;
+  //   let res = widthForPadding;
+  //   return widthForPadding;
+  // };
+  // const arrowsPad = arrowsPadding(device);
+
   const properties = {
     prevArrow: (
-      <ArrowContainer left={71}>
+      <ArrowContainer left={135}>
         <ArrowImage src={LeftArrow} alt="left arrow" />
       </ArrowContainer>
     ),
     nextArrow: (
-      <ArrowContainer right={71}>
+      <ArrowContainer right={135}>
         <ArrowImage src={RightArrow} alt="right arrow" />
       </ArrowContainer>
     ),
@@ -115,12 +131,15 @@ export const Slideshow = ({ children }) => {
                 // Spread bgImage into BackgroundImage:
                 {...bgImage}
                 preserveStackingContext>
-                {children}
+                <InnerContainer>
+                  <ContentWrapper>
+                    <BackgroundImageLabel>
+                      {label}
+                      {node.caption && parse(node.caption, options)}
+                    </BackgroundImageLabel>
+                  </ContentWrapper>
+                </InnerContainer>
               </BackgroundImageContainer>
-              <BackgroundImageLabel>
-                {label}
-                {node.caption && parse(node.caption, options)}
-              </BackgroundImageLabel>
             </ImageWrapper>
           );
         })}
