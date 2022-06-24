@@ -6,8 +6,11 @@ import { convertToBgImage } from "gbimage-bridge";
 import BackgroundImage from "gatsby-background-image";
 import parse, { domToReact } from "html-react-parser";
 import SecondaryButton from "../buttons/SecondaryButton";
-import ContentWrapper from "../ContentWrapper";
 
+const ContentWrapper = styled.section`
+  max-width: 1170px;
+  margin: 0 auto;
+`;
 const Title = styled.h1`
   line-height: 48px;
   margin-bottom: 40px;
