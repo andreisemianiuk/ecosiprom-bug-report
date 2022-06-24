@@ -40,7 +40,7 @@ const Title = styled.div`
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  color: ${props => (props.isHovered ? "#1a7897" : "#4a5763")};
+  color: ${({ hovered }) => (hovered ? "#1a7897" : "#4a5763")};
 
   transition: color 0.4s ease-in-out;
 `;
@@ -55,4 +55,4 @@ const SecondaryButton = ({ title, callback, hovered }) => {
   );
 };
 
-export default React.memo(SecondaryButton);
+export default SecondaryButton;
