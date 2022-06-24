@@ -22,8 +22,8 @@ const StyledIcon = styled(SecondaryIcon)`
   top: 2px;
   left: 0;
   transition: filter 0.5s ease-in-out;
-  filter: ${({ isHovered }) =>
-    isHovered
+  filter: ${({ hovered }) =>
+    hovered
       ? "invert(36%) sepia(81%) saturate(469%) hue-rotate(149deg) brightness(93%) contrast(91%)"
       : "none"};
 `;
@@ -48,9 +48,9 @@ const Title = styled.div`
 const SecondaryButton = ({ title, callback, hovered }) => {
   return (
     <StyledButton onClick={callback}>
-      <StyledIcon isHovered={hovered} />
+      <StyledIcon hovered={hovered} />
       <StyledArrowIcon />
-      <Title isHovered={hovered}>{title}</Title>
+      <Title hovered={hovered}>{title}</Title>
     </StyledButton>
   );
 };
