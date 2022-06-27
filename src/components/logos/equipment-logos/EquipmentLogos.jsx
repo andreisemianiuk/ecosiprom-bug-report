@@ -52,7 +52,7 @@ const EquipmentLogos = () => {
           id
           localFile {
             childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, formats: PNG, height: 100)
+              gatsbyImageData(placeholder: BLURRED, formats: PNG, height: 60)
             }
           }
         }
