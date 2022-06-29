@@ -58,10 +58,8 @@ const ImageBackgroundLayer = styled.div`
   width: 100%;
   height: 100%;
   transition: all 0.3s ease-in-out;
-  background: rgba(0, 0, 0, 0.2);
-  &:hover {
-    background: rgba(0, 0, 0, 0);
-  }
+  background: ${({ hovered }) =>
+    hovered ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.2)"};
 `;
 
 const ProjectsBox = ({ handleHoverOn, handleHoverOff, hovered, itemData }) => {
@@ -84,7 +82,7 @@ const ProjectsBox = ({ handleHoverOn, handleHoverOff, hovered, itemData }) => {
       hovered={hovered}>
       <ImageWrapper>
         <GatsbyImage image={image} alt={altText} />
-        <ImageBackgroundLayer />
+        <ImageBackgroundLayer hovered={hovered} />
       </ImageWrapper>
       <InfoBox>
         <Title hovered={hovered}>{altText}</Title>
