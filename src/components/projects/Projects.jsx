@@ -3,14 +3,14 @@ import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 import PrimaryButton from "../buttons/PrimaryButton";
 import parse, { domToReact } from "html-react-parser";
-import CatalogBox from "./CatalogBox";
+import ProjectsBox from "./ProjectsBox";
 
 const Container = styled.section`
   display: flex;
   justify-content: center;
 
-  background-color: #f3f7f9;
-  padding: 80px 0;
+  background-color: #fff;
+  padding: 80px 0 100px;
 `;
 const ContentWrapper = styled.div`
   display: flex;
@@ -37,19 +37,18 @@ const Info = styled.div`
 const List = styled.div`
   display: flex;
   justify-content: space-between;
-
   width: 100%;
 `;
 
-const Catalog = () => {
+const Projects = () => {
   const [hoveredItemId, setHoveredItemId] = React.useState(null);
   const {
     allWpMediaItem: { nodes },
     allWpContentNode: { nodes: contentNodes },
   } = useStaticQuery(graphql`
-    query MainCatalogQuery {
+    query MainProjectsQuery {
       allWpMediaItem(
-        filter: { title: { regex: "/catalog/" } }
+        filter: { title: { regex: "/projects/" } }
         sort: { fields: caption }
       ) {
         nodes {
@@ -58,7 +57,13 @@ const Catalog = () => {
           description
           localFile {
             childImageSharp {
-              gatsbyImageData(placeholder: TRACED_SVG)
+              gatsbyImageData(
+                height: 280
+                width: 377
+                placeholder: TRACED_SVG
+                quality: 100
+                formats: PNG
+              )
             }
           }
         }
@@ -78,7 +83,7 @@ const Catalog = () => {
 
   let options = {
     replace: domNode => {
-      if (domNode.attribs && domNode.attribs.class === "catalog") {
+      if (domNode.attribs && domNode.attribs.class === "projects") {
         return <>{domToReact(domNode.children[1].children, options)}</>;
       }
       if (
@@ -87,7 +92,7 @@ const Catalog = () => {
           domNode.attribs.class === "services-container" ||
           domNode.attribs.class === "equipment-logos" ||
           domNode.attribs.class === "implementation-cycle" ||
-          domNode.attribs.class === "projects" ||
+          domNode.attribs.class === "catalog" ||
           domNode.attribs.class === "partners-icons-wrapper")
       ) {
         return <></>;
@@ -106,14 +111,14 @@ const Catalog = () => {
       <ContentWrapper>
         <Header>
           <Title>Каталог</Title>
-          <PrimaryButton text="Все оборудование" />
+          <PrimaryButton text="Все проекты" />
         </Header>
         <Info>{parse(content, options)}</Info>
         <List>
           {nodes.map(item => {
             let hovered = hoveredItemId === item.id ? true : false;
             return (
-              <CatalogBox
+              <ProjectsBox
                 handleHoverOn={handleHoverOn}
                 handleHoverOff={handleHoverOff}
                 itemData={item}
@@ -127,4 +132,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default Projects;
