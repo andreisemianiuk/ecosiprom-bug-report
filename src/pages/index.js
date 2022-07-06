@@ -1,13 +1,14 @@
-import { graphql, Link } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
-import parse, { domToReact } from "html-react-parser";
 import * as React from "react";
 import styled from "styled-components";
-import { devices } from "../common/MediaQuery/media-query";
 import Layout from "../components/Layout";
-import { Logos } from "../components/Logos";
 import { Slideshow } from "../components/Slideshow";
-import ProductionDirections from "../components/directionsOfProduction/ProductionDirections";
+import ProductionDirections from "../components/directions-of-production/ProductionDirections";
+import ServicesList from "../components/services-list/ServicesList";
+import Catalog from "../components/catalog/Catalog";
+import EquipmentLogos from "../components/logos/equipment-logos/EquipmentLogos";
+import ImplementationCycle from "../components/implementation-cycle/ImplementationCycle";
+import Projects from "../components/projects/Projects";
+import AboutUs from "../components/about-us/AboutUs";
 
 const SliderContainer = styled.div`
   display: flex;
@@ -15,171 +16,21 @@ const SliderContainer = styled.div`
   align-items: center;
 `;
 
-let Services = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  /* font-family: Verdana, sans-serif; */
-  margin: 30px 0;
-  @media ${devices.mobileL} {
-    margin: 10px 5px;
-  }
-`;
-let ServiceItem = styled(Link)`
-  max-width: 350px;
-  color: #292734;
-  margin: 5px;
-  text-decoration: none;
-  padding: 20px 10px;
-
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0 14px 28px rgba(77, 99, 135, 0.25),
-      0 10px 10px rgba(0, 0, 0, 0.22);
-  }
-
-  @media ${devices.mobileL} {
-    max-width: 100%;
-    padding: 20px 0 0;
-    margin: 0;
-    &:hover {
-      transform: scale(1);
-    }
-  }
-`;
-let ServicesImage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-let ServicesTitle = styled.p`
-  text-transform: uppercase;
-  text-align: center;
-  color: #c42034;
-  /* font-size: 1.2em; */
-  font-weight: bolder;
-  padding: 10px 5px;
-`;
-let ServicesList = styled.ul`
-  font-size: 1em;
-  padding: 0 10px 0 30px;
-`;
-let ServicesListItem = styled.li`
-  /* font-size: 1.1em; */
-`;
-
-function HomePage({ data }) {
-  let { content } = data.allWpContentNode.edges[0].node;
-  let services = data.allWpMediaItem.edges.filter(node =>
-    /services/.test(node.node.title)
-  );
-
-  let options = {
-    replace: domNode => {
-      if (
-        domNode.attribs &&
-        domNode.attribs.class === "partners-icons-wrapper"
-      ) {
-        return <></>;
-      }
-      if (domNode.attribs && domNode.attribs.class === "services-container") {
-        return <Services>{domToReact(domNode.children, options)}</Services>;
-      }
-      if (domNode.attribs && domNode.attribs.class === "services-item") {
-        return (
-          <ServiceItem to="/services">
-            {domToReact(domNode.children, options)}
-          </ServiceItem>
-        );
-      }
-      if (domNode.attribs && domNode.attribs.class === "services-title") {
-        return (
-          <ServicesTitle>{domToReact(domNode.children, options)}</ServicesTitle>
-        );
-      }
-      if (
-        domNode.attribs &&
-        domNode.attribs.class === "services-image-wrapper"
-      ) {
-        let dataAttribute = new RegExp(`${domNode.next.attribs.data}`);
-
-        let image = services.find(
-          item =>
-            domNode.next.attribs.data && dataAttribute.test(item.node.title)
-        );
-        if (image) {
-          return (
-            <ServicesImage>
-              <GatsbyImage
-                image={image.node.localFile.childImageSharp.gatsbyImageData}
-                alt={image.node.title}
-              />
-            </ServicesImage>
-          );
-        } else {
-          return <div>image</div>;
-        }
-      }
-      if (domNode.attribs && domNode.attribs.class === "services-list") {
-        return (
-          <ServicesList>{domToReact(domNode.children, options)}</ServicesList>
-        );
-      }
-      if (domNode.attribs && domNode.attribs.class === "services-list-item") {
-        return (
-          <ServicesListItem>
-            {domToReact(domNode.children, options)}
-          </ServicesListItem>
-        );
-      }
-      if (
-        domNode.attribs &&
-        (domNode.attribs.class === "main-slideshow-images" ||
-          domNode.attribs.class === "directions")
-      ) {
-        return <></>;
-      }
-    },
-  };
-
+function HomePage() {
   return (
     <Layout>
       <SliderContainer>
         <Slideshow autoplay={true} />
       </SliderContainer>
       <ProductionDirections />
-      {parse(content, options)}
-      <Logos type={"компаниями"} />
-      <Logos type={"оборудованием"} />
+      <ServicesList />
+      <Catalog />
+      <EquipmentLogos />
+      <ImplementationCycle />
+      <Projects />
+      <AboutUs />
     </Layout>
   );
 }
 
 export default HomePage;
-
-export const pageQuery = graphql`
-  query {
-    allWpContentNode(filter: { slug: { eq: "main" } }) {
-      edges {
-        node {
-          ... on WpPage {
-            id
-            content
-          }
-        }
-      }
-    }
-    allWpMediaItem(filter: { title: { regex: "/services/" } }) {
-      edges {
-        node {
-          title
-          localFile {
-            childImageSharp {
-              gatsbyImageData
-            }
-          }
-        }
-      }
-    }
-  }
-`;
