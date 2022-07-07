@@ -64,7 +64,7 @@ const AboutUs = () => {
   `);
 
   let options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (
         domNode.attribs &&
         (domNode.attribs.class === "main-slideshow-images" ||
@@ -86,6 +86,25 @@ const AboutUs = () => {
     },
   };
 
+  const infoItems = [
+    {
+      label: "> 20 лет",
+      text: "Опыт работы наших сотрудников в промышленности РБ и странах СНГ",
+    },
+    {
+      label: "450+",
+      text: "Объектов спроектировано, укомплектовано и построено",
+    },
+    {
+      label: "100%",
+      text: "Довольных клиентов",
+    },
+    {
+      label: "24/7",
+      text: " Круглосуточная техническая поддержка и консультация",
+    },
+  ];
+
   return (
     <>
       <AboutUsCommon isMain={true} />
@@ -93,28 +112,12 @@ const AboutUs = () => {
         <InnerWrapper>
           {parse(content, options)}
           <InfoWrapper>
-            <InfoItem>
-              <InfoLabel>{"> 20 лет"}</InfoLabel>
-              <InfoText>
-                Опыт работы наших сотрудников в промышленности РБ и странах СНГ
-              </InfoText>
-            </InfoItem>
-            <InfoItem>
-              <InfoLabel>{"450+"}</InfoLabel>
-              <InfoText>
-                Объектов спроектировано, укомплектовано и построено
-              </InfoText>
-            </InfoItem>
-            <InfoItem>
-              <InfoLabel>{"100%"}</InfoLabel>
-              <InfoText>Довольных клиентов</InfoText>
-            </InfoItem>
-            <InfoItem>
-              <InfoLabel>{"24/7"}</InfoLabel>
-              <InfoText>
-                Круглосуточная техническая поддержка и консультация
-              </InfoText>
-            </InfoItem>
+            {infoItems.map((item, index) => (
+              <InfoItem key={index}>
+                <InfoLabel>{item.label}</InfoLabel>
+                <InfoText>{item.text}</InfoText>
+              </InfoItem>
+            ))}
           </InfoWrapper>
         </InnerWrapper>
       </Container>
