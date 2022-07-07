@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import PrimaryButton from "../buttons/PrimaryButton";
-import { Logo } from "./Logo";
+import { Logo } from "../../common/logo/Logo";
 import { Navbar } from "./Navbar";
 import { ContactHeader } from "./ContactHeader";
 
@@ -34,7 +34,7 @@ const Header = () => {
       <LogoNavbarContainer>
         <ContentWrapper>
           <Link to={"/"}>
-            <Logo />
+            <Logo color={"primary"} width={170} />
           </Link>
           <Navbar />
           <PrimaryButton text={"Оставить заявку"} />
