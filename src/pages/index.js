@@ -10,6 +10,7 @@ import ImplementationCycle from "../components/implementation-cycle/Implementati
 import Projects from "../components/projects/Projects";
 import AboutUs from "../components/about-us/AboutUs";
 import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
+import FeedbackForm from "../components/feedback-form/FeedbackForm";
 
 const SliderContainer = styled.div`
   display: flex;
@@ -31,6 +32,7 @@ function HomePage() {
       <Projects />
       <AboutUs />
       <PartnerLogos />
+      <FeedbackForm />
     </Layout>
   );
 }
