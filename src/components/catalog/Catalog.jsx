@@ -77,7 +77,7 @@ const Catalog = () => {
   let { content } = contentNodes[0];
 
   let options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (domNode.attribs && domNode.attribs.class === "catalog") {
         return <>{domToReact(domNode.children[1].children, options)}</>;
       }
@@ -88,6 +88,7 @@ const Catalog = () => {
           domNode.attribs.class === "equipment-logos" ||
           domNode.attribs.class === "implementation-cycle" ||
           domNode.attribs.class === "projects" ||
+          domNode.attribs.class === "partners-logos" ||
           domNode.attribs.class === "about-us" ||
           domNode.attribs.class === "partners-icons-wrapper")
       ) {
@@ -96,7 +97,7 @@ const Catalog = () => {
     },
   };
 
-  const handleHoverOn = index => {
+  const handleHoverOn = (index) => {
     setHoveredItemId(index);
   };
   const handleHoverOff = () => {
@@ -111,7 +112,7 @@ const Catalog = () => {
         </Header>
         <Info>{parse(content, options)}</Info>
         <List>
-          {nodes.map(item => {
+          {nodes.map((item) => {
             let hovered = hoveredItemId === item.id ? true : false;
             return (
               <CatalogBox

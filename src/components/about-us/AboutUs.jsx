@@ -74,6 +74,7 @@ const AboutUs = () => {
           domNode.attribs.class === "projects" ||
           domNode.attribs.class === "catalog" ||
           domNode.attribs.class === "about-us" ||
+          domNode.attribs.class === "partners-logos" ||
           domNode.attribs.class === "equipment-logos")
       ) {
         return <></>;

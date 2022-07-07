@@ -9,6 +9,7 @@ import EquipmentLogos from "../components/logos/equipment-logos/EquipmentLogos";
 import ImplementationCycle from "../components/implementation-cycle/ImplementationCycle";
 import Projects from "../components/projects/Projects";
 import AboutUs from "../components/about-us/AboutUs";
+import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
 
 const SliderContainer = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ function HomePage() {
       <ImplementationCycle />
       <Projects />
       <AboutUs />
+      <PartnerLogos />
     </Layout>
   );
 }

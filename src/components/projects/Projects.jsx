@@ -82,7 +82,7 @@ const Projects = () => {
   let { content } = contentNodes[0];
 
   let options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (domNode.attribs && domNode.attribs.class === "projects") {
         return <>{domToReact(domNode.children[1].children, options)}</>;
       }
@@ -91,6 +91,7 @@ const Projects = () => {
         (domNode.attribs.class === "main-slideshow-images" ||
           domNode.attribs.class === "services-container" ||
           domNode.attribs.class === "equipment-logos" ||
+          domNode.attribs.class === "partners-logos" ||
           domNode.attribs.class === "implementation-cycle" ||
           domNode.attribs.class === "catalog" ||
           domNode.attribs.class === "about-us" ||
@@ -101,7 +102,7 @@ const Projects = () => {
     },
   };
 
-  const handleHoverOn = index => {
+  const handleHoverOn = (index) => {
     setHoveredItemId(index);
   };
   const handleHoverOff = () => {
@@ -116,7 +117,7 @@ const Projects = () => {
         </Header>
         <Info>{parse(content, options)}</Info>
         <List>
-          {nodes.map(item => {
+          {nodes.map((item) => {
             let hovered = hoveredItemId === item.id ? true : false;
             return (
               <ProjectsBox
