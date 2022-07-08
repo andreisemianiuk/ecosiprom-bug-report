@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import Layout from "../components/Layout";
-import { Slideshow } from "../components/Slideshow";
+
 import ProductionDirections from "../components/directions-of-production/ProductionDirections";
 import ServicesList from "../components/services-list/ServicesList";
 import Catalog from "../components/catalog/Catalog";
@@ -11,6 +11,7 @@ import Projects from "../components/projects/Projects";
 import AboutUs from "../components/about-us/AboutUs";
 import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
+import { Slideshow } from "../components/slideshow-main-page/Slideshow";
 
 const SliderContainer = styled.div`
   display: flex;

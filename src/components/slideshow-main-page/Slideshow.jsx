@@ -7,10 +7,8 @@ import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
 import parse, { domToReact } from "html-react-parser";
-import LeftArrow from "../images/left-arrow.png";
-import RightArrow from "../images/right-arrow.png";
-// import { useMediaQueryHook } from "../common/MediaQuery/useMediaQueryHook";
-// import { sizes } from "../common/MediaQuery/media-query";
+import LeftArrow from "../../images/left-arrow.png";
+import RightArrow from "../../images/right-arrow.png";
 
 const ImageWrapper = styled.div`
   background: linear-gradient(
@@ -48,18 +46,30 @@ const BackgroundImageInfo = styled.p`
   font-weight: 500;
   margin-top: 21px;
 `;
+const ArrowWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+const ArrowInnerWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 1170px;
+  height: 100%;
+  margin: 0 auto;
+`;
 const ArrowContainer = styled.div`
   position: absolute;
   top: 350px;
-  left: ${v => v.left}px;
-  right: ${v => v.right}px;
+  left: ${(v) => v.left}px;
+  right: ${(v) => v.right}px;
   cursor: pointer;
 `;
 const ArrowImage = styled.img`
   width: 36px;
   height: 36px;
-  src: ${v => v.src};
-  alt: ${v => v.alt};
 `;
 
 export const Slideshow = () => {
@@ -82,7 +92,7 @@ export const Slideshow = () => {
   `);
 
   const options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (domNode.name === "p") {
         return (
           <BackgroundImageInfo>
@@ -93,34 +103,31 @@ export const Slideshow = () => {
     },
   };
 
-  // const device = useMediaQueryHook();
-  // const arrowsPadding = device => {
-  //   let deviceSize = parseInt(sizes[device]);
-  //   let widthWithoutContent = deviceSize - 1170;
-  //   let widthOfSingleSide = widthWithoutContent / 2;
-  //   let widthForPadding = widthOfSingleSide * 0.75;
-  //   let res = widthForPadding;
-  //   return widthForPadding;
-  // };
-  // const arrowsPad = arrowsPadding(device);
-
   const properties = {
     prevArrow: (
-      <ArrowContainer left={135}>
-        <ArrowImage src={LeftArrow} alt="left arrow" />
-      </ArrowContainer>
+      <ArrowWrapper>
+        <ArrowInnerWrapper>
+          <ArrowContainer left={-81}>
+            <ArrowImage src={LeftArrow} alt="left arrow" />
+          </ArrowContainer>
+        </ArrowInnerWrapper>
+      </ArrowWrapper>
     ),
     nextArrow: (
-      <ArrowContainer right={135}>
-        <ArrowImage src={RightArrow} alt="right arrow" />
-      </ArrowContainer>
+      <ArrowWrapper>
+        <ArrowInnerWrapper>
+          <ArrowContainer right={-81}>
+            <ArrowImage src={RightArrow} alt="right arrow" />
+          </ArrowContainer>
+        </ArrowInnerWrapper>
+      </ArrowWrapper>
     ),
   };
 
   return (
     <div style={{ width: "100%" }}>
       <Fade {...properties}>
-        {nodes.map(node => {
+        {nodes.map((node) => {
           let image = getImage(node.localFile.childImageSharp.gatsbyImageData);
           let bgImage = convertToBgImage(image);
           let label = node.title.replace("main-back-", "");
