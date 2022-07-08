@@ -31,9 +31,9 @@ const LogoWrapper = styled.div`
   position: relative;
 `;
 const ArrowContainer = styled.div`
-  position: absolute;
-  left: ${v => v.left}%;
-  right: ${v => v.right}%;
+  position: relative;
+  left: ${(v) => v.left}px;
+  right: ${(v) => v.right}px;
   cursor: pointer;
   transition: filter 0.4s ease-in-out;
   &:hover {
@@ -62,12 +62,12 @@ const EquipmentLogos = () => {
 
   const properties = {
     prevArrow: (
-      <ArrowContainer left={5}>
+      <ArrowContainer left={-65}>
         <LeftArrow />
       </ArrowContainer>
     ),
     nextArrow: (
-      <ArrowContainer right={5}>
+      <ArrowContainer right={-65}>
         <RightArrow />
       </ArrowContainer>
     ),
@@ -78,7 +78,7 @@ const EquipmentLogos = () => {
     <ContentWrapper>
       <Title>Мы работаем с оборудованием</Title>
       <Container {...properties}>
-        {nodes.map(node => {
+        {nodes.map((node) => {
           return (
             <LogoWrapper>
               <GatsbyImage
