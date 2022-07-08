@@ -87,6 +87,7 @@ const Location = styled.address`
   font-style: normal;
   line-height: 20px;
   margin-left: 8px;
+  font-feature-settings: "pnum" on, "lnum" on;
 `;
 const EmailWrapper = styled.div`
   display: flex;
