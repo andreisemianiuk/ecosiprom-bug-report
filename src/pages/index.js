@@ -26,7 +26,7 @@ function HomePage() {
         <Slideshow autoplay={true} />
       </SliderContainer>
       <ProductionDirections />
-      <ServicesList />
+      <ServicesList isMain />
       <Catalog />
       <EquipmentLogos />
       <ImplementationCycle />
