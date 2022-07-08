@@ -1,6 +1,6 @@
-import React from "react"
-import { graphql, Link, useStaticQuery } from "gatsby"
-import styled from "styled-components"
+import React from "react";
+import { graphql, Link, useStaticQuery } from "gatsby";
+import styled from "styled-components";
 // import { devices } from "../../common/MediaQuery/media-query"
 
 const Nav = styled.nav`
@@ -8,12 +8,12 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   height: 100%;
-`
+`;
 const NavList = styled.ul`
   display: flex;
   justify-content: space-between;
   margin: 0;
-`
+`;
 const NavItem = styled.li`
   font-size: 15px;
   font-weight: 600;
@@ -24,7 +24,7 @@ const NavItem = styled.li`
   & :first-child {
     padding-left: 0;
   }
-`
+`;
 const StyledNavLink = styled(Link)`
   position: relative;
   text-decoration: none;
@@ -41,7 +41,7 @@ const StyledNavLink = styled(Link)`
     height: 3px;
     border-radius: 1px;
     background-color: #0e6683;
-    bottom: -32px;
+    bottom: -33px;
     left: 0;
     transform-origin: right;
     transform: scaleX(0);
@@ -51,7 +51,7 @@ const StyledNavLink = styled(Link)`
     transform-origin: left;
     transform: scaleX(1);
   }
-`
+`;
 
 export const Navbar = () => {
   const {
@@ -70,7 +70,7 @@ export const Navbar = () => {
         }
       }
     }
-  `)
+  `);
   return (
     <Nav>
       <NavList>
@@ -88,5 +88,5 @@ export const Navbar = () => {
         ))}
       </NavList>
     </Nav>
-  )
-}
+  );
+};

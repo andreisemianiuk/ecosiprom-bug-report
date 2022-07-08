@@ -11,6 +11,7 @@ const HeaderContainer = styled.div`
   top: 0;
   width: 100%;
   z-index: 1000;
+  border-bottom: 1px solid #dbdbe1;
 `;
 const LogoNavbarContainer = styled.div`
   display: flex;
