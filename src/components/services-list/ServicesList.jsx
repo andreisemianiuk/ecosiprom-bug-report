@@ -9,8 +9,12 @@ const ContentWrapper = styled.section`
   margin: 0 auto;
   padding-bottom: 80px;
 `;
+const Navigation = styled.div`
+  padding: 50px 0 20px;
+`;
 const Title = styled.h1`
   line-height: 48px;
+  margin: 0;
   margin-bottom: 40px;
 `;
 const ItemsWrapper = styled.div`
@@ -27,7 +31,8 @@ const ButtonWrapper = styled.div`
   margin-top: 30px;
 `;
 
-const ServicesList = () => {
+const ServicesList = ({ isMain, children }) => {
+  // isMain should be true if we are on the main page
   const [hoveredItemId, setHoveredItemId] = React.useState(null);
   const {
     allWpMediaItem: { nodes },
@@ -51,7 +56,7 @@ const ServicesList = () => {
     }
   `);
 
-  const handleHoverOn = index => {
+  const handleHoverOn = (index) => {
     setHoveredItemId(index);
   };
   const handleHoverOff = () => {
@@ -60,9 +65,10 @@ const ServicesList = () => {
 
   return (
     <ContentWrapper>
+      {!isMain && <Navigation>{children}</Navigation>}
       <Title>Наши услуги</Title>
       <ItemsWrapper>
-        {nodes.map(service => {
+        {nodes.map((service) => {
           let hovered = hoveredItemId === service.id ? true : false;
           return (
             <ServiceBox
