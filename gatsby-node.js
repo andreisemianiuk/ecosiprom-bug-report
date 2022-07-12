@@ -1,13 +1,13 @@
-const path = require(`path`)
+const path = require(`path`);
 
-exports.createPages = async gatsbyUtilities => {
-  const productItems = await getProductItems(gatsbyUtilities)
-  const productList = await getProductList(gatsbyUtilities)
+exports.createPages = async (gatsbyUtilities) => {
+  const productItems = await getProductItems(gatsbyUtilities);
+  const productList = await getProductList(gatsbyUtilities);
 
   // const projectItems = await getProjectItems(gatsbyUtilities)
   // const projectList = await getProjectList(gatsbyUtilities)
 
-  const servicestList = await getServicesList(gatsbyUtilities)
+  const servicesList = await getServicesList(gatsbyUtilities);
 
   if (
     // ||
@@ -15,40 +15,55 @@ exports.createPages = async gatsbyUtilities => {
     // !projectList.length
     !productItems.length ||
     !productList.length ||
-    !servicestList.length
+    !servicesList.length
   ) {
-    return
+    return;
   }
-  await createProductItemPages({ productItems, gatsbyUtilities })
-  await createProductListPages({ productList, gatsbyUtilities })
-  await createServicesListPages({ servicestList, gatsbyUtilities })
+  await createProductItemPages({ productItems, gatsbyUtilities });
+  await createProductListPages({ productList, gatsbyUtilities });
+  await createServicesPages({ servicesList, gatsbyUtilities });
 
   // await createProjectItemPages({ productItems, gatsbyUtilities })
   // await createProjectListPages({ productList, gatsbyUtilities })
-}
+};
 const createProductItemPages = async ({ productItems, gatsbyUtilities }) => {
   Promise.all(
     productItems.map(({ node }) => {
       if (
-        node.slug !== 'electromagnitnye-klapany' ||
-        node.slug !== 'gorelki-rekumat' ||
-        node.slug !== 'izluchayushchie-truby'
+        node.slug !== "electromagnitnye-klapany" ||
+        node.slug !== "gorelki-rekumat" ||
+        node.slug !== "izluchayushchie-truby"
       ) {
         gatsbyUtilities.actions.createPage({
           path: node.uri,
           component: require.resolve(
-            './src/templates/modal-product-item-template.js'
+            "./src/templates/modal-product-item-template.js"
           ),
           context: {
             id: node.id,
             parentId: node.parentId,
           },
           // defer: true,
-        })
+        });
       }
     })
-  )
-}
+  );
+};
+const createServicesPages = async ({ servicesList, gatsbyUtilities }) => {
+  Promise.all(
+    servicesList.map(({ node }) => {
+      gatsbyUtilities.actions.createPage({
+        path: node.uri,
+        component: require.resolve("./src/templates/service-page-template.js"),
+        context: {
+          id: node.id,
+          parentId: node.parentId,
+        },
+        // defer: true,
+      });
+    })
+  );
+};
 // const createProjectItemPages = async ({ productItems, gatsbyUtilities }) => {
 //   Promise.all(
 //     productItems.map(({ node }) => {
@@ -77,31 +92,31 @@ const createProductListPages = async ({ productList, gatsbyUtilities }) => {
     productList.map(({ node }) => {
       gatsbyUtilities.actions.createPage({
         path: node.uri,
-        component: require.resolve('./src/templates/product-list-template.js'),
+        component: require.resolve("./src/templates/product-list-template.js"),
         context: {
           id: node.id,
           parentId: node.parentId,
         },
         // defer: true,
-      })
+      });
     })
-  )
-}
-const createServicesListPages = async ({ servicestList, gatsbyUtilities }) => {
-  Promise.all(
-    servicestList.map(({ node }) => {
-      gatsbyUtilities.actions.createPage({
-        path: node.uri,
-        component: require.resolve('./src/templates/services-list-template.js'),
-        context: {
-          id: node.id,
-          parentId: node.parentId,
-        },
-        // defer: true,
-      })
-    })
-  )
-}
+  );
+};
+// const createServicesListPages = async ({ servicesList, gatsbyUtilities }) => {
+//   Promise.all(
+//     servicestList.map(({ node }) => {
+//       gatsbyUtilities.actions.createPage({
+//         path: node.uri,
+//         component: require.resolve('./src/templates/services-list-template.js'),
+//         context: {
+//           id: node.id,
+//           parentId: node.parentId,
+//         },
+//         // defer: true,
+//       })
+//     })
+//   )
+// }
 // const createProjectListPages = async ({ productList, gatsbyUtilities }) => {
 //   Promise.all(
 //     productList.map(({ node }) => {
@@ -150,16 +165,16 @@ async function getProductItems({ graphql, reporter }) {
         }
       }
     }
-  `)
+  `);
 
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your product items`,
       graphqlResult.errors
-    )
-    return
+    );
+    return;
   }
-  return graphqlResult.data.allWpPage.edges
+  return graphqlResult.data.allWpPage.edges;
 }
 // async function getProjectItems({ graphql, reporter }) {
 //   const graphqlResult = await graphql(`
@@ -206,16 +221,16 @@ async function getProductList({ graphql, reporter }) {
         }
       }
     }
-  `)
+  `);
 
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your product items`,
       graphqlResult.errors
-    )
-    return
+    );
+    return;
   }
-  return graphqlResult.data.allWpPage.edges
+  return graphqlResult.data.allWpPage.edges;
 }
 // async function getProjectList({ graphql, reporter }) {
 //   const graphqlResult = await graphql(`
@@ -252,18 +267,19 @@ async function getServicesList({ graphql, reporter }) {
             slug
             uri
             parentId
+            content
           }
         }
       }
     }
-  `)
+  `);
 
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your services list items`,
       graphqlResult.errors
-    )
-    return
+    );
+    return;
   }
-  return graphqlResult.data.allWpPage.edges
+  return graphqlResult.data.allWpPage.edges;
 }
