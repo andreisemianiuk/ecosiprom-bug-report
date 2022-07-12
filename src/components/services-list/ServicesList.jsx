@@ -46,6 +46,7 @@ const ServicesList = ({ isMain, children }) => {
           id
           altText
           description
+          slug
           localFile {
             childImageSharp {
               gatsbyImageData

@@ -18,6 +18,7 @@ const Item = styled(Link)`
   border-radius: 2px;
   overflow: hidden;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.3s ease-in-out;
 `;
 const Content = styled.div`
@@ -73,21 +74,24 @@ const SubItem = styled.li`
 `;
 
 const ServiceBox = ({ handleHoverOn, handleHoverOff, hovered, service }) => {
-  const { id, altText, description, localFile } = service;
+  const { id, altText, description, slug, localFile } = service;
   let image = getImage(localFile.childImageSharp.gatsbyImageData);
   let bgImage = convertToBgImage(image);
 
   let options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (domNode.name === "li") {
         return <SubItem>{domToReact(domNode.children, options)}</SubItem>;
       }
     },
   };
 
+  const serviceUrl = `/services/${slug.replace("services-", "")}`;
+
   return (
     <Item
       key={id}
+      to={serviceUrl}
       onMouseOver={() => handleHoverOn(id)}
       onMouseLeave={handleHoverOff}
       hovered={hovered}>
