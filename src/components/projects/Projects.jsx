@@ -112,7 +112,7 @@ const Projects = () => {
     <Container>
       <ContentWrapper>
         <Header>
-          <Title>Каталог</Title>
+          <Title>Проекты</Title>
           <PrimaryButton text="Все проекты" />
         </Header>
         <Info>{parse(content, options)}</Info>
