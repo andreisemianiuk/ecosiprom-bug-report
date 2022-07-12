@@ -96,6 +96,38 @@ module.exports = {
             crumbLabel: "Наши услуги",
           },
           {
+            pathname: "/services",
+            crumbLabel: "Наши услуги",
+          },
+          {
+            pathname: "/services",
+            crumbLabel: "Наши услуги",
+          },
+          {
+            pathname: "/services/proekt",
+            crumbLabel: "Проектирование",
+          },
+          {
+            pathname: "/services/postavka",
+            crumbLabel: "Поставка оборудования",
+          },
+          {
+            pathname: "/services/montazh",
+            crumbLabel: "Строительно-монтажные работы",
+          },
+          {
+            pathname: "/services/pnr",
+            crumbLabel: "Пусконаладочные работы",
+          },
+          {
+            pathname: "/services/obsluzhivanie",
+            crumbLabel: "Сервисное и техническое обслуживание",
+          },
+          {
+            pathname: "/services/poverka",
+            crumbLabel: "Поверка и калибровка средств измерений",
+          },
+          {
             pathname: "/catalog",
             crumbLabel: "Каталог",
           },
