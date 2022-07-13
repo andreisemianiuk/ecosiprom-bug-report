@@ -34,7 +34,7 @@ const PhoneCircleIconContainer = styled.div`
 const ItemWrapper = styled.a`
   display: flex;
   align-items: center;
-  margin-left: 20px;
+  margin-left: 26px;
   &:first-child {
     margin-left: 0;
   }
@@ -42,7 +42,6 @@ const ItemWrapper = styled.a`
 const Item = styled.a`
   display: flex;
   align-items: center;
-  width: 147px;
   color: inherit;
   font-weight: 500;
   padding-left: 10px;
