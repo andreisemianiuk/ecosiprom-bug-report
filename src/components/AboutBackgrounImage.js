@@ -1,9 +1,9 @@
-import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import BackgroundImage from 'gatsby-background-image'
-import { getImage } from 'gatsby-plugin-image'
-import { convertToBgImage } from 'gbimage-bridge'
-import styled from 'styled-components'
+import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import BackgroundImage from "gatsby-background-image";
+import { getImage } from "gatsby-plugin-image";
+import { convertToBgImage } from "gbimage-bridge";
+import styled from "styled-components";
 
 function BackImage({ children }) {
   let {
@@ -11,7 +11,7 @@ function BackImage({ children }) {
   } = useStaticQuery(
     graphql`
       query {
-        allWpMediaItem(filter: { title: { regex: "/about-background-3/" } }) {
+        allWpMediaItem(filter: { title: { regex: "/about-main/" } }) {
           nodes {
             id
             title
@@ -25,28 +25,28 @@ function BackImage({ children }) {
         }
       }
     `
-  )
+  );
   // console.log('nodes >> ', nodes)
-  let currentImage = nodes[0]
+  let currentImage = nodes[0];
   // console.log('images >> ', images)
-  let image = getImage(currentImage.localFile.childImageSharp.gatsbyImageData)
-  let bgImage = convertToBgImage(image)
+  let image = getImage(currentImage.localFile.childImageSharp.gatsbyImageData);
+  let bgImage = convertToBgImage(image);
   return (
     <BackgroundImage
       // className={className}
-      Tag='section'
+      Tag="section"
       // Spread bgImage into BackgroundImage:
       {...bgImage}
       preserveStackingContext>
       {children}
     </BackgroundImage>
-  )
+  );
 }
 
 const AboutBackgroundImage = styled(BackImage)`
   background-position: center;
   background-size: cover;
   height: max-content;
-`
+`;
 
-export default AboutBackgroundImage
+export default AboutBackgroundImage;
