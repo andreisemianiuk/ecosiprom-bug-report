@@ -140,10 +140,7 @@ const ImplementationCycle = () => {
     allWpMediaItem: { nodes },
   } = useStaticQuery(graphql`
     query CycleQuery {
-      allWpMediaItem(
-        filter: { title: { regex: "/cycle/" } }
-        sort: { fields: caption }
-      ) {
+      allWpMediaItem(filter: { title: { regex: "/cycle/" } }) {
         nodes {
           id
           altText
@@ -161,7 +158,10 @@ const ImplementationCycle = () => {
 
   const [hoveredId, setHoveredId] = React.useState(nodes[0].id);
 
-  let currentItem = nodes.find(node => node.id === hoveredId) || nodes[0];
+  let currentItem =
+    nodes
+      .sort((a, b) => a.caption.match(/\d/) - b.caption.match(/\d/))
+      .find((node) => node.id === hoveredId) || nodes[0];
   let currentCountValue = currentItem.caption.replace(/\D/g, "");
   let currentInfoLabel = currentItem.altText;
   let currentInfoDescription = currentItem.description;
@@ -169,12 +169,12 @@ const ImplementationCycle = () => {
   let image = getImage(currentItem.localFile.childImageSharp.gatsbyImageData);
   let bgImage = convertToBgImage(image);
 
-  const handleHoverOn = index => {
+  const handleHoverOn = (index) => {
     setHoveredId(index);
   };
 
   const options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (domNode.name === "li") {
         return (
           <InfoDescriptionItem>
@@ -200,7 +200,7 @@ const ImplementationCycle = () => {
           </LeftBlock>
           <MenuWrapper>
             <Menu>
-              {nodes.map(node => {
+              {nodes.map((node) => {
                 const isHovered = hoveredId === node.id ? true : false;
                 return (
                   <MenuItemWrapper
