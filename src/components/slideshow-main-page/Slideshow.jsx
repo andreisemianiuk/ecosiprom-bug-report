@@ -9,6 +9,7 @@ import styled from "styled-components";
 import parse, { domToReact } from "html-react-parser";
 import LeftArrow from "../../images/left-arrow.png";
 import RightArrow from "../../images/right-arrow.png";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 const ImageWrapper = styled.div`
   background: linear-gradient(
@@ -22,29 +23,47 @@ const ImageWrapper = styled.div`
 `;
 const BackgroundImageContainer = styled(BackgroundImage)`
   width: 100%;
-  height: 500px;
+  height: 540px;
 `;
 const InnerContainer = styled.div`
   display: flex;
   justify-content: center;
+  height: 100%;
 `;
 const ContentWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   max-width: 1170px;
   color: #fff;
+  padding: 0 0 169px;
 `;
 const BackgroundImageLabel = styled.h1`
   max-width: 668px;
-  padding-top: 116px;
+  padding: 116px 0 21px;
+  margin: 0;
 `;
 const BackgroundImageInfo = styled.p`
   width: 584px;
   font-size: 16px;
   line-height: 24px;
   font-weight: 500;
-  margin-top: 21px;
+  margin: 0;
+`;
+const ButtonWrapper = styled.div`
+  position: absolute;
+  top: 425px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+`;
+const ButtonContentWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
 `;
 const ArrowWrapper = styled.div`
   position: absolute;
@@ -59,10 +78,11 @@ const ArrowInnerWrapper = styled.div`
   max-width: 1170px;
   height: 100%;
   margin: 0 auto;
+  z-index: 1000;
 `;
 const ArrowContainer = styled.div`
   position: absolute;
-  top: 350px;
+  top: 340px;
   left: ${(v) => v.left}px;
   right: ${(v) => v.right}px;
   cursor: pointer;
@@ -126,6 +146,16 @@ export const Slideshow = () => {
 
   return (
     <div style={{ width: "100%" }}>
+      <ButtonWrapper>
+        <ButtonContentWrapper>
+          <PrimaryButton
+            text={"Подробнее"}
+            width={138}
+            height={56}
+            pathTo={"/services"}
+          />
+        </ButtonContentWrapper>
+      </ButtonWrapper>
       <Fade {...properties}>
         {nodes.map((node) => {
           let image = getImage(node.localFile.childImageSharp.gatsbyImageData);
@@ -140,10 +170,10 @@ export const Slideshow = () => {
                 preserveStackingContext>
                 <InnerContainer>
                   <ContentWrapper>
-                    <BackgroundImageLabel>
-                      {label}
+                    <div>
+                      <BackgroundImageLabel>{label}</BackgroundImageLabel>
                       {node.caption && parse(node.caption, options)}
-                    </BackgroundImageLabel>
+                    </div>
                   </ContentWrapper>
                 </InnerContainer>
               </BackgroundImageContainer>
