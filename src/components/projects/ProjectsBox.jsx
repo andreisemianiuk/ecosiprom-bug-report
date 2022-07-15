@@ -62,22 +62,30 @@ const ImageBackgroundLayer = styled.div`
     hovered ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.2)"};
 `;
 
-const ProjectsBox = ({ handleHoverOn, handleHoverOff, hovered, itemData }) => {
+const ProjectsBox = ({ itemData }) => {
+  const [hovered, setHovered] = React.useState(false);
   const { id, altText, description, localFile } = itemData;
   let image = getImage(localFile.childImageSharp.gatsbyImageData);
 
   let options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (domNode.name === "p") {
         return <References>{domToReact(domNode.children, options)}</References>;
       }
     },
   };
 
+  const handleHoverOn = () => {
+    setHovered(true);
+  };
+  const handleHoverOff = () => {
+    setHovered(false);
+  };
+
   return (
     <Container
       key={id}
-      onMouseOver={() => handleHoverOn(id)}
+      onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
       hovered={hovered}>
       <ImageWrapper>

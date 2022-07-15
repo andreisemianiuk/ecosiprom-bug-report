@@ -41,7 +41,6 @@ const List = styled.div`
 `;
 
 const Projects = () => {
-  const [hoveredItemId, setHoveredItemId] = React.useState(null);
   const {
     allWpMediaItem: { nodes },
     allWpContentNode: { nodes: contentNodes },
@@ -102,12 +101,6 @@ const Projects = () => {
     },
   };
 
-  const handleHoverOn = (index) => {
-    setHoveredItemId(index);
-  };
-  const handleHoverOff = () => {
-    setHoveredItemId(null);
-  };
   return (
     <Container>
       <ContentWrapper>
@@ -118,15 +111,7 @@ const Projects = () => {
         <Info>{parse(content, options)}</Info>
         <List>
           {nodes.map((item) => {
-            let hovered = hoveredItemId === item.id ? true : false;
-            return (
-              <ProjectsBox
-                handleHoverOn={handleHoverOn}
-                handleHoverOff={handleHoverOff}
-                itemData={item}
-                hovered={hovered}
-              />
-            );
+            return <ProjectsBox itemData={item} />;
           })}
         </List>
       </ContentWrapper>
