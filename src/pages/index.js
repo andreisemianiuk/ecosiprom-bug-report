@@ -12,6 +12,7 @@ import AboutUs from "../components/about-us/AboutUs";
 import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
 import { Slideshow } from "../components/slideshow-main-page/Slideshow";
+import CatalogMain from "../components/catalog/CatalogMain";
 
 const SliderContainer = styled.div`
   display: flex;
@@ -25,9 +26,8 @@ function HomePage() {
       <SliderContainer>
         <Slideshow autoplay={true} />
       </SliderContainer>
-      <ProductionDirections />
       <ServicesList isMain />
-      <Catalog />
+      <CatalogMain />
       <EquipmentLogos />
       <ImplementationCycle />
       <Projects />

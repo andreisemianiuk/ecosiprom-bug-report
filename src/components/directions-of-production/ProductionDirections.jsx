@@ -74,8 +74,6 @@ const icons = [
 ];
 
 const ProductionDirections = () => {
-  console.log("🚀 ~rendered  ProductionDirections");
-
   return (
     <DirectionsList>
       {icons.map((item, index) => (
@@ -86,7 +84,6 @@ const ProductionDirections = () => {
 };
 
 const DirectionsItem = ({ index, item }) => {
-  console.log("🚀 ~rendered  DirectionsItem");
   const [hovered, setHovered] = React.useState(false);
 
   const handleHoverOn = () => {

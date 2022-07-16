@@ -10,6 +10,7 @@ import parse, { domToReact } from "html-react-parser";
 import LeftArrow from "../../images/left-arrow.png";
 import RightArrow from "../../images/right-arrow.png";
 import PrimaryButton from "../buttons/PrimaryButton";
+import ProductionDirections from "../directions-of-production/ProductionDirections";
 
 const ImageWrapper = styled.div`
   background: linear-gradient(
@@ -59,9 +60,22 @@ const ButtonWrapper = styled.div`
   height: 100%;
   z-index: 100;
 `;
+const DirectionsWrapper = styled.div`
+  position: absolute;
+  top: 660px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+`;
 const ButtonContentWrapper = styled.div`
   width: 100%;
   height: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+`;
+const DirectionsContentWrapper = styled.div`
+  width: 100%;
   max-width: 1170px;
   margin: 0 auto;
 `;
@@ -145,7 +159,7 @@ export const Slideshow = () => {
   };
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", marginBottom: "204px" }}>
       <ButtonWrapper>
         <ButtonContentWrapper>
           <PrimaryButton
@@ -156,6 +170,11 @@ export const Slideshow = () => {
           />
         </ButtonContentWrapper>
       </ButtonWrapper>
+      <DirectionsWrapper>
+        <DirectionsContentWrapper>
+          <ProductionDirections />
+        </DirectionsContentWrapper>
+      </DirectionsWrapper>
       <Fade {...properties}>
         {nodes.map((node) => {
           let image = getImage(node.localFile.childImageSharp.gatsbyImageData);

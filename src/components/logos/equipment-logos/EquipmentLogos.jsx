@@ -12,7 +12,7 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1170px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: ${({ padding }) => (padding ? padding : "80px 0")};
 `;
 const Title = styled.h1`
   margin: 0;
@@ -42,7 +42,7 @@ const ArrowContainer = styled.div`
   }
 `;
 
-const EquipmentLogos = () => {
+const EquipmentLogos = ({ padding }) => {
   const {
     allWpMediaItem: { nodes },
   } = useStaticQuery(graphql`
@@ -75,7 +75,7 @@ const EquipmentLogos = () => {
   };
 
   return (
-    <ContentWrapper>
+    <ContentWrapper padding={padding}>
       <Title>Мы работаем с оборудованием</Title>
       <Container {...properties}>
         {nodes.map((node) => {
