@@ -1,8 +1,5 @@
 import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import parse, { domToReact } from "html-react-parser";
 import styled from "styled-components";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import AskIcon from "../../assets/services/ask.svg";
 import AvtomatIcon from "../../assets/services/avtomat.svg";
 import ElectroIcon from "../../assets/services/electro.svg";
@@ -19,7 +16,7 @@ const DirectionsList = styled.ul`
   overflow: hidden;
   z-index: 100;
 `;
-const DirectionsItem = styled.li`
+const DirectionsItemStyled = styled.li`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -77,30 +74,39 @@ const icons = [
 ];
 
 const ProductionDirections = () => {
-  const [hovered, setHovered] = React.useState(null);
-
-  const handleHoverOn = index => {
-    setHovered(index);
-  };
-  const handleHoverOff = () => {
-    setHovered(null);
-  };
+  console.log("🚀 ~rendered  ProductionDirections");
 
   return (
     <DirectionsList>
       {icons.map((item, index) => (
-        <DirectionsItem
-          key={index}
-          onMouseOver={() => handleHoverOn(index)}
-          onMouseLeave={handleHoverOff}>
-          <StyledIcon hovered={hovered === index}>
-            <item.icon />
-          </StyledIcon>
-          <DirectionTitle>{item.title}</DirectionTitle>
-          <SecondaryButton title={"Подробнее"} hovered={hovered === index} />
-        </DirectionsItem>
+        <DirectionsItem index={index} item={item} />
       ))}
     </DirectionsList>
+  );
+};
+
+const DirectionsItem = ({ index, item }) => {
+  console.log("🚀 ~rendered  DirectionsItem");
+  const [hovered, setHovered] = React.useState(false);
+
+  const handleHoverOn = () => {
+    setHovered(true);
+  };
+  const handleHoverOff = () => {
+    setHovered(false);
+  };
+
+  return (
+    <DirectionsItemStyled
+      key={index}
+      onMouseOver={handleHoverOn}
+      onMouseLeave={handleHoverOff}>
+      <StyledIcon hovered={hovered}>
+        <item.icon />
+      </StyledIcon>
+      <DirectionTitle>{item.title}</DirectionTitle>
+      <SecondaryButton title={"Подробнее"} hovered={hovered} />
+    </DirectionsItemStyled>
   );
 };
 
