@@ -33,7 +33,7 @@ const ButtonWrapper = styled.div`
 
 const ServicesList = ({ isMain, children }) => {
   // isMain should be true if we are on the main page
-  const [hoveredItemId, setHoveredItemId] = React.useState(null);
+
   const {
     allWpMediaItem: { nodes },
   } = useStaticQuery(graphql`
@@ -57,28 +57,13 @@ const ServicesList = ({ isMain, children }) => {
     }
   `);
 
-  const handleHoverOn = (index) => {
-    setHoveredItemId(index);
-  };
-  const handleHoverOff = () => {
-    setHoveredItemId(null);
-  };
-
   return (
     <ContentWrapper>
       {!isMain && <Navigation>{children}</Navigation>}
       <Title>Наши услуги</Title>
       <ItemsWrapper>
         {nodes.map((service) => {
-          let hovered = hoveredItemId === service.id ? true : false;
-          return (
-            <ServiceBox
-              handleHoverOn={handleHoverOn}
-              handleHoverOff={handleHoverOff}
-              service={service}
-              hovered={hovered}
-            />
-          );
+          return <ServiceBox service={service} />;
         })}
       </ItemsWrapper>
       <ButtonWrapper>

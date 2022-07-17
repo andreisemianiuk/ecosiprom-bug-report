@@ -73,7 +73,8 @@ const SubItem = styled.li`
   }
 `;
 
-const ServiceBox = ({ handleHoverOn, handleHoverOff, hovered, service }) => {
+const ServiceBox = ({ service }) => {
+  const [hovered, setHovered] = React.useState(false);
   const { id, altText, description, slug, localFile } = service;
   let image = getImage(localFile.childImageSharp.gatsbyImageData);
   let bgImage = convertToBgImage(image);
@@ -88,11 +89,18 @@ const ServiceBox = ({ handleHoverOn, handleHoverOff, hovered, service }) => {
 
   const serviceUrl = `/services/${slug.replace("services-", "")}`;
 
+  const handleHoverOn = () => {
+    setHovered(true);
+  };
+  const handleHoverOff = () => {
+    setHovered(false);
+  };
+
   return (
     <Item
       key={id}
       to={serviceUrl}
-      onMouseOver={() => handleHoverOn(id)}
+      onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
       hovered={hovered}>
       <BackgroundImageContainer
