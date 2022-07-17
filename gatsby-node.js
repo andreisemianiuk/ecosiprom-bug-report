@@ -1,54 +1,17 @@
 const path = require(`path`);
 
 exports.createPages = async (gatsbyUtilities) => {
-  const productItems = await getProductItems(gatsbyUtilities);
-  const productList = await getProductList(gatsbyUtilities);
-
-  // const projectItems = await getProjectItems(gatsbyUtilities)
-  // const projectList = await getProjectList(gatsbyUtilities)
-
+  const catalogList = await getCatalogList(gatsbyUtilities);
   const servicesList = await getServicesList(gatsbyUtilities);
 
-  if (
-    // ||
-    // !projectItems.length ||
-    // !projectList.length
-    !productItems.length ||
-    !productList.length ||
-    !servicesList.length
-  ) {
+  if (!catalogList.length || !servicesList.length) {
     return;
   }
-  await createProductItemPages({ productItems, gatsbyUtilities });
-  await createProductListPages({ productList, gatsbyUtilities });
-  await createServicesPages({ servicesList, gatsbyUtilities });
 
-  // await createProjectItemPages({ productItems, gatsbyUtilities })
-  // await createProjectListPages({ productList, gatsbyUtilities })
+  await createServicesPages({ servicesList, gatsbyUtilities });
+  await createCatalogListPages({ catalogList, gatsbyUtilities });
 };
-const createProductItemPages = async ({ productItems, gatsbyUtilities }) => {
-  Promise.all(
-    productItems.map(({ node }) => {
-      if (
-        node.slug !== "electromagnitnye-klapany" ||
-        node.slug !== "gorelki-rekumat" ||
-        node.slug !== "izluchayushchie-truby"
-      ) {
-        gatsbyUtilities.actions.createPage({
-          path: node.uri,
-          component: require.resolve(
-            "./src/templates/modal-product-item-template.js"
-          ),
-          context: {
-            id: node.id,
-            parentId: node.parentId,
-          },
-          // defer: true,
-        });
-      }
-    })
-  );
-};
+
 const createServicesPages = async ({ servicesList, gatsbyUtilities }) => {
   Promise.all(
     servicesList.map(({ node }) => {
@@ -64,35 +27,13 @@ const createServicesPages = async ({ servicesList, gatsbyUtilities }) => {
     })
   );
 };
-// const createProjectItemPages = async ({ productItems, gatsbyUtilities }) => {
-//   Promise.all(
-//     productItems.map(({ node }) => {
-//       if (
-//         node.slug !== 'electromagnitnye-klapany' ||
-//         node.slug !== 'gorelki-rekumat' ||
-//         node.slug !== 'izluchayushchie-truby'
-//       ) {
-//         gatsbyUtilities.actions.createPage({
-//           path: node.uri,
-//           component: require.resolve(
-//             './src/templates/modal-product-item-template.js'
-//           ),
-//           context: {
-//             id: node.id,
-//             parentId: node.parentId,
-//           },
-//           // defer: true,
-//         })
-//       }
-//     })
-//   )
-// }
-const createProductListPages = async ({ productList, gatsbyUtilities }) => {
+
+const createCatalogListPages = async ({ catalogList, gatsbyUtilities }) => {
   Promise.all(
-    productList.map(({ node }) => {
+    catalogList.map(({ node }) => {
       gatsbyUtilities.actions.createPage({
         path: node.uri,
-        component: require.resolve("./src/templates/product-list-template.js"),
+        component: require.resolve("./src/templates/catalog-list-template.js"),
         context: {
           id: node.id,
           parentId: node.parentId,
@@ -102,112 +43,14 @@ const createProductListPages = async ({ productList, gatsbyUtilities }) => {
     })
   );
 };
-// const createServicesListPages = async ({ servicesList, gatsbyUtilities }) => {
-//   Promise.all(
-//     servicestList.map(({ node }) => {
-//       gatsbyUtilities.actions.createPage({
-//         path: node.uri,
-//         component: require.resolve('./src/templates/services-list-template.js'),
-//         context: {
-//           id: node.id,
-//           parentId: node.parentId,
-//         },
-//         // defer: true,
-//       })
-//     })
-//   )
-// }
-// const createProjectListPages = async ({ productList, gatsbyUtilities }) => {
-//   Promise.all(
-//     productList.map(({ node }) => {
-//       gatsbyUtilities.actions.createPage({
-//         path: node.uri,
-//         component: require.resolve('./src/templates/project-list-template.js'),
-//         context: {
-//           id: node.id,
-//           parentId: node.parentId,
-//         },
-//         // defer: true,
-//       })
-//     })
-//   )
-// }
-async function getProductItems({ graphql, reporter }) {
-  const graphqlResult = await graphql(`
-    {
-      allWpPage(
-        filter: {
-          wpParent: {
-            node: {
-              slug: {
-                in: [
-                  "armatura-privody-regulyatory"
-                  "electromagnitnye-klapany"
-                  "toplivnye-nasosy"
-                  "datchiki-rele-avtomaty-goreniya"
-                  "prom-gorelki"
-                  "gorelki-rekumat"
-                  "gorelki-regemat"
-                  "izluchayushchie-truby"
-                ]
-              }
-            }
-          }
-        }
-      ) {
-        edges {
-          node {
-            id
-            parentId
-            uri
-            slug
-          }
-        }
-      }
-    }
-  `);
 
-  if (graphqlResult.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your product items`,
-      graphqlResult.errors
-    );
-    return;
-  }
-  return graphqlResult.data.allWpPage.edges;
-}
-// async function getProjectItems({ graphql, reporter }) {
-//   const graphqlResult = await graphql(`
-//     {
-//       allWpPage(filter: { wpParent: { node: { slug: { in: [] } } } }) {
-//         edges {
-//           node {
-//             id
-//             parentId
-//             uri
-//             slug
-//           }
-//         }
-//       }
-//     }
-//   `)
-
-//   if (graphqlResult.errors) {
-//     reporter.panicOnBuild(
-//       `There was an error loading your project items`,
-//       graphqlResult.errors
-//     )
-//     return
-//   }
-//   return graphqlResult.data.allWpPage.edges
-// }
-async function getProductList({ graphql, reporter }) {
+async function getCatalogList({ graphql, reporter }) {
   const graphqlResult = await graphql(`
     {
       allWpPage(
         filter: {
           slug: {
-            regex: "/armatura-privody-regulyatory|electromagnitnye-klapany|toplivnye-nasosy|datchiki-rele-avtomaty-goreniya|prom-gorelki|gorelki-rekumat|gorelki-regemat|izluchayushchie-truby/"
+            regex: "/electromagnitnye-klapany|gorelki-rekumat|gorelki-regemat|izluchayushchie-truby/"
           }
         }
       ) {
@@ -225,38 +68,14 @@ async function getProductList({ graphql, reporter }) {
 
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
-      `There was an error loading your product items`,
+      `There was an error loading your catalog list`,
       graphqlResult.errors
     );
     return;
   }
   return graphqlResult.data.allWpPage.edges;
 }
-// async function getProjectList({ graphql, reporter }) {
-//   const graphqlResult = await graphql(`
-//     {
-//       allWpPage(filter: { slug: {} }) {
-//         edges {
-//           node {
-//             id
-//             parentId
-//             slug
-//             uri
-//           }
-//         }
-//       }
-//     }
-//   `)
 
-//   if (graphqlResult.errors) {
-//     reporter.panicOnBuild(
-//       `There was an error loading your project items`,
-//       graphqlResult.errors
-//     )
-//     return
-//   }
-//   return graphqlResult.data.allWpPage.edges
-// }
 async function getServicesList({ graphql, reporter }) {
   const graphqlResult = await graphql(`
     {

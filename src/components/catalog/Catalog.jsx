@@ -4,13 +4,13 @@ import styled from "styled-components";
 import PrimaryButton from "../buttons/PrimaryButton";
 import parse, { domToReact } from "html-react-parser";
 import CatalogBox from "./CatalogBox";
+import CatalogMenu from "./CatalogMenu";
 
 const Container = styled.section`
   display: flex;
   justify-content: center;
 
-  background-color: #f3f7f9;
-  padding: 80px 0;
+  background-color: #fff;
 `;
 const ContentWrapper = styled.div`
   display: flex;
@@ -25,6 +25,9 @@ const Header = styled.div`
   align-items: flex-start;
   width: 100%;
 `;
+const Navigation = styled.div`
+  padding: 50px 0 20px;
+`;
 const Title = styled.h1`
   margin: 0;
 `;
@@ -35,93 +38,39 @@ const Info = styled.div`
   margin-bottom: 40px;
 `;
 const List = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 20px;
 
   width: 100%;
 `;
 
-const Catalog = () => {
-  const [hoveredItemId, setHoveredItemId] = React.useState(null);
-  const {
-    allWpMediaItem: { nodes },
-    allWpContentNode: { nodes: contentNodes },
-  } = useStaticQuery(graphql`
-    query MainCatalogQuery {
-      allWpMediaItem(
-        filter: { title: { regex: "/catalog/" } }
-        sort: { fields: caption }
-      ) {
-        nodes {
-          id
-          altText
-          description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(placeholder: TRACED_SVG)
-            }
-          }
-        }
-      }
-      allWpContentNode(filter: { slug: { eq: "main" } }) {
-        nodes {
-          ... on WpPage {
-            id
-            content
-          }
-        }
-      }
-    }
-  `);
+const Catalog = ({ children, images, title, isMain }) => {
+  // isMain is used to determine if the catalog is being rendered on the main catalog page or not
+  const [currentItem, setCurrentItem] = React.useState([0, "privody"]);
 
-  let { content } = contentNodes[0];
+  const filteredImages = isMain
+    ? images.filter((node) => {
+        return node.title.includes(currentItem[1]);
+      })
+    : images;
 
-  let options = {
-    replace: (domNode) => {
-      if (domNode.attribs && domNode.attribs.class === "catalog") {
-        return <>{domToReact(domNode.children[1].children, options)}</>;
-      }
-      if (
-        domNode.attribs &&
-        (domNode.attribs.class === "main-slideshow-images" ||
-          domNode.attribs.class === "services-container" ||
-          domNode.attribs.class === "equipment-logos" ||
-          domNode.attribs.class === "implementation-cycle" ||
-          domNode.attribs.class === "projects" ||
-          domNode.attribs.class === "partners-logos" ||
-          domNode.attribs.class === "about-us" ||
-          domNode.attribs.class === "partners-icons-wrapper")
-      ) {
-        return <></>;
-      }
-    },
-  };
-
-  const handleHoverOn = (index) => {
-    setHoveredItemId(index);
-  };
-  const handleHoverOff = () => {
-    setHoveredItemId(null);
-  };
   return (
     <Container>
       <ContentWrapper>
         <Header>
-          <Title>Каталог</Title>
-          <PrimaryButton text="Все оборудование" />
+          <div>
+            <Navigation>{children}</Navigation>
+            <Title>{title}</Title>
+          </div>
         </Header>
-        <Info>{parse(content, options)}</Info>
+        <CatalogMenu
+          currentItem={currentItem}
+          setCurrentItem={setCurrentItem}
+        />
         <List>
-          {nodes.map((item) => {
-            let hovered = hoveredItemId === item.id ? true : false;
-            return (
-              <CatalogBox
-                handleHoverOn={handleHoverOn}
-                handleHoverOff={handleHoverOff}
-                itemData={item}
-                hovered={hovered}
-              />
-            );
+          {filteredImages.map((item) => {
+            return <CatalogBox itemData={item} />;
           })}
         </List>
       </ContentWrapper>

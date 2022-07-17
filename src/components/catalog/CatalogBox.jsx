@@ -11,7 +11,7 @@ const Container = styled(Link)`
 
   width: 278px;
   height: 400px;
-
+  text-decoration: none;
   background-color: #fff;
   border: 1px solid #dbdbe1;
   box-shadow: ${({ hovered }) =>
@@ -51,13 +51,14 @@ const Image = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px;
 `;
 
-const CatalogBox = ({ handleHoverOn, handleHoverOff, hovered, itemData }) => {
+const CatalogBox = ({ itemData }) => {
   const { id, altText, description, localFile } = itemData;
-
+  const [hovered, setHovered] = React.useState(false);
   let options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (domNode.name === "p") {
         return <References>{domToReact(domNode.children, options)}</References>;
       }
@@ -66,11 +67,17 @@ const CatalogBox = ({ handleHoverOn, handleHoverOff, hovered, itemData }) => {
       }
     },
   };
-
+  const handleHoverOn = () => {
+    setHovered(true);
+  };
+  const handleHoverOff = () => {
+    setHovered(false);
+  };
   return (
     <Container
       key={id}
-      onMouseOver={() => handleHoverOn(id)}
+      to={`/catalog`}
+      onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
       hovered={hovered}>
       <Image>
