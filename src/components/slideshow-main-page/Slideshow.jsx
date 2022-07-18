@@ -60,19 +60,18 @@ const ButtonWrapper = styled.div`
   height: 100%;
   z-index: 100;
 `;
-const DirectionsWrapper = styled.div`
-  position: absolute;
-  top: 660px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-`;
 const ButtonContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   max-width: 1170px;
   margin: 0 auto;
+`;
+const DirectionsWrapper = styled.div`
+  position: absolute;
+  top: 660px;
+  left: 0;
+  width: 100%;
+  z-index: 100;
 `;
 const DirectionsContentWrapper = styled.div`
   width: 100%;
