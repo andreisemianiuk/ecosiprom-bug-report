@@ -50,7 +50,7 @@ async function getCatalogList({ graphql, reporter }) {
       allWpPage(
         filter: {
           slug: {
-            regex: "/electromagnitnye-klapany|gorelki-rekumat|gorelki-regemat|izluchayushchie-truby/"
+            regex: "/elektromagnitnye-klapany|gorelki-rekumat|gorelki-regemat|izluchayushchie-truby/"
           }
         }
       ) {

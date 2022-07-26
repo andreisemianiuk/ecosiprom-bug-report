@@ -1,8 +1,5 @@
 import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
-import PrimaryButton from "../buttons/PrimaryButton";
-import parse, { domToReact } from "html-react-parser";
 import CatalogBox from "./CatalogBox";
 import CatalogMenu from "./CatalogMenu";
 
@@ -30,22 +27,18 @@ const Navigation = styled.div`
 `;
 const Title = styled.h1`
   margin: 0;
-`;
-const Info = styled.div`
-  color: #4a5763;
-  line-height: 27px;
-  margin-top: 24px;
   margin-bottom: 40px;
 `;
 const List = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 19px;
   grid-row-gap: 20px;
 
   width: 100%;
 `;
 
-const Catalog = ({ children, images, title, isMain }) => {
+const Catalog = ({ children, images, title, isMain, location }) => {
   // isMain is used to determine if the catalog is being rendered on the main catalog page or not
   const [currentItem, setCurrentItem] = React.useState([0, "privody"]);
 
@@ -64,13 +57,15 @@ const Catalog = ({ children, images, title, isMain }) => {
             <Title>{title}</Title>
           </div>
         </Header>
-        <CatalogMenu
-          currentItem={currentItem}
-          setCurrentItem={setCurrentItem}
-        />
+        {isMain && (
+          <CatalogMenu
+            currentItem={currentItem}
+            setCurrentItem={setCurrentItem}
+          />
+        )}
         <List>
           {filteredImages.map((item) => {
-            return <CatalogBox itemData={item} />;
+            return <CatalogBox itemData={item} location={location} />;
           })}
         </List>
       </ContentWrapper>

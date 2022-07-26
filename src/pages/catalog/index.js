@@ -27,11 +27,11 @@ const CatalogPage = ({
     wpPage: { content },
   },
   pageContext,
+  location,
 }) => {
   const {
     breadcrumb: { crumbs },
   } = pageContext;
-  console.log("🚀 ~ file: index.js ~ line 34 ~ pageContext", pageContext);
 
   const options = {
     replace: (domNode) => {
@@ -48,7 +48,7 @@ const CatalogPage = ({
 
   return (
     <Layout>
-      <Catalog isMain images={nodes} title={title}>
+      <Catalog isMain images={nodes} title={title} location={location}>
         <Breadcrumb crumbs={crumbs} color={"#4a5763"} />
       </Catalog>
       <EquipmentLogos padding={"80px 0 60px"} />

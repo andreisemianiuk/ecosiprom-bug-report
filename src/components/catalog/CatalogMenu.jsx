@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  margin: 40px 0;
+  margin-bottom: 40px;
 `;
 const Item = styled.div`
   width: 234px;

@@ -54,8 +54,8 @@ const Image = styled.div`
   padding: 15px;
 `;
 
-const CatalogBox = ({ itemData }) => {
-  const { id, altText, description, localFile } = itemData;
+const CatalogBox = ({ itemData, location: { pathname } }) => {
+  const { id, title, altText, description, localFile } = itemData;
   const [hovered, setHovered] = React.useState(false);
   let options = {
     replace: (domNode) => {
@@ -73,10 +73,15 @@ const CatalogBox = ({ itemData }) => {
   const handleHoverOff = () => {
     setHovered(false);
   };
+
+  const path = title?.toLowerCase().replace(/^\w*-/g, "") || "";
+
   return (
     <Container
       key={id}
-      to={`/catalog`}
+      to={`${
+        pathname[pathname.length - 1] === "/" ? pathname.slice(0, -1) : pathname
+      }/${path}`}
       onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
       hovered={hovered}>
