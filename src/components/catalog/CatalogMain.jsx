@@ -41,7 +41,7 @@ const List = styled.div`
   width: 100%;
 `;
 
-const CatalogMain = () => {
+const CatalogMain = ({ location }) => {
   const [hoveredItemId, setHoveredItemId] = React.useState(null);
   const {
     allWpMediaItem: { nodes },
@@ -103,6 +103,7 @@ const CatalogMain = () => {
   const handleHoverOff = () => {
     setHoveredItemId(null);
   };
+  //const location = { pathname: "/catalog/" };
   return (
     <Container>
       <ContentWrapper>
@@ -119,6 +120,7 @@ const CatalogMain = () => {
                 handleHoverOn={handleHoverOn}
                 handleHoverOff={handleHoverOff}
                 itemData={item}
+                location={location}
                 hovered={hovered}
               />
             );

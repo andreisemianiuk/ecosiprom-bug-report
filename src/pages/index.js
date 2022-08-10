@@ -20,14 +20,14 @@ const SliderContainer = styled.div`
   align-items: center;
 `;
 
-function HomePage() {
+function HomePage({ location }) {
   return (
     <Layout>
       <SliderContainer>
         <Slideshow autoplay={true} />
       </SliderContainer>
       <ServicesList isMain />
-      <CatalogMain />
+      <CatalogMain location={location} />
       <EquipmentLogos />
       <ImplementationCycle />
       <Projects />

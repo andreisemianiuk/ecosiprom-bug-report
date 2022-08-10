@@ -2,14 +2,16 @@ const path = require(`path`);
 
 exports.createPages = async (gatsbyUtilities) => {
   const catalogList = await getCatalogList(gatsbyUtilities);
+  const catalogPages = await getCatalogPages(gatsbyUtilities);
   const servicesList = await getServicesList(gatsbyUtilities);
 
-  if (!catalogList.length || !servicesList.length) {
+  if (!catalogList.length || !servicesList.length || !catalogPages.length) {
     return;
   }
 
   await createServicesPages({ servicesList, gatsbyUtilities });
   await createCatalogListPages({ catalogList, gatsbyUtilities });
+  await createCatalogPages({ catalogPages, gatsbyUtilities });
 };
 
 const createServicesPages = async ({ servicesList, gatsbyUtilities }) => {
@@ -34,6 +36,22 @@ const createCatalogListPages = async ({ catalogList, gatsbyUtilities }) => {
       gatsbyUtilities.actions.createPage({
         path: node.uri,
         component: require.resolve("./src/templates/catalog-list-template.js"),
+        context: {
+          id: node.id,
+          parentId: node.parentId,
+        },
+        // defer: true,
+      });
+    })
+  );
+};
+
+const createCatalogPages = async ({ catalogPages, gatsbyUtilities }) => {
+  Promise.all(
+    catalogPages.map(({ node }) => {
+      gatsbyUtilities.actions.createPage({
+        path: node.uri,
+        component: require.resolve("./src/templates/catalog-item-template.js"),
         context: {
           id: node.id,
           parentId: node.parentId,
@@ -69,6 +87,32 @@ async function getCatalogList({ graphql, reporter }) {
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your catalog list`,
+      graphqlResult.errors
+    );
+    return;
+  }
+  return graphqlResult.data.allWpPage.edges;
+}
+
+async function getCatalogPages({ graphql, reporter }) {
+  const graphqlResult = await graphql(`
+    {
+      allWpPage(filter: { slug: { regex: "/regulyatory-davleniya-gaza/" } }) {
+        edges {
+          node {
+            id
+            parentId
+            slug
+            uri
+          }
+        }
+      }
+    }
+  `);
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your catalog page`,
       graphqlResult.errors
     );
     return;

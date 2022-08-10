@@ -29,6 +29,7 @@ const CatalogPage = ({
   pageContext,
   location,
 }) => {
+  //console.log("🚀 ~ file: index.js ~ line 32 ~ location", location);
   const {
     breadcrumb: { crumbs },
   } = pageContext;
