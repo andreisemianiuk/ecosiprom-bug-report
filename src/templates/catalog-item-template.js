@@ -29,24 +29,18 @@ const GatsbyImageWrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 20px;
+  padding-left: 0;
 `;
 const ContainerWithShortDescriptionAndImage = styled.div`
   display: flex;
   justify-content: space-between;
-  /*height: 800px;*/
-
-  /*align-items: center;*/
-  /*width: 200px;*/
   padding: 50px 0 70px 0;
 `;
 const LeftBlock = styled.div`
   display: flex;
   flex-direction: column;
-  /*justify-content: space-between;*/
-  /*align-items: center;*/
   width: 100%;
-  max-width: 575px;
-  /*padding: 50px 0 70px 0;*/
+  min-width: 720px;
 `;
 const Title = styled.h1`
   margin: 0;
@@ -56,8 +50,10 @@ const Navigation = styled.div`
   padding: 0 0 20px;
 `;
 const ShortDescription = styled.div`
+  max-width: 575px;
   color: #4a5763;
   margin-bottom: 50px;
+  font-feature-settings: "pnum" on, "lnum" on;
 `;
 const Menubar = styled.div`
   background-color: #f3f7f9;
@@ -71,7 +67,6 @@ const MenubarInnerContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 0 auto;
-  /*padding-bottom: 80px;*/
 `;
 const DescriptionTitle = styled.h2`
   margin: 0;
@@ -127,6 +122,21 @@ const Th = styled.th`
   border: 1px solid #dbdbe1;
 `;
 
+const menuItems = [
+  {
+    title: "Описание",
+    value: 0,
+  },
+  {
+    title: "Характеристики",
+    value: 1,
+  },
+  {
+    title: "Документы",
+    value: 2,
+  },
+];
+
 const CustomizedPrimaryButton = ({ text, checked }) => {
   return (
     <PrimaryButton
@@ -140,35 +150,14 @@ const CustomizedPrimaryButton = ({ text, checked }) => {
   );
 };
 
-const MenuBar = () => {
-  const [checkedIndex, setCheckedIndex] = React.useState(0);
-
-  const handleChange = (index) => {
-    setCheckedIndex(index);
-  };
-
-  const menuItems = [
-    {
-      text: "Описание",
-      value: 0,
-    },
-    {
-      text: "Характеристики",
-      value: 1,
-    },
-    {
-      text: "Документы",
-      value: 2,
-    },
-  ];
-
+const MenuBar = ({ checkedIndex, handleChangeIndex }) => {
   return (
     <Menubar>
       <MenubarInnerContainer>
-        {menuItems.map(({ text }, index) => (
-          <div onClick={() => handleChange(index)}>
+        {menuItems.map(({ title }, index) => (
+          <div onClick={() => handleChangeIndex(index)}>
             <CustomizedPrimaryButton
-              text={text}
+              text={title}
               checked={checkedIndex === index}
             />
           </div>
@@ -178,16 +167,35 @@ const MenuBar = () => {
   );
 };
 
+const DescriptionContent = ({ content, options }) => {
+  const [checkedIndex, setCheckedIndex] = React.useState(0);
+  return (
+    <>
+      <MenuBar
+        checkedIndex={checkedIndex}
+        handleChangeIndex={setCheckedIndex}
+      />
+      <MenubarInnerContainer>
+        <DescriptionContainer>
+          <DescriptionTitle>{menuItems[checkedIndex].title}</DescriptionTitle>
+          {parse(content, options)}
+        </DescriptionContainer>
+      </MenubarInnerContainer>
+    </>
+  );
+};
+
 const CatalogItemTemplate = ({
   data: {
     wpPage: { content },
-    //allWpMediaItem: { localFile, altText },
-    wpMediaItem: { localFile, altText, title, description },
+    //wpMediaItem: { localFile, altText, title, description },
+    allWpMediaItem: { nodes },
   },
+
   pageContext,
-  location,
 }) => {
-  let descriptionText = description.replace(/<p>/g, "").replace(/<\/p>/g, "");
+  const { localFile, altText, description } = nodes[0];
+  let descriptionText = description.replace(/<p>|<\/p>|<br \/>/g, "");
 
   const options = {
     replace: (domNode) => {
@@ -258,7 +266,7 @@ const CatalogItemTemplate = ({
               <Navigation>
                 <Breadcrumb crumbs={crumbs} color={"#4a5763"} />
               </Navigation>
-              <Title>{title}</Title>
+              <Title>{altText}</Title>
               <ShortDescription>{descriptionText}</ShortDescription>
               <PrimaryButton text={"Сделать заказ"} width={157} height={56} />
             </LeftBlock>
@@ -268,13 +276,7 @@ const CatalogItemTemplate = ({
           </ContainerWithShortDescriptionAndImage>
         </ContentWrapper>
       </InnerContainer>
-      <MenuBar />
-      <MenubarInnerContainer>
-        <DescriptionContainer>
-          <DescriptionTitle>Описание</DescriptionTitle>
-          {parse(content, options)}
-        </DescriptionContainer>
-      </MenubarInnerContainer>
+      <DescriptionContent content={content} options={options} />
       <FeedbackForm />
     </Layout>
   );
@@ -283,17 +285,21 @@ const CatalogItemTemplate = ({
 export default CatalogItemTemplate;
 
 export const pageQuery = graphql`
-  query CatalogItemTemplateQuery($id: String!) {
+  query CatalogItemTemplateQuery($id: String!, $parentId: ID!, $slug: String!) {
     wpPage(id: { eq: $id }) {
       content
     }
-    wpMediaItem(wpParent: { node: { id: { eq: $id } } }) {
-      title
-      altText
-      description
-      localFile {
-        childImageSharp {
-          gatsbyImageData
+    allWpMediaItem(
+      filter: { parentId: { eq: $parentId }, slug: { regex: $slug } }
+    ) {
+      nodes {
+        title
+        altText
+        description
+        localFile {
+          childImageSharp {
+            gatsbyImageData(placeholder: TRACED_SVG, height: 300)
+          }
         }
       }
     }

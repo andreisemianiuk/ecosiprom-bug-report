@@ -55,6 +55,7 @@ const createCatalogPages = async ({ catalogPages, gatsbyUtilities }) => {
         context: {
           id: node.id,
           parentId: node.parentId,
+          slug: `/${node.slug}/`,
         },
         // defer: true,
       });
@@ -65,13 +66,7 @@ const createCatalogPages = async ({ catalogPages, gatsbyUtilities }) => {
 async function getCatalogList({ graphql, reporter }) {
   const graphqlResult = await graphql(`
     {
-      allWpPage(
-        filter: {
-          slug: {
-            regex: "/elektromagnitnye-klapany|gorelki-rekumat|gorelki-regemat|izluchayushchie-truby/"
-          }
-        }
-      ) {
+      allWpPage(filter: { slug: { regex: "/elektromagnitnye-klapany/" } }) {
         edges {
           node {
             id
@@ -97,7 +92,13 @@ async function getCatalogList({ graphql, reporter }) {
 async function getCatalogPages({ graphql, reporter }) {
   const graphqlResult = await graphql(`
     {
-      allWpPage(filter: { slug: { regex: "/regulyatory-davleniya-gaza/" } }) {
+      allWpPage(
+        filter: {
+          slug: {
+            regex: "/regulyatory-davleniya-gaza|gazovye-filtry|regulyator-rashoda-lmv|krany-tipa-batterflyaj|elektromagnitnye-privody|servomotory|psk|vmr|vra-vla-vta|evrmnc-evrmna|vmrna|vmm|vmh|vm|vd|vu|cfk|psg|pcs/"
+          }
+        }
+      ) {
         edges {
           node {
             id

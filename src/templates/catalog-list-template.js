@@ -71,7 +71,7 @@ export const pageQuery = graphql`
         description
         localFile {
           childImageSharp {
-            gatsbyImageData(placeholder: TRACED_SVG, height: 167)
+            gatsbyImageData(placeholder: TRACED_SVG, height: 150)
           }
         }
       }

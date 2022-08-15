@@ -11,6 +11,9 @@ const List = styled.ol`
 const Item = styled.li`
   margin: 0;
   margin-right: 28px;
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 const BreadcrumbLink = styled(Link)`
   font-size: 14px;

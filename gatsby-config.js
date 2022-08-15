@@ -132,6 +132,86 @@ module.exports = {
             crumbLabel: "Каталог",
           },
           {
+            pathname: "/catalog/regulyatory-davleniya-gaza",
+            crumbLabel: "Регуляторы давления газа",
+          },
+          {
+            pathname: "/catalog/gazovye-filtry",
+            crumbLabel: "Газовые фильтры",
+          },
+          {
+            pathname: "/catalog/regulyator-rashoda-lmv",
+            crumbLabel: "Регулятор расхода LMV",
+          },
+          {
+            pathname: "/catalog/krany-tipa-batterflyaj",
+            crumbLabel: 'Краны типа "баттерфляй"',
+          },
+          {
+            pathname: "/catalog/elektromagnitnye-privody",
+            crumbLabel: "Электромагнитные приводы",
+          },
+          {
+            pathname: "/catalog/elektromagnitnye-klapany",
+            crumbLabel: "Электромагнитные клапаны",
+          },
+          {
+            pathname: "/catalog/servomotory",
+            crumbLabel: "Сервомоторы",
+          },
+          {
+            pathname: "/catalog/psk",
+            crumbLabel: "Предохранительно-сбросные клапаны",
+          },
+          {
+            pathname: "/catalog/vu",
+            crumbLabel: "Предохранительно-сбросные клапаны",
+          },
+          {
+            pathname: "/catalog/vm",
+            crumbLabel: "Предохранительно-сбросные клапаны",
+          },
+          {
+            pathname: "/catalog/vd",
+            crumbLabel: "Предохранительно-сбросные клапаны",
+          },
+          {
+            pathname: "/catalog/cfk",
+            crumbLabel: "Автоматы горения CFK",
+          },
+          {
+            pathname: "/catalog/psg",
+            crumbLabel: "Датчики-реле PSG",
+          },
+          {
+            pathname: "/catalog/pcs",
+            crumbLabel: "Механическое реле PCS",
+          },
+          {
+            pathname: "/catalog/elektromagnitnye-klapany/vmr",
+            crumbLabel: "Газовые клапаны VMR и VML",
+          },
+          {
+            pathname: "/catalog/elektromagnitnye-klapany/vra-vla-vta",
+            crumbLabel: "Клапаны регулирующие VRA, VLA и VTA",
+          },
+          {
+            pathname: "/catalog/elektromagnitnye-klapany/evrmnc-evrmna",
+            crumbLabel: "Клапаны с ручным взводом EVRMNC и EVRMNA",
+          },
+          {
+            pathname: "/catalog/elektromagnitnye-klapany/vmrna",
+            crumbLabel: "Газовые клапаны VMRNA",
+          },
+          {
+            pathname: "/catalog/elektromagnitnye-klapany/vmm",
+            crumbLabel: "Блоки газовых клапанов VMM",
+          },
+          {
+            pathname: "/catalog/elektromagnitnye-klapany/vmh",
+            crumbLabel: "Газовые отсечные клапаны VMH",
+          },
+          {
             pathname: "/projects",
             crumbLabel: "Проекты",
           },

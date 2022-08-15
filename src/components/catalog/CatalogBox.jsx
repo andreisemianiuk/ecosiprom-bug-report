@@ -1,7 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
-import parse, { domToReact } from "html-react-parser";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { GatsbyImage } from "gatsby-plugin-image";
 
@@ -43,7 +42,9 @@ const References = styled.div`
   color: #4a5763;
   line-height: 22px;
   margin-bottom: 10px;
-  padding-right: 10px;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  /*text-overflow: ellipsis;*/
 `;
 const Image = styled.div`
   width: 100%;
@@ -57,16 +58,9 @@ const Image = styled.div`
 const CatalogBox = ({ itemData, location: { pathname } }) => {
   const { id, title, altText, description, localFile } = itemData;
   const [hovered, setHovered] = React.useState(false);
-  let options = {
-    replace: (domNode) => {
-      if (domNode.name === "p") {
-        return <References>{domToReact(domNode.children, options)}</References>;
-      }
-      if (domNode.name === "br") {
-        return <></>;
-      }
-    },
-  };
+
+  let descriptionText = description?.replace(/<p>|<\/p>|<br \/>/g, "") || "";
+
   const handleHoverOn = () => {
     setHovered(true);
   };
@@ -93,7 +87,7 @@ const CatalogBox = ({ itemData, location: { pathname } }) => {
       </Image>
       <InfoBox>
         <Title hovered={hovered}>{altText}</Title>
-        {parse(description || "", options)}
+        <References>{descriptionText}</References>
         <SecondaryButton title="Подробнее" hovered={hovered} />
       </InfoBox>
     </Container>
