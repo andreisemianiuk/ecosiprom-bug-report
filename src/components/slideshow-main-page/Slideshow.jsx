@@ -171,7 +171,7 @@ export const Slideshow = () => {
       </ButtonWrapper>
       <DirectionsWrapper>
         <DirectionsContentWrapper>
-          <ProductionDirections />
+          <ProductionDirections bottomMargin={130} isMain />
         </DirectionsContentWrapper>
       </DirectionsWrapper>
       <Fade {...properties}>

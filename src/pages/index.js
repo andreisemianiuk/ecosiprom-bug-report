@@ -13,6 +13,7 @@ import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
 import { Slideshow } from "../components/slideshow-main-page/Slideshow";
 import CatalogMain from "../components/catalog/CatalogMain";
+import ProjectsMain from "../components/projects/ProjectsMain";
 
 const SliderContainer = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ function HomePage({ location }) {
       <CatalogMain location={location} />
       <EquipmentLogos />
       <ImplementationCycle />
-      <Projects />
+      <ProjectsMain location={location} />
       <AboutUs />
       <PartnerLogos />
       <FeedbackForm />

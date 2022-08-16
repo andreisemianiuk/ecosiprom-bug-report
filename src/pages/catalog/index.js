@@ -1,14 +1,12 @@
-import * as React from "react";
 import { graphql } from "gatsby";
 import parse, { domToReact } from "html-react-parser";
+import * as React from "react";
 import styled from "styled-components";
-import { devices } from "../../common/MediaQuery/media-query";
-import { CatalogLayout } from "../../components/CatalogLayout";
-import Layout from "../../components/Layout";
 import { Breadcrumb } from "../../common/breadCrumb/Breadcrumb";
 import Catalog from "../../components/catalog/Catalog";
-import EquipmentLogos from "../../components/logos/equipment-logos/EquipmentLogos";
 import FeedbackForm from "../../components/feedback-form/FeedbackForm";
+import Layout from "../../components/Layout";
+import EquipmentLogos from "../../components/logos/equipment-logos/EquipmentLogos";
 
 const TextContainer = styled.div`
   width: 100%;

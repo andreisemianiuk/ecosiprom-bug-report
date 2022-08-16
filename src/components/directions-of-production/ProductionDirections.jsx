@@ -1,4 +1,6 @@
+import { Link } from "gatsby";
 import * as React from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import AskIcon from "../../assets/services/ask.svg";
 import AvtomatIcon from "../../assets/services/avtomat.svg";
@@ -12,7 +14,7 @@ const DirectionsList = styled.ul`
   justify-content: center;
 
   position: relative;
-  bottom: 130px;
+  bottom: ${({ bottomMargin }) => (bottomMargin ? `${bottomMargin}px` : 0)};
   overflow: hidden;
   z-index: 100;
 `;
@@ -27,8 +29,8 @@ const DirectionsItemStyled = styled.li`
   height: 230px;
   box-sizing: border-box;
   background: #ffffff;
-  box-shadow: inset 1px 0px 0px #dbdbe1, inset -1px 0px 0px #dbdbe1,
-    inset 0px -2px 0px #dbdbe1;
+  box-shadow: inset 0px 1px 0px #dbdbe1, inset 1px 0px 0px #dbdbe1,
+    inset -1px 0px 0px #dbdbe1, inset 0px -2px 0px #dbdbe1;
   border-radius: 2px;
   padding: 20px;
   margin: 0;
@@ -38,10 +40,10 @@ const DirectionsItemStyled = styled.li`
     content: "";
     position: absolute;
     width: 100%;
-    height: 0;
+    height: ${({ isCurrentItem }) => (isCurrentItem ? "4px" : 0)};
     border-radius: 1px;
     background-color: #0e6683;
-    bottom: 0;
+    bottom: ${({ isCurrentItem }) => (isCurrentItem ? " calc(0px)" : 0)};
     left: 0;
     will-change: top;
     transition: all 0.3s ease-in-out;
@@ -73,37 +75,77 @@ const icons = [
   { title: "Система отопления и кондиционирования", icon: OtoplenieIcon },
 ];
 
-const ProductionDirections = () => {
+const ProductionDirections = ({
+  isMain,
+  bottomMargin,
+  currentItem,
+  setCurrentItem,
+}) => {
   return (
-    <DirectionsList>
+    <DirectionsList bottomMargin={bottomMargin}>
       {icons.map((item, index) => (
-        <DirectionsItem index={index} item={item} />
+        <DirectionsItem
+          isMain={isMain}
+          index={index}
+          item={item}
+          isCurrentItem={currentItem === index ? true : false}
+          setCurrentItem={setCurrentItem}
+        />
       ))}
     </DirectionsList>
   );
 };
 
-const DirectionsItem = ({ index, item }) => {
+const DirectionsItem = ({
+  index,
+  item,
+  isCurrentItem,
+  setCurrentItem,
+  isMain,
+}) => {
   const [hovered, setHovered] = React.useState(false);
+
+  const handleClick = () => {
+    if (!isMain) {
+      setHovered(false);
+      setCurrentItem(index);
+    }
+  };
 
   const handleHoverOn = () => {
     setHovered(true);
   };
   const handleHoverOff = () => {
-    setHovered(false);
+    if (!isCurrentItem) {
+      setHovered(false);
+    }
   };
 
+  useEffect(() => {
+    if (isCurrentItem) {
+      setHovered(true);
+    } else {
+      setHovered(false);
+    }
+  }, [isCurrentItem]);
+
   return (
-    <DirectionsItemStyled
-      key={index}
-      onMouseOver={handleHoverOn}
-      onMouseLeave={handleHoverOff}>
-      <StyledIcon hovered={hovered}>
-        <item.icon />
-      </StyledIcon>
-      <DirectionTitle>{item.title}</DirectionTitle>
-      <SecondaryButton title={"Подробнее"} hovered={hovered} />
-    </DirectionsItemStyled>
+    <Link
+      to={isMain && "/projects"}
+      style={{ textDecoration: "none", color: "#03141A" }}>
+      <DirectionsItemStyled
+        isCurrentItem={isCurrentItem}
+        key={index}
+        onClick={handleClick}
+        onMouseOver={handleHoverOn}
+        onMouseLeave={handleHoverOff}>
+        <StyledIcon hovered={hovered}>
+          <item.icon />
+        </StyledIcon>
+        <DirectionTitle>{item.title}</DirectionTitle>
+        <SecondaryButton title={"Подробнее"} hovered={hovered} />
+      </DirectionsItemStyled>
+    </Link>
   );
 };
 

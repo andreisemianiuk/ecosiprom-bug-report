@@ -2,7 +2,6 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import parse, { domToReact } from "html-react-parser";
 import styled from "styled-components";
-import { CatalogLayout } from "../components/CatalogLayout";
 import Layout from "../components/Layout";
 import Catalog from "../components/catalog/Catalog";
 import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
