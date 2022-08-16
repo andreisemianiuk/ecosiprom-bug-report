@@ -7,6 +7,7 @@ import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
 import Layout from "../components/Layout";
 import Projects from "../components/projects/Projects";
+import ProjectsMain from "../components/projects/ProjectsMain";
 
 const ImageContainer = styled.div`
   width: 100%;
@@ -107,7 +108,7 @@ const ServicePageTemplate = ({
       </ImageContainer>
 
       <Info>{parse(content, options)}</Info>
-      <Projects />
+      <ProjectsMain />
       <FeedbackForm />
     </Layout>
   );

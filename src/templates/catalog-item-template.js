@@ -155,7 +155,11 @@ const MenuBar = ({ checkedIndex, handleChangeIndex }) => {
     <Menubar>
       <MenubarInnerContainer>
         {menuItems.map(({ title }, index) => (
-          <div onClick={() => handleChangeIndex(index)}>
+          <div
+            onClick={() => handleChangeIndex(index)}
+            key={index}
+            role={"button"}
+            tabIndex={-1}>
             <CustomizedPrimaryButton
               text={title}
               checked={checkedIndex === index}

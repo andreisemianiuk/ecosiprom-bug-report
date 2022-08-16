@@ -4,13 +4,14 @@ import styled from "styled-components";
 import PrimaryButton from "../buttons/PrimaryButton";
 import parse, { domToReact } from "html-react-parser";
 import ProjectsBox from "./ProjectsBox";
+import ProductionDirections from "../directions-of-production/ProductionDirections";
 
 const Container = styled.section`
   display: flex;
   justify-content: center;
 
   background-color: #fff;
-  padding: 80px 0 100px;
+  padding-bottom: 20px;
 `;
 const ContentWrapper = styled.div`
   display: flex;
@@ -32,83 +33,41 @@ const Info = styled.div`
   color: #4a5763;
   line-height: 27px;
   margin-top: 24px;
-  margin-bottom: 40px;
 `;
 const List = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 20px;
+  grid-row-gap: 40px;
   width: 100%;
 `;
+const Navigation = styled.div`
+  padding: 50px 0 20px;
+`;
 
-const Projects = () => {
-  const {
-    allWpMediaItem: { nodes },
-    allWpContentNode: { nodes: contentNodes },
-  } = useStaticQuery(graphql`
-    query MainProjectsQuery {
-      allWpMediaItem(
-        filter: { title: { regex: "/projects/" } }
-        sort: { fields: caption }
-      ) {
-        nodes {
-          id
-          altText
-          description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                height: 280
-                width: 377
-                placeholder: TRACED_SVG
-                quality: 100
-                formats: PNG
-              )
-            }
-          }
-        }
-      }
-      allWpContentNode(filter: { slug: { eq: "main" } }) {
-        nodes {
-          ... on WpPage {
-            id
-            content
-          }
-        }
-      }
-    }
-  `);
-
-  let { content } = contentNodes[0];
-
+const Projects = ({ children, title, content, nodes, location }) => {
   let options = {
     replace: (domNode) => {
-      if (domNode.attribs && domNode.attribs.class === "projects") {
-        return <>{domToReact(domNode.children[1].children, options)}</>;
-      }
-      if (
-        domNode.attribs &&
-        (domNode.attribs.class === "main-slideshow-images" ||
-          domNode.attribs.class === "services-container" ||
-          domNode.attribs.class === "equipment-logos" ||
-          domNode.attribs.class === "partners-logos" ||
-          domNode.attribs.class === "implementation-cycle" ||
-          domNode.attribs.class === "catalog" ||
-          domNode.attribs.class === "about-us" ||
-          domNode.attribs.class === "partners-icons-wrapper")
-      ) {
+      if (domNode.attribs && domNode.attribs.class === "images-wrapper") {
         return <></>;
       }
     },
   };
-
+  const [currentItem, setCurrentItem] = React.useState(0);
   return (
     <Container>
       <ContentWrapper>
         <Header>
-          <Title>Проекты</Title>
-          <PrimaryButton text="Все проекты" />
+          <div>
+            <Navigation>{children}</Navigation>
+            <Title>{title}</Title>
+          </div>
         </Header>
         <Info>{parse(content, options)}</Info>
+        <ProductionDirections
+          currentItem={currentItem}
+          setCurrentItem={setCurrentItem}
+        />
         <List>
           {nodes.map((item) => {
             return <ProjectsBox itemData={item} />;

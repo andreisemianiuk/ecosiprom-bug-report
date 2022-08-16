@@ -1,5 +1,5 @@
-import React from 'react'
-import { CatalogMenuProvider } from './src/common/catalogMenu/useCatalogMenu'
+import React from "react";
+import { ProjectsMenuProvider } from "./src/common/projectsMenu/useProjectsMenu";
 export const wrapRootElement = ({ element }) => (
-  <CatalogMenuProvider>{element}</CatalogMenuProvider>
-)
+  <ProjectsMenuProvider>{element}</ProjectsMenuProvider>
+);
