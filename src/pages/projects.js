@@ -1,7 +1,6 @@
 import { graphql } from "gatsby";
 import * as React from "react";
 import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
-import ProductionDirections from "../components/directions-of-production/ProductionDirections";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
 import Layout from "../components/Layout";
 import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
