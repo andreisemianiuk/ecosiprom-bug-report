@@ -63,8 +63,12 @@ const ImageBackgroundLayer = styled.div`
 `;
 
 const ProjectsBox = ({ itemData }) => {
+  console.log(
+    "🚀 ~ file: ProjectsBox.jsx ~ line 66 ~ ProjectsBox ~ itemData",
+    itemData
+  );
   const [hovered, setHovered] = React.useState(false);
-  const { id, altText, description, localFile } = itemData;
+  const { id, title, altText, description, localFile } = itemData;
   let image = getImage(localFile.childImageSharp.gatsbyImageData);
 
   let options = {
@@ -82,22 +86,28 @@ const ProjectsBox = ({ itemData }) => {
     setHovered(false);
   };
 
+  const pathToProject = `/projects/${title.replace(/projects-/g, "")}`;
+
   return (
-    <Container
-      key={id}
-      onMouseOver={handleHoverOn}
-      onMouseLeave={handleHoverOff}
-      hovered={hovered}>
-      <ImageWrapper>
-        <GatsbyImage image={image} alt={altText} />
-        <ImageBackgroundLayer hovered={hovered} />
-      </ImageWrapper>
-      <InfoBox>
-        <Title hovered={hovered}>{altText}</Title>
-        {parse(description || "", options)}
-        <SecondaryButton title="Подробнее" hovered={hovered} />
-      </InfoBox>
-    </Container>
+    <Link
+      to={pathToProject}
+      style={{ textDecoration: "none", color: "inherit" }}>
+      <Container
+        key={id}
+        onMouseOver={handleHoverOn}
+        onMouseLeave={handleHoverOff}
+        hovered={hovered}>
+        <ImageWrapper>
+          <GatsbyImage image={image} alt={altText} />
+          <ImageBackgroundLayer hovered={hovered} />
+        </ImageWrapper>
+        <InfoBox>
+          <Title hovered={hovered}>{altText}</Title>
+          {parse(description || "", options)}
+          <SecondaryButton title="Подробнее" hovered={hovered} />
+        </InfoBox>
+      </Container>
+    </Link>
   );
 };
 

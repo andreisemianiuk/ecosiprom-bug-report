@@ -4,14 +4,39 @@ exports.createPages = async (gatsbyUtilities) => {
   const catalogList = await getCatalogList(gatsbyUtilities);
   const catalogPages = await getCatalogPages(gatsbyUtilities);
   const servicesList = await getServicesList(gatsbyUtilities);
+  const projectsList = await getProjectsList(gatsbyUtilities);
 
-  if (!catalogList.length || !servicesList.length || !catalogPages.length) {
+  if (
+    !projectsList.length ||
+    !catalogList.length ||
+    !servicesList.length ||
+    !catalogPages.length
+  ) {
     return;
   }
 
+  await createProjectsPages({ projectsList, gatsbyUtilities });
   await createServicesPages({ servicesList, gatsbyUtilities });
   await createCatalogListPages({ catalogList, gatsbyUtilities });
   await createCatalogPages({ catalogPages, gatsbyUtilities });
+};
+
+const createProjectsPages = async ({ projectsList, gatsbyUtilities }) => {
+  Promise.all(
+    projectsList.map(({ node }) => {
+      gatsbyUtilities.actions.createPage({
+        path: node.uri,
+        component: require.resolve(
+          "./src/templates/projects-item/projects-item-template.js"
+        ),
+        context: {
+          id: node.id,
+          parentId: node.parentId,
+        },
+        // defer: true,
+      });
+    })
+  );
 };
 
 const createServicesPages = async ({ servicesList, gatsbyUtilities }) => {
@@ -141,6 +166,33 @@ async function getServicesList({ graphql, reporter }) {
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your services list items`,
+      graphqlResult.errors
+    );
+    return;
+  }
+  return graphqlResult.data.allWpPage.edges;
+}
+
+async function getProjectsList({ graphql, reporter }) {
+  const graphqlResult = await graphql(`
+    {
+      allWpPage(filter: { wpParent: { node: { slug: { eq: "projects" } } } }) {
+        edges {
+          node {
+            id
+            slug
+            uri
+            parentId
+            content
+          }
+        }
+      }
+    }
+  `);
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your projects list items`,
       graphqlResult.errors
     );
     return;

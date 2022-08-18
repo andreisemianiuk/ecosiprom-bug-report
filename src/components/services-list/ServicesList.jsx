@@ -31,8 +31,9 @@ const ButtonWrapper = styled.div`
   margin-top: 30px;
 `;
 
-const ServicesList = ({ isMain, children }) => {
+const ServicesList = ({ isMain, children, completedServices, title }) => {
   // isMain should be true if we are on the main page
+  // completedServices is an array of services that we want to display
 
   const {
     allWpMediaItem: { nodes },
@@ -57,18 +58,26 @@ const ServicesList = ({ isMain, children }) => {
     }
   `);
 
+  const filteredNodes = completedServices
+    ? nodes.filter((node) => {
+        return completedServices.includes(node.altText);
+      })
+    : nodes;
+
   return (
     <ContentWrapper>
       {!isMain && <Navigation>{children}</Navigation>}
-      <Title>Наши услуги</Title>
+      <Title>{title}</Title>
       <ItemsWrapper>
-        {nodes.map((service) => {
+        {filteredNodes.map((service) => {
           return <ServiceBox service={service} />;
         })}
       </ItemsWrapper>
-      <ButtonWrapper>
-        <PrimaryButton text={"Оставить заявку"} />
-      </ButtonWrapper>
+      {isMain && (
+        <ButtonWrapper>
+          <PrimaryButton text={"Оставить заявку"} />
+        </ButtonWrapper>
+      )}
     </ContentWrapper>
   );
 };

@@ -49,6 +49,7 @@ export const pageQuery = graphql`
         id
         altText
         description
+        title
         localFile {
           childImageSharp {
             gatsbyImageData(

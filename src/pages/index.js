@@ -27,7 +27,7 @@ function HomePage({ location }) {
       <SliderContainer>
         <Slideshow autoplay={true} />
       </SliderContainer>
-      <ServicesList isMain />
+      <ServicesList isMain title={"Наши услуги"} />
       <CatalogMain location={location} />
       <EquipmentLogos />
       <ImplementationCycle />

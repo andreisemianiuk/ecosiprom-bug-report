@@ -216,6 +216,30 @@ module.exports = {
             crumbLabel: "Проекты",
           },
           {
+            pathname: "/projects/stadler",
+            crumbLabel: "Штадлер",
+          },
+          {
+            pathname: "/projects/minskenergo",
+            crumbLabel: "МинскЭнерго",
+          },
+          {
+            pathname: "/projects/belgee",
+            crumbLabel: "Белджи",
+          },
+          {
+            pathname: "/projects/kronospan",
+            crumbLabel: "Кроноспан",
+          },
+          {
+            pathname: "/projects/belkaliy",
+            crumbLabel: "Беларуськалий",
+          },
+          {
+            pathname: "/projects/grodnoazot",
+            crumbLabel: "Гродно Азот",
+          },
+          {
             pathname: "/about-us",
             crumbLabel: "О Компании",
           },

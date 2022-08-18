@@ -65,9 +65,6 @@ const ItemList = styled.ul`
 `;
 const SubItem = styled.li`
   margin-left: 40px;
-  &::first-letter {
-    text-transform: capitalize;
-  }
   &::marker {
     font-size: 0.6em;
   }
