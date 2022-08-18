@@ -31,6 +31,14 @@ const ServicePageTemplate = ({
   },
   pageContext,
 }) => {
+  console.log(
+    "🚀 ~ file: projects-item-template.js ~ line 34 ~ localFile",
+    localFile
+  );
+  console.log(
+    "🚀 ~ file: projects-item-template.js ~ line 34 ~ altText",
+    altText
+  );
   let completedServices;
   const options = {
     replace: (domNode) => {
@@ -122,7 +130,10 @@ export const pageQuery = graphql`
     wpPage(id: { eq: $id }) {
       content
     }
-    wpMediaItem(wpParent: { node: { id: { eq: $id } } }) {
+    wpMediaItem(
+      wpParent: { node: { id: { eq: $id } } }
+      title: { regex: "/cropped-/" }
+    ) {
       title
       caption
       altText
