@@ -86,7 +86,7 @@ const ProjectsBox = ({ itemData }) => {
     setHovered(false);
   };
 
-  const pathToProject = `/projects/${title.replace(/projects-/g, "")}`;
+  const pathToProject = `/projects/${title?.replace(/projects-/g, "")}` || "/";
 
   return (
     <Link
