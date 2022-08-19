@@ -63,10 +63,6 @@ const ImageBackgroundLayer = styled.div`
 `;
 
 const ProjectsBox = ({ itemData }) => {
-  console.log(
-    "🚀 ~ file: ProjectsBox.jsx ~ line 66 ~ ProjectsBox ~ itemData",
-    itemData
-  );
   const [hovered, setHovered] = React.useState(false);
   const { id, title, altText, description, localFile } = itemData;
   let image = getImage(localFile.childImageSharp.gatsbyImageData);

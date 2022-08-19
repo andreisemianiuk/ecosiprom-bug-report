@@ -32,7 +32,7 @@ const InnerContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  padding: ${props => (props.isMain ? "87px 0" : "50px 0 80px")};
+  padding: ${(props) => (props.isMain ? "87px 0" : "50px 0 80px")};
 `;
 const ContentWrapper = styled.div`
   display: flex;
@@ -70,13 +70,13 @@ const InfoList = styled.ul`
   margin: 0;
   margin-bottom: 30px;
 `;
-const StyledArrowIcon = styled(ArrowIcon)`
-  margin-right: 16px;
-`;
 const InfoListItem = styled.li`
   display: flex;
   align-items: center;
   list-style-type: none;
+`;
+const StyledArrowIcon = styled(ArrowIcon)`
+  margin-right: 16px;
 `;
 const MapWrapper = styled.div`
   display: flex;
@@ -106,13 +106,17 @@ const MapSmallPoint = styled(MapSmallPointImage)`
   width: ${({ sizeSmall }) => `${sizeSmall}px`};
   height: ${({ sizeSmall }) => `${sizeSmall}px`};
 `;
+const Navigation = styled.div`
+  padding: 90px 0 20px;
+`;
 
-const AboutUsCommon = isMain => {
+const AboutUsCommon = ({ children, isMain, location }) => {
   // isMain is a boolean that determines whether the component is rendered on the main page or on the about us page
   const {
-    wpMediaItem: { localFile, altText, description },
+    wpMediaItem: { localFile, altText },
+    wpPage: { content },
   } = useStaticQuery(graphql`
-    query MainAboutQuery {
+    query AboutQuery {
       wpMediaItem(title: { eq: "about-main" }) {
         title
         altText
@@ -123,13 +127,16 @@ const AboutUsCommon = isMain => {
           }
         }
       }
+      wpPage(title: { eq: "О нас" }) {
+        content
+      }
     }
   `);
 
   const mainImage = getImage(localFile.childImageSharp.gatsbyImageData);
 
   let options = {
-    replace: domNode => {
+    replace: (domNode) => {
       if (domNode.attribs && domNode.attribs.class === "heading") {
         return (
           <InfoTextHeading>
@@ -143,16 +150,23 @@ const AboutUsCommon = isMain => {
           <InfoText>{isMain ? text : domToReact(domNode.children)}</InfoText>
         );
       }
-      if (domNode.name === "ul") {
+      if (domNode.attribs && domNode.attribs.class === "heading-list") {
         return <InfoList>{domToReact(domNode.children, options)}</InfoList>;
       }
-      if (domNode.name === "li") {
+      if (domNode.attribs && domNode.attribs.class === "heading-list-item") {
         return (
           <InfoListItem>
             <StyledArrowIcon />
             {domToReact(domNode.children, options)}
           </InfoListItem>
         );
+      }
+      if (
+        domNode.attribs &&
+        (domNode.attribs.class === "images-wrapper" ||
+          domNode.attribs.class === "description")
+      ) {
+        return <></>;
       }
     },
   };
@@ -164,9 +178,9 @@ const AboutUsCommon = isMain => {
       <InnerContainer isMain={isMain}>
         <ContentWrapper>
           <InfoWrapper>
-            {!isMain && <div>Главная - О компании</div>}
+            {!isMain && <Navigation>{children}</Navigation>}
             <Title>О компании</Title>
-            {parse(description || "", options)}
+            {parse(content || "", options)}
             {isMain && (
               <PrimaryButton
                 text="Оставить заявку"

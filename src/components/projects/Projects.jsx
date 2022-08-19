@@ -45,7 +45,7 @@ const Navigation = styled.div`
   padding: 50px 0 20px;
 `;
 
-const Projects = ({ children, title, content, nodes, location }) => {
+const Projects = ({ children, title, content, nodes }) => {
   let options = {
     replace: (domNode) => {
       if (domNode.attribs && domNode.attribs.class === "images-wrapper") {

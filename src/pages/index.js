@@ -32,7 +32,7 @@ function HomePage({ location }) {
       <EquipmentLogos />
       <ImplementationCycle />
       <ProjectsMain location={location} />
-      <AboutUs />
+      <AboutUs isMain />
       <PartnerLogos />
       <FeedbackForm />
     </Layout>
