@@ -1,177 +1,181 @@
-import * as React from 'react'
-import Layout from '../components/Layout'
-import MyMap from '../components/MyMap'
-import { graphql } from 'gatsby'
-import parse, { domToReact } from 'html-react-parser'
-import styled from 'styled-components'
-import { devices } from '../common/MediaQuery/media-query'
+import * as React from "react";
+import Layout from "../components/layout/Layout";
+import { graphql } from "gatsby";
+import parse, { domToReact } from "html-react-parser";
+import styled from "styled-components";
+import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
+import YandexMap from "../components/yandex-map/YandexMap";
+import MobileIcon from "../assets/mobile.svg";
+import PhoneIcon from "../assets/phone.svg";
+import EmailIcon from "../assets/email.svg";
+import AddressIcon from "../assets/address.svg";
+import TimeTableIcon from "../assets/time-table.svg";
+import FaxIcon from "../assets/fax.svg";
+import PhoneCircleIcon from "../assets/phone-circle.svg";
+import FeedbackForm from "../components/feedback-form/FeedbackForm";
 
-let Section = styled.div`
+const Container = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 0 50px 30px;
-  @media ${devices.laptop} {
-    flex-direction: column;
-    padding: 0;
-  }
-  @media ${devices.mobileL} {
-    padding: 0;
-  }
-`
-let Container = styled.div`
-  @media ${devices.mobileL} {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-`
-let Title = styled.h1`
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #c42034;
-  @media ${devices.desktop} {
-    font-size: 2em;
-    text-align: center;
-  }
-  @media ${devices.laptopL} {
-    font-size: 1.4em;
-  }
-  @media ${devices.mobileL} {
-    font-size: 1.5em;
-  }
-`
-let Description = styled.div`
-  font-size: 1.5em;
-  @media ${devices.laptopL} {
-    font-size: 1.2em;
-  }
-  @media (max-width: 1200px) {
-    font-size: 1em;
-  }
-  @media ${devices.mobileL} {
-    padding-left: 0;
-  }
-`
-let FieldsWrapper = styled.address`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  font-style: normal;
-  @media ${devices.laptop} {
-    flex-direction: row;
-  }
-  @media (max-width: 800px) {
-    flex-direction: column;
-  }
-`
-let Field = styled.div`
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1170px;
+  margin: 50px auto;
+`;
+const InfoBlock = styled.div``;
+const Title = styled.h1`
+  margin: 20px 0 50px;
+`;
+const TextContainer = styled.div`
+  line-height: 20px;
+  font-weight: 500;
+  font-feature-settings: "pnum" on, "lnum" on;
+`;
+const PhoneWrapper = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  flex-direction: column;
-  margin-bottom: 10px;
-  @media ${devices.mobileL} {
-  }
-`
-let FieldName = styled.div``
-let Info = styled.div`
-  color: #00637f;
-  /* margin: 10px; */
-`
-let Name = styled.div`
-  color: #283043;
-  font-weight: bold;
-  margin-top: 30px;
-  text-align: center;
-  font-size: 1.2em;
-`
-let Phone = styled.a`
-  display: block;
-  color: #00637f;
+`;
+const PhoneCircleIconContainer = styled.div`
+  position: absolute;
+  left: 6.9px;
+  bottom: -1.5px;
+`;
+const MapContainer = styled.div`
+  width: 872px;
+  height: 480px;
+`;
+const ItemWrapper = styled.a`
+  display: flex;
+  align-items: flex-start;
   text-decoration: none;
-`
-let Email = styled.a``
-let MapContainer = styled.div`
-  padding-top: 50px;
-  @media ${devices.mobileL} {
-    padding: 0;
-    margin: 20px 0;
-  }
-`
+  color: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 5px;
+`;
+const Item = styled.span`
+  max-width: 170px;
+  padding-left: 10px;
+`;
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+`;
+const CompanyName = styled.div`
+  font-size: 24px;
+  color: #000000;
+  font-weight: 800;
+  line-height: 27px;
+  margin-top: 40px;
+`;
 
-function ContactsPage({ data }) {
-  let { content } = data.allWpContentNode.edges[0].node
+const Contacts = ({
+  data: {
+    wpPage: { title, content },
+  },
+  pageContext,
+}) => {
+  const {
+    breadcrumb: { crumbs },
+  } = pageContext;
 
   let options = {
-    replace: domNode => {
-      if (domNode.attribs && domNode.attribs.class === 'title') {
-        return <Title>{domToReact(domNode.children, options)}</Title>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'description') {
+    replace: (domNode) => {
+      if (domNode.attribs && domNode.attribs.class === "address") {
         return (
-          <Description>{domToReact(domNode.children, options)}</Description>
-        )
+          <ItemWrapper href="#">
+            <IconWrapper>
+              <AddressIcon />
+            </IconWrapper>
+            <Item>{domToReact(domNode.children, options)}</Item>
+          </ItemWrapper>
+        );
       }
-      if (domNode.attribs && domNode.attribs.class === 'fields-wrapper') {
+      if (domNode.attribs && domNode.attribs.class === "city-phone") {
         return (
-          <FieldsWrapper>{domToReact(domNode.children, options)}</FieldsWrapper>
-        )
+          <ItemWrapper href={`tel:${domNode.children[0].data}`}>
+            <PhoneWrapper>
+              <IconWrapper>
+                <PhoneIcon />
+              </IconWrapper>
+              <PhoneCircleIconContainer>
+                <PhoneCircleIcon />
+              </PhoneCircleIconContainer>
+            </PhoneWrapper>
+            <Item>{domToReact(domNode.children, options)}</Item>
+          </ItemWrapper>
+        );
       }
-      if (domNode.attribs && domNode.attribs.class === 'field') {
-        return <Field>{domToReact(domNode.children, options)}</Field>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'field-name') {
-        return <FieldName>{domToReact(domNode.children, options)}</FieldName>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'field-info') {
-        return <Info>{domToReact(domNode.children, options)}</Info>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'contact-name') {
-        return <Name>{domToReact(domNode.children, options)}</Name>
-      }
-      if (domNode.attribs && domNode.attribs.class === 'phone') {
-        const tel =
-          domNode.children[0].data &&
-          typeof domNode.children[0].data === 'string' &&
-          domNode.children[0].data.replace(/[\)\(\s]/g, '')
+      if (domNode.attribs && domNode.attribs.class === "mobile-phone") {
         return (
-          <Phone href={`tel:${tel}`}>
-            {domToReact(domNode.children, options)}
-          </Phone>
-        )
+          <ItemWrapper href={`tel:${domNode.children[0].data}`}>
+            <IconWrapper>
+              <MobileIcon />
+            </IconWrapper>
+            <Item>{domToReact(domNode.children, options)}</Item>
+          </ItemWrapper>
+        );
       }
-      if (domNode.attribs && domNode.attribs.class === 'email') {
+      if (domNode.attribs && domNode.attribs.class === "fax") {
         return (
-          <Email href={`mailto:${domNode.children[0].data}`}>
-            {domToReact(domNode.children, options)}
-          </Email>
-        )
+          <ItemWrapper href={`fax:${domNode.children[0].data}`}>
+            <IconWrapper>
+              <FaxIcon />
+            </IconWrapper>
+            <Item>{domToReact(domNode.children, options)}</Item>
+          </ItemWrapper>
+        );
+      }
+      if (domNode.attribs && domNode.attribs.class === "email") {
+        return (
+          <ItemWrapper href={`mailto:${domNode.children[0].data}`}>
+            <IconWrapper>
+              <EmailIcon />
+            </IconWrapper>
+            <Item>{domToReact(domNode.children, options)}</Item>
+          </ItemWrapper>
+        );
+      }
+      if (domNode.attribs && domNode.attribs.class === "time-table") {
+        return (
+          <ItemWrapper href="#">
+            <IconWrapper>
+              <TimeTableIcon />
+            </IconWrapper>
+            <Item>{domToReact(domNode.children, options)}</Item>
+          </ItemWrapper>
+        );
       }
     },
-  }
+  };
   return (
     <Layout>
-      <Section>
-        <div>{parse(content, options)}</div>
+      <Container>
+        <InfoBlock>
+          <Breadcrumb crumbs={crumbs} color={"#4a5763"} />
+          <Title>{title}</Title>
+          <TextContainer>{parse(content, options)}</TextContainer>
+          <CompanyName>ООО «Экосипром»</CompanyName>
+        </InfoBlock>
         <MapContainer>
-          <MyMap />
+          <YandexMap />
         </MapContainer>
-      </Section>
+      </Container>
+      <FeedbackForm />
     </Layout>
-  )
-}
+  );
+};
 
-export default ContactsPage
+export default Contacts;
 
-export const contactsPageQuery = graphql`
-  query {
-    allWpContentNode(filter: { slug: { eq: "contacts" } }) {
-      edges {
-        node {
-          ... on WpPage {
-            id
-            content
-          }
-        }
-      }
+export const pageQuery = graphql`
+  query ContactsPageQuery {
+    wpPage(title: { eq: "Контакты" }) {
+      title
+      content
     }
   }
-`
+`;
