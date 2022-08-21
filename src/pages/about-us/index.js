@@ -3,7 +3,7 @@ import * as React from "react";
 import Layout from "../../components/layout/Layout";
 import { Breadcrumb } from "../../common/breadCrumb/Breadcrumb";
 import AboutUsCommon from "../../components/about-us/AboutUsCommon";
-import AboutUsInfo from "../../components/about-us/aboutUsInfo";
+import AboutUsInfo from "../../components/about-us/AboutUsInfo";
 import FeedbackForm from "../../components/feedback-form/FeedbackForm";
 import ProjectsMain from "../../components/projects/ProjectsMain";
 
