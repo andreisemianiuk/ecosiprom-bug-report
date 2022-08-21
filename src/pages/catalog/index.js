@@ -45,7 +45,7 @@ const CatalogPage = ({
   const title = crumbs[crumbs.length - 1].crumbLabel;
 
   return (
-    <Layout>
+    <Layout location={location}>
       <Catalog isMain images={nodes} title={title} location={location}>
         <Breadcrumb crumbs={crumbs} color={"#4a5763"} />
       </Catalog>

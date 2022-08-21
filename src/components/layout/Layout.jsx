@@ -8,10 +8,10 @@ const MainContent = styled.div`
   padding-top: 110px;
 `;
 
-export default function Layout({ children }) {
+export default function Layout({ children, location }) {
   return (
     <>
-      <Header />
+      <Header location={location} />
       <MainContent>{children}</MainContent>
       <Footer />
     </>

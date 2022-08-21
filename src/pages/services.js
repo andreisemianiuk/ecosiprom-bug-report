@@ -4,13 +4,13 @@ import FeedbackForm from "../components/feedback-form/FeedbackForm";
 import Layout from "../components/layout/Layout";
 import ServicesList from "../components/services-list/ServicesList";
 
-function ServicesPage({ pageContext }) {
+function ServicesPage({ pageContext, location }) {
   const {
     breadcrumb: { crumbs },
   } = pageContext;
 
   return (
-    <Layout>
+    <Layout location={location}>
       <ServicesList isMain={false}>
         <Breadcrumb crumbs={crumbs} color={"#4a5763"} />
       </ServicesList>

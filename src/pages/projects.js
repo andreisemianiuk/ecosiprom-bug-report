@@ -19,7 +19,7 @@ const ProjectsPage = ({
   } = pageContext;
 
   return (
-    <Layout>
+    <Layout location={location}>
       <Projects
         nodes={nodes}
         title={title}

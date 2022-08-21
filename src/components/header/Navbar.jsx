@@ -28,7 +28,7 @@ const NavItem = styled.li`
 const StyledNavLink = styled(Link)`
   position: relative;
   text-decoration: none;
-  color: inherit;
+  color: ${({ isActive }) => (isActive ? "#0e6683" : "inherit")};
   transition: color 0.3s ease-in-out;
 
   &:hover {
@@ -43,8 +43,8 @@ const StyledNavLink = styled(Link)`
     background-color: #0e6683;
     bottom: -33px;
     left: 0;
-    transform-origin: right;
-    transform: scaleX(0);
+    transform-origin: ${({ isActive }) => (isActive ? "left" : "right")};
+    transform: ${({ isActive }) => (isActive ? "scaleX(1)" : "scaleX(0)")};
     transition: transform 0.3s ease-in-out;
   }
   &:hover::before {
@@ -53,7 +53,7 @@ const StyledNavLink = styled(Link)`
   }
 `;
 
-export const Navbar = () => {
+export const Navbar = ({ location }) => {
   const {
     wpMenu: {
       menuItems: { nodes },
@@ -74,18 +74,21 @@ export const Navbar = () => {
   return (
     <Nav>
       <NavList>
-        {nodes.map(({ id, label, path }) => (
-          <NavItem key={id}>
-            <StyledNavLink to={`${path}`} activeClassName={"active"}>
-              {label
-                .split(" ")
-                .map((word, i) =>
-                  i === 0 ? `${word[0].toUpperCase()}${word.slice(1)}` : word
-                )
-                .join(" ")}
-            </StyledNavLink>
-          </NavItem>
-        ))}
+        {nodes.map(({ id, label, path }) => {
+          const isActive = location.pathname === path;
+          return (
+            <NavItem key={id}>
+              <StyledNavLink to={path} isActive={isActive}>
+                {label
+                  .split(" ")
+                  .map((word, i) =>
+                    i === 0 ? `${word[0].toUpperCase()}${word.slice(1)}` : word
+                  )
+                  .join(" ")}
+              </StyledNavLink>
+            </NavItem>
+          );
+        })}
       </NavList>
     </Nav>
   );

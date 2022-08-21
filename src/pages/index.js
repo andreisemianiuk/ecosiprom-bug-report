@@ -19,7 +19,7 @@ const SliderContainer = styled.div`
 
 function HomePage({ location }) {
   return (
-    <Layout>
+    <Layout location={location}>
       <SliderContainer>
         <Slideshow autoplay={true} />
       </SliderContainer>

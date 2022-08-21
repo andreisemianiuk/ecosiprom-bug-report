@@ -20,7 +20,7 @@ const AboutPage = ({
   } = pageContext;
 
   return (
-    <Layout>
+    <Layout location={location}>
       <AboutUsCommon location={location} isMain={false}>
         <Breadcrumb crumbs={crumbs} color={"#fff"} />
       </AboutUsCommon>

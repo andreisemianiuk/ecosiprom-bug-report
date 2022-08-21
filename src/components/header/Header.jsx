@@ -28,7 +28,7 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 1170px;
 `;
-const Header = () => {
+const Header = ({ location }) => {
   return (
     <HeaderContainer>
       <ContactHeader />
@@ -37,7 +37,7 @@ const Header = () => {
           <Link to={"/"}>
             <Logo color={"primary"} width={170} />
           </Link>
-          <Navbar />
+          <Navbar location={location} />
           <PrimaryButton text={"Оставить заявку"} />
         </ContentWrapper>
       </LogoNavbarContainer>

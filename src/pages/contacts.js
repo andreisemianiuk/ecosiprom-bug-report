@@ -77,6 +77,7 @@ const Contacts = ({
     wpPage: { title, content },
   },
   pageContext,
+  location,
 }) => {
   const {
     breadcrumb: { crumbs },
@@ -152,7 +153,7 @@ const Contacts = ({
     },
   };
   return (
-    <Layout>
+    <Layout location={location}>
       <Container>
         <InfoBlock>
           <Breadcrumb crumbs={crumbs} color={"#4a5763"} />
