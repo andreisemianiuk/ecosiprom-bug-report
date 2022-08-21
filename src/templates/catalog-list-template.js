@@ -2,7 +2,7 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import parse, { domToReact } from "html-react-parser";
 import styled from "styled-components";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import Catalog from "../components/catalog/Catalog";
 import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
 import EquipmentLogos from "../components/logos/equipment-logos/EquipmentLogos";

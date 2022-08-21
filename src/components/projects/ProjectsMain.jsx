@@ -1,8 +1,8 @@
-import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import parse from "html-react-parser";
+import * as React from "react";
 import styled from "styled-components";
 import PrimaryButton from "../buttons/PrimaryButton";
-import parse, { domToReact } from "html-react-parser";
 import ProjectsBox from "./ProjectsBox";
 
 const Container = styled.section`

@@ -51,7 +51,7 @@ const InfoText = styled.div`
 
 const AboutUs = () => {
   const {
-    wpContentNode: { id, content },
+    wpContentNode: { content },
   } = useStaticQuery(graphql`
     query AboutFooterQuery {
       wpContentNode(slug: { eq: "main" }) {

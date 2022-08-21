@@ -2,7 +2,7 @@ import { graphql } from "gatsby";
 import * as React from "react";
 import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
 import Projects from "../components/projects/Projects";
 

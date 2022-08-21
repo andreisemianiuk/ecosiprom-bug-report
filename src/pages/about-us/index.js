@@ -1,14 +1,11 @@
-import * as React from "react";
-import Layout from "../../components/Layout";
 import { graphql } from "gatsby";
-import parse, { domToReact } from "html-react-parser";
-//import { devices } from "../common/MediaQuery/media-query";
-import { GatsbyImage } from "gatsby-plugin-image";
-import AboutUsCommon from "../../components/about-us/AboutUsCommon";
+import * as React from "react";
+import Layout from "../../components/layout/Layout";
 import { Breadcrumb } from "../../common/breadCrumb/Breadcrumb";
+import AboutUsCommon from "../../components/about-us/AboutUsCommon";
 import AboutUsInfo from "../../components/about-us/aboutUsInfo";
-import ProjectsMain from "../../components/projects/ProjectsMain";
 import FeedbackForm from "../../components/feedback-form/FeedbackForm";
+import ProjectsMain from "../../components/projects/ProjectsMain";
 
 const AboutPage = ({
   data: {

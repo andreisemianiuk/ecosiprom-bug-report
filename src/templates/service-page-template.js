@@ -5,8 +5,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
-import Layout from "../components/Layout";
-import Projects from "../components/projects/Projects";
+import Layout from "../components/layout/Layout";
 import ProjectsMain from "../components/projects/ProjectsMain";
 
 const ImageContainer = styled.div`

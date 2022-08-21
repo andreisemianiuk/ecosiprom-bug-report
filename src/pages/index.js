@@ -1,19 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import Layout from "../components/Layout";
-
-import ProductionDirections from "../components/directions-of-production/ProductionDirections";
-import ServicesList from "../components/services-list/ServicesList";
-import Catalog from "../components/catalog/Catalog";
-import EquipmentLogos from "../components/logos/equipment-logos/EquipmentLogos";
-import ImplementationCycle from "../components/implementation-cycle/ImplementationCycle";
-import Projects from "../components/projects/Projects";
+import Layout from "../components/layout/Layout";
 import AboutUs from "../components/about-us/AboutUs";
-import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
-import FeedbackForm from "../components/feedback-form/FeedbackForm";
-import { Slideshow } from "../components/slideshow-main-page/Slideshow";
 import CatalogMain from "../components/catalog/CatalogMain";
+import FeedbackForm from "../components/feedback-form/FeedbackForm";
+import ImplementationCycle from "../components/implementation-cycle/ImplementationCycle";
+import EquipmentLogos from "../components/logos/equipment-logos/EquipmentLogos";
+import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
 import ProjectsMain from "../components/projects/ProjectsMain";
+import ServicesList from "../components/services-list/ServicesList";
+import { Slideshow } from "../components/slideshow-main-page/Slideshow";
 
 const SliderContainer = styled.div`
   display: flex;

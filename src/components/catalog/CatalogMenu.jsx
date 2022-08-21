@@ -1,7 +1,6 @@
 import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import PrimaryButton from "../buttons/PrimaryButton";
 import styled from "styled-components";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 const Container = styled.div`
   display: flex;

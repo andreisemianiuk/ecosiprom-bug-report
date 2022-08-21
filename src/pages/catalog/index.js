@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Breadcrumb } from "../../common/breadCrumb/Breadcrumb";
 import Catalog from "../../components/catalog/Catalog";
 import FeedbackForm from "../../components/feedback-form/FeedbackForm";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 import EquipmentLogos from "../../components/logos/equipment-logos/EquipmentLogos";
 
 const TextContainer = styled.div`
@@ -27,7 +27,6 @@ const CatalogPage = ({
   pageContext,
   location,
 }) => {
-  //console.log("🚀 ~ file: index.js ~ line 32 ~ location", location);
   const {
     breadcrumb: { crumbs },
   } = pageContext;

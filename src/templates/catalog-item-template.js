@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
 import PrimaryButton from "../components/buttons/PrimaryButton";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 
 const InnerContainer = styled.div`
   display: flex;
@@ -156,7 +156,7 @@ const MenuBar = ({ checkedIndex, handleChangeIndex }) => {
       <MenubarInnerContainer>
         {menuItems.map(({ title }, index) => (
           <div
-            onClick={() => handleChangeIndex(index)}
+            //onClick={() => handleChangeIndex(index)}
             key={index}
             role={"button"}
             tabIndex={-1}>

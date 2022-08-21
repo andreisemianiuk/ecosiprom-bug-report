@@ -1,10 +1,9 @@
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 import * as React from "react";
-import { graphql, Link } from "gatsby";
-import { useStaticQuery } from "gatsby";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
-import { GatsbyImage } from "gatsby-plugin-image";
 import LeftArrow from "../../../assets/slider-arrow-left.svg";
 import RightArrow from "../../../assets/slider-arrow-right.svg";
 

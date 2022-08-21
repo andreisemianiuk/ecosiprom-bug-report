@@ -4,7 +4,7 @@ import parse, { domToReact } from "html-react-parser";
 import * as React from "react";
 import { Breadcrumb } from "../../common/breadCrumb/Breadcrumb";
 import FeedbackForm from "../../components/feedback-form/FeedbackForm";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout/Layout";
 import { Slide } from "react-slideshow-image";
 import LeftArrow from "../../../src/assets/slider-arrow-left.svg";
 import RightArrow from "../../../src/assets/slider-arrow-right.svg";
@@ -31,14 +31,6 @@ const ServicePageTemplate = ({
   },
   pageContext,
 }) => {
-  console.log(
-    "🚀 ~ file: projects-item-template.js ~ line 34 ~ localFile",
-    localFile
-  );
-  console.log(
-    "🚀 ~ file: projects-item-template.js ~ line 34 ~ altText",
-    altText
-  );
   let completedServices;
   const options = {
     replace: (domNode) => {

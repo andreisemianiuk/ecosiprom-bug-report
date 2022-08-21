@@ -1,8 +1,7 @@
-import * as React from "react";
-import { graphql, Link } from "gatsby";
-import { useStaticQuery } from "gatsby";
-import styled from "styled-components";
+import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
+import * as React from "react";
+import styled from "styled-components";
 
 const ContentWrapper = styled.section`
   width: 100%;
