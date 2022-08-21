@@ -16,12 +16,9 @@
   },
   "dependencies": {
     "@fontsource/raleway": "^4.5.9",
-    "@mdx-js/mdx": "^1.6.22",
-    "@mdx-js/react": "^1.6.22",
     "babel-plugin-styled-components": "^2.0.6",
     "gatsby": "^4.9.3",
     "gatsby-background-image": "^1.6.0",
-    "gatsby-image": "^3.11.0",
     "gatsby-plugin-breadcrumb": "^12.3.1",
     "gatsby-plugin-gatsby-cloud": "^4.9.1",
     "gatsby-plugin-image": "^2.9.1",
@@ -36,14 +33,11 @@
     "gbimage-bridge": "^0.2.1",
     "html-react-parser": "^1.4.8",
     "leaflet": "^1.7.1",
-    "postcss": "^8.4.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-leaflet": "^3.2.2",
     "react-responsive": "^9.0.0-beta.5",
-    "react-slick": "^0.29.0",
     "react-slideshow-image": "^3.7.0",
-    "slick-carousel": "^1.8.1",
+    "react-yandex-maps": "^4.6.0",
     "styled-components": "^5.3.3"
   }
 }
