@@ -150,16 +150,12 @@ const CustomizedPrimaryButton = ({ text, checked }) => {
   );
 };
 
-const MenuBar = ({ checkedIndex, handleChangeIndex }) => {
+const MenuBar = ({ checkedIndex }) => {
   return (
     <Menubar>
       <MenubarInnerContainer>
         {menuItems.map(({ title }, index) => (
-          <div
-            //onClick={() => handleChangeIndex(index)}
-            key={index}
-            role={"button"}
-            tabIndex={-1}>
+          <div key={index} role={"button"} tabIndex={-1}>
             <CustomizedPrimaryButton
               text={title}
               checked={checkedIndex === index}
@@ -192,10 +188,9 @@ const DescriptionContent = ({ content, options }) => {
 const CatalogItemTemplate = ({
   data: {
     wpPage: { content },
-    //wpMediaItem: { localFile, altText, title, description },
     allWpMediaItem: { nodes },
   },
-
+  location,
   pageContext,
 }) => {
   const { localFile, altText, description } = nodes[0];
@@ -262,7 +257,7 @@ const CatalogItemTemplate = ({
   const image = getImage(localFile.childImageSharp.gatsbyImageData);
 
   return (
-    <Layout>
+    <Layout location={location}>
       <InnerContainer>
         <ContentWrapper>
           <ContainerWithShortDescriptionAndImage>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "gatsby";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { GatsbyImage } from "gatsby-plugin-image";
+import { useAppContext } from "../../api/contextApi";
 
 const Container = styled(Link)`
   display: flex;
@@ -55,11 +56,14 @@ const Image = styled.div`
   padding: 15px;
 `;
 
-const CatalogBox = ({ itemData, location: { pathname } }) => {
+const CatalogBox = ({ isMain, itemData, location: { pathname } }) => {
+  const { dispatch } = useAppContext();
   const { id, title, altText, description, localFile } = itemData;
   const [hovered, setHovered] = React.useState(false);
 
   let descriptionText = description?.replace(/<p>|<\/p>|<br \/>/g, "") || "";
+
+  const path = title?.toLowerCase().replace(/^\w*-/g, "") || "";
 
   const handleHoverOn = () => {
     setHovered(true);
@@ -67,15 +71,23 @@ const CatalogBox = ({ itemData, location: { pathname } }) => {
   const handleHoverOff = () => {
     setHovered(false);
   };
-
-  const path = title?.toLowerCase().replace(/^\w*-/g, "") || "";
+  const handleClick = () => {
+    dispatch({ type: "CATALOG-MENU", payload: path });
+  };
 
   return (
     <Container
       key={id}
-      to={`${
-        pathname[pathname.length - 1] === "/" ? pathname.slice(0, -1) : pathname
-      }/${path}`}
+      to={
+        isMain
+          ? "/catalog/"
+          : `${
+              pathname[pathname.length - 1] === "/"
+                ? pathname.slice(0, -1)
+                : pathname
+            }/${path}`
+      }
+      onClick={handleClick}
       onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
       hovered={hovered}>
@@ -94,4 +106,4 @@ const CatalogBox = ({ itemData, location: { pathname } }) => {
   );
 };
 
-export default CatalogBox;
+export default React.memo(CatalogBox);

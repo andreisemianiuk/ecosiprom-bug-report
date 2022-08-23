@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { useAppContext } from "../../api/contextApi";
 import CatalogBox from "./CatalogBox";
 import CatalogMenu from "./CatalogMenu";
 
@@ -40,11 +41,12 @@ const List = styled.div`
 
 const Catalog = ({ children, images, title, isMain, location }) => {
   // isMain is used to determine if the catalog is being rendered on the main catalog page or not
-  const [currentItem, setCurrentItem] = React.useState([0, "privody"]);
+
+  const { state } = useAppContext();
 
   const filteredImages = isMain
     ? images.filter((node) => {
-        return node.title.includes(currentItem[1]);
+        return node.title.includes(state.catalogCurrentItem);
       })
     : images;
 
@@ -57,12 +59,7 @@ const Catalog = ({ children, images, title, isMain, location }) => {
             <Title>{title}</Title>
           </div>
         </Header>
-        {isMain && (
-          <CatalogMenu
-            currentItem={currentItem}
-            setCurrentItem={setCurrentItem}
-          />
-        )}
+        {isMain && <CatalogMenu />}
         <List>
           {filteredImages.map((item) => {
             return <CatalogBox itemData={item} location={location} />;

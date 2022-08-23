@@ -63,6 +63,7 @@ const ServicePageTemplate = ({
     wpMediaItem: { localFile, altText },
   },
   pageContext,
+  location,
 }) => {
   const options = {
     replace: (domNode) => {
@@ -84,7 +85,7 @@ const ServicePageTemplate = ({
   const image = getImage(localFile.childImageSharp.gatsbyImageData);
 
   return (
-    <Layout>
+    <Layout location={location}>
       <ImageContainer>
         <GatsbyImage
           key={altText}

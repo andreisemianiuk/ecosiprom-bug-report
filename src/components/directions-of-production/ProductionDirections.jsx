@@ -131,7 +131,7 @@ const DirectionsItem = ({
 
   return (
     <Link
-      to={isMain && "/projects"}
+      to={isMain && "/projects/"}
       style={{ textDecoration: "none", color: "#03141A" }}>
       <DirectionsItemStyled
         isCurrentItem={isCurrentItem}

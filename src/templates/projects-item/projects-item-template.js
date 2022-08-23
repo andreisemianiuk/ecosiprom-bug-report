@@ -23,13 +23,14 @@ import {
 } from "./styles.js";
 import ServicesList from "../../components/services-list/ServicesList";
 
-const ServicePageTemplate = ({
+const ProjectsPageTemplate = ({
   data: {
     wpPage: { content },
     wpMediaItem: { localFile, altText },
     allWpMediaItem: { nodes },
   },
   pageContext,
+  location,
 }) => {
   let completedServices;
   const options = {
@@ -70,7 +71,7 @@ const ServicePageTemplate = ({
   };
 
   return (
-    <Layout>
+    <Layout location={location}>
       <ImageContainer>
         <GatsbyImage
           key={altText}
@@ -115,7 +116,7 @@ const ServicePageTemplate = ({
   );
 };
 
-export default ServicePageTemplate;
+export default ProjectsPageTemplate;
 
 export const pageQuery = graphql`
   query ProjectsPageTemplateQuery($id: String!) {

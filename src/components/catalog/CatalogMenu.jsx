@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { useAppContext } from "../../api/contextApi";
 import PrimaryButton from "../buttons/PrimaryButton";
 
 const Container = styled.div`
@@ -11,33 +12,44 @@ const Item = styled.div`
   height: 60px;
 `;
 
-const CatalogMenu = ({ currentItem, setCurrentItem }) => {
-  const items = [
-    ["Арматура, приводы и регуляторы", "privody"],
-    ["Промышленные горелки", "gorelki"],
-    ["Топливные насосы", "nasosy"],
-    ["Датчики реле, автоматы горения", "rele"],
-    ["Оборудование АСК", "ask"],
+const CatalogMenu = () => {
+  const { state, dispatch } = useAppContext();
+
+  const itemsTest = [
+    { privody: "Арматура, приводы и регуляторы" },
+    { gorelki: "Промышленные горелки" },
+    { nasosy: "Топливные насосы" },
+    { datchiki: "Датчики реле, автоматы горения" },
+    { ask: "Оборудование АСК" },
   ];
 
   return (
     <Container>
-      {items.map((item, index) => (
-        <Item onClick={() => setCurrentItem([index, item[1]])}>
-          <PrimaryButton
-            text={item[0]}
-            width={234}
-            height={60}
-            border
-            backgroundColor={currentItem[0] === index ? "#0E6683" : "#fff"}
-            color={currentItem[0] === index ? "#fff" : "#0E6683"}
-            hoverStyles={{
-              backgroundColor: "#0E6683",
-              color: "#fff",
-            }}
-          />
-        </Item>
-      ))}
+      {itemsTest.map((item) => {
+        const key = Object.keys(item)[0];
+        const value = Object.values(item)[0];
+
+        const isCurrent = state.catalogCurrentItem === key;
+
+        return (
+          <Item
+            key={key}
+            onClick={() => dispatch({ type: "CATALOG-MENU", payload: key })}>
+            <PrimaryButton
+              text={value}
+              width={234}
+              height={60}
+              border
+              backgroundColor={isCurrent ? "#0E6683" : "#fff"}
+              color={isCurrent ? "#fff" : "#0E6683"}
+              hoverStyles={{
+                backgroundColor: "#0E6683",
+                color: "#fff",
+              }}
+            />
+          </Item>
+        );
+      })}
     </Container>
   );
 };

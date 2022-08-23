@@ -2,6 +2,7 @@ import { graphql } from "gatsby";
 import parse, { domToReact } from "html-react-parser";
 import * as React from "react";
 import styled from "styled-components";
+import { useAppContext } from "../../api/contextApi";
 import { Breadcrumb } from "../../common/breadCrumb/Breadcrumb";
 import Catalog from "../../components/catalog/Catalog";
 import FeedbackForm from "../../components/feedback-form/FeedbackForm";
@@ -27,6 +28,8 @@ const CatalogPage = ({
   pageContext,
   location,
 }) => {
+  const { dispatch } = useAppContext();
+
   const {
     breadcrumb: { crumbs },
   } = pageContext;
@@ -43,6 +46,10 @@ const CatalogPage = ({
   };
 
   const title = crumbs[crumbs.length - 1].crumbLabel;
+
+  React.useEffect(() => {
+    return () => dispatch({ type: "CATALOG-MENU", payload: "privody" });
+  }, [dispatch]);
 
   return (
     <Layout location={location}>

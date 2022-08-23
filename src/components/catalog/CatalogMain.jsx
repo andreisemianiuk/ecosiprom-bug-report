@@ -42,7 +42,6 @@ const List = styled.div`
 `;
 
 const CatalogMain = ({ location }) => {
-  const [hoveredItemId, setHoveredItemId] = React.useState(null);
   const {
     allWpMediaItem: { nodes },
     allWpContentNode: { nodes: contentNodes },
@@ -97,31 +96,22 @@ const CatalogMain = ({ location }) => {
     },
   };
 
-  const handleHoverOn = (index) => {
-    setHoveredItemId(index);
-  };
-  const handleHoverOff = () => {
-    setHoveredItemId(null);
-  };
-  //const location = { pathname: "/catalog/" };
   return (
     <Container>
       <ContentWrapper>
         <Header>
           <Title>Каталог</Title>
-          <PrimaryButton text="Все оборудование" />
+          <PrimaryButton text="Все оборудование" pathTo={"/catalog/"} />
         </Header>
         <Info>{parse(content, options)}</Info>
         <List>
           {nodes.map((item) => {
-            let hovered = hoveredItemId === item.id ? true : false;
             return (
               <CatalogBox
-                handleHoverOn={handleHoverOn}
-                handleHoverOff={handleHoverOff}
+                key={item.id}
+                isMain
                 itemData={item}
                 location={location}
-                hovered={hovered}
               />
             );
           })}

@@ -75,7 +75,11 @@ export const Navbar = ({ location }) => {
     <Nav>
       <NavList>
         {nodes.map(({ id, label, path }) => {
-          const isActive = location.pathname === path;
+          const pathname =
+            location.pathname.length > 1
+              ? location.pathname.match(/\/.*?\//)[0]
+              : location.pathname;
+          const isActive = pathname === path;
           return (
             <NavItem key={id}>
               <StyledNavLink to={path} isActive={isActive}>

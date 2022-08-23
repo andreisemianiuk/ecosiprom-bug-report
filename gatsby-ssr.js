@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectsMenuProvider } from "./src/common/projectsMenu/useProjectsMenu";
+import { AppProvider } from "./src/api/contextApi";
 export const wrapRootElement = ({ element }) => (
-  <ProjectsMenuProvider>{element}</ProjectsMenuProvider>
+  <AppProvider>{element}</AppProvider>
 );

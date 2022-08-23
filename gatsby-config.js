@@ -159,15 +159,15 @@ module.exports = {
           },
           {
             pathname: "/catalog/vu",
-            crumbLabel: "Предохранительно-сбросные клапаны",
+            crumbLabel: "Топливные насосы VU",
           },
           {
             pathname: "/catalog/vm",
-            crumbLabel: "Предохранительно-сбросные клапаны",
+            crumbLabel: "Топливные насосы VM",
           },
           {
             pathname: "/catalog/vd",
-            crumbLabel: "Предохранительно-сбросные клапаны",
+            crumbLabel: "Топливные насосы VD",
           },
           {
             pathname: "/catalog/cfk",

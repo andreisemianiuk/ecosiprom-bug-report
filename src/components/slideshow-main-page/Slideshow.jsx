@@ -57,7 +57,6 @@ const ButtonWrapper = styled.div`
   top: 425px;
   left: 0;
   width: 100%;
-  height: 100%;
   z-index: 100;
 `;
 const ButtonContentWrapper = styled.div`
@@ -165,7 +164,7 @@ export const Slideshow = () => {
             text={"Подробнее"}
             width={138}
             height={56}
-            pathTo={"/services"}
+            pathTo={"/projects/"}
           />
         </ButtonContentWrapper>
       </ButtonWrapper>
