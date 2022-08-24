@@ -26,9 +26,9 @@ const codeStyles = {
 };
 
 // markup
-const NotFoundPage = () => {
+const NotFoundPage = ({ location }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <div style={pageStyles}>
         <title>Not found</title>
         <h1 style={headingStyles}>Page not found</h1>
