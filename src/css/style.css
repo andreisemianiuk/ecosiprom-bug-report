@@ -141,3 +141,41 @@ a:hover,
 a:focus {
   text-decoration: none;
 }
+
+/* test styles */
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content {
+  width: 370px;
+  height: 460px;
+  transform: translateY(50px);
+  transition: transform 500ms ease-out;
+  overflow-y: hidden;
+}
+
+.ReactModal__Content--after-open {
+  transform: translateY(0);
+}
+
+.ReactModal__Content--before-close {
+  transform: translateY(50px);
+  -webkit-transform: translateY(50px);
+  -moz-transform: translateY(50px);
+  -ms-transform: translateY(50px);
+  -o-transform: translateY(50px);
+}

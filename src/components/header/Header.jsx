@@ -38,7 +38,11 @@ const Header = ({ location }) => {
             <Logo color={"primary"} width={170} />
           </Link>
           <Navbar location={location} />
-          <PrimaryButton text={"Оставить заявку"} />
+          <PrimaryButton
+            text={"Оставить заявку"}
+            pathTo={"/send-form"}
+            state={{ modal: true }}
+          />
         </ContentWrapper>
       </LogoNavbarContainer>
     </HeaderContainer>

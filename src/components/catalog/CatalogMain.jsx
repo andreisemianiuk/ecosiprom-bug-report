@@ -54,6 +54,7 @@ const CatalogMain = ({ location }) => {
         nodes {
           id
           altText
+          title
           description
           localFile {
             childImageSharp {

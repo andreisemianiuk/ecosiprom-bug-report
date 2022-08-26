@@ -28,7 +28,8 @@ const CatalogPage = ({
   pageContext,
   location,
 }) => {
-  const { dispatch } = useAppContext();
+  const { state, dispatch } = useAppContext();
+  console.log("🚀 ~ file: index.js ~ line 32 ~ state", state);
 
   const {
     breadcrumb: { crumbs },
@@ -48,6 +49,7 @@ const CatalogPage = ({
   const title = crumbs[crumbs.length - 1].crumbLabel;
 
   React.useEffect(() => {
+    console.log("useEffect");
     return () => dispatch({ type: "CATALOG-MENU", payload: "privody" });
   }, [dispatch]);
 

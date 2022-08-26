@@ -100,7 +100,7 @@ const ProjectsMain = ({ location }) => {
       <ContentWrapper>
         <Header>
           <Title>{title}</Title>
-          <PrimaryButton text="Все проекты" pathTo={"/projects"} />
+          <PrimaryButton text="Все проекты" pathTo={"/projects/"} />
         </Header>
         <Info>{parse(content, options)}</Info>
         <List>

@@ -46,15 +46,18 @@ const PrimaryButton = ({
   hoverStyles,
   isRightArrow,
   callback,
+  state,
+  type,
 }) => {
   return (
-    <Link to={pathTo}>
+    <Link to={pathTo} state={state}>
       <StyledButton
         onClick={callback}
         color={color}
         width={width}
         height={height}
         border={border}
+        type={type}
         backgroundColor={backgroundColor}
         hoverStyles={hoverStyles}>
         <Text>
@@ -66,4 +69,4 @@ const PrimaryButton = ({
   );
 };
 
-export default PrimaryButton;
+export default React.memo(PrimaryButton);

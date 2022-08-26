@@ -16,14 +16,14 @@ export const wrapRootElement = ({ element }) => (
   <AppProvider>{element}</AppProvider>
 );
 
-export const shouldUpdateScroll = ({
-  routerProps: { location },
-  getSavedScrollPosition,
-}) => {
-  const currentPosition = getSavedScrollPosition(location);
-  // const queriedPosition = getSavedScrollPosition({ pathname: `/random` })
+//export const shouldUpdateScroll = ({
+//  routerProps: { location },
+//  getSavedScrollPosition,
+//}) => {
+//  const currentPosition = getSavedScrollPosition(location);
+//  // const queriedPosition = getSavedScrollPosition({ pathname: `/random` })
 
-  window.scrollTo(...(currentPosition || [0, 0]));
+//  window.scrollTo(...(currentPosition || [0, 0]));
 
-  return false;
-};
+//  return true;
+//};

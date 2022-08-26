@@ -22,8 +22,17 @@ module.exports = {
         // See http://reactcommunity.org/react-modal/#usage
         modalProps: {
           style: {
-            overlay: {},
-            content: { inset: "inherit", padding: 0 },
+            overlay: {
+              background: "rgba(0, 0, 0, 0.75)",
+            },
+            content: {
+              inset: "initial",
+              padding: 0,
+              width: "370px",
+              height: "460px",
+              overflow: "hidden",
+              backgroundColor: "#CFE0E6",
+            },
           },
         },
       },
