@@ -1,6 +1,5 @@
-import React from "react";
 import { ModalRoutingContext } from "gatsby-plugin-modal-routing-3";
-import { Link } from "gatsby";
+import React from "react";
 import styled from "styled-components";
 import SendForm from "../components/send-form/SendForm";
 
@@ -19,7 +18,7 @@ const SendFormPage = () => {
       {({ modal, closeTo }) => {
         return (
           <Container>
-            <SendForm />
+            <SendForm closeTo={closeTo} />
           </Container>
         );
       }}

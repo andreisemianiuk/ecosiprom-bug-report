@@ -35,7 +35,13 @@ const FeedbackForm = () => {
           вопросы.
         </Text>
       </Info>
-      <PrimaryButton text={"Получить консультацию"} width={250} isRightArrow />
+      <PrimaryButton
+        text={"Получить консультацию"}
+        width={250}
+        isRightArrow
+        pathTo={"/send-form"}
+        state={{ modal: true }}
+      />
     </Container>
   );
 };

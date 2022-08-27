@@ -196,7 +196,11 @@ const ImplementationCycle = () => {
             <CurrentInfoContent>
               {parse(currentInfoDescription, options)}
             </CurrentInfoContent>
-            <PrimaryButton text="Оставить заявку" />
+            <PrimaryButton
+              text="Оставить заявку"
+              pathTo={"/send-form"}
+              state={{ modal: true }}
+            />
           </LeftBlock>
           <MenuWrapper>
             <Menu>

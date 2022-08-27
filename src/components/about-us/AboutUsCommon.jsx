@@ -186,7 +186,9 @@ const AboutUsCommon = ({ children, isMain, location }) => {
                 text="Оставить заявку"
                 color={"#0E6683"}
                 backgroundColor={"#ffffff"}
-                hoverStyles={{ backgroundColor: "#CFE0E6;" }}
+                hoverStyles={{ backgroundColor: "#CFE0E6", color: "#0E6683" }}
+                pathTo={"/send-form"}
+                state={{ modal: true }}
               />
             )}
           </InfoWrapper>
