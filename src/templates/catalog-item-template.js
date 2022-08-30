@@ -267,7 +267,13 @@ const CatalogItemTemplate = ({
               </Navigation>
               <Title>{altText}</Title>
               <ShortDescription>{descriptionText}</ShortDescription>
-              <PrimaryButton text={"Сделать заказ"} width={157} height={56} />
+              <PrimaryButton
+                text={"Сделать заказ"}
+                width={157}
+                height={56}
+                pathTo={"/send-form"}
+                state={{ modal: true }}
+              />
             </LeftBlock>
             <GatsbyImageWrapper>
               <GatsbyImage alt={altText} image={image} />
