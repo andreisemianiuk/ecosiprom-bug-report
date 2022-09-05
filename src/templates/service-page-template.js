@@ -56,6 +56,10 @@ const InfoParagraph = styled.p`
     margin-bottom: 0;
   }
 `;
+const ListItem = styled.li`
+  list-style-position: inside;
+  margin-left: 10px;
+`;
 
 const ServicePageTemplate = ({
   data: {
@@ -74,6 +78,9 @@ const ServicePageTemplate = ({
         return (
           <InfoParagraph>{domToReact(domNode.children, options)}</InfoParagraph>
         );
+      }
+      if (domNode.name === "li") {
+        return <ListItem>{domToReact(domNode.children, options)}</ListItem>;
       }
     },
   };
@@ -127,7 +134,7 @@ export const pageQuery = graphql`
       altText
       localFile {
         childImageSharp {
-          gatsbyImageData(formats: PNG, height: 300)
+          gatsbyImageData(formats: WEBP, height: 300)
         }
       }
     }

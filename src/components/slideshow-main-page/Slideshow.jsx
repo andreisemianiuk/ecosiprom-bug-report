@@ -113,7 +113,7 @@ export const Slideshow = () => {
         nodes {
           localFile {
             childImageSharp {
-              gatsbyImageData
+              gatsbyImageData(formats: WEBP)
             }
           }
           title

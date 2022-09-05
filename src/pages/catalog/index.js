@@ -29,7 +29,6 @@ const CatalogPage = ({
   location,
 }) => {
   const { state, dispatch } = useAppContext();
-  console.log("🚀 ~ file: index.js ~ line 32 ~ state", state);
 
   const {
     breadcrumb: { crumbs },

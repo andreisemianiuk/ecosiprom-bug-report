@@ -44,7 +44,7 @@ const List = styled.div`
 const CatalogMain = ({ location }) => {
   const {
     allWpMediaItem: { nodes },
-    allWpContentNode: { nodes: contentNodes },
+    wpPage: { content },
   } = useStaticQuery(graphql`
     query MainCatalogQuery {
       allWpMediaItem(
@@ -63,34 +63,21 @@ const CatalogMain = ({ location }) => {
           }
         }
       }
-      allWpContentNode(filter: { slug: { eq: "main" } }) {
-        nodes {
-          ... on WpPage {
-            id
-            content
-          }
-        }
+      wpPage(title: { eq: "Каталог" }) {
+        content
       }
     }
   `);
 
-  let { content } = contentNodes[0];
-
   let options = {
     replace: (domNode) => {
-      if (domNode.attribs && domNode.attribs.class === "catalog") {
-        return <>{domToReact(domNode.children[1].children, options)}</>;
+      if (domNode.attribs && domNode.attribs.class === "main-page-text") {
+        return <>{domToReact(domNode.children, options)}</>;
       }
       if (
         domNode.attribs &&
-        (domNode.attribs.class === "main-slideshow-images" ||
-          domNode.attribs.class === "services-container" ||
-          domNode.attribs.class === "equipment-logos" ||
-          domNode.attribs.class === "implementation-cycle" ||
-          domNode.attribs.class === "projects" ||
-          domNode.attribs.class === "partners-logos" ||
-          domNode.attribs.class === "about-us" ||
-          domNode.attribs.class === "partners-icons-wrapper")
+        (domNode.attribs.class === "images" ||
+          domNode.attribs.class === "common-text")
       ) {
         return <></>;
       }

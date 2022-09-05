@@ -1,7 +1,12 @@
 import React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import styled from "styled-components";
-// import { devices } from "../../common/MediaQuery/media-query"
+import {
+  Desktop,
+  TabletOrMobile,
+  Mobile,
+  Tablet,
+} from "../../common/media-query-components/media-query-components";
 
 const Nav = styled.nav`
   display: flex;
@@ -9,8 +14,21 @@ const Nav = styled.nav`
   align-items: center;
   height: 100%;
 `;
+const MobileNav = styled.nav`
+  /*display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;*/
+`;
 const NavList = styled.ul`
   display: flex;
+  justify-content: space-between;
+  margin: 0;
+`;
+const MobileNavList = styled.ul`
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin: 0;
 `;
@@ -72,28 +90,61 @@ export const Navbar = ({ location }) => {
     }
   `);
   return (
-    <Nav>
-      <NavList>
-        {nodes.map(({ id, label, path }) => {
-          const pathname =
-            location.pathname.length > 1
-              ? location.pathname.match(/\/.*?\//)[0]
-              : location.pathname;
-          const isActive = pathname === path;
-          return (
-            <NavItem key={id}>
-              <StyledNavLink to={path} isActive={isActive}>
-                {label
-                  .split(" ")
-                  .map((word, i) =>
-                    i === 0 ? `${word[0].toUpperCase()}${word.slice(1)}` : word
-                  )
-                  .join(" ")}
-              </StyledNavLink>
-            </NavItem>
-          );
-        })}
-      </NavList>
-    </Nav>
+    <>
+      <Desktop>
+        <Nav>
+          <NavList>
+            {nodes.map(({ id, label, path }) => {
+              const pathname =
+                location.pathname.length > 1
+                  ? location.pathname.match(/\/.*?\//)[0]
+                  : location.pathname;
+              const isActive = pathname === path;
+              return (
+                <NavItem key={id}>
+                  <StyledNavLink to={path} isActive={isActive}>
+                    {label
+                      .split(" ")
+                      .map((word, i) =>
+                        i === 0
+                          ? `${word[0].toUpperCase()}${word.slice(1)}`
+                          : word
+                      )
+                      .join(" ")}
+                  </StyledNavLink>
+                </NavItem>
+              );
+            })}
+          </NavList>
+        </Nav>
+      </Desktop>
+      <Mobile>
+        <MobileNav>
+          <MobileNavList>
+            {nodes.map(({ id, label, path }) => {
+              const pathname =
+                location.pathname.length > 1
+                  ? location.pathname.match(/\/.*?\//)[0]
+                  : location.pathname;
+              const isActive = pathname === path;
+              return (
+                <NavItem key={id}>
+                  <StyledNavLink to={path} isActive={isActive}>
+                    {label
+                      .split(" ")
+                      .map((word, i) =>
+                        i === 0
+                          ? `${word[0].toUpperCase()}${word.slice(1)}`
+                          : word
+                      )
+                      .join(" ")}
+                  </StyledNavLink>
+                </NavItem>
+              );
+            })}
+          </MobileNavList>
+        </MobileNav>
+      </Mobile>
+    </>
   );
 };

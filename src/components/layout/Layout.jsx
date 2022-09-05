@@ -5,7 +5,7 @@ import Header from "../header/Header";
 
 const MainContent = styled.div`
   min-height: 80vh;
-  padding-top: 110px;
+  /*padding-top: 110px;*/
 `;
 
 const Layout = ({ children, location }) => {

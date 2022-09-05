@@ -13,64 +13,7 @@ import TimeTableIcon from "../assets/time-table.svg";
 import FaxIcon from "../assets/fax.svg";
 import PhoneCircleIcon from "../assets/phone-circle.svg";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1170px;
-  margin: 50px auto;
-`;
-const InfoBlock = styled.div``;
-const Title = styled.h1`
-  margin: 20px 0 50px;
-`;
-const TextContainer = styled.div`
-  line-height: 20px;
-  font-weight: 500;
-  font-feature-settings: "pnum" on, "lnum" on;
-`;
-const PhoneWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-const PhoneCircleIconContainer = styled.div`
-  position: absolute;
-  left: 6.9px;
-  bottom: -1.5px;
-`;
-const MapContainer = styled.div`
-  width: 872px;
-  height: 480px;
-`;
-const ItemWrapper = styled.a`
-  display: flex;
-  align-items: flex-start;
-  text-decoration: none;
-  color: inherit;
-  font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 5px;
-`;
-const Item = styled.span`
-  max-width: 170px;
-  padding-left: 10px;
-`;
-const IconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-`;
-const CompanyName = styled.div`
-  font-size: 24px;
-  color: #000000;
-  font-weight: 800;
-  line-height: 27px;
-  margin-top: 40px;
-`;
+import { useMediaQuery } from "react-responsive";
 
 const Contacts = ({
   data: {
@@ -179,4 +122,62 @@ export const pageQuery = graphql`
       content
     }
   }
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1170px;
+  margin: 50px auto;
+`;
+const InfoBlock = styled.div``;
+const Title = styled.h1`
+  margin: 20px 0 50px;
+`;
+const TextContainer = styled.div`
+  line-height: 20px;
+  font-weight: 500;
+  font-feature-settings: "pnum" on, "lnum" on;
+`;
+const PhoneWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+const PhoneCircleIconContainer = styled.div`
+  position: absolute;
+  left: 6.9px;
+  bottom: -1.5px;
+`;
+const MapContainer = styled.div`
+  width: 872px;
+  height: 480px;
+`;
+const ItemWrapper = styled.a`
+  display: flex;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 5px;
+`;
+const Item = styled.span`
+  max-width: 170px;
+  padding-left: 10px;
+`;
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+`;
+const CompanyName = styled.div`
+  font-size: 24px;
+  color: #000000;
+  font-weight: 800;
+  line-height: 27px;
+  margin-top: 40px;
 `;

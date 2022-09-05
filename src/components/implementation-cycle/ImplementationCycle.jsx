@@ -148,7 +148,7 @@ const ImplementationCycle = () => {
           description
           localFile {
             childImageSharp {
-              gatsbyImageData(quality: 100, placeholder: BLURRED)
+              gatsbyImageData(formats: WEBP, placeholder: BLURRED)
             }
           }
         }
@@ -156,18 +156,19 @@ const ImplementationCycle = () => {
     }
   `);
 
-  const [hoveredId, setHoveredId] = React.useState(nodes[0].id);
+  const sortedNodes = nodes.sort(
+    (a, b) => a.caption.match(/\d/) - b.caption.match(/\d/)
+  );
+  const [hoveredId, setHoveredId] = React.useState(sortedNodes[0].id);
+  const currentItem =
+    sortedNodes.find((node) => node.id === hoveredId) || nodes[0];
 
-  let currentItem =
-    nodes
-      .sort((a, b) => a.caption.match(/\d/) - b.caption.match(/\d/))
-      .find((node) => node.id === hoveredId) || nodes[0];
-  let currentCountValue = currentItem.caption.replace(/\D/g, "");
-  let currentInfoLabel = currentItem.altText;
-  let currentInfoDescription = currentItem.description;
+  const currentCountValue = currentItem.caption.replace(/\D/g, "");
+  const currentInfoLabel = currentItem.altText;
+  const currentInfoDescription = currentItem.description;
 
-  let image = getImage(currentItem.localFile.childImageSharp.gatsbyImageData);
-  let bgImage = convertToBgImage(image);
+  const image = getImage(currentItem.localFile.childImageSharp.gatsbyImageData);
+  const bgImage = convertToBgImage(image);
 
   const handleHoverOn = (index) => {
     setHoveredId(index);
@@ -206,6 +207,7 @@ const ImplementationCycle = () => {
             <Menu>
               {nodes.map((node) => {
                 const isHovered = hoveredId === node.id ? true : false;
+
                 return (
                   <MenuItemWrapper
                     key={node.id}

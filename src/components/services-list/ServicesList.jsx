@@ -75,7 +75,11 @@ const ServicesList = ({ isMain, children, completedServices, title }) => {
       </ItemsWrapper>
       {isMain && (
         <ButtonWrapper>
-          <PrimaryButton text={"Оставить заявку"} />
+          <PrimaryButton
+            text={"Оставить заявку"}
+            pathTo={"/send-form"}
+            state={{ modal: true }}
+          />
         </ButtonWrapper>
       )}
     </ContentWrapper>
