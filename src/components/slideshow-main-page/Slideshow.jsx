@@ -157,7 +157,8 @@ export const Slideshow = () => {
   };
 
   return (
-    <div style={{ width: "100%", marginBottom: "204px" }}>
+    <div
+      style={{ width: "100%", marginBottom: "204px", display: "inline-block" }}>
       <ButtonWrapper>
         <ButtonContentWrapper>
           <PrimaryButton
