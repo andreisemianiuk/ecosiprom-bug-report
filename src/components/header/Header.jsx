@@ -8,8 +8,12 @@ import { ContactHeader } from "./ContactHeader";
 import HamburgerIcon from "../../assets/mobile/hamburger.svg";
 import PhoneIcon from "../../assets/mobile/phone_for_mobile_header.svg";
 import CrossIcon from "../../assets/mobile/cross_mobile.svg";
-import useScreenWidth from "../../common/screen-width/useScreenWidth.js";
 import { useState } from "react";
+import {
+  Desktop,
+  Default,
+} from "../../common/media-query-components/media-query-components";
+import { useMediaQuery } from "react-responsive";
 
 const HeaderContainer = styled.div`
   position: sticky;
@@ -27,9 +31,6 @@ const LogoNavbarContainer = styled.div`
 
   height: 80px;
   background-color: #ffffff;
-  @media (max-width: 768px) {
-    padding: 0 20px;
-  }
 `;
 const ContentWrapper = styled.div`
   display: flex;
@@ -46,13 +47,15 @@ const HamburgerWrapper = styled.div`
   width: 25px;
   height: 25px;
   cursor: pointer;
+  margin-left: 25px;
+`;
+const PhoneIconWrapper = styled.div`
+  margin-right: 25px;
 `;
 
 const Header = ({ location }) => {
-  const screenWidth = useScreenWidth();
-  const isMobile = screenWidth < 768;
-  console.log("🚀 ~ file: Header.jsx ~ line 54 ~ Header ~ isMobile", isMobile);
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const handleMobileMenu = () => {
     setIsOpenMobileMenu(!isOpenMobileMenu);
@@ -60,11 +63,13 @@ const Header = ({ location }) => {
 
   return (
     <HeaderContainer>
-      {!isMobile && <ContactHeader />}
+      <Desktop>
+        <ContactHeader />
+      </Desktop>
       <LogoNavbarContainer>
         <ContentWrapper>
-          {isMobile ? (
-            !isOpenMobileMenu ? (
+          <Default>
+            {!isOpenMobileMenu ? (
               <HamburgerWrapper onClick={handleMobileMenu}>
                 <HamburgerIcon />
               </HamburgerWrapper>
@@ -72,20 +77,24 @@ const Header = ({ location }) => {
               <HamburgerWrapper onClick={handleMobileMenu}>
                 <CrossIcon />
               </HamburgerWrapper>
-            )
-          ) : null}
+            )}
+          </Default>
           <Link to={"/"}>
-            <Logo color={"primary"} width={!isMobile ? 230 : 170} />
+            <Logo color={"primary"} width={isMobile ? 170 : 230} />
           </Link>
-          {!isMobile && <Navbar location={location} />}
-          {!isMobile && (
+          <Desktop>
+            <Navbar location={location} />
             <PrimaryButton
               text={"Оставить заявку"}
               pathTo={"/send-form"}
               state={{ modal: true }}
             />
-          )}
-          {isMobile && <PhoneIcon />}
+          </Desktop>
+          <Default>
+            <PhoneIconWrapper>
+              <PhoneIcon />
+            </PhoneIconWrapper>
+          </Default>
         </ContentWrapper>
       </LogoNavbarContainer>
     </HeaderContainer>
