@@ -62,42 +62,49 @@ const Header = ({ location }) => {
   };
 
   return (
-    <HeaderContainer>
+    <>
       <Desktop>
-        <ContactHeader />
+        <HeaderContainer>
+          <ContactHeader />
+          <LogoNavbarContainer>
+            <ContentWrapper>
+              <Link to={"/"}>
+                <Logo color={"primary"} width={isMobile ? 170 : 230} />
+              </Link>
+              <Navbar location={location} />
+              <PrimaryButton
+                text={"Оставить заявку"}
+                pathTo={"/send-form"}
+                state={{ modal: true }}
+              />
+            </ContentWrapper>
+          </LogoNavbarContainer>
+        </HeaderContainer>
       </Desktop>
-      <LogoNavbarContainer>
-        <ContentWrapper>
-          <Default>
-            {!isOpenMobileMenu ? (
-              <HamburgerWrapper onClick={handleMobileMenu}>
-                <HamburgerIcon />
-              </HamburgerWrapper>
-            ) : (
-              <HamburgerWrapper onClick={handleMobileMenu}>
-                <CrossIcon />
-              </HamburgerWrapper>
-            )}
-          </Default>
-          <Link to={"/"}>
-            <Logo color={"primary"} width={isMobile ? 170 : 230} />
-          </Link>
-          <Desktop>
-            <Navbar location={location} />
-            <PrimaryButton
-              text={"Оставить заявку"}
-              pathTo={"/send-form"}
-              state={{ modal: true }}
-            />
-          </Desktop>
-          <Default>
-            <PhoneIconWrapper>
-              <PhoneIcon />
-            </PhoneIconWrapper>
-          </Default>
-        </ContentWrapper>
-      </LogoNavbarContainer>
-    </HeaderContainer>
+      <Default>
+        <HeaderContainer>
+          <LogoNavbarContainer>
+            <ContentWrapper>
+              {!isOpenMobileMenu ? (
+                <HamburgerWrapper onClick={handleMobileMenu}>
+                  <HamburgerIcon />
+                </HamburgerWrapper>
+              ) : (
+                <HamburgerWrapper onClick={handleMobileMenu}>
+                  <CrossIcon />
+                </HamburgerWrapper>
+              )}
+              <Link to={"/"}>
+                <Logo color={"primary"} width={isMobile ? 170 : 230} />
+              </Link>
+              <PhoneIconWrapper>
+                <PhoneIcon />
+              </PhoneIconWrapper>
+            </ContentWrapper>
+          </LogoNavbarContainer>
+        </HeaderContainer>
+      </Default>
+    </>
   );
 };
 
