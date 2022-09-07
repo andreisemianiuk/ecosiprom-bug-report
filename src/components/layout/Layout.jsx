@@ -9,6 +9,9 @@ const MainContent = styled.div`
 `;
 
 const Layout = ({ children, location }) => {
+  if (typeof window === `undefined`) {
+    return <></>;
+  }
   return (
     <>
       <Header location={location} />
