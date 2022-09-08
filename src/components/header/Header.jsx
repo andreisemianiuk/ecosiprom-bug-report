@@ -21,9 +21,6 @@ const HeaderContainer = styled.div`
   width: 100%;
   z-index: 1000;
   border-bottom: 1px solid #dbdbe1;
-  /*@media (max-width: 768px) {
-    width: 100vw;
-  }*/
 `;
 const LogoNavbarContainer = styled.div`
   display: flex;
@@ -52,6 +49,23 @@ const HamburgerWrapper = styled.div`
 const PhoneIconWrapper = styled.div`
   margin-right: 25px;
 `;
+const MenuContainer = styled.div`
+  position: fixed;
+  top: 81px;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #fff;
+  transition: left 0.5s ease-in-out;
+`;
+const ContactHeaderWrapper = styled.div`
+  background-color: #f3f7f9;
+`;
+const SendButtonWrapper = styled.div`
+  width: 100%;
+  padding: 0 20px;
+`;
 
 const Header = ({ location }) => {
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
@@ -62,49 +76,59 @@ const Header = ({ location }) => {
   };
 
   return (
-    <>
+    <HeaderContainer>
       <Desktop>
-        <HeaderContainer>
-          <ContactHeader />
-          <LogoNavbarContainer>
-            <ContentWrapper>
-              <Link to={"/"}>
-                <Logo color={"primary"} width={isMobile ? 170 : 230} />
-              </Link>
-              <Navbar location={location} />
-              <PrimaryButton
-                text={"Оставить заявку"}
-                pathTo={"/send-form"}
-                state={{ modal: true }}
-              />
-            </ContentWrapper>
-          </LogoNavbarContainer>
-        </HeaderContainer>
+        <ContactHeader />
       </Desktop>
-      <Default>
-        <HeaderContainer>
-          <LogoNavbarContainer>
-            <ContentWrapper>
-              {!isOpenMobileMenu ? (
-                <HamburgerWrapper onClick={handleMobileMenu}>
-                  <HamburgerIcon />
-                </HamburgerWrapper>
-              ) : (
-                <HamburgerWrapper onClick={handleMobileMenu}>
-                  <CrossIcon />
-                </HamburgerWrapper>
-              )}
-              <Link to={"/"}>
-                <Logo color={"primary"} width={isMobile ? 170 : 230} />
-              </Link>
-              <PhoneIconWrapper>
-                <PhoneIcon />
-              </PhoneIconWrapper>
-            </ContentWrapper>
-          </LogoNavbarContainer>
-        </HeaderContainer>
-      </Default>
-    </>
+      <LogoNavbarContainer>
+        <ContentWrapper>
+          <Default>
+            {!isOpenMobileMenu ? (
+              <HamburgerWrapper onClick={handleMobileMenu}>
+                <HamburgerIcon />
+              </HamburgerWrapper>
+            ) : (
+              <HamburgerWrapper onClick={handleMobileMenu}>
+                <CrossIcon />
+              </HamburgerWrapper>
+            )}
+          </Default>
+          <Link to={"/"}>
+            <Logo color={"primary"} width={isMobile ? 170 : 230} />
+          </Link>
+          <Default>
+            <PhoneIconWrapper>
+              <PhoneIcon />
+            </PhoneIconWrapper>
+            {isOpenMobileMenu && (
+              <MenuContainer>
+                <Navbar location={location} />
+                <ContactHeaderWrapper>
+                  <ContactHeader />
+                  <SendButtonWrapper>
+                    <PrimaryButton
+                      isMobile
+                      height={48}
+                      text={"Оставить заявку"}
+                      pathTo={"/send-form"}
+                      state={{ modal: true }}
+                    />
+                  </SendButtonWrapper>
+                </ContactHeaderWrapper>
+              </MenuContainer>
+            )}
+          </Default>
+          <Desktop>
+            <Navbar location={location} />
+            <PrimaryButton
+              text={"Оставить заявку"}
+              pathTo={"/send-form"}
+              state={{ modal: true }}
+            />
+          </Desktop>
+        </ContentWrapper>
+      </LogoNavbarContainer>
+    </HeaderContainer>
   );
 };
 

@@ -4,7 +4,8 @@ import styled from "styled-components";
 import RightArrowIcon from "../../assets/right-arrow.svg";
 
 const StyledButton = styled.button`
-  width: ${(props) => (props.width ? props.width : `173`)}px;
+  width: ${(props) =>
+    props.isMobile ? "100%" : props.width ? `${props.width}px` : "173px"};
   height: ${(props) => (props.height ? props.height : `48`)}px;
   padding: 0 18px;
   font-size: 14px;
@@ -48,12 +49,14 @@ const PrimaryButton = ({
   callback,
   state,
   type,
+  isMobile,
 }) => {
   return (
     <Link to={pathTo} state={state}>
       <StyledButton
         onClick={callback}
         color={color}
+        isMobile={isMobile}
         width={width}
         height={height}
         border={border}

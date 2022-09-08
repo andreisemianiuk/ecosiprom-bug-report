@@ -13,24 +13,18 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   height: 100%;
-`;
-const MobileNav = styled.nav`
-  /*display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;*/
+  @media (max-width: 1123px) {
+    height: fit-content;
+  }
 `;
 const NavList = styled.ul`
   display: flex;
   justify-content: space-between;
   margin: 0;
-`;
-const MobileNavList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 0;
+  @media (max-width: 1123px) {
+    width: 100%;
+    flex-direction: column;
+  }
 `;
 const NavItem = styled.li`
   font-size: 15px;
@@ -41,6 +35,14 @@ const NavItem = styled.li`
   list-style: none;
   & :first-child {
     padding-left: 0;
+  }
+  @media (max-width: 1123px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding-left: 0;
+    border-bottom: 1px solid #dbdbe1;
   }
 `;
 const StyledNavLink = styled(Link)`
@@ -64,6 +66,9 @@ const StyledNavLink = styled(Link)`
     transform-origin: ${({ isActive }) => (isActive ? "left" : "right")};
     transform: ${({ isActive }) => (isActive ? "scaleX(1)" : "scaleX(0)")};
     transition: transform 0.3s ease-in-out;
+    @media (max-width: 1123px) {
+      display: none;
+    }
   }
   &:hover::before {
     transform-origin: left;
@@ -90,61 +95,28 @@ export const Navbar = ({ location }) => {
     }
   `);
   return (
-    <>
-      <Desktop>
-        <Nav>
-          <NavList>
-            {nodes.map(({ id, label, path }) => {
-              const pathname =
-                location.pathname.length > 1
-                  ? location.pathname.match(/\/.*?\//)[0]
-                  : location.pathname;
-              const isActive = pathname === path;
-              return (
-                <NavItem key={id}>
-                  <StyledNavLink to={path} isActive={isActive}>
-                    {label
-                      .split(" ")
-                      .map((word, i) =>
-                        i === 0
-                          ? `${word[0].toUpperCase()}${word.slice(1)}`
-                          : word
-                      )
-                      .join(" ")}
-                  </StyledNavLink>
-                </NavItem>
-              );
-            })}
-          </NavList>
-        </Nav>
-      </Desktop>
-      <Mobile>
-        <MobileNav>
-          <MobileNavList>
-            {nodes.map(({ id, label, path }) => {
-              const pathname =
-                location.pathname.length > 1
-                  ? location.pathname.match(/\/.*?\//)[0]
-                  : location.pathname;
-              const isActive = pathname === path;
-              return (
-                <NavItem key={id}>
-                  <StyledNavLink to={path} isActive={isActive}>
-                    {label
-                      .split(" ")
-                      .map((word, i) =>
-                        i === 0
-                          ? `${word[0].toUpperCase()}${word.slice(1)}`
-                          : word
-                      )
-                      .join(" ")}
-                  </StyledNavLink>
-                </NavItem>
-              );
-            })}
-          </MobileNavList>
-        </MobileNav>
-      </Mobile>
-    </>
+    <Nav>
+      <NavList>
+        {nodes.map(({ id, label, path }) => {
+          const pathname =
+            location.pathname.length > 1
+              ? location.pathname.match(/\/.*?\//)[0]
+              : location.pathname;
+          const isActive = pathname === path;
+          return (
+            <NavItem key={id}>
+              <StyledNavLink to={path} isActive={isActive}>
+                {label
+                  .split(" ")
+                  .map((word, i) =>
+                    i === 0 ? `${word[0].toUpperCase()}${word.slice(1)}` : word
+                  )
+                  .join(" ")}
+              </StyledNavLink>
+            </NavItem>
+          );
+        })}
+      </NavList>
+    </Nav>
   );
 };

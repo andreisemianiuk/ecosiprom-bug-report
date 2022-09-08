@@ -13,6 +13,14 @@ const Wrapper = styled.div`
   font-size: 14px;
   font-feature-settings: "pnum" on, "lnum" on;
   text-decoration: none;
+  @media (max-width: 1123px) {
+    flex-direction: column;
+    justify-content: space-between;
+    height: fit-content;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    background-color: inherit;
+  }
 `;
 const ContentWrapper = styled.div`
   width: 100%;
@@ -20,16 +28,11 @@ const ContentWrapper = styled.div`
   justify-content: flex-end;
   max-width: 1170px;
   margin: 0 auto;
-`;
-const PhoneWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-const PhoneCircleIconContainer = styled.div`
-  position: absolute;
-  left: 6.3px;
-  bottom: -4.5px;
+  @media (max-width: 1123px) {
+    flex-direction: column;
+    width: 200px;
+    justify-content: center;
+  }
 `;
 const ItemWrapper = styled.a`
   display: flex;
@@ -37,6 +40,10 @@ const ItemWrapper = styled.a`
   margin-left: 26px;
   &:first-child {
     margin-left: 0;
+  }
+  @media (max-width: 1123px) {
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 `;
 const Item = styled.a`
@@ -47,26 +54,48 @@ const Item = styled.a`
   padding-left: 10px;
   text-decoration: none;
 `;
+const PhoneWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+const IconWrapper = styled.div`
+  width: 20px;
+
+  display: flex;
+  justify-content: center;
+`;
+const PhoneCircleIconContainer = styled.div`
+  position: absolute;
+  left: 7px;
+  bottom: -4.5px;
+`;
 
 export const ContactHeader = () => {
   return (
     <Wrapper>
       <ContentWrapper>
         <ItemWrapper>
-          <MobileIcon />
+          <IconWrapper>
+            <MobileIcon />
+          </IconWrapper>
           <Item href="tel:+37529-662-30-04">+375 (29) 662-30-04</Item>
         </ItemWrapper>
         <ItemWrapper>
           <PhoneWrapper>
-            <PhoneIcon />
-            <PhoneCircleIconContainer>
-              <PhoneCircleIcon />
-            </PhoneCircleIconContainer>
+            <IconWrapper>
+              <PhoneIcon />
+              <PhoneCircleIconContainer>
+                <PhoneCircleIcon />
+              </PhoneCircleIconContainer>
+            </IconWrapper>
           </PhoneWrapper>
           <Item href="tel:+37517-275-23-06">+375 (17) 275-23-06</Item>
         </ItemWrapper>
         <ItemWrapper>
-          <EmailIcon />
+          <IconWrapper>
+            <EmailIcon />
+          </IconWrapper>
           <Item href="mailto:info@ecosiprom.com">info@ecosiprom.com</Item>
         </ItemWrapper>
       </ContentWrapper>
