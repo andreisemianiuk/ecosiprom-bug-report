@@ -8,6 +8,9 @@ const ContentWrapper = styled.section`
   max-width: 1170px;
   margin: 0 auto;
   padding-bottom: 80px;
+  @media (max-width: 767px) {
+    padding-top: 20px;
+  }
 `;
 const Navigation = styled.div`
   padding: 50px 0 20px;
@@ -16,14 +19,24 @@ const Title = styled.h1`
   line-height: 48px;
   margin: 0;
   margin-bottom: 40px;
+  @media (max-width: 767px) {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    line-height: 40px;
+    font-size: 32px;
+  }
 `;
 const ItemsWrapper = styled.div`
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(3, 377px);
   grid-template-rows: repeat(2, 350px);
-
   justify-content: center;
+  @media (max-width: 767px) {
+    column-gap: 20px;
+    grid-template-columns: repeat(1, 335px);
+    grid-template-rows: repeat(6, 270px);
+  }
 `;
 const ButtonWrapper = styled.div`
   display: flex;

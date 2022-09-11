@@ -9,6 +9,8 @@ import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
 import {
   Default,
+  Desktop,
+  Mobile,
   TabletOrMobile,
 } from "../../common/media-query-components/media-query-components";
 import LeftArrow from "../../images/left-arrow.png";
@@ -19,6 +21,9 @@ import ProductionDirections from "../directions-of-production/ProductionDirectio
 const SlideshowContainer = styled.div`
   width: 100%;
   margin-bottom: 204px;
+  @media (max-width: 767px) {
+    margin-bottom: 0;
+  }
 `;
 const ImageWrapper = styled.div`
   background: linear-gradient(
@@ -122,7 +127,7 @@ const ArrowWrapper = styled.div`
   width: 100%;
   height: 100%;
   @media (max-width: 1123px) {
-    display: none;
+    /*visibility: collapse;*/
   }
 `;
 const ArrowInnerWrapper = styled.div`
@@ -143,6 +148,31 @@ const ArrowContainer = styled.div`
 const ArrowImage = styled.img`
   width: 36px;
   height: 36px;
+`;
+const Indicator = styled.div`
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  z-index: 99;
+  text-align: center;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  margin: 0;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  &.active {
+    border-color: #2787a7;
+    background-color: #2787a7;
+  }
 `;
 
 export const Slideshow = () => {
@@ -176,6 +206,7 @@ export const Slideshow = () => {
     },
   };
 
+  const indicators = () => <Indicator />;
   const properties = {
     prevArrow: (
       <ArrowWrapper>
@@ -195,16 +226,9 @@ export const Slideshow = () => {
         </ArrowInnerWrapper>
       </ArrowWrapper>
     ),
+    indicators: indicators,
   };
-  const indicators = () => <div className="indicator" />;
-  const responsiveSettings = [
-    {
-      breakpoint: 1123,
-      settings: {
-        indicators: indicators,
-      },
-    },
-  ];
+
   return (
     <SlideshowContainer>
       <Default>
@@ -236,7 +260,7 @@ export const Slideshow = () => {
           <ProductionDirections bottomMargin={130} isMain />
         </DirectionsContentWrapper>
       </DirectionsWrapper>
-      <Fade {...properties} responsive={responsiveSettings}>
+      <Fade {...properties}>
         {nodes.map((node) => {
           let image = getImage(node.localFile.childImageSharp.gatsbyImageData);
           let bgImage = convertToBgImage(image);
