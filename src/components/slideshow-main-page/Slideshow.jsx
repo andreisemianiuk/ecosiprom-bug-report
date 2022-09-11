@@ -122,7 +122,7 @@ const ArrowWrapper = styled.div`
   width: 100%;
   height: 100%;
   @media (max-width: 1123px) {
-    display: none;
+    /*visibility: collapse;*/
   }
 `;
 const ArrowInnerWrapper = styled.div`
@@ -202,6 +202,7 @@ export const Slideshow = () => {
       breakpoint: 1123,
       settings: {
         indicators: indicators,
+        //canSwipe: true,
       },
     },
   ];
