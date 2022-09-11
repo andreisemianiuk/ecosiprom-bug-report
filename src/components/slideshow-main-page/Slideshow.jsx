@@ -2,16 +2,24 @@ import { graphql, useStaticQuery } from "gatsby";
 import BackgroundImage from "gatsby-background-image";
 import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
+import parse, { domToReact } from "html-react-parser";
 import React from "react";
 import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
-import parse, { domToReact } from "html-react-parser";
+import {
+  Default,
+  TabletOrMobile,
+} from "../../common/media-query-components/media-query-components";
 import LeftArrow from "../../images/left-arrow.png";
 import RightArrow from "../../images/right-arrow.png";
 import PrimaryButton from "../buttons/PrimaryButton";
 import ProductionDirections from "../directions-of-production/ProductionDirections";
 
+const SlideshowContainer = styled.div`
+  width: 100%;
+  margin-bottom: 204px;
+`;
 const ImageWrapper = styled.div`
   background: linear-gradient(
     89.9deg,
@@ -39,11 +47,20 @@ const ContentWrapper = styled.div`
   max-width: 1170px;
   color: #fff;
   padding: 0 0 169px;
+  @media (max-width: 991px) {
+    max-width: fit-content;
+    padding: 140px 20px 0;
+  }
 `;
 const BackgroundImageLabel = styled.h1`
   max-width: 668px;
   padding: 116px 0 21px;
   margin: 0;
+  @media (max-width: 991px) {
+    font-size: 28px;
+    line-height: 36px;
+    padding: 0;
+  }
 `;
 const BackgroundImageInfo = styled.p`
   width: 584px;
@@ -51,10 +68,25 @@ const BackgroundImageInfo = styled.p`
   line-height: 24px;
   font-weight: 500;
   margin: 0;
+  @media (max-width: 991px) {
+    width: fit-content;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 `;
 const ButtonWrapper = styled.div`
   position: absolute;
   top: 425px;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  @media (max-width: 991px) {
+    display: none;
+  }
+`;
+const MobileButtonWrapper = styled.div`
+  position: absolute;
+  top: 480px;
   left: 0;
   width: 100%;
   z-index: 100;
@@ -64,6 +96,9 @@ const ButtonContentWrapper = styled.div`
   height: 100%;
   max-width: 1170px;
   margin: 0 auto;
+  @media (max-width: 991px) {
+    padding: 0 20px;
+  }
 `;
 const DirectionsWrapper = styled.div`
   position: absolute;
@@ -71,6 +106,9 @@ const DirectionsWrapper = styled.div`
   left: 0;
   width: 100%;
   z-index: 100;
+  @media (max-width: 991px) {
+    display: none;
+  }
 `;
 const DirectionsContentWrapper = styled.div`
   width: 100%;
@@ -83,6 +121,9 @@ const ArrowWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  @media (max-width: 1123px) {
+    display: none;
+  }
 `;
 const ArrowInnerWrapper = styled.div`
   position: relative;
@@ -155,26 +196,47 @@ export const Slideshow = () => {
       </ArrowWrapper>
     ),
   };
-
+  const indicators = () => <div className="indicator" />;
+  const responsiveSettings = [
+    {
+      breakpoint: 1123,
+      settings: {
+        indicators: indicators,
+      },
+    },
+  ];
   return (
-    <div
-      style={{ width: "100%", marginBottom: "204px", display: "inline-block" }}>
-      <ButtonWrapper>
-        <ButtonContentWrapper>
-          <PrimaryButton
-            text={"Подробнее"}
-            width={138}
-            height={56}
-            pathTo={"/projects/"}
-          />
-        </ButtonContentWrapper>
-      </ButtonWrapper>
+    <SlideshowContainer>
+      <Default>
+        <ButtonWrapper>
+          <ButtonContentWrapper>
+            <PrimaryButton
+              text={"Подробнее"}
+              width={138}
+              height={56}
+              pathTo={"/projects/"}
+            />
+          </ButtonContentWrapper>
+        </ButtonWrapper>
+      </Default>
+      <TabletOrMobile>
+        <MobileButtonWrapper>
+          <ButtonContentWrapper>
+            <PrimaryButton
+              text={"Подробнее"}
+              isMobile
+              height={48}
+              pathTo={"/projects/"}
+            />
+          </ButtonContentWrapper>
+        </MobileButtonWrapper>
+      </TabletOrMobile>
       <DirectionsWrapper>
         <DirectionsContentWrapper>
           <ProductionDirections bottomMargin={130} isMain />
         </DirectionsContentWrapper>
       </DirectionsWrapper>
-      <Fade {...properties}>
+      <Fade {...properties} responsive={responsiveSettings}>
         {nodes.map((node) => {
           let image = getImage(node.localFile.childImageSharp.gatsbyImageData);
           let bgImage = convertToBgImage(image);
@@ -199,6 +261,6 @@ export const Slideshow = () => {
           );
         })}
       </Fade>
-    </div>
+    </SlideshowContainer>
   );
 };

@@ -60,6 +60,7 @@ const MenuContainer = styled.div`
   transition: left 0.5s ease-in-out;
 `;
 const ContactHeaderWrapper = styled.div`
+  padding-bottom: 100px;
   background-color: #f3f7f9;
 `;
 const SendButtonWrapper = styled.div`

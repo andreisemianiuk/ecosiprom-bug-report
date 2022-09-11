@@ -5,7 +5,9 @@ import Header from "../header/Header";
 
 const MainContent = styled.div`
   min-height: 80vh;
-  /*padding-top: 110px;*/
+  @media (max-width: 1123px) {
+    max-width: 100vw;
+  }
 `;
 
 const Layout = ({ children, location }) => {
@@ -17,7 +19,6 @@ const Layout = ({ children, location }) => {
       <Header location={location} />
       <MainContent>{children}</MainContent>
       <Footer />
-      {/*<Loader />*/}
     </>
   );
 };
