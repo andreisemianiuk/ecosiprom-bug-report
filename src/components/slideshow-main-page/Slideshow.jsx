@@ -9,8 +9,6 @@ import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
 import {
   Default,
-  Desktop,
-  Mobile,
   TabletOrMobile,
 } from "../../common/media-query-components/media-query-components";
 import LeftArrow from "../../images/left-arrow.png";
