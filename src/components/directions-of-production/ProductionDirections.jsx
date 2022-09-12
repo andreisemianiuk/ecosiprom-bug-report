@@ -25,7 +25,8 @@ const DirectionsItemStyled = styled.li`
   justify-content: space-between;
 
   position: relative;
-  width: 234px;
+  width: 100%;
+  max-width: 234px;
   height: 230px;
   box-sizing: border-box;
   background: #ffffff;
@@ -58,6 +59,9 @@ const DirectionTitle = styled.div`
   font-weight: 700;
   line-height: 22px;
   height: 66px;
+  @media (max-width: 1223px) {
+    font-size: 13px;
+  }
 `;
 const StyledIcon = styled.div`
   transition: filter 0.4s ease-in-out;

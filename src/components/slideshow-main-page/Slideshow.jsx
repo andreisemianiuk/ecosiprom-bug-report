@@ -9,6 +9,7 @@ import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
 import {
   Default,
+  DesktopOrLaptop,
   TabletOrMobile,
 } from "../../common/media-query-components/media-query-components";
 import LeftArrow from "../../images/left-arrow.png";
@@ -19,6 +20,9 @@ import ProductionDirections from "../directions-of-production/ProductionDirectio
 const SlideshowContainer = styled.div`
   width: 100%;
   margin-bottom: 204px;
+  @media (max-width: 991px) {
+    margin-bottom: 50px;
+  }
   @media (max-width: 767px) {
     margin-bottom: 0;
   }
@@ -50,7 +54,13 @@ const ContentWrapper = styled.div`
   max-width: 1170px;
   color: #fff;
   padding: 0 0 169px;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
   @media (max-width: 991px) {
+    max-width: 700px;
+  }
+  @media (max-width: 767px) {
     max-width: fit-content;
     padding: 140px 20px 0;
   }
@@ -59,7 +69,7 @@ const BackgroundImageLabel = styled.h1`
   max-width: 668px;
   padding: 116px 0 21px;
   margin: 0;
-  @media (max-width: 991px) {
+  @media (max-width: 767px) {
     font-size: 28px;
     line-height: 36px;
     padding: 0;
@@ -99,7 +109,11 @@ const ButtonContentWrapper = styled.div`
   height: 100%;
   max-width: 1170px;
   margin: 0 auto;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
   @media (max-width: 991px) {
+    max-width: 740px;
     padding: 0 20px;
   }
 `;
@@ -117,6 +131,9 @@ const DirectionsContentWrapper = styled.div`
   width: 100%;
   max-width: 1170px;
   margin: 0 auto;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
 `;
 const ArrowWrapper = styled.div`
   position: absolute;
@@ -229,7 +246,7 @@ export const Slideshow = () => {
 
   return (
     <SlideshowContainer>
-      <Default>
+      <DesktopOrLaptop>
         <ButtonWrapper>
           <ButtonContentWrapper>
             <PrimaryButton
@@ -240,7 +257,7 @@ export const Slideshow = () => {
             />
           </ButtonContentWrapper>
         </ButtonWrapper>
-      </Default>
+      </DesktopOrLaptop>
       <TabletOrMobile>
         <MobileButtonWrapper>
           <ButtonContentWrapper>

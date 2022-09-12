@@ -4,6 +4,10 @@ import styled from "styled-components";
 import PrimaryButton from "../buttons/PrimaryButton";
 import parse, { domToReact } from "html-react-parser";
 import CatalogBox from "./CatalogBox";
+import {
+  Mobile,
+  NotMobile,
+} from "../../common/media-query-components/media-query-components";
 
 const Container = styled.section`
   display: flex;
@@ -11,6 +15,9 @@ const Container = styled.section`
 
   background-color: #f3f7f9;
   padding: 80px 0;
+  @media (max-width: 767px) {
+    padding: 50px 0;
+  }
 `;
 const ContentWrapper = styled.div`
   display: flex;
@@ -18,6 +25,12 @@ const ContentWrapper = styled.div`
 
   width: 100%;
   max-width: 1170px;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+  }
 `;
 const Header = styled.div`
   display: flex;
@@ -27,6 +40,11 @@ const Header = styled.div`
 `;
 const Title = styled.h1`
   margin: 0;
+  @media (max-width: 767px) {
+    font-size: 32px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
 `;
 const Info = styled.div`
   color: #4a5763;
@@ -37,8 +55,22 @@ const Info = styled.div`
 const List = styled.div`
   display: flex;
   justify-content: space-between;
-
   width: 100%;
+  @media (max-width: 991px) {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(2, minmax(335px, 1fr));
+    grid-template-rows: repeat(2, max(375px));
+    row-gap: 40px;
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(1, minmax(100vw, 1fr));
+    grid-template-rows: repeat(4, max(375px));
+  }
+`;
+const ButtonMobileWrapper = styled.div`
+  padding: 0 20px;
+  margin-top: 60px;
 `;
 
 const CatalogMain = ({ location }) => {
@@ -89,9 +121,13 @@ const CatalogMain = ({ location }) => {
       <ContentWrapper>
         <Header>
           <Title>Каталог</Title>
-          <PrimaryButton text="Все оборудование" pathTo={"/catalog/"} />
+          <NotMobile>
+            <PrimaryButton text="Все оборудование" pathTo={"/catalog/"} />
+          </NotMobile>
         </Header>
-        <Info>{parse(content, options)}</Info>
+        <NotMobile>
+          <Info>{parse(content, options)}</Info>
+        </NotMobile>
         <List>
           {nodes.map((item) => {
             return (
@@ -104,6 +140,15 @@ const CatalogMain = ({ location }) => {
             );
           })}
         </List>
+        <Mobile>
+          <ButtonMobileWrapper>
+            <PrimaryButton
+              text="Все оборудование"
+              pathTo={"/catalog/"}
+              isMobile
+            />
+          </ButtonMobileWrapper>
+        </Mobile>
       </ContentWrapper>
     </Container>
   );

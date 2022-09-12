@@ -5,7 +5,7 @@ import Header from "../header/Header";
 
 const MainContent = styled.div`
   min-height: 80vh;
-  @media (max-width: 1123px) {
+  @media (max-width: 1223px) {
     max-width: 100vw;
   }
 `;

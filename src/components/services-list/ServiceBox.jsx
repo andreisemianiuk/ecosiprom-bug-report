@@ -1,11 +1,13 @@
-import * as React from "react";
-import styled from "styled-components";
 import { Link } from "gatsby";
+import BackgroundImage from "gatsby-background-image";
 import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
 import parse, { domToReact } from "html-react-parser";
+import * as React from "react";
+import { useLayoutEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
 import SecondaryButton from "../buttons/SecondaryButton";
-import BackgroundImage from "gatsby-background-image";
 
 const Item = styled(Link)`
   width: 100%;
@@ -21,25 +23,29 @@ const Item = styled(Link)`
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 `;
+const BackgroundImageContainer = styled(BackgroundImage)`
+  width: 100%;
+  height: 100%;
+`;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
   height: 100%;
-`;
-const BackgroundImageContainer = styled(BackgroundImage)`
-  width: 100%;
-  height: 100%;
+  padding: 20px;
 `;
 const InfoBox = styled.div`
   min-height: 108px;
   padding-top: 20px;
   padding-left: 20px;
-  margin: 20px;
   background-color: #fff;
   border-radius: 2px;
   overflow: hidden;
+  width: 100%;
+  @media (max-width: 767px) {
+    padding-right: 10px;
+  }
 `;
 const ItemTitle = styled.h3`
   font-weight: 700;
@@ -48,6 +54,9 @@ const ItemTitle = styled.h3`
   transition: color 0.3s ease-in-out;
   &::first-letter {
     text-transform: capitalize;
+  }
+  @media (max-width: 767px) {
+    margin-bottom: 10px;
   }
 `;
 const ItemList = styled.ul`
@@ -67,6 +76,20 @@ const SubItem = styled.li`
   margin-left: 40px;
   &::marker {
     font-size: 0.6em;
+  }
+  @media (max-width: 767px) {
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    &::marker {
+      font-size: 1em;
+      content: "- ";
+    }
+  }
+`;
+const StyledButton = styled.div`
+  @media (max-width: 767px) {
+    margin-top: 10px;
   }
 `;
 
@@ -93,6 +116,13 @@ const ServiceBox = ({ service }) => {
     setHovered(false);
   };
 
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 991 });
+  useLayoutEffect(() => {
+    if (isTabletOrMobile) {
+      setHovered(true);
+    }
+  }, []);
+
   return (
     <Item
       key={id}
@@ -110,7 +140,9 @@ const ServiceBox = ({ service }) => {
             <ItemTitle hovered={hovered}>{altText}</ItemTitle>
             <ItemList hovered={hovered}>
               {parse(description, options)}
-              <SecondaryButton title="Подробнее" hovered={true} />
+              <StyledButton>
+                <SecondaryButton title="Подробнее" hovered={true} />
+              </StyledButton>
             </ItemList>
           </InfoBox>
         </Content>

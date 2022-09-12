@@ -18,6 +18,10 @@ const Container = styled(Link)`
     hovered ? "0px 15px 30px rgba(0, 0, 0, 0.1)" : null};
   cursor: pointer;
   transition: box-shadow 0.3s ease-in-out;
+  @media (max-width: 767px) {
+    width: 100%;
+    max-width: 335px;
+  }
 `;
 
 const InfoBox = styled.div`
