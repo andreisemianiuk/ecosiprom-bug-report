@@ -7,6 +7,143 @@ import styled from "styled-components";
 import parse, { domToReact } from "html-react-parser";
 import ShortRight from "../../images/short_right.png";
 import PrimaryButton from "../buttons/PrimaryButton";
+import {
+  Mobile,
+  NotMobile,
+} from "../../common/media-query-components/media-query-components";
+import { useMediaQuery } from "react-responsive";
+import { useEffect } from "react";
+
+const ImplementationCycle = () => {
+  const {
+    allWpMediaItem: { nodes },
+  } = useStaticQuery(graphql`
+    query CycleQuery {
+      allWpMediaItem(filter: { title: { regex: "/cycle/" } }) {
+        nodes {
+          id
+          altText
+          caption
+          description
+          localFile {
+            childImageSharp {
+              gatsbyImageData(formats: WEBP, placeholder: BLURRED)
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const sortedNodes = nodes.sort(
+    (a, b) => a.caption.match(/\d/) - b.caption.match(/\d/)
+  );
+  const [hoveredId, setHoveredId] = React.useState(0);
+  const currentItem = sortedNodes.find((_, id) => id === hoveredId) || nodes[0];
+
+  const currentCountValue = currentItem.caption.replace(/\D/g, "");
+  const currentInfoLabel = currentItem.altText;
+  const currentInfoDescription = currentItem.description;
+
+  const image = getImage(currentItem.localFile.childImageSharp.gatsbyImageData);
+  const bgImage = convertToBgImage(image);
+
+  const handleHoverOn = (index) => {
+    setHoveredId(index);
+  };
+
+  const switchItem = () => {
+    if (hoveredId < 5) {
+      setHoveredId(hoveredId + 1);
+    } else {
+      setHoveredId(0);
+    }
+  };
+
+  const options = {
+    replace: (domNode) => {
+      if (domNode.name === "li") {
+        return (
+          <InfoDescriptionItem>
+            <ShortRightIcon src={ShortRight} alt="short right" />
+            {domToReact(domNode.children, options)}
+          </InfoDescriptionItem>
+        );
+      }
+    },
+  };
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  return (
+    <Container onClick={switchItem}>
+      <FixedInfoWrapper>
+        <FixedInfo>
+          <LeftBlock>
+            <Title>Полный цикл реализации проектов “под ключ”</Title>
+            <CurrentInfoLabel>{currentInfoLabel}</CurrentInfoLabel>
+            <CurrentInfoContent>
+              {parse(currentInfoDescription, options)}
+            </CurrentInfoContent>
+            <ButtonWrapper>
+              <PrimaryButton
+                isMobile={isMobile}
+                text="Оставить заявку"
+                pathTo={"/send-form"}
+                state={{ modal: true }}
+              />
+            </ButtonWrapper>
+            <Mobile>
+              <Counter>
+                <EditableCounterValue>
+                  0{parse(currentCountValue)}
+                </EditableCounterValue>{" "}
+                / 06
+              </Counter>
+            </Mobile>
+          </LeftBlock>
+          <NotMobile>
+            <MenuWrapper>
+              <Menu>
+                {nodes.map((node, id) => {
+                  const isHovered = hoveredId === id ? true : false;
+                  return (
+                    <MenuItemWrapper
+                      key={node.id}
+                      onMouseOver={() => handleHoverOn(id)}
+                      hovered={isHovered}>
+                      <MenuItem>{node.altText}</MenuItem>
+                      <ItemMarker hovered={isHovered} />
+                      {isHovered && <ItemMarkerHovered />}
+                    </MenuItemWrapper>
+                  );
+                })}
+              </Menu>
+              <Counter>
+                <EditableCounterValue>
+                  0{parse(currentCountValue)}
+                </EditableCounterValue>{" "}
+                / 06
+              </Counter>
+            </MenuWrapper>
+          </NotMobile>
+        </FixedInfo>
+      </FixedInfoWrapper>
+      <BackgroundImageContainer
+        Tag="div"
+        // Spread bgImage into BackgroundImage:
+        {...bgImage}
+        key={currentItem.title}
+        preserveStackingContext>
+        <InnerContainer>
+          <ContentWrapper />
+        </InnerContainer>
+      </BackgroundImageContainer>
+    </Container>
+  );
+};
+
+export default ImplementationCycle;
 
 const Container = styled.div`
   position: relative;
@@ -25,13 +162,23 @@ const FixedInfo = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 1170px;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 730px;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+    max-width: max-content;
+    padding: 0 20px;
+  }
 `;
 const LeftBlock = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
   padding-bottom: 20px;
-
   color: #fff;
 `;
 const Title = styled.h2`
@@ -39,17 +186,41 @@ const Title = styled.h2`
 
   margin: 0;
   padding: 150px 0 30px;
+  @media (max-width: 991px) {
+    font-size: 28px;
+    line-height: 36px;
+    max-width: 380px;
+    padding-bottom: 20px;
+  }
 `;
 const CurrentInfoLabel = styled.div`
   font-size: 20px;
   line-height: 28px;
   font-weight: 800;
   margin-bottom: 30px;
+  @media (max-width: 991px) {
+    max-width: 380px;
+  }
+  @media (max-width: 767px) {
+    margin-bottom: 20px;
+    max-width: 400px;
+  }
 `;
 const CurrentInfoContent = styled.ul`
   font-size: 15px;
   line-height: 32px;
   font-weight: 400;
+  @media (max-width: 991px) {
+    max-width: 380px;
+  }
+  @media (max-width: 767px) {
+    margin-top: 0;
+    margin-bottom: 30px;
+    max-width: 400px;
+  }
+`;
+const ButtonWrapper = styled.div`
+  width: 100%;
 `;
 const ShortRightIcon = styled.img`
   margin-right: 16px;
@@ -95,7 +266,6 @@ const ItemMarker = styled.span`
   height: ${({ hovered }) => (hovered ? "7px" : "3px")};
   background-color: #fff;
   border-radius: 50%;
-
   z-index: 1;
 `;
 const ItemMarkerHovered = styled.span`
@@ -134,113 +304,3 @@ const ContentWrapper = styled.div`
   max-width: 1170px;
   color: #fff;
 `;
-
-const ImplementationCycle = () => {
-  const {
-    allWpMediaItem: { nodes },
-  } = useStaticQuery(graphql`
-    query CycleQuery {
-      allWpMediaItem(filter: { title: { regex: "/cycle/" } }) {
-        nodes {
-          id
-          altText
-          caption
-          description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(formats: WEBP, placeholder: BLURRED)
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  const sortedNodes = nodes.sort(
-    (a, b) => a.caption.match(/\d/) - b.caption.match(/\d/)
-  );
-  const [hoveredId, setHoveredId] = React.useState(sortedNodes[0].id);
-  const currentItem =
-    sortedNodes.find((node) => node.id === hoveredId) || nodes[0];
-
-  const currentCountValue = currentItem.caption.replace(/\D/g, "");
-  const currentInfoLabel = currentItem.altText;
-  const currentInfoDescription = currentItem.description;
-
-  const image = getImage(currentItem.localFile.childImageSharp.gatsbyImageData);
-  const bgImage = convertToBgImage(image);
-
-  const handleHoverOn = (index) => {
-    setHoveredId(index);
-  };
-
-  const options = {
-    replace: (domNode) => {
-      if (domNode.name === "li") {
-        return (
-          <InfoDescriptionItem>
-            <ShortRightIcon src={ShortRight} alt="short right" />
-            {domToReact(domNode.children, options)}
-          </InfoDescriptionItem>
-        );
-      }
-    },
-  };
-
-  return (
-    <Container>
-      <FixedInfoWrapper>
-        <FixedInfo>
-          <LeftBlock>
-            <Title>Полный цикл реализации проектов “под ключ”</Title>
-            <CurrentInfoLabel>{currentInfoLabel}</CurrentInfoLabel>
-            <CurrentInfoContent>
-              {parse(currentInfoDescription, options)}
-            </CurrentInfoContent>
-            <PrimaryButton
-              text="Оставить заявку"
-              pathTo={"/send-form"}
-              state={{ modal: true }}
-            />
-          </LeftBlock>
-          <MenuWrapper>
-            <Menu>
-              {nodes.map((node) => {
-                const isHovered = hoveredId === node.id ? true : false;
-
-                return (
-                  <MenuItemWrapper
-                    key={node.id}
-                    onMouseOver={() => handleHoverOn(node.id)}
-                    hovered={isHovered}>
-                    <MenuItem>{node.altText}</MenuItem>
-                    <ItemMarker hovered={isHovered} />
-                    {isHovered && <ItemMarkerHovered />}
-                  </MenuItemWrapper>
-                );
-              })}
-            </Menu>
-            <Counter>
-              <EditableCounterValue>
-                0{parse(currentCountValue)}
-              </EditableCounterValue>{" "}
-              / 06
-            </Counter>
-          </MenuWrapper>
-        </FixedInfo>
-      </FixedInfoWrapper>
-      <BackgroundImageContainer
-        Tag="div"
-        // Spread bgImage into BackgroundImage:
-        {...bgImage}
-        key={currentItem.title}
-        preserveStackingContext>
-        <InnerContainer>
-          <ContentWrapper />
-        </InnerContainer>
-      </BackgroundImageContainer>
-    </Container>
-  );
-};
-
-export default ImplementationCycle;

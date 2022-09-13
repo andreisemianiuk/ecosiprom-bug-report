@@ -29,7 +29,7 @@ module.exports = {
               inset: "initial",
               padding: 0,
               width: "370px",
-              height: "460px",
+              height: "530px",
               overflow: "hidden",
               backgroundColor: "#CFE0E6",
             },

@@ -52,7 +52,7 @@ const PrimaryButton = ({
   isMobile,
 }) => {
   return (
-    <Link to={pathTo} state={state}>
+    <Link to={pathTo} state={state} style={{ maxWidth: "fit-content" }}>
       <StyledButton
         onClick={callback}
         color={color}

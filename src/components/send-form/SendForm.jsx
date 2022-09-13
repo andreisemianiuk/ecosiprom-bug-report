@@ -15,6 +15,7 @@ import {
 import UserIcon from "../../assets/user.svg";
 import PhoneIcon from "../../assets/phone-2.svg";
 import EmailIcon from "../../assets/email.svg";
+import OrderTopicIcon from "../../assets/order-topic.svg";
 import CrossIcon1 from "../../assets/cross-1.svg";
 import CrossIcon2 from "../../assets/cross-2.svg";
 
@@ -53,6 +54,12 @@ const SendForm = ({ closeTo }) => {
             <EmailIcon />
           </IconWrapper>
           <Input type="email" name="email" placeholder="Ваш почтовый адрес" />
+        </InputWrapper>
+        <InputWrapper>
+          <IconWrapper>
+            <OrderTopicIcon />
+          </IconWrapper>
+          <Input type="text" name="description" placeholder="Тема заявки" />
         </InputWrapper>
         <PrimaryButton
           text={"Оставить заявку"}

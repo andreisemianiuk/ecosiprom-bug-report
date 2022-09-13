@@ -161,15 +161,16 @@ a:focus {
 }
 
 .ReactModal__Content {
-  width: 370px;
-  height: 460px;
   transform: translateY(50px);
   transition: transform 500ms ease-out;
-  overflow-y: hidden;
 }
 
 .ReactModal__Content--after-open {
   transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
 }
 
 .ReactModal__Content--before-close {
