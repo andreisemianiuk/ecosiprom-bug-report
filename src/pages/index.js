@@ -27,7 +27,7 @@ function HomePage({ location }) {
       <CatalogMain location={location} />
       <EquipmentLogos />
       <ImplementationCycle />
-      <ProjectsMain location={location} />
+      <ProjectsMain />
       <AboutUs isMain />
       <PartnerLogos />
       <FeedbackForm />

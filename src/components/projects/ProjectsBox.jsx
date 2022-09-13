@@ -4,13 +4,16 @@ import { Link } from "gatsby";
 import parse, { domToReact } from "html-react-parser";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { memo } from "react";
 
 const Container = styled(Link)`
   display: flex;
   flex-direction: column;
 
-  width: 377px;
+  width: 100%;
+  max-width: 377px;
   height: 490px;
+  text-decoration: none;
 
   box-shadow: ${({ hovered }) =>
     hovered ? "0px 15px 30px rgba(0, 0, 0, 0.1)" : null};
@@ -43,6 +46,10 @@ const References = styled.div`
   line-height: 22px;
   margin-bottom: 10px;
   padding-right: 10px;
+  @media (max-width: 991px) {
+    max-height: max-content;
+    padding-right: 0;
+  }
 `;
 const ImageWrapper = styled.div`
   width: 100%;
@@ -85,26 +92,23 @@ const ProjectsBox = ({ itemData }) => {
   const pathToProject = `/projects/${title?.replace(/projects-/g, "")}` || "/";
 
   return (
-    <Link
+    <Container
       to={pathToProject}
-      style={{ textDecoration: "none", color: "inherit" }}>
-      <Container
-        key={id}
-        onMouseOver={handleHoverOn}
-        onMouseLeave={handleHoverOff}
-        hovered={hovered}>
-        <ImageWrapper>
-          <GatsbyImage image={image} alt={altText} />
-          <ImageBackgroundLayer hovered={hovered} />
-        </ImageWrapper>
-        <InfoBox>
-          <Title hovered={hovered}>{altText}</Title>
-          {parse(description || "", options)}
-          <SecondaryButton title="Подробнее" hovered={hovered} />
-        </InfoBox>
-      </Container>
-    </Link>
+      key={id}
+      onMouseOver={handleHoverOn}
+      onMouseLeave={handleHoverOff}
+      hovered={hovered}>
+      <ImageWrapper>
+        <GatsbyImage image={image} alt={altText} />
+        <ImageBackgroundLayer hovered={hovered} />
+      </ImageWrapper>
+      <InfoBox>
+        <Title hovered={hovered}>{altText}</Title>
+        {parse(description || "", options)}
+        <SecondaryButton title="Подробнее" hovered={hovered} />
+      </InfoBox>
+    </Container>
   );
 };
 
-export default ProjectsBox;
+export default memo(ProjectsBox);
