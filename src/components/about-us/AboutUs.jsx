@@ -68,14 +68,12 @@ const AboutUs = () => {
       if (
         domNode.attribs &&
         (domNode.attribs.class === "main-slideshow-images" ||
-          domNode.attribs.class === "directions" ||
           domNode.attribs.class === "services-container" ||
-          domNode.attribs.class === "implementation-cycle" ||
-          domNode.attribs.class === "projects" ||
           domNode.attribs.class === "catalog" ||
-          domNode.attribs.class === "about-us" ||
+          domNode.attribs.class === "equipment-logos" ||
           domNode.attribs.class === "partners-logos" ||
-          domNode.attribs.class === "equipment-logos")
+          domNode.attribs.class === "implementation-cycle" ||
+          domNode.attribs.class === "about-us")
       ) {
         return <></>;
       }
@@ -102,7 +100,7 @@ const AboutUs = () => {
     },
     {
       label: "24/7",
-      text: " Круглосуточная техническая поддержка и консультация",
+      text: "Круглосуточная техническая поддержка и консультация",
     },
   ];
 
