@@ -8,6 +8,9 @@ const Container = styled.div`
   width: 100%;
   height: 350px;
   background-color: #f3f7f9;
+  @media (max-width: 767px) {
+    height: max-content;
+  }
 `;
 const InnerWrapper = styled.div`
   width: 100%;
@@ -15,6 +18,12 @@ const InnerWrapper = styled.div`
   max-width: 1170px;
   margin: 0 auto;
   padding: 80px 0;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 767px) {
+    padding: 50px 20px;
+  }
 `;
 const FooterTitle = styled.h3`
   width: 100%;
@@ -27,12 +36,19 @@ const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const InfoItem = styled.div`
   display: flex;
   flex-direction: column;
   width: 278px;
   margin-top: 40px;
+  @media (max-width: 1223px) {
+    align-items: center;
+  }
 `;
 const InfoLabel = styled.div`
   height: 50px;
@@ -47,6 +63,10 @@ const InfoText = styled.div`
   font-weight: 400;
   line-height: 22px;
   color: #4a5763;
+  @media (max-width: 1223px) {
+    text-align: center;
+    padding: 0 10px;
+  }
 `;
 
 const AboutUs = () => {

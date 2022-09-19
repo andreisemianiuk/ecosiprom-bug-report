@@ -8,11 +8,23 @@ const ContentWrapper = styled.section`
   max-width: 1170px;
   margin: 0 auto;
   padding: 80px 0 89px;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+  }
+  @media (max-width: 767px) {
+    padding: 50px 20px;
+  }
 `;
 const Title = styled.h1`
   margin: 0;
   padding-bottom: 40px;
   line-height: 48px;
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 `;
 const Container = styled.div`
   width: 100%;
@@ -21,13 +33,18 @@ const Container = styled.div`
   grid-gap: 20px;
   justify-content: center;
   align-items: center;
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(2, auto);
+  }
 `;
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 178px;
-  height: 90px;
+  width: 100%;
+  max-width: 178px;
+  height: 100%;
+  max-height: 90px;
 `;
 
 const PartnerLogos = () => {
