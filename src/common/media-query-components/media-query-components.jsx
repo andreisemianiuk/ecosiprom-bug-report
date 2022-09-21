@@ -1,7 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 
 export const Desktop = ({ children }) => {
-  const isDesktop = useMediaQuery({ minWidth: 1224 });
+  const isDesktop = useMediaQuery({ minWidth: 1223 });
   return isDesktop ? children : null;
 };
 export const Laptop = ({ children }) => {
@@ -29,7 +29,7 @@ export const Mobile = ({ children }) => {
   return isMobile ? children : null;
 };
 export const NotMobile = ({ children }) => {
-  const isNotMobile = useMediaQuery({ minWidth: 768 });
+  const isNotMobile = useMediaQuery({ minWidth: 767 });
   return isNotMobile ? children : null;
 };
 export const Default = ({ children }) => {

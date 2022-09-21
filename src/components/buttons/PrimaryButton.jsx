@@ -7,8 +7,8 @@ const StyledButton = styled.button`
   width: ${(props) =>
     props.isMobile ? "100%" : props.width ? `${props.width}px` : "173px"};
   height: ${(props) => (props.height ? props.height : `48`)}px;
-  padding: 0 18px;
-  font-size: 14px;
+  padding: ${(props) => (props.padding ? props.padding : "0 18px")};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : `14`)}px;
   font-weight: 600;
   line-height: 20px;
   gap: 8px;
@@ -40,6 +40,7 @@ const PrimaryButton = ({
   text,
   width,
   height,
+  padding,
   border,
   pathTo,
   color,
@@ -50,13 +51,16 @@ const PrimaryButton = ({
   state,
   type,
   isMobile,
+  fontSize,
 }) => {
   return (
     <Link to={pathTo} state={state} style={{ maxWidth: "fit-content" }}>
       <StyledButton
         onClick={callback}
         color={color}
+        padding={padding}
         isMobile={isMobile}
+        fontSize={fontSize}
         width={width}
         height={height}
         border={border}

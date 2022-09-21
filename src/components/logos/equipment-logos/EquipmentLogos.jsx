@@ -85,6 +85,12 @@ const ContentWrapper = styled.div`
   max-width: 1170px;
   margin: 0 auto;
   padding: ${({ padding }) => (padding ? padding : "80px 0")};
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+  }
   @media (max-width: 767px) {
     padding: 0 10px;
   }

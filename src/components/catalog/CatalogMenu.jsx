@@ -1,19 +1,14 @@
 import * as React from "react";
+import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import { useAppContext } from "../../api/contextApi";
 import PrimaryButton from "../buttons/PrimaryButton";
-
-const Container = styled.div`
-  display: flex;
-  margin-bottom: 40px;
-`;
-const Item = styled.div`
-  width: 234px;
-  height: 60px;
-`;
+import DropdownIcon from "../../assets/dropdown-white.svg";
 
 const CatalogMenu = () => {
   const { state, dispatch } = useAppContext();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const itemsTest = [
     { privody: "Арматура, приводы и регуляторы" },
@@ -22,9 +17,31 @@ const CatalogMenu = () => {
     { datchiki: "Датчики реле, автоматы горения" },
     { ask: "Оборудование АСК" },
   ];
+  const isTablet = useMediaQuery({ minWidth: 767, maxWidth: 991 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobileS = useMediaQuery({ maxWidth: 350 });
+  if (isMobile) {
+    const currentIndex = itemsTest.findIndex((item) => {
+      const key = Object.keys(item)[0];
+      if (state.catalogCurrentItem === key) return true;
+      return false;
+    });
+
+    const el = itemsTest.splice(currentIndex, 1)[0];
+    itemsTest.splice(0, 0, el);
+  }
+
+  const handleClickMenuItem = (key) => {
+    dispatch({ type: "CATALOG-MENU", payload: key });
+    setIsMobileMenuOpen(false);
+  };
+  const handleMobileMenuDropdown = (e) => {
+    e.stopPropagation();
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
-    <Container>
+    <Container height={isMobileMenuOpen ? "100%" : null}>
       {itemsTest.map((item) => {
         const key = Object.keys(item)[0];
         const value = Object.values(item)[0];
@@ -33,11 +50,15 @@ const CatalogMenu = () => {
 
         return (
           <Item
+            isCurrent={isCurrent}
+            isMobileMenuOpen={isMobileMenuOpen}
             key={key}
-            onClick={() => dispatch({ type: "CATALOG-MENU", payload: key })}>
+            onClick={() => handleClickMenuItem(key)}>
             <PrimaryButton
               text={value}
-              width={234}
+              isMobile
+              fontSize={isTablet || isMobileS ? 13 : null}
+              padding={isTablet ? "0" : isMobileS ? "0 20px 0 0" : null}
               height={60}
               border
               backgroundColor={isCurrent ? "#0E6683" : "#fff"}
@@ -47,6 +68,11 @@ const CatalogMenu = () => {
                 color: "#fff",
               }}
             />
+            <DropdownIconWrapper
+              onClick={(e) => handleMobileMenuDropdown(e)}
+              rotate={isMobileMenuOpen ? true : false}>
+              <DropdownIcon />
+            </DropdownIconWrapper>
           </Item>
         );
       })}
@@ -55,3 +81,44 @@ const CatalogMenu = () => {
 };
 
 export default React.memo(CatalogMenu);
+
+const Container = styled.div`
+  display: flex;
+  margin-bottom: 40px;
+  @media (max-width: 767px) {
+    z-index: 100;
+    width: 100%;
+    position: absolute;
+    top: 232px;
+    left: 0;
+    height: ${({ height }) => (height ? height : "60px")};
+    overflow: hidden;
+    flex-direction: column;
+    padding: 0 20px;
+  }
+`;
+const Item = styled.div`
+  width: 100%;
+  max-width: 234px;
+  height: 60px;
+  position: relative;
+  @media (max-width: 767px) {
+    max-width: 100%;
+    display: ${({ isCurrent, isMobileMenuOpen }) =>
+      isMobileMenuOpen ? "block" : isCurrent ? "block" : "none"};
+  }
+`;
+const DropdownIconWrapper = styled.div`
+  display: none;
+  @media (max-width: 767px) {
+    display: block;
+    z-index: 1000;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    transform: ${({ rotate }) => (rotate ? "rotate(-180deg)" : "0")};
+    transition: transform 0.3s ease-in-out;
+  }
+`;

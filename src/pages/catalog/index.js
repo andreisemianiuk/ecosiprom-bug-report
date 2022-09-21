@@ -9,17 +9,6 @@ import FeedbackForm from "../../components/feedback-form/FeedbackForm";
 import Layout from "../../components/layout/Layout";
 import EquipmentLogos from "../../components/logos/equipment-logos/EquipmentLogos";
 
-const TextContainer = styled.div`
-  width: 100%;
-  max-width: 1170px;
-  margin: 0 auto;
-`;
-const CommonText = styled.div`
-  font-weight: 400;
-  line-height: 24px;
-  margin-bottom: 80px;
-`;
-
 const CatalogPage = ({
   data: {
     allWpMediaItem: { nodes },
@@ -87,4 +76,22 @@ export const pageQuery = graphql`
       }
     }
   }
+`;
+
+const TextContainer = styled.div`
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+    padding: 0 20px;
+  }
+`;
+const CommonText = styled.div`
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 80px;
 `;

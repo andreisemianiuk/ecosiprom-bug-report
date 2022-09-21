@@ -8,17 +8,6 @@ import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
 import EquipmentLogos from "../components/logos/equipment-logos/EquipmentLogos";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
 
-const TextContainer = styled.div`
-  width: 100%;
-  max-width: 1170px;
-  margin: 0 auto;
-`;
-const CommonText = styled.div`
-  font-weight: 400;
-  line-height: 24px;
-  margin-bottom: 80px;
-`;
-
 const CatalogListTemplate = ({
   data: {
     wpPage: { content },
@@ -76,4 +65,22 @@ export const pageQuery = graphql`
       }
     }
   }
+`;
+
+const TextContainer = styled.div`
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+    padding: 0 20px;
+  }
+`;
+const CommonText = styled.div`
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 80px;
 `;
