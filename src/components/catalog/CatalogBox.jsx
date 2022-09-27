@@ -5,18 +5,16 @@ import SecondaryButton from "../buttons/SecondaryButton";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { useAppContext } from "../../api/contextApi";
 
-const Container = styled(Link)`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
 
   width: 278px;
   height: 400px;
-  text-decoration: none;
   background-color: #fff;
   border: 1px solid #dbdbe1;
   box-shadow: ${({ hovered }) =>
     hovered ? "0px 15px 30px rgba(0, 0, 0, 0.1)" : null};
-  cursor: pointer;
   transition: box-shadow 0.3s ease-in-out;
   @media (max-width: 767px) {
     width: 100%;
@@ -82,16 +80,6 @@ const CatalogBox = ({ isMain, itemData, location: { pathname } }) => {
   return (
     <Container
       key={id}
-      to={
-        isMain
-          ? "/catalog/"
-          : `${
-              pathname[pathname.length - 1] === "/"
-                ? pathname.slice(0, -1)
-                : pathname
-            }/${path}`
-      }
-      onClick={handleClick}
       onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
       hovered={hovered}>
@@ -104,7 +92,20 @@ const CatalogBox = ({ isMain, itemData, location: { pathname } }) => {
       <InfoBox>
         <Title hovered={hovered}>{altText}</Title>
         <References>{descriptionText}</References>
-        <SecondaryButton title="Подробнее" hovered={hovered} />
+        <SecondaryButton
+          title="Подробнее"
+          hovered={hovered}
+          callback={handleClick}
+          linkTo={
+            isMain
+              ? "/catalog/"
+              : `${
+                  pathname[pathname.length - 1] === "/"
+                    ? pathname.slice(0, -1)
+                    : pathname
+                }/${path}`
+          }
+        />
       </InfoBox>
     </Container>
   );

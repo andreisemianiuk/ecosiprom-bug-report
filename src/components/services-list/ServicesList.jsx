@@ -16,7 +16,7 @@ const ContentWrapper = styled.section`
     max-width: 700px;
   }
   @media (max-width: 767px) {
-    padding: 20px 20px 50px;
+    padding: ${({ isMain }) => (isMain ? "20px 20px 50px" : "0 20px 50px")};
   }
 `;
 const Navigation = styled.div`
@@ -96,7 +96,7 @@ const ServicesList = ({ isMain, children, completedServices, title }) => {
     : nodes;
 
   return (
-    <ContentWrapper>
+    <ContentWrapper isMain={isMain}>
       {!isMain && <Navigation>{children}</Navigation>}
       <Title>{title}</Title>
       <ItemsWrapper>

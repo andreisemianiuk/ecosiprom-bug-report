@@ -1,3 +1,4 @@
+import { Link } from "gatsby";
 import * as React from "react";
 import styled from "styled-components";
 import RightArrowIcon from "../../assets/right-arrow.svg";
@@ -45,13 +46,15 @@ const Title = styled.div`
   transition: color 0.4s ease-in-out;
 `;
 
-const SecondaryButton = ({ title, callback, hovered }) => {
+const SecondaryButton = ({ title, callback, hovered, linkTo }) => {
   return (
-    <StyledButton onClick={callback}>
-      <StyledIcon hovered={hovered} />
-      <StyledArrowIcon />
-      <Title hovered={hovered}>{title}</Title>
-    </StyledButton>
+    <Link to={linkTo}>
+      <StyledButton onClick={callback}>
+        <StyledIcon hovered={hovered} />
+        <StyledArrowIcon />
+        <Title hovered={hovered}>{title}</Title>
+      </StyledButton>
+    </Link>
   );
 };
 

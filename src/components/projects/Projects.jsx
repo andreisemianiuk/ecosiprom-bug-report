@@ -17,6 +17,12 @@ const ContentWrapper = styled.div`
 
   width: 100%;
   max-width: 1170px;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+  }
 `;
 const Header = styled.div`
   display: flex;

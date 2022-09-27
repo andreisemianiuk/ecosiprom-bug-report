@@ -9,7 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import SecondaryButton from "../buttons/SecondaryButton";
 
-const Item = styled(Link)`
+const Item = styled.div`
   width: 100%;
   height: 100%;
   background: ${({ hovered }) =>
@@ -19,8 +19,6 @@ const Item = styled(Link)`
       : "rgba(0, 0, 0, 0.1)"};
   border-radius: 2px;
   overflow: hidden;
-  cursor: pointer;
-  text-decoration: none;
   transition: all 0.3s ease-in-out;
 `;
 const BackgroundImageContainer = styled(BackgroundImage)`
@@ -110,23 +108,25 @@ const ServiceBox = ({ service }) => {
   const serviceUrl = `/services/${slug.replace("services-", "")}`;
 
   const handleHoverOn = () => {
-    setHovered(true);
+    if (!isTabletOrMobile) {
+      setHovered(true);
+    }
   };
   const handleHoverOff = () => {
-    setHovered(false);
+    if (!isTabletOrMobile) {
+      setHovered(false);
+    }
   };
 
   const isTabletOrMobile = useMediaQuery({ maxWidth: 991 });
-  useLayoutEffect(() => {
-    if (isTabletOrMobile) {
-      setHovered(true);
-    }
-  }, []);
+  const handleTabletOrMobileClick = () => {
+    setHovered(!hovered);
+  };
 
   return (
     <Item
       key={id}
-      to={serviceUrl}
+      onClick={handleTabletOrMobileClick}
       onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
       hovered={hovered}>
@@ -141,7 +141,11 @@ const ServiceBox = ({ service }) => {
             <ItemList hovered={hovered}>
               {parse(description, options)}
               <StyledButton>
-                <SecondaryButton title="Подробнее" hovered={true} />
+                <SecondaryButton
+                  title="Подробнее"
+                  hovered={true}
+                  linkTo={serviceUrl}
+                />
               </StyledButton>
             </ItemList>
           </InfoBox>

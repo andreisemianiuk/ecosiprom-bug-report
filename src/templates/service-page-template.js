@@ -8,59 +8,6 @@ import FeedbackForm from "../components/feedback-form/FeedbackForm";
 import Layout from "../components/layout/Layout";
 import ProjectsMain from "../components/projects/ProjectsMain";
 
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 300px;
-  position: relative;
-`;
-const ImageLayout = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 300px;
-  background: #03141a;
-  opacity: 0.5;
-`;
-const InnerContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-`;
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1170px;
-  padding-top: 100px;
-`;
-const BackgroundImageLabel = styled.h1`
-  color: #fff;
-  padding-top: 20px;
-  margin: 0;
-`;
-const Info = styled.div`
-  width: 100%;
-  max-width: 1170px;
-  margin: 80px auto 0;
-  color: #4a5763;
-  line-height: 24px;
-  font-feature-settings: "pnum" on, "lnum" on;
-`;
-const InfoParagraph = styled.p`
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-const ListItem = styled.li`
-  list-style-position: inside;
-  margin-left: 10px;
-`;
-
 const ServicePageTemplate = ({
   data: {
     wpPage: { content },
@@ -139,4 +86,80 @@ export const pageQuery = graphql`
       }
     }
   }
+`;
+
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 300px;
+  position: relative;
+`;
+const ImageLayout = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background: #03141a;
+  opacity: 0.5;
+`;
+const InnerContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1170px;
+  padding-top: 100px;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+  }
+  @media (max-width: 767px) {
+    margin: 0;
+    padding: 80px 20px 0;
+  }
+`;
+const BackgroundImageLabel = styled.h1`
+  color: #fff;
+  padding-top: 20px;
+  margin: 0;
+  @media (max-width: 400px) {
+    font-size: 32px;
+  }
+`;
+const Info = styled.div`
+  width: 100%;
+  max-width: 1170px;
+  margin: 80px auto 0;
+  color: #4a5763;
+  line-height: 24px;
+  font-feature-settings: "pnum" on, "lnum" on;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+  }
+  @media (max-width: 767px) {
+    margin: 0;
+    padding: 50px 20px 0;
+  }
+`;
+const InfoParagraph = styled.p`
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+const ListItem = styled.li`
+  list-style-position: inside;
+  margin-left: 10px;
 `;
