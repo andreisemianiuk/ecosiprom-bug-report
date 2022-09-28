@@ -13,18 +13,17 @@ import OtoplenieIcon from "../../assets/services/otoplenie.svg";
 import { NotMobile } from "../../common/media-query-components/media-query-components";
 import SecondaryButton from "../buttons/SecondaryButton";
 
-const icons = [
-  { title: "Автоматизированные системы контроля выбросов", icon: AskIcon },
-  { title: "Производство электрощитовой продукции", icon: ElectroIcon },
-  { title: "Системы газоснабжения и газопотребления", icon: GazIcon },
-  { title: "Автоматизация технологических процессов", icon: AvtomatIcon },
-  { title: "Система отопления и кондиционирования", icon: OtoplenieIcon },
-];
-
 const ProductionDirections = ({ isMain, bottomMargin }) => {
   const { state, dispatch } = useAppContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
+  const icons = [
+    { title: "Автоматизированные системы контроля выбросов", icon: AskIcon },
+    { title: "Производство электрощитовой продукции", icon: ElectroIcon },
+    { title: "Системы газоснабжения и газопотребления", icon: GazIcon },
+    { title: "Автоматизация технологических процессов", icon: AvtomatIcon },
+    { title: "Система отопления и кондиционирования", icon: OtoplenieIcon },
+  ];
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   if (isMobile && !isMain) {
