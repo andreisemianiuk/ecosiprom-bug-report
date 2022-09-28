@@ -92,11 +92,8 @@ const CatalogBox = ({ isMain, itemData, location: { pathname } }) => {
       <InfoBox>
         <Title hovered={hovered}>{altText}</Title>
         <References>{descriptionText}</References>
-        <SecondaryButton
-          title="Подробнее"
-          hovered={hovered}
-          callback={handleClick}
-          linkTo={
+        <Link
+          to={
             isMain
               ? "/catalog/"
               : `${
@@ -104,8 +101,13 @@ const CatalogBox = ({ isMain, itemData, location: { pathname } }) => {
                     ? pathname.slice(0, -1)
                     : pathname
                 }/${path}`
-          }
-        />
+          }>
+          <SecondaryButton
+            title="Подробнее"
+            hovered={hovered}
+            callback={handleClick}
+          />
+        </Link>
       </InfoBox>
     </Container>
   );

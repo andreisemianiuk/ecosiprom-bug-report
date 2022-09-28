@@ -79,6 +79,7 @@ const ProjectsMain = () => {
             let hovered = hoveredItemId === item.id ? true : false;
             return (
               <ProjectsBox
+                key={item.id}
                 handleHoverOn={handleHoverOn}
                 handleHoverOff={handleHoverOff}
                 itemData={item}

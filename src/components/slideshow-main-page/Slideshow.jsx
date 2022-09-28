@@ -17,6 +17,120 @@ import RightArrow from "../../images/right-arrow.png";
 import PrimaryButton from "../buttons/PrimaryButton";
 import ProductionDirections from "../directions-of-production/ProductionDirections";
 
+export const Slideshow = () => {
+  const {
+    allWpMediaItem: { nodes },
+  } = useStaticQuery(graphql`
+    query SlideshowQuery {
+      allWpMediaItem(filter: { title: { regex: "/main-back/" } }) {
+        nodes {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(formats: WEBP)
+            }
+          }
+          title
+          caption
+        }
+      }
+    }
+  `);
+
+  const options = {
+    replace: (domNode) => {
+      if (domNode.name === "p") {
+        return (
+          <BackgroundImageInfo>
+            {domToReact(domNode.children, options)}
+          </BackgroundImageInfo>
+        );
+      }
+    },
+  };
+
+  const indicators = () => <Indicator />;
+  const properties = {
+    prevArrow: (
+      <ArrowWrapper>
+        <ArrowInnerWrapper>
+          <ArrowContainer left={-81}>
+            <ArrowImage src={LeftArrow} alt="left arrow" />
+          </ArrowContainer>
+        </ArrowInnerWrapper>
+      </ArrowWrapper>
+    ),
+    nextArrow: (
+      <ArrowWrapper>
+        <ArrowInnerWrapper>
+          <ArrowContainer right={-81}>
+            <ArrowImage src={RightArrow} alt="right arrow" />
+          </ArrowContainer>
+        </ArrowInnerWrapper>
+      </ArrowWrapper>
+    ),
+    indicators: indicators,
+  };
+
+  return (
+    <SlideshowContainer>
+      <DesktopOrLaptop>
+        <ButtonWrapper>
+          <ButtonContentWrapper>
+            <PrimaryButton
+              text={"Подробнее"}
+              width={138}
+              height={56}
+              pathTo={"/projects/"}
+            />
+          </ButtonContentWrapper>
+        </ButtonWrapper>
+      </DesktopOrLaptop>
+      <TabletOrMobile>
+        <MobileButtonWrapper>
+          <ButtonContentWrapper>
+            <PrimaryButton
+              text={"Подробнее"}
+              isMobile
+              height={48}
+              pathTo={"/projects/"}
+            />
+          </ButtonContentWrapper>
+        </MobileButtonWrapper>
+      </TabletOrMobile>
+      <DirectionsWrapper>
+        <DirectionsContentWrapper>
+          <ProductionDirections bottomMargin={130} isMain />
+        </DirectionsContentWrapper>
+      </DirectionsWrapper>
+      <Fade {...properties}>
+        {nodes.map((node) => {
+          let image = getImage(node.localFile.childImageSharp.gatsbyImageData);
+          let bgImage = convertToBgImage(image);
+          let label = node.title.replace("main-back-", "");
+          return (
+            <ImageWrapper key={node.title}>
+              <BackgroundImageContainer
+                Tag="div"
+                // Spread bgImage into BackgroundImage:
+                {...bgImage}
+                preserveStackingContext>
+                <InnerContainer>
+                  <ContentWrapper>
+                    <div>
+                      <BackgroundImageLabel>{label}</BackgroundImageLabel>
+                      {node.caption && parse(node.caption, options)}
+                    </div>
+                  </ContentWrapper>
+                </InnerContainer>
+              </BackgroundImageContainer>
+            </ImageWrapper>
+          );
+        })}
+      </Fade>
+    </SlideshowContainer>
+  );
+};
+
 const SlideshowContainer = styled.div`
   width: 100%;
   margin-bottom: 204px;
@@ -141,9 +255,6 @@ const ArrowWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  @media (max-width: 1123px) {
-    /*visibility: collapse;*/
-  }
 `;
 const ArrowInnerWrapper = styled.div`
   position: relative;
@@ -152,6 +263,12 @@ const ArrowInnerWrapper = styled.div`
   height: 100%;
   margin: 0 auto;
   z-index: 1000;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 700px;
+  }
 `;
 const ArrowContainer = styled.div`
   position: absolute;
@@ -159,6 +276,9 @@ const ArrowContainer = styled.div`
   left: ${(v) => v.left}px;
   right: ${(v) => v.right}px;
   cursor: pointer;
+  @media (max-width: 991px) {
+    display: none;
+  }
 `;
 const ArrowImage = styled.img`
   width: 36px;
@@ -189,117 +309,3 @@ const Indicator = styled.div`
     background-color: #2787a7;
   }
 `;
-
-export const Slideshow = () => {
-  const {
-    allWpMediaItem: { nodes },
-  } = useStaticQuery(graphql`
-    query SlideshowQuery {
-      allWpMediaItem(filter: { title: { regex: "/main-back/" } }) {
-        nodes {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(formats: WEBP)
-            }
-          }
-          title
-          caption
-        }
-      }
-    }
-  `);
-
-  const options = {
-    replace: (domNode) => {
-      if (domNode.name === "p") {
-        return (
-          <BackgroundImageInfo>
-            {domToReact(domNode.children, options)}
-          </BackgroundImageInfo>
-        );
-      }
-    },
-  };
-
-  const indicators = () => <Indicator />;
-  const properties = {
-    prevArrow: (
-      <ArrowWrapper>
-        <ArrowInnerWrapper>
-          <ArrowContainer left={-81}>
-            <ArrowImage src={LeftArrow} alt="left arrow" />
-          </ArrowContainer>
-        </ArrowInnerWrapper>
-      </ArrowWrapper>
-    ),
-    nextArrow: (
-      <ArrowWrapper>
-        <ArrowInnerWrapper>
-          <ArrowContainer right={-81}>
-            <ArrowImage src={RightArrow} alt="right arrow" />
-          </ArrowContainer>
-        </ArrowInnerWrapper>
-      </ArrowWrapper>
-    ),
-    indicators: indicators,
-  };
-
-  return (
-    <SlideshowContainer>
-      <DesktopOrLaptop>
-        <ButtonWrapper>
-          <ButtonContentWrapper>
-            <PrimaryButton
-              text={"Подробнее"}
-              width={138}
-              height={56}
-              pathTo={"/projects/"}
-            />
-          </ButtonContentWrapper>
-        </ButtonWrapper>
-      </DesktopOrLaptop>
-      <TabletOrMobile>
-        <MobileButtonWrapper>
-          <ButtonContentWrapper>
-            <PrimaryButton
-              text={"Подробнее"}
-              isMobile
-              height={48}
-              pathTo={"/projects/"}
-            />
-          </ButtonContentWrapper>
-        </MobileButtonWrapper>
-      </TabletOrMobile>
-      <DirectionsWrapper>
-        <DirectionsContentWrapper>
-          <ProductionDirections bottomMargin={130} isMain />
-        </DirectionsContentWrapper>
-      </DirectionsWrapper>
-      <Fade {...properties}>
-        {nodes.map((node) => {
-          let image = getImage(node.localFile.childImageSharp.gatsbyImageData);
-          let bgImage = convertToBgImage(image);
-          let label = node.title.replace("main-back-", "");
-          return (
-            <ImageWrapper key={node.title}>
-              <BackgroundImageContainer
-                Tag="div"
-                // Spread bgImage into BackgroundImage:
-                {...bgImage}
-                preserveStackingContext>
-                <InnerContainer>
-                  <ContentWrapper>
-                    <div>
-                      <BackgroundImageLabel>{label}</BackgroundImageLabel>
-                      {node.caption && parse(node.caption, options)}
-                    </div>
-                  </ContentWrapper>
-                </InnerContainer>
-              </BackgroundImageContainer>
-            </ImageWrapper>
-          );
-        })}
-      </Fade>
-    </SlideshowContainer>
-  );
-};

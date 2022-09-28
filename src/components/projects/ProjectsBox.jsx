@@ -6,18 +6,60 @@ import SecondaryButton from "../buttons/SecondaryButton";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { memo } from "react";
 
-const Container = styled(Link)`
+const ProjectsBox = ({ itemData }) => {
+  const [hovered, setHovered] = React.useState(false);
+  const { title, altText, description, localFile } = itemData;
+  let image = getImage(localFile.childImageSharp.gatsbyImageData);
+
+  let options = {
+    replace: (domNode) => {
+      if (domNode.name === "p") {
+        return <References>{domToReact(domNode.children, options)}</References>;
+      }
+    },
+  };
+
+  const handleHoverOn = () => {
+    setHovered(true);
+  };
+  const handleHoverOff = () => {
+    setHovered(false);
+  };
+
+  const pathToProject = `/projects/${title?.replace(/projects-/g, "")}` || "/";
+
+  return (
+    <Container
+      onMouseOver={handleHoverOn}
+      onMouseLeave={handleHoverOff}
+      hovered={hovered}>
+      <ImageWrapper>
+        <GatsbyImage image={image} alt={altText} />
+        <ImageBackgroundLayer hovered={hovered} />
+      </ImageWrapper>
+      <InfoBox>
+        <Title hovered={hovered}>{altText}</Title>
+        {parse(description || "", options)}
+        <Link to={pathToProject}>
+          <SecondaryButton title="Подробнее" hovered={hovered} />
+        </Link>
+      </InfoBox>
+    </Container>
+  );
+};
+
+export default memo(ProjectsBox);
+
+const Container = styled.div`
   display: flex;
   flex-direction: column;
 
   width: 100%;
   max-width: 377px;
   height: 490px;
-  text-decoration: none;
 
   box-shadow: ${({ hovered }) =>
     hovered ? "0px 15px 30px rgba(0, 0, 0, 0.1)" : null};
-  cursor: pointer;
   transition: box-shadow 0.3s ease-in-out;
 `;
 
@@ -68,47 +110,3 @@ const ImageBackgroundLayer = styled.div`
   background: ${({ hovered }) =>
     hovered ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.2)"};
 `;
-
-const ProjectsBox = ({ itemData }) => {
-  const [hovered, setHovered] = React.useState(false);
-  const { id, title, altText, description, localFile } = itemData;
-  let image = getImage(localFile.childImageSharp.gatsbyImageData);
-
-  let options = {
-    replace: (domNode) => {
-      if (domNode.name === "p") {
-        return <References>{domToReact(domNode.children, options)}</References>;
-      }
-    },
-  };
-
-  const handleHoverOn = () => {
-    setHovered(true);
-  };
-  const handleHoverOff = () => {
-    setHovered(false);
-  };
-
-  const pathToProject = `/projects/${title?.replace(/projects-/g, "")}` || "/";
-
-  return (
-    <Container
-      to={pathToProject}
-      key={id}
-      onMouseOver={handleHoverOn}
-      onMouseLeave={handleHoverOff}
-      hovered={hovered}>
-      <ImageWrapper>
-        <GatsbyImage image={image} alt={altText} />
-        <ImageBackgroundLayer hovered={hovered} />
-      </ImageWrapper>
-      <InfoBox>
-        <Title hovered={hovered}>{altText}</Title>
-        {parse(description || "", options)}
-        <SecondaryButton title="Подробнее" hovered={hovered} />
-      </InfoBox>
-    </Container>
-  );
-};
-
-export default memo(ProjectsBox);

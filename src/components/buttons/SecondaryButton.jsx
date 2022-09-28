@@ -4,6 +4,20 @@ import styled from "styled-components";
 import RightArrowIcon from "../../assets/right-arrow.svg";
 import SecondaryIcon from "../../assets/secondary.svg";
 
+const SecondaryButton = ({ title, callback, hovered, fontSize }) => {
+  return (
+    <StyledButton onClick={callback}>
+      <StyledIcon hovered={hovered.toString()} />
+      <StyledArrowIcon />
+      <Title hovered={hovered.toString()} fontSize={fontSize}>
+        {title}
+      </Title>
+    </StyledButton>
+  );
+};
+
+export default SecondaryButton;
+
 const StyledButton = styled.button`
   display: flex;
   align-items: center;
@@ -24,7 +38,7 @@ const StyledIcon = styled(SecondaryIcon)`
   left: 0;
   transition: filter 0.5s ease-in-out;
   filter: ${({ hovered }) =>
-    hovered
+    hovered === "true"
       ? "invert(36%) sepia(81%) saturate(469%) hue-rotate(149deg) brightness(93%) contrast(91%)"
       : "none"};
 `;
@@ -38,24 +52,10 @@ const Title = styled.div`
   top: 0;
   right: 0;
 
-  font-size: 14px;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "14px")};
   font-weight: 500;
   line-height: 20px;
-  color: ${({ hovered }) => (hovered ? "#1a7897" : "#4a5763")};
+  color: ${({ hovered }) => (hovered === "true" ? "#1a7897" : "#4a5763")};
 
   transition: color 0.4s ease-in-out;
 `;
-
-const SecondaryButton = ({ title, callback, hovered, linkTo }) => {
-  return (
-    <Link to={linkTo}>
-      <StyledButton onClick={callback}>
-        <StyledIcon hovered={hovered} />
-        <StyledArrowIcon />
-        <Title hovered={hovered}>{title}</Title>
-      </StyledButton>
-    </Link>
-  );
-};
-
-export default SecondaryButton;

@@ -93,7 +93,7 @@ const StyledButton = styled.div`
 
 const ServiceBox = ({ service }) => {
   const [hovered, setHovered] = React.useState(false);
-  const { id, altText, description, slug, localFile } = service;
+  const { altText, description, slug, localFile } = service;
   let image = getImage(localFile.childImageSharp.gatsbyImageData);
   let bgImage = convertToBgImage(image);
 
@@ -125,7 +125,6 @@ const ServiceBox = ({ service }) => {
 
   return (
     <Item
-      key={id}
       onClick={handleTabletOrMobileClick}
       onMouseOver={handleHoverOn}
       onMouseLeave={handleHoverOff}
@@ -141,11 +140,9 @@ const ServiceBox = ({ service }) => {
             <ItemList hovered={hovered}>
               {parse(description, options)}
               <StyledButton>
-                <SecondaryButton
-                  title="Подробнее"
-                  hovered={true}
-                  linkTo={serviceUrl}
-                />
+                <Link to={serviceUrl}>
+                  <SecondaryButton title="Подробнее" hovered={true} />
+                </Link>
               </StyledButton>
             </ItemList>
           </InfoBox>

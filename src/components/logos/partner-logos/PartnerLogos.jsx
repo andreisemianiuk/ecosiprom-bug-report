@@ -3,6 +3,53 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import * as React from "react";
 import styled from "styled-components";
 
+const PartnerLogos = () => {
+  const {
+    allWpMediaItem: { nodes },
+  } = useStaticQuery(graphql`
+    query PartnersLogosQuery {
+      allWpMediaItem(
+        filter: { title: { regex: "/partners/" } }
+        sort: { fields: caption }
+      ) {
+        nodes {
+          id
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                placeholder: BLURRED
+                formats: PNG
+                height: 76
+                quality: 100
+              )
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  return (
+    <ContentWrapper>
+      <Title>Наши партнеры</Title>
+      <Container>
+        {nodes.map((node, index) => {
+          return (
+            <LogoWrapper key={index}>
+              <GatsbyImage
+                image={node.localFile.childImageSharp.gatsbyImageData}
+                alt=""
+              />
+            </LogoWrapper>
+          );
+        })}
+      </Container>
+    </ContentWrapper>
+  );
+};
+
+export default PartnerLogos;
+
 const ContentWrapper = styled.section`
   width: 100%;
   max-width: 1170px;
@@ -46,50 +93,3 @@ const LogoWrapper = styled.div`
   height: 100%;
   max-height: 90px;
 `;
-
-const PartnerLogos = () => {
-  const {
-    allWpMediaItem: { nodes },
-  } = useStaticQuery(graphql`
-    query PartnersLogosQuery {
-      allWpMediaItem(
-        filter: { title: { regex: "/partners/" } }
-        sort: { fields: caption }
-      ) {
-        nodes {
-          id
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                placeholder: BLURRED
-                formats: PNG
-                height: 76
-                quality: 100
-              )
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  return (
-    <ContentWrapper>
-      <Title>Наши партнеры</Title>
-      <Container>
-        {nodes.map((node) => {
-          return (
-            <LogoWrapper>
-              <GatsbyImage
-                image={node.localFile.childImageSharp.gatsbyImageData}
-                alt=""
-              />
-            </LogoWrapper>
-          );
-        })}
-      </Container>
-    </ContentWrapper>
-  );
-};
-
-export default PartnerLogos;

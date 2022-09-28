@@ -18,6 +18,7 @@ export const useAppContext = () => {
 function useProviderApp() {
   const appInitialState = {
     catalogCurrentItem: "privody",
+    projectsCurrentItem: "Автоматизированные системы контроля выбросов",
   };
   const reducer = (state, action) => {
     const { payload, type } = action;
@@ -33,6 +34,26 @@ function useProviderApp() {
           return {
             ...state,
             catalogCurrentItem: "privody",
+          };
+        }
+      case "PROJECTS-MENU":
+        const projects = [
+          "Автоматизированные системы контроля выбросов",
+          "Производство электрощитовой продукции",
+          "Системы газоснабжения и газопотребления",
+          "Автоматизация технологических процессов",
+          "Система отопления и кондиционирования",
+        ];
+
+        if (projects.includes(payload)) {
+          return {
+            ...state,
+            projectsCurrentItem: payload,
+          };
+        } else {
+          return {
+            ...state,
+            projectsCurrentItem: "Автоматизированные системы контроля выбросов",
           };
         }
       default:

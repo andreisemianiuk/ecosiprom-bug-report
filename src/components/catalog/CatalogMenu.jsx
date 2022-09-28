@@ -10,7 +10,7 @@ const CatalogMenu = () => {
   const { state, dispatch } = useAppContext();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const itemsTest = [
+  const menuItems = [
     { privody: "Арматура, приводы и регуляторы" },
     { gorelki: "Промышленные горелки" },
     { nasosy: "Топливные насосы" },
@@ -21,14 +21,14 @@ const CatalogMenu = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isMobileS = useMediaQuery({ maxWidth: 350 });
   if (isMobile) {
-    const currentIndex = itemsTest.findIndex((item) => {
+    const currentIndex = menuItems.findIndex((item) => {
       const key = Object.keys(item)[0];
       if (state.catalogCurrentItem === key) return true;
       return false;
     });
 
-    const el = itemsTest.splice(currentIndex, 1)[0];
-    itemsTest.splice(0, 0, el);
+    const el = menuItems.splice(currentIndex, 1)[0];
+    menuItems.splice(0, 0, el);
   }
 
   const handleClickMenuItem = (key) => {
@@ -42,7 +42,7 @@ const CatalogMenu = () => {
 
   return (
     <Container height={isMobileMenuOpen ? "100%" : null}>
-      {itemsTest.map((item) => {
+      {menuItems.map((item) => {
         const key = Object.keys(item)[0];
         const value = Object.values(item)[0];
 

@@ -1,8 +1,43 @@
 import parse from "html-react-parser";
 import * as React from "react";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import ProductionDirections from "../directions-of-production/ProductionDirections";
 import ProjectsBox from "./ProjectsBox";
+
+const Projects = ({ children, title, content, nodes }) => {
+  let options = {
+    replace: (domNode) => {
+      if (domNode.attribs && domNode.attribs.class === "images-wrapper") {
+        return <></>;
+      }
+    },
+  };
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  return (
+    <Container>
+      <ContentWrapper>
+        <Header>
+          <div>
+            <Navigation>{children}</Navigation>
+            <Title>{title}</Title>
+          </div>
+        </Header>
+        <Info isMobile={isMobile}>{parse(content, options)}</Info>
+        <ProductionDirections />
+        <List>
+          {nodes.map((item) => {
+            return <ProjectsBox itemData={item} key={item.id} />;
+          })}
+        </List>
+      </ContentWrapper>
+    </Container>
+  );
+};
+
+export default Projects;
 
 const Container = styled.section`
   display: flex;
@@ -23,6 +58,10 @@ const ContentWrapper = styled.div`
   @media (max-width: 991px) {
     max-width: 700px;
   }
+  @media (max-width: 767px) {
+    max-width: max-content;
+    padding: 0 20px;
+  }
 `;
 const Header = styled.div`
   display: flex;
@@ -37,6 +76,9 @@ const Info = styled.div`
   color: #4a5763;
   line-height: 27px;
   margin-top: 24px;
+  @media (max-width: 767px) {
+    margin-top: ${({ isMobile }) => (isMobile ? "120px" : "24px")};
+  }
 `;
 const List = styled.div`
   display: grid;
@@ -44,42 +86,14 @@ const List = styled.div`
   grid-column-gap: 20px;
   grid-row-gap: 40px;
   width: 100%;
+  @media (max-width: 767px) {
+    grid-template-columns: auto auto;
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: auto;
+    justify-items: center;
+  }
 `;
 const Navigation = styled.div`
   padding: 50px 0 20px;
 `;
-
-const Projects = ({ children, title, content, nodes }) => {
-  let options = {
-    replace: (domNode) => {
-      if (domNode.attribs && domNode.attribs.class === "images-wrapper") {
-        return <></>;
-      }
-    },
-  };
-  const [currentItem, setCurrentItem] = React.useState(0);
-  return (
-    <Container>
-      <ContentWrapper>
-        <Header>
-          <div>
-            <Navigation>{children}</Navigation>
-            <Title>{title}</Title>
-          </div>
-        </Header>
-        <Info>{parse(content, options)}</Info>
-        <ProductionDirections
-          currentItem={currentItem}
-          setCurrentItem={setCurrentItem}
-        />
-        <List>
-          {nodes.map((item) => {
-            return <ProjectsBox itemData={item} />;
-          })}
-        </List>
-      </ContentWrapper>
-    </Container>
-  );
-};
-
-export default Projects;
