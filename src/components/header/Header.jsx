@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import PrimaryButton from "../buttons/PrimaryButton";
@@ -18,6 +18,14 @@ import { useMediaQuery } from "react-responsive";
 const Header = ({ location }) => {
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  const html = document.querySelector("html");
+
+  useEffect(() => {
+    isOpenMobileMenu
+      ? (html.style.overflow = "hidden")
+      : (html.style.overflow = "visible");
+  }, [isOpenMobileMenu]);
 
   const handleMobileMenu = () => {
     setIsOpenMobileMenu(!isOpenMobileMenu);
@@ -88,6 +96,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   z-index: 1000;
   border-bottom: 1px solid #dbdbe1;
+  overflow: hidden;
 `;
 const LogoNavbarContainer = styled.div`
   display: flex;
