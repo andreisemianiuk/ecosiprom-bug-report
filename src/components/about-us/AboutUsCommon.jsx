@@ -55,10 +55,9 @@ const AboutUsCommon = ({ children, isMain }) => {
         );
       }
       if (domNode.attribs && domNode.attribs.class === "text") {
-        let text = domToReact(domNode.children).substring(0, 211) + "...";
-        return (
-          <InfoText>{isMain ? text : domToReact(domNode.children)}</InfoText>
-        );
+        let text =
+          domToReact(domNode.children).substring(0, isMain ? 214 : 190) + "...";
+        return <InfoText>{text}</InfoText>;
       }
       if (domNode.attribs && domNode.attribs.class === "heading-list") {
         return <InfoList>{domToReact(domNode.children, options)}</InfoList>;
@@ -120,72 +119,72 @@ const AboutUsCommon = ({ children, isMain }) => {
                 <img src={MapImage} alt="контурная карта РБ" />
                 <MapPoint size={21} top={209} left={256}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={7} />
+                    <MapSmallPoint sizesmall={7} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={21} top={80} left={374}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={7} />
+                    <MapSmallPoint sizesmall={7} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={21} top={218} left={439}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={7} />
+                    <MapSmallPoint sizesmall={7} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={21} top={367} left={432}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={7} />
+                    <MapSmallPoint sizesmall={7} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={21} top={378} left={37}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={7} />
+                    <MapSmallPoint sizesmall={7} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={21} top={234} left={58}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={7} />
+                    <MapSmallPoint sizesmall={7} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={17} top={200} left={134}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={7} />
+                    <MapSmallPoint sizesmall={7} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={15} top={83} left={320}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={5} />
+                    <MapSmallPoint sizesmall={5} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={15} top={276} left={353}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={5} />
+                    <MapSmallPoint sizesmall={5} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={15} top={311} left={154}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={5} />
+                    <MapSmallPoint sizesmall={5} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={15} top={316} left={249}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={5} />
+                    <MapSmallPoint sizesmall={5} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={15} top={388} left={217}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={5} />
+                    <MapSmallPoint sizesmall={5} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={15} top={276} left={353}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={5} />
+                    <MapSmallPoint sizesmall={5} />
                   </MapSmallPointWrapper>
                 </MapPoint>
                 <MapPoint size={15} top={412} left={394}>
                   <MapSmallPointWrapper>
-                    <MapSmallPoint sizeSmall={5} />
+                    <MapSmallPoint sizesmall={5} />
                   </MapSmallPointWrapper>
                 </MapPoint>
               </MapWrapper>
@@ -279,10 +278,9 @@ const Title = styled.h1`
     margin-bottom: 20px;
   }
 `;
-const InfoTextHeading = styled.p`
+const InfoTextHeading = styled.div`
   font-size: 16px;
   line-height: 24px;
-  margin: 0;
   margin-bottom: 30px;
   @media (max-width: 424px) {
     font-size: 15px;
@@ -347,8 +345,8 @@ const MapSmallPointWrapper = styled.div`
   background-color: transparent;
 `;
 const MapSmallPoint = styled(MapSmallPointImage)`
-  width: ${({ sizeSmall }) => `${sizeSmall}px`};
-  height: ${({ sizeSmall }) => `${sizeSmall}px`};
+  width: ${({ sizesmall }) => `${sizesmall}px`};
+  height: ${({ sizesmall }) => `${sizesmall}px`};
 `;
 const Navigation = styled.div`
   padding: 90px 0 20px;
