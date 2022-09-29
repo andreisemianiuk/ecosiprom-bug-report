@@ -44,7 +44,7 @@ const ServicesList = ({ isMain, children, completedServices, title }) => {
     <ContentWrapper isMain={isMain}>
       {!isMain && <Navigation>{children}</Navigation>}
       <Title>{title}</Title>
-      <ItemsWrapper>
+      <ItemsWrapper itemsCount={filteredNodes.length}>
         {filteredNodes.map((service) => {
           return <ServiceBox key={service.id} service={service} />;
         })}
@@ -105,9 +105,12 @@ const ItemsWrapper = styled.div`
     grid-template-rows: repeat(3, max(350px));
   }
   @media (max-width: 767px) {
-    column-gap: 20px;
-    grid-template-columns: repeat(1, max(377px));
-    grid-template-rows: repeat(6, max(350px));
+    grid-template-columns: repeat(1, max(350px));
+    grid-template-rows: ${({ itemsCount }) =>
+      `repeat(${itemsCount}, max(350px))`};
+  }
+  @media (max-width: 350px) {
+    grid-template-columns: repeat(1, max(320px));
   }
 `;
 const ButtonWrapper = styled.div`
