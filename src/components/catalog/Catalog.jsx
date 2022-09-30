@@ -26,8 +26,8 @@ const Catalog = ({ children, images, title, isMain, location }) => {
         </Header>
         {isMain && <CatalogMenu />}
         <List isMain={isMain}>
-          {filteredImages.map((item) => {
-            return <CatalogBox itemData={item} location={location} />;
+          {filteredImages.map((item, id) => {
+            return <CatalogBox key={id} itemData={item} location={location} />;
           })}
         </List>
       </ContentWrapper>

@@ -63,9 +63,9 @@ const EquipmentLogos = ({ padding }) => {
         <Title>Мы работаем с оборудованием</Title>
       </NotMobile>
       <Container {...properties}>
-        {nodes.map((node) => {
+        {nodes.map((node, id) => {
           return (
-            <LogoWrapper>
+            <LogoWrapper key={id}>
               <GatsbyImage
                 image={node.localFile.childImageSharp.gatsbyImageData}
                 alt=""

@@ -50,9 +50,9 @@ const CatalogMenu = () => {
 
         return (
           <Item
+            key={key}
             isCurrent={isCurrent}
             isMobileMenuOpen={isMobileMenuOpen}
-            key={key}
             onClick={() => handleClickMenuItem(key)}>
             <PrimaryButton
               text={value}
@@ -70,7 +70,7 @@ const CatalogMenu = () => {
             />
             <DropdownIconWrapper
               onClick={(e) => handleMobileMenuDropdown(e)}
-              rotate={isMobileMenuOpen ? true : false}>
+              rotate={isMobileMenuOpen ? "true" : "false"}>
               <DropdownIcon />
             </DropdownIconWrapper>
           </Item>
@@ -118,7 +118,7 @@ const DropdownIconWrapper = styled.div`
     right: 15px;
     width: 20px;
     height: 20px;
-    transform: ${({ rotate }) => (rotate ? "rotate(-180deg)" : "0")};
+    transform: ${({ rotate }) => (rotate === "true" ? "rotate(-180deg)" : "0")};
     transition: transform 0.3s ease-in-out;
   }
 `;

@@ -17,7 +17,7 @@ const CatalogPage = ({
   pageContext,
   location,
 }) => {
-  const { state, dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
 
   const {
     breadcrumb: { crumbs },
@@ -37,7 +37,6 @@ const CatalogPage = ({
   const title = crumbs[crumbs.length - 1].crumbLabel;
 
   React.useEffect(() => {
-    console.log("useEffect");
     return () => dispatch({ type: "CATALOG-MENU", payload: "privody" });
   }, [dispatch]);
 

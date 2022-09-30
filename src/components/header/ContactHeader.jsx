@@ -5,6 +5,38 @@ import PhoneIcon from "../../assets/phone.svg";
 import EmailIcon from "../../assets/email.svg";
 import PhoneCircleIcon from "../../assets/phone-circle.svg";
 
+export const ContactHeader = () => {
+  return (
+    <Wrapper>
+      <ContentWrapper>
+        <ItemWrapper href="tel:+37529-662-30-04">
+          <IconWrapper>
+            <MobileIcon />
+          </IconWrapper>
+          <Item>+375 (29) 662-30-04</Item>
+        </ItemWrapper>
+        <ItemWrapper href="tel:+37517-275-23-06">
+          <PhoneWrapper>
+            <IconWrapper>
+              <PhoneIcon />
+              <PhoneCircleIconContainer>
+                <PhoneCircleIcon />
+              </PhoneCircleIconContainer>
+            </IconWrapper>
+          </PhoneWrapper>
+          <Item>+375 (17) 275-23-06</Item>
+        </ItemWrapper>
+        <ItemWrapper href="mailto:info@ecosiprom.com">
+          <IconWrapper>
+            <EmailIcon />
+          </IconWrapper>
+          <Item>info@ecosiprom.com</Item>
+        </ItemWrapper>
+      </ContentWrapper>
+    </Wrapper>
+  );
+};
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -38,6 +70,7 @@ const ItemWrapper = styled.a`
   display: flex;
   align-items: center;
   margin-left: 26px;
+  text-decoration: none;
   &:first-child {
     margin-left: 0;
   }
@@ -46,13 +79,12 @@ const ItemWrapper = styled.a`
     margin-bottom: 10px;
   }
 `;
-const Item = styled.a`
+const Item = styled.div`
   display: flex;
   align-items: center;
-  color: inherit;
+  color: #03141a;
   font-weight: 500;
   padding-left: 10px;
-  text-decoration: none;
 `;
 const PhoneWrapper = styled.div`
   position: relative;
@@ -70,35 +102,3 @@ const PhoneCircleIconContainer = styled.div`
   left: 7px;
   bottom: -4.5px;
 `;
-
-export const ContactHeader = () => {
-  return (
-    <Wrapper>
-      <ContentWrapper>
-        <ItemWrapper>
-          <IconWrapper>
-            <MobileIcon />
-          </IconWrapper>
-          <Item href="tel:+37529-662-30-04">+375 (29) 662-30-04</Item>
-        </ItemWrapper>
-        <ItemWrapper>
-          <PhoneWrapper>
-            <IconWrapper>
-              <PhoneIcon />
-              <PhoneCircleIconContainer>
-                <PhoneCircleIcon />
-              </PhoneCircleIconContainer>
-            </IconWrapper>
-          </PhoneWrapper>
-          <Item href="tel:+37517-275-23-06">+375 (17) 275-23-06</Item>
-        </ItemWrapper>
-        <ItemWrapper>
-          <IconWrapper>
-            <EmailIcon />
-          </IconWrapper>
-          <Item href="mailto:info@ecosiprom.com">info@ecosiprom.com</Item>
-        </ItemWrapper>
-      </ContentWrapper>
-    </Wrapper>
-  );
-};

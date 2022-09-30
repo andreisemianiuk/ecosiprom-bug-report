@@ -1,12 +1,51 @@
-import React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
+import React from "react";
 import styled from "styled-components";
-import {
-  Desktop,
-  TabletOrMobile,
-  Mobile,
-  Tablet,
-} from "../../common/media-query-components/media-query-components";
+
+export const Navbar = ({ location }) => {
+  const {
+    wpMenu: {
+      menuItems: { nodes },
+    },
+  } = useStaticQuery(graphql`
+    query NavbarQuery {
+      wpMenu(slug: { eq: "footer_menu" }) {
+        menuItems {
+          nodes {
+            path
+            id
+            label
+          }
+        }
+      }
+    }
+  `);
+  return (
+    <Nav>
+      <NavList>
+        {nodes.map(({ id, label, path }) => {
+          const pathname =
+            location.pathname.length > 1
+              ? location.pathname.match(/\/.*?\//)[0]
+              : location.pathname;
+          const isactive = pathname === path;
+          return (
+            <NavItem key={id}>
+              <StyledNavLink to={path} isactive={isactive.toString()}>
+                {label
+                  .split(" ")
+                  .map((word, i) =>
+                    i === 0 ? `${word[0].toUpperCase()}${word.slice(1)}` : word
+                  )
+                  .join(" ")}
+              </StyledNavLink>
+            </NavItem>
+          );
+        })}
+      </NavList>
+    </Nav>
+  );
+};
 
 const Nav = styled.nav`
   display: flex;
@@ -48,7 +87,7 @@ const NavItem = styled.li`
 const StyledNavLink = styled(Link)`
   position: relative;
   text-decoration: none;
-  color: ${({ isActive }) => (isActive ? "#0e6683" : "inherit")};
+  color: ${({ isactive }) => (isactive === "true" ? "#0e6683" : "inherit")};
   transition: color 0.3s ease-in-out;
 
   &:hover {
@@ -63,8 +102,10 @@ const StyledNavLink = styled(Link)`
     background-color: #0e6683;
     bottom: -33px;
     left: 0;
-    transform-origin: ${({ isActive }) => (isActive ? "left" : "right")};
-    transform: ${({ isActive }) => (isActive ? "scaleX(1)" : "scaleX(0)")};
+    transform-origin: ${({ isactive }) =>
+      isactive === "true" ? "left" : "right"};
+    transform: ${({ isactive }) =>
+      isactive === "true" ? "scaleX(1)" : "scaleX(0)"};
     transition: transform 0.3s ease-in-out;
     @media (max-width: 1123px) {
       display: none;
@@ -75,48 +116,3 @@ const StyledNavLink = styled(Link)`
     transform: scaleX(1);
   }
 `;
-
-export const Navbar = ({ location }) => {
-  const {
-    wpMenu: {
-      menuItems: { nodes },
-    },
-  } = useStaticQuery(graphql`
-    query NavbarQuery {
-      wpMenu(slug: { eq: "footer_menu" }) {
-        menuItems {
-          nodes {
-            path
-            id
-            label
-          }
-        }
-      }
-    }
-  `);
-  return (
-    <Nav>
-      <NavList>
-        {nodes.map(({ id, label, path }) => {
-          const pathname =
-            location.pathname.length > 1
-              ? location.pathname.match(/\/.*?\//)[0]
-              : location.pathname;
-          const isActive = pathname === path;
-          return (
-            <NavItem key={id}>
-              <StyledNavLink to={path} isActive={isActive}>
-                {label
-                  .split(" ")
-                  .map((word, i) =>
-                    i === 0 ? `${word[0].toUpperCase()}${word.slice(1)}` : word
-                  )
-                  .join(" ")}
-              </StyledNavLink>
-            </NavItem>
-          );
-        })}
-      </NavList>
-    </Nav>
-  );
-};

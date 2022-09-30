@@ -3,6 +3,51 @@ import * as React from "react";
 import styled from "styled-components";
 import RightArrowIcon from "../../assets/right-arrow.svg";
 
+const PrimaryButton = ({
+  text,
+  width,
+  height,
+  padding,
+  border,
+  pathTo,
+  color,
+  backgroundColor,
+  hoverStyles,
+  isRightArrow,
+  callback,
+  state,
+  type,
+  isMobile,
+  fontSize,
+}) => {
+  return (
+    <Link
+      to={pathTo ? pathTo : ""}
+      state={state}
+      style={{ maxWidth: "fit-content" }}>
+      <StyledButton
+        onClick={callback}
+        color={color}
+        padding={padding}
+        isMobile={isMobile}
+        fontSize={fontSize}
+        width={width}
+        height={height}
+        border={border}
+        type={type}
+        backgroundColor={backgroundColor}
+        hoverStyles={hoverStyles}>
+        <Text>
+          <span>{text}</span>
+          {isRightArrow && <StyledArrowIcon />}
+        </Text>
+      </StyledButton>
+    </Link>
+  );
+};
+
+export default React.memo(PrimaryButton);
+
 const StyledButton = styled.button`
   width: ${(props) =>
     props.isMobile ? "100%" : props.width ? `${props.width}px` : "173px"};
@@ -35,45 +80,3 @@ const Text = styled.div`
 const StyledArrowIcon = styled(RightArrowIcon)`
   margin-left: 10px;
 `;
-
-const PrimaryButton = ({
-  text,
-  width,
-  height,
-  padding,
-  border,
-  pathTo,
-  color,
-  backgroundColor,
-  hoverStyles,
-  isRightArrow,
-  callback,
-  state,
-  type,
-  isMobile,
-  fontSize,
-}) => {
-  return (
-    <Link to={pathTo} state={state} style={{ maxWidth: "fit-content" }}>
-      <StyledButton
-        onClick={callback}
-        color={color}
-        padding={padding}
-        isMobile={isMobile}
-        fontSize={fontSize}
-        width={width}
-        height={height}
-        border={border}
-        type={type}
-        backgroundColor={backgroundColor}
-        hoverStyles={hoverStyles}>
-        <Text>
-          <span>{text}</span>
-          {isRightArrow && <StyledArrowIcon />}
-        </Text>
-      </StyledButton>
-    </Link>
-  );
-};
-
-export default React.memo(PrimaryButton);

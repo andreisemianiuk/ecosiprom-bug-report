@@ -1,19 +1,18 @@
-import * as React from "react";
-import Layout from "../components/layout/Layout";
 import { graphql } from "gatsby";
 import parse, { domToReact } from "html-react-parser";
+import * as React from "react";
 import styled from "styled-components";
-import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
-import YandexMap from "../components/yandex-map/YandexMap";
-import MobileIcon from "../assets/mobile.svg";
-import PhoneIcon from "../assets/phone.svg";
-import EmailIcon from "../assets/email.svg";
 import AddressIcon from "../assets/address.svg";
-import TimeTableIcon from "../assets/time-table.svg";
+import EmailIcon from "../assets/email.svg";
 import FaxIcon from "../assets/fax.svg";
+import MobileIcon from "../assets/mobile.svg";
 import PhoneCircleIcon from "../assets/phone-circle.svg";
+import PhoneIcon from "../assets/phone.svg";
+import TimeTableIcon from "../assets/time-table.svg";
+import { Breadcrumb } from "../common/breadCrumb/Breadcrumb";
 import FeedbackForm from "../components/feedback-form/FeedbackForm";
-import { useMediaQuery } from "react-responsive";
+import Layout from "../components/layout/Layout";
+import YandexMap from "../components/yandex-map/YandexMap";
 
 const Contacts = ({
   data: {
