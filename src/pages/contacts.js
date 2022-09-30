@@ -130,10 +130,28 @@ const Container = styled.div`
   width: 100%;
   max-width: 1170px;
   margin: 50px auto;
+  @media (max-width: 1223px) {
+    max-width: 900px;
+  }
+  @media (max-width: 991px) {
+    max-width: 750px;
+  }
+  @media (max-width: 767px) {
+    flex-direction: column;
+    margin: 50px auto 0;
+  }
 `;
-const InfoBlock = styled.div``;
+const InfoBlock = styled.div`
+  @media (max-width: 767px) {
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
+`;
 const Title = styled.h1`
   margin: 20px 0 50px;
+  @media (max-width: 767px) {
+    margin: 20px 0;
+  }
 `;
 const TextContainer = styled.div`
   line-height: 20px;
@@ -151,8 +169,19 @@ const PhoneCircleIconContainer = styled.div`
   bottom: -1.5px;
 `;
 const MapContainer = styled.div`
-  width: 872px;
+  width: 100%;
+  max-width: 872px;
   height: 480px;
+  @media (max-width: 1223px) {
+    max-width: 672px;
+    height: 380px;
+  }
+  @media (max-width: 991px) {
+    max-width: 500px;
+  }
+  @media (max-width: 767px) {
+    max-width: 767px;
+  }
 `;
 const ItemWrapper = styled.a`
   display: flex;
@@ -180,4 +209,7 @@ const CompanyName = styled.div`
   font-weight: 800;
   line-height: 27px;
   margin-top: 40px;
+  @media (max-width: 767px) {
+    margin-top: 20px;
+  }
 `;
