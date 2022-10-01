@@ -25,7 +25,7 @@ const Header = ({ location }) => {
     isOpenMobileMenu
       ? (html.style.overflow = "hidden")
       : (html.style.overflow = "visible");
-  }, [isOpenMobileMenu]);
+  }, [isOpenMobileMenu, html]);
 
   const handleMobileMenu = () => {
     setIsOpenMobileMenu(!isOpenMobileMenu);
@@ -53,7 +53,7 @@ const Header = ({ location }) => {
             <Logo color={"primary"} width={isMobile ? 170 : 230} />
           </Link>
           <Default>
-            <PhoneIconWrapper>
+            <PhoneIconWrapper href="tel:+37529-662-30-04">
               <PhoneIcon />
             </PhoneIconWrapper>
             {isOpenMobileMenu && (
@@ -122,7 +122,7 @@ const HamburgerWrapper = styled.div`
   cursor: pointer;
   margin-left: 25px;
 `;
-const PhoneIconWrapper = styled.div`
+const PhoneIconWrapper = styled.a`
   margin-right: 25px;
 `;
 const MenuContainer = styled.div`

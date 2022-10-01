@@ -7,7 +7,7 @@ const MainContent = styled.div`
   /*min-height: 80vh;*/
 `;
 
-const Layout = ({ children, location }) => {
+const Layout = ({ children, location = "/" }) => {
   if (typeof window === `undefined`) {
     return <></>;
   }

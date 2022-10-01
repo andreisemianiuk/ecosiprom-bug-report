@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Layout from "../components/layout/Layout";
 
 export default function NotFound({ location }) {
+  console.log("🚀 ~ file: 404.js ~ line 7 ~ NotFound ~ location", location);
   return (
     <Layout location={location}>
       <Container>
