@@ -2,17 +2,16 @@ import { graphql, useStaticQuery } from "gatsby";
 import BackgroundImage from "gatsby-background-image";
 import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
-import React from "react";
-import styled from "styled-components";
 import parse, { domToReact } from "html-react-parser";
-import ShortRight from "../../images/short_right.png";
-import PrimaryButton from "../buttons/PrimaryButton";
+import React from "react";
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
 import {
   Mobile,
   NotMobile,
 } from "../../common/media-query-components/media-query-components";
-import { useMediaQuery } from "react-responsive";
-import { useEffect } from "react";
+import ShortRight from "../../images/short_right.png";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 const ImplementationCycle = () => {
   const {
@@ -81,10 +80,12 @@ const ImplementationCycle = () => {
         <FixedInfo>
           <LeftBlock>
             <Title>Полный цикл реализации проектов “под ключ”</Title>
-            <CurrentInfoLabel>{currentInfoLabel}</CurrentInfoLabel>
-            <CurrentInfoContent>
-              {parse(currentInfoDescription, options)}
-            </CurrentInfoContent>
+            <div>
+              <CurrentInfoLabel>{currentInfoLabel}</CurrentInfoLabel>
+              <CurrentInfoContent>
+                {parse(currentInfoDescription, options)}
+              </CurrentInfoContent>
+            </div>
             <ButtonWrapper>
               <PrimaryButton
                 isMobile={isMobile}
@@ -155,6 +156,7 @@ const FixedInfoWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 100%;
   z-index: 1;
 `;
 const FixedInfo = styled.div`
@@ -180,10 +182,12 @@ const LeftBlock = styled.div`
   height: 100%;
   padding-bottom: 20px;
   color: #fff;
+  @media (max-width: 767px) {
+    justify-content: space-between;
+  }
 `;
 const Title = styled.h2`
   max-width: 540px;
-
   margin: 0;
   padding: 150px 0 30px;
   @media (max-width: 991px) {
@@ -191,6 +195,15 @@ const Title = styled.h2`
     line-height: 36px;
     max-width: 380px;
     padding-bottom: 20px;
+  }
+  @media (max-width: 767px) {
+    padding-top: 120px;
+  }
+  @media (max-width: 425px) {
+    padding-top: 70px;
+  }
+  @media (max-width: 380px) {
+    padding-top: 50px;
   }
 `;
 const CurrentInfoLabel = styled.div`
@@ -283,6 +296,12 @@ const Counter = styled.div`
   padding-right: 20px;
   color: #dbdbe1;
   font-feature-settings: "pnum" on, "lnum" on;
+  @media (max-width: 450px) {
+    padding-top: 30px;
+  }
+  @media (max-width: 380px) {
+    padding-top: 20px;
+  }
 `;
 const EditableCounterValue = styled.span`
   font-size: 1.5em;
