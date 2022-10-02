@@ -10,7 +10,7 @@ import PartnerLogos from "../components/logos/partner-logos/PartnerLogos";
 import ProjectsMain from "../components/projects/ProjectsMain";
 import ServicesList from "../components/services-list/ServicesList";
 import { Slideshow } from "../components/slideshow-main-page/Slideshow";
-import ScrollToTopButton from "../common/scrollToTopButton/scrollToTopButton";
+import ScrollToTopButton from "../common/scrollToTopButton/ScrollToTopButton";
 
 const SliderContainer = styled.div`
   display: flex;
