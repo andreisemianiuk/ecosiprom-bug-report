@@ -8,7 +8,6 @@ import { Fade } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
 import {
-  Default,
   DesktopOrLaptop,
   TabletOrMobile,
 } from "../../common/media-query-components/media-query-components";
