@@ -11,6 +11,7 @@ import ProjectsMain from "../components/projects/ProjectsMain";
 import ServicesList from "../components/services-list/ServicesList";
 import { Slideshow } from "../components/slideshow-main-page/Slideshow";
 import ScrollToTopButton from "../common/scrollToTopButton/ScrollToTopButton";
+import { SEO } from "../components/seo/Seo";
 
 const SliderContainer = styled.div`
   display: flex;
@@ -20,20 +21,23 @@ const SliderContainer = styled.div`
 
 function HomePage({ location }) {
   return (
-    <Layout location={location}>
-      <SliderContainer>
-        <Slideshow autoplay={true} />
-      </SliderContainer>
-      <ServicesList isMain title={"Наши услуги"} />
-      <CatalogMain location={location} />
-      <EquipmentLogos />
-      <ImplementationCycle />
-      <ProjectsMain />
-      <AboutUs isMain />
-      <PartnerLogos />
-      <FeedbackForm />
-      <ScrollToTopButton />
-    </Layout>
+    <>
+      <SEO />
+      <Layout location={location}>
+        <SliderContainer>
+          <Slideshow autoplay={true} />
+        </SliderContainer>
+        <ServicesList isMain title={"Наши услуги"} />
+        <CatalogMain location={location} />
+        <EquipmentLogos />
+        <ImplementationCycle />
+        <ProjectsMain />
+        <AboutUs isMain />
+        <PartnerLogos />
+        <FeedbackForm />
+        <ScrollToTopButton />
+      </Layout>
+    </>
   );
 }
 

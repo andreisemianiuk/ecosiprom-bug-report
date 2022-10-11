@@ -1,9 +1,13 @@
 module.exports = {
   siteMetadata: {
     siteUrl: "https://ecosiprom.gatsbyjs.io",
-    title: "ecosiprom",
+    title: "Ecosiprom",
+    description:
+      "Компания Экосипром. Основные направления: системы газоснабжения и газопотребления, автоматизированные системы контроля выбросов, автоматизация технологических процессов, производство электрощитовой продукции.",
+    image: "/static/logo-ecosiprom.png",
   },
   plugins: [
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {

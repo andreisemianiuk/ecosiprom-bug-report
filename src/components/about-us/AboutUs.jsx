@@ -98,6 +98,10 @@ const InnerWrapper = styled.div`
   @media (max-width: 1223px) {
     max-width: 900px;
   }
+  @media (max-width: 991px) {
+    max-width: 700px;
+    padding: 50px 0;
+  }
   @media (max-width: 767px) {
     padding: 50px 20px;
   }
@@ -134,6 +138,12 @@ const InfoLabel = styled.div`
   font-weight: 800;
   color: #0e6683;
   font-feature-settings: "pnum" on, "lnum" on;
+  @media (max-width: 991px) {
+    font-size: 42px;
+  }
+  @media (max-width: 767px) {
+    font-size: 46px;
+  }
 `;
 const InfoText = styled.div`
   font-size: 15px;

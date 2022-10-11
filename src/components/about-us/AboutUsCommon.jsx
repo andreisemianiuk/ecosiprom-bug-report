@@ -1,16 +1,16 @@
-import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import styled from "styled-components";
-import PrimaryButton from "../buttons/PrimaryButton";
-import parse, { domToReact } from "html-react-parser";
-import { getImage, GatsbyImage } from "gatsby-plugin-image";
-import ArrowIcon from "../../assets/short_right.svg";
-import MapImage from "../../images/about-map.png";
-import MapSmallPointImage from "../../assets/ellipse.svg";
-import { DesktopOrLaptop } from "../../common/media-query-components/media-query-components";
-import { useMediaQuery } from "react-responsive";
 import BackgroundImage from "gatsby-background-image";
+import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
+import parse, { domToReact } from "html-react-parser";
+import * as React from "react";
+import { useMediaQuery } from "react-responsive";
+import styled from "styled-components";
+import MapSmallPointImage from "../../assets/ellipse.svg";
+import ArrowIcon from "../../assets/short_right.svg";
+import { DesktopOrLaptop } from "../../common/media-query-components/media-query-components";
+import MapImage from "../../images/about-map.png";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 const AboutUsCommon = ({ children, isMain }) => {
   // isMain is a boolean that determines whether the component is rendered on the main page or on the about us page

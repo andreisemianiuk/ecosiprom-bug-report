@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 
 const AppContext = React.createContext();
 
-export function AppProvider({ children }) {
+export const AppProvider = ({ children }) => {
   const state = useProviderApp();
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
-}
+};
 
 export const useAppContext = () => {
   const context = useContext(AppContext);

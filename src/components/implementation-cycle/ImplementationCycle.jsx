@@ -34,11 +34,13 @@ const ImplementationCycle = () => {
     }
   `);
 
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
   const sortedNodes = nodes.sort(
     (a, b) => a.caption.match(/\d/) - b.caption.match(/\d/)
   );
-  const [hoveredId, setHoveredId] = React.useState(0);
-  const currentItem = sortedNodes.find((_, id) => id === hoveredId) || nodes[0];
+  const [currentId, setCurrentId] = React.useState(0);
+  const currentItem = sortedNodes.find((_, id) => id === currentId) || nodes[0];
 
   const currentCountValue = currentItem.caption.replace(/\D/g, "");
   const currentInfoLabel = currentItem.altText;
@@ -47,16 +49,8 @@ const ImplementationCycle = () => {
   const image = getImage(currentItem.localFile.childImageSharp.gatsbyImageData);
   const bgImage = convertToBgImage(image);
 
-  const handleHoverOn = (index) => {
-    setHoveredId(index);
-  };
-
-  const switchItem = () => {
-    if (hoveredId < 5) {
-      setHoveredId(hoveredId + 1);
-    } else {
-      setHoveredId(0);
-    }
+  const handleSwitchItem = (index) => {
+    setCurrentId(index);
   };
 
   const options = {
@@ -72,20 +66,18 @@ const ImplementationCycle = () => {
     },
   };
 
-  const isMobile = useMediaQuery({ maxWidth: 767 });
-
   return (
-    <Container onClick={switchItem}>
+    <Container>
       <FixedInfoWrapper>
         <FixedInfo>
           <LeftBlock>
             <Title>Полный цикл реализации проектов “под ключ”</Title>
-            <div>
+            <CurrentInfoWrapper>
               <CurrentInfoLabel>{currentInfoLabel}</CurrentInfoLabel>
               <CurrentInfoContent>
                 {parse(currentInfoDescription, options)}
               </CurrentInfoContent>
-            </div>
+            </CurrentInfoWrapper>
             <ButtonWrapper>
               <PrimaryButton
                 isMobile={isMobile}
@@ -107,11 +99,12 @@ const ImplementationCycle = () => {
             <MenuWrapper>
               <Menu>
                 {nodes.map((node, id) => {
-                  const isHovered = hoveredId === id ? true : false;
+                  const isHovered = currentId === id ? true : false;
                   return (
                     <MenuItemWrapper
                       key={node.id}
-                      onMouseOver={() => handleHoverOn(id)}
+                      onMouseOver={() => handleSwitchItem(id)}
+                      onClick={() => handleSwitchItem(id)}
                       hovered={isHovered}>
                       <MenuItem>{node.altText}</MenuItem>
                       <ItemMarker hovered={isHovered} />
@@ -205,6 +198,9 @@ const Title = styled.h2`
   @media (max-width: 380px) {
     padding-top: 50px;
   }
+`;
+const CurrentInfoWrapper = styled.div`
+  max-width: 540px;
 `;
 const CurrentInfoLabel = styled.div`
   font-size: 20px;

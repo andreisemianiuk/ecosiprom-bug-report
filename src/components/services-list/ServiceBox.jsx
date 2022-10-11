@@ -4,10 +4,72 @@ import { getImage } from "gatsby-plugin-image";
 import { convertToBgImage } from "gbimage-bridge";
 import parse, { domToReact } from "html-react-parser";
 import * as React from "react";
-import { useLayoutEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import SecondaryButton from "../buttons/SecondaryButton";
+
+const ServiceBox = ({ service }) => {
+  const [hovered, setHovered] = React.useState(false);
+  const { altText, description, slug, localFile } = service;
+  let image = getImage(localFile.childImageSharp.gatsbyImageData);
+  let bgImage = convertToBgImage(image);
+
+  let options = {
+    replace: (domNode) => {
+      if (domNode.name === "li") {
+        return <SubItem>{domToReact(domNode.children, options)}</SubItem>;
+      }
+    },
+  };
+
+  const serviceUrl = `/services/${slug.replace("services-", "")}`;
+
+  const handleHoverOn = () => {
+    if (!isTabletOrMobile) {
+      setHovered(true);
+    }
+  };
+  const handleHoverOff = () => {
+    if (!isTabletOrMobile) {
+      setHovered(false);
+    }
+  };
+
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 991 });
+  const handleTabletOrMobileClick = () => {
+    setHovered(!hovered);
+  };
+
+  return (
+    <Item
+      onClick={handleTabletOrMobileClick}
+      onMouseOver={handleHoverOn}
+      onMouseLeave={handleHoverOff}
+      hovered={hovered}>
+      <BackgroundImageContainer
+        Tag="div"
+        // Spread bgImage into BackgroundImage:
+        {...bgImage}
+        preserveStackingContext>
+        <Content>
+          <InfoBox>
+            <ItemTitle hovered={hovered}>{altText}</ItemTitle>
+            <ItemList hovered={hovered}>
+              {parse(description, options)}
+              <StyledButton>
+                <Link to={serviceUrl}>
+                  <SecondaryButton title="Подробнее" hovered={true} />
+                </Link>
+              </StyledButton>
+            </ItemList>
+          </InfoBox>
+        </Content>
+      </BackgroundImageContainer>
+    </Item>
+  );
+};
+
+export default ServiceBox;
 
 const Item = styled.div`
   width: 100%;
@@ -90,66 +152,3 @@ const StyledButton = styled.div`
     margin-top: 10px;
   }
 `;
-
-const ServiceBox = ({ service }) => {
-  const [hovered, setHovered] = React.useState(false);
-  const { altText, description, slug, localFile } = service;
-  let image = getImage(localFile.childImageSharp.gatsbyImageData);
-  let bgImage = convertToBgImage(image);
-
-  let options = {
-    replace: (domNode) => {
-      if (domNode.name === "li") {
-        return <SubItem>{domToReact(domNode.children, options)}</SubItem>;
-      }
-    },
-  };
-
-  const serviceUrl = `/services/${slug.replace("services-", "")}`;
-
-  const handleHoverOn = () => {
-    if (!isTabletOrMobile) {
-      setHovered(true);
-    }
-  };
-  const handleHoverOff = () => {
-    if (!isTabletOrMobile) {
-      setHovered(false);
-    }
-  };
-
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 991 });
-  const handleTabletOrMobileClick = () => {
-    setHovered(!hovered);
-  };
-
-  return (
-    <Item
-      onClick={handleTabletOrMobileClick}
-      onMouseOver={handleHoverOn}
-      onMouseLeave={handleHoverOff}
-      hovered={hovered}>
-      <BackgroundImageContainer
-        Tag="div"
-        // Spread bgImage into BackgroundImage:
-        {...bgImage}
-        preserveStackingContext>
-        <Content>
-          <InfoBox>
-            <ItemTitle hovered={hovered}>{altText}</ItemTitle>
-            <ItemList hovered={hovered}>
-              {parse(description, options)}
-              <StyledButton>
-                <Link to={serviceUrl}>
-                  <SecondaryButton title="Подробнее" hovered={true} />
-                </Link>
-              </StyledButton>
-            </ItemList>
-          </InfoBox>
-        </Content>
-      </BackgroundImageContainer>
-    </Item>
-  );
-};
-
-export default ServiceBox;
