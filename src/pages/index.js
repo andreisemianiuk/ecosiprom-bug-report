@@ -21,7 +21,8 @@ const SliderContainer = styled.div`
 
 function HomePage({ location }) {
   return (
-    <SEO>
+    <>
+      <SEO />
       <Layout location={location}>
         <SliderContainer>
           <Slideshow autoplay={true} />
@@ -36,7 +37,7 @@ function HomePage({ location }) {
         <FeedbackForm />
         <ScrollToTopButton />
       </Layout>
-    </SEO>
+    </>
   );
 }
 
